@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-4-26 16:43:06 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.bbs.entities.User" table="USER">
+        <id name="userId" type="java.lang.Integer">
+            <column name="USER_ID" />
+            <generator class="native" />
+        </id>
+        <property name="phoneNumber" type="java.lang.String">
+            <column name="PHONE_NUMBER" />
+        </property>
+        <property name="weChat" type="java.lang.String">
+            <column name="WECHAT" />
+        </property>
+        <property name="name" type="java.lang.String">
+            <column name="NAME" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="PASSWORD" />
+        </property>
+        <property name="identityId" type="java.lang.String">
+            <column name="IDENTITYID" />
+        </property>
+        <property name="gender" type="java.lang.String">
+            <column name="GENDER" />
+        </property>
+        <property name="role" type="java.lang.String">
+            <column name="ROLE" />
+        </property>
+        <property name="recommendFre" type="java.lang.Integer">
+            <column name="RECOMMEND_FRE" />
+        </property>
+    </class>
+</hibernate-mapping>

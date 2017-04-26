@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-4-26 16:43:06 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.bbs.entities.SearchHistory" table="SEARCH_HISTORY">
+        <id name="historyId" type="java.lang.Integer">
+            <column name="HISTORY_ID" />
+            <generator class="native" />
+        </id>
+        <many-to-one name="user" class="com.bbs.entities.User">
+            <column name="USER_ID" />
+        </many-to-one>
+        <property name="keyword" type="java.lang.String">
+            <column name="KEYWORD" />
+        </property>
+        <property name="updateAt" type="java.util.Date">
+            <column name="UPDATE_AT" />
+        </property>
+    </class>
+</hibernate-mapping>
