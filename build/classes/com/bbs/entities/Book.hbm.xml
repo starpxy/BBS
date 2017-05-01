@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2017-4-26 16:43:06 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bbs.entities.Book" table="BOOK">
+    <class name="com.bbs.entities.Book" table="BOOKS">
         <id name="bookId" type="java.lang.Integer">
             <column name="BOOK_ID" />
             <generator class="native" />
@@ -44,5 +44,9 @@
         <property name="updateAt" type="java.util.Date">
             <column name="UPDATE_AT" />
         </property>
+        <set name="comments" table="COMMENTS" inverse="true">
+        	<key column="COMMENT_ID"></key>
+        	<one-to-many class="com.bbs.entities.Comment"/>
+        </set>
     </class>
 </hibernate-mapping>

@@ -1,6 +1,8 @@
 package com.bbs.entities;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Book {
 	private Integer bookId;
@@ -16,83 +18,118 @@ public class Book {
 	private String type;
 	private Integer bookVolume;
 	private Date updateAt;
+	private Set<Comment> comments = new HashSet<>();
+
 	public Integer getBookId() {
 		return bookId;
 	}
+
+	public Set<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
+	}
+
 	public void setBookId(Integer bookId) {
 		this.bookId = bookId;
 	}
+
 	public String getAuthor() {
 		return author;
 	}
+
 	public void setAuthor(String author) {
 		this.author = author;
 	}
+
 	public String getSimpleChart() {
 		return simpleChart;
 	}
+
 	public void setSimpleChart(String simpleChart) {
 		this.simpleChart = simpleChart;
 	}
+
 	public String getIsbn() {
 		return isbn;
 	}
+
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
+
 	public String getBookTitle() {
 		return bookTitle;
 	}
+
 	public void setBookTitle(String bookTitle) {
 		this.bookTitle = bookTitle;
 	}
+
 	public String getPublisher() {
 		return publisher;
 	}
+
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
+
 	public String getVersionNumber() {
 		return versionNumber;
 	}
+
 	public void setVersionNumber(String versionNumber) {
 		this.versionNumber = versionNumber;
 	}
+
 	public String getPreface() {
 		return preface;
 	}
+
 	public void setPreface(String preface) {
 		this.preface = preface;
 	}
+
 	public String getDirectory() {
 		return directory;
 	}
+
 	public void setDirectory(String directory) {
 		this.directory = directory;
 	}
+
 	public String getIntroduction() {
 		return introduction;
 	}
+
 	public void setIntroduction(String introduction) {
 		this.introduction = introduction;
 	}
+
 	public String getType() {
 		return type;
 	}
+
 	public void setType(String type) {
 		this.type = type;
 	}
+
 	public Integer getBookVolume() {
 		return bookVolume;
 	}
+
 	public void setBookVolume(Integer bookVolume) {
 		this.bookVolume = bookVolume;
 	}
+
 	public Date getUpdateAt() {
 		return updateAt;
 	}
+
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
 	}
-	
+
 }

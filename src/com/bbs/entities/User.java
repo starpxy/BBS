@@ -1,5 +1,8 @@
 package com.bbs.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class User {
 	private Integer userId;
 	private String phoneNumber;
@@ -10,6 +13,24 @@ public class User {
 	private String gender;
 	private String role;
 	private Integer recommendFre;
+	private Set<Reservation> reservations = new HashSet<>();
+	private Set<BorrowedRecord> borrowedRecords = new HashSet<>();
+
+	public Set<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(Set<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+	public Set<BorrowedRecord> getBorrowedRecords() {
+		return borrowedRecords;
+	}
+
+	public void setBorrowedRecords(Set<BorrowedRecord> borrowedRecords) {
+		this.borrowedRecords = borrowedRecords;
+	}
 
 	public Integer getUserId() {
 		return userId;

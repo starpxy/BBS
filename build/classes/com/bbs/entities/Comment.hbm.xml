@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2017-4-26 16:43:06 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bbs.entities.Comment" table="COMMENT">
+    <class name="com.bbs.entities.Comment" table="COMMENTS">
         <id name="commentId" type="java.lang.Integer">
             <column name="COMMENT_ID" />
             <generator class="native" />
