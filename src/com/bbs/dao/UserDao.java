@@ -19,5 +19,8 @@ public class UserDao {
 		String hql = "FROM User";
 		return getSession().createQuery(hql).list();
 	}
+	public void register(){
+		
+	}
 
 }
