@@ -10,12 +10,6 @@
 
     <package name="default" namespace="/" extends="struts-default">
 	
-		<action name="user-*" class="userAction" method="{1}">
-			<result name="list">WEB-INF/view/user-list.jsp</result>
-		</action>
-        <action name="list-*" class="listAction" method="{1}">
-			<result name="list">WEB-INF/view/list-list.jsp</result>
-		</action>
     </package>
 
 </struts>
