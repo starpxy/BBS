@@ -1,5 +1,10 @@
 package com.bbs.actions;
 
-public class UserAction {
+import com.bbs.services.UserService;
 
+public class UserAction {
+	private UserService userService;
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
 }
