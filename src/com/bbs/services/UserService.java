@@ -9,6 +9,9 @@ public class UserService {
 		this.userDao = userDao;
 	}
 	public boolean login(User user){
-		return userDao.isGranted(user);
+		return userDao.login(user);
+	}
+	public void register(User user){
+		userDao.register(user);
 	}
 }

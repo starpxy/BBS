@@ -8,7 +8,7 @@ import com.bbs.entities.User;
 import com.bbs.entities.User;
 
 public class UserDao extends BaseDao {
-	public boolean isGranted(User user){
+	public boolean login(User user){
 		if (user==null) {
 			return false;
 		}
@@ -21,5 +21,8 @@ public class UserDao extends BaseDao {
 		else {
 			return false;
 		}
+	}
+	public void register(User user){
+		getSession().saveOrUpdate(user);
 	}
 }

@@ -28,6 +28,7 @@ public class UserAction extends ActionSupport implements RequestAware,ModelDrive
 	}
 	public String login(){
 		if (userService.login(user)) {
+			request.put("user", user);
 			return "granted";
 		}
 		else{
@@ -36,6 +37,15 @@ public class UserAction extends ActionSupport implements RequestAware,ModelDrive
 	}
 	public void prepareLogin(){
 		user = new User();
+	}
+	public void prepareRegister(){
+		user = new User();
+	}
+	public String register(){
+		user.setRole("user");
+		user.setRecommendFre(1);
+		userService.register(user);
+		return "register";
 	}
 	@Override
 	public User getModel() {

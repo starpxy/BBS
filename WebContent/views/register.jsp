@@ -99,7 +99,7 @@
                 <div class="weui_cell_hd"><label for="" class="weui_label">性别</label></div>
 
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input name="gender" class="weui_input" type="text" required placeholder="点击选择性别" emptyTips="请选择性别" id='d2'/>
+                    <input name="gender" class="weui_input" type="text" required placeholder="点击选择性别" emptyTips="请选择性别" id='d2' />
                 </div>
 
                 <div class="weui_cell_ft">
