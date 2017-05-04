@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-4-26 16:43:06 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.bbs.entities.BookItem" table="BOOK_ITEMS">
+        <id name="itemId" type="java.lang.Integer">
+            <column name="ITEM_ID" />
+            <generator class="native" />
+        </id>
+        <many-to-one name="book" class="com.bbs.entities.Book">
+            <column name="BOOK_ID" />
+        </many-to-one>
+        <property name="qrCode" type="java.lang.String">
+            <column name="QR_CODE" />
+        </property>
+        <property name="status" type="java.lang.String">
+            <column name="STATUS" />
+        </property>
+    </class>
+</hibernate-mapping>

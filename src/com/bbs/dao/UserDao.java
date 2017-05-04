@@ -4,6 +4,9 @@ import java.util.List;
 
 import com.bbs.entities.User;
 
+
+import com.bbs.entities.User;
+
 public class UserDao extends BaseDao {
 	public boolean isGranted(User user){
 		if (user==null) {

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-4-26 16:43:06 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.bbs.entities.Book" table="BOOKS">
+        <id name="bookId" type="java.lang.Integer">
+            <column name="BOOK_ID" />
+            <generator class="native" />
+        </id>
+        <property name="author" type="java.lang.String">
+            <column name="AUTHOR" />
+        </property>
+        <property name="simpleChart" type="java.lang.String">
+            <column name="SIMPLE_CHART" />
+        </property>
+        <property name="isbn" type="java.lang.String">
+            <column name="ISBN" />
+        </property>
+        <property name="bookTitle" type="java.lang.String">
+            <column name="BOOK_TITLE" />
+        </property>
+        <property name="publisher" type="java.lang.String">
+            <column name="PUBLISHER" />
+        </property>
+        <property name="versionNumber" type="java.lang.String">
+            <column name="VERSION_NUMBER" />
+        </property>
+        <property name="preface" type="java.lang.String">
+            <column name="PREFACE" />
+        </property>
+        <property name="directory" type="java.lang.String">
+            <column name="DIRECTORY" />
+        </property>
+        <property name="introduction" type="java.lang.String">
+            <column name="INTRODUCTION" />
+        </property>
+        <property name="type" type="java.lang.String">
+            <column name="TYPE" />
+        </property>
+        <property name="bookVolume" type="java.lang.Integer">
+            <column name="BOOK_VOLUME" />
+        </property>
+        <property name="updateAt" type="java.util.Date">
+            <column name="UPDATE_AT" />
+        </property>
+        <set name="comments" table="COMMENTS" inverse="true">
+        	<key column="COMMENT_ID"></key>
+        	<one-to-many class="com.bbs.entities.Comment"/>
+        </set>
+    </class>
+</hibernate-mapping>
