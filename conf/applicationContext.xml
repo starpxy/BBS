@@ -40,7 +40,7 @@
 	<!-- 配置事务切入点，把事务属性和事务切入点关联起来 -->
 	<!-- 详情见尚硅谷教程的Spring4中的22节教程 -->
 	<aop:config>
-		<aop:pointcut expression="execution(* com.starpxy.services.*.*(..))" id="txPointCut"/>
+		<aop:pointcut expression="execution(* com.bbs.services.*.*(..))" id="txPointCut"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCut"/>
 	</aop:config>
 </beans>

@@ -9,6 +9,6 @@ public class BaseDao {
 		this.sessionFactory = sessionFactory;
 	}
 	public Session getSession(){
-		return sessionFactory.getCurrentSession();
+		return this.sessionFactory.getCurrentSession();
 	}
 }

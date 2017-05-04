@@ -20,14 +20,14 @@
 
     <div class="login-icon tcenter"><img src="asserts/images/faces/admin.jpg"></div>
 
-    <form id="form" action="main.jsp" method="post">
+    <form id="form" action="user-login" method="post">
 
         <div class="weui_cells weui_cells_form">
 
             <div class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">账号</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" type="text" id="account" required placeholder="手机号/微信ID" emptyTips="请输入账号"
+                    <input name="phoneNumber" class="weui_input" type="text" id="account" required placeholder="手机号/微信ID" emptyTips="请输入账号"
                            pattern="[0-9a-zA-Z]{3,21}" maxlength="21" notMatchTips="请输入正确的帐号">
                 </div>
                 <div class="weui_cell_ft">
@@ -38,7 +38,7 @@
             <div class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">密码</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" type="password" id="password" required placeholder="输入你的密码"
+                    <input name="password" class="weui_input" type="password" id="password" required placeholder="输入你的密码"
                            emptyTips="请输入密码">
                 </div>
                 <div class="weui_cell_ft">
@@ -129,7 +129,7 @@
         if ($(this).hasClass('weui_btn_disabled')) {
             return;
         }
-        $form.validate(function (error) {
+      /*   $form.validate(function (error) {
             if (error) {
 
             } else {
@@ -148,7 +148,8 @@
                 }, 1000);
             }
         });
-
+ */
+        $form.submit();
     });
 
 

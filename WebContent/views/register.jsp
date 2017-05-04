@@ -17,7 +17,7 @@
 <div class="page-hd">
     <div class="tcenter">用户注册</div>
 
-    <form id="form" method="post" action="login.html">
+    <form id="form" method="post" action="user-register">
 
         <div class="weui_cells_title">帐号</div>
 
@@ -26,13 +26,12 @@
 
                 <div class="weui_cell_hd">
                     <select class="weui_select" name="select2">
-                        <option value="1">微信号</option>
-                        <option value="2">手机号</option>
+                        <option value="1">手机号</option>
                     </select>
                 </div>
 
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" type="text" maxlength="21" placeholder="请输入帐号" pattern="[0-9a-zA-Z]{6,21}"
+                    <input name="phoneNumber" class="weui_input" type="text" maxlength="21" placeholder="请输入帐号" pattern="[0-9a-zA-Z]{6,21}"
                            notMatchTips="请输入正确的帐号" required emptyTips="请输入帐号"/>
                 </div>
 
@@ -45,11 +44,25 @@
         <div class="weui_cells_title">其他信息</div>
         <div class="weui_cells weui_cells_form">
 
+			 <div class="weui_cell">
+                <div class="weui_cell_hd"><label class="weui_label">姓名</label></div>
+
+                <div class="weui_cell_bd weui_cell_primary">
+                    <input name="name" class="weui_input" placeholder="请输入姓名"
+                           emptyTips="请输入姓名" />
+                </div>
+
+                <div class="weui_cell_ft">
+                    <i class="weui_icon_warn"></i>
+                </div>
+
+            </div>
+			
             <div class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">身份证号</label></div>
 
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" type="number" required pattern="[0-9]{18}" placeholder="请输入身份证号"
+                    <input name="identityId" class="weui_input" type="number" required pattern="[0-9]{18}" placeholder="请输入身份证号"
                            emptyTips="请输入身份证号" maxlength="18" notMatchTips="请输入正确的身份证号"/>
                 </div>
 
@@ -63,7 +76,7 @@
             <div class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">密码</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" type="password" required placeholder="输入你的密码" emptyTips="请输入密码">
+                    <input name="password" class="weui_input" type="password" required placeholder="输入你的密码" emptyTips="请输入密码">
                 </div>
                 <div class="weui_cell_ft">
                     <i class="weui_icon_warn"></i>
@@ -86,7 +99,7 @@
                 <div class="weui_cell_hd"><label for="" class="weui_label">性别</label></div>
 
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" type="text" required placeholder="点击选择性别" emptyTips="请选择性别" id='d2'/>
+                    <input name="gender" class="weui_input" type="text" required placeholder="点击选择性别" emptyTips="请选择性别" id='d2'/>
                 </div>
 
                 <div class="weui_cell_ft">

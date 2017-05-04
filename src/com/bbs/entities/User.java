@@ -10,7 +10,7 @@ public class User {
 	private String name;
 	private String password;
 	private String identityId;
-	private String gender;
+	private String gender; 
 	private String role;
 	private Integer recommendFre;
 	private Set<Reservation> reservations = new HashSet<>();

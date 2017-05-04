@@ -7,9 +7,22 @@
 
     <constant name="struts.enable.DynamicMethodInvocation" value="false" />
     <constant name="struts.devMode" value="true" />
-
     <package name="default" namespace="/" extends="struts-default">
-	
+		<!-- 定义新的拦截器栈 -->
+		<interceptors>
+			<interceptor-stack name="bbsStack">
+				<interceptor-ref name="paramsPrepareParamsStack">
+					<param name="prepare.alwaysInvokePrepare">false</param>
+				</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		<default-interceptor-ref name="bbsStack"></default-interceptor-ref>
+		<action name="user-*" class="userAction" method="{1}">
+			<result name="granted">main.jsp</result>
+			<result name="refused">register.jsp</result>
+			<result name="register">login.jsp</result>
+		</action>
     </package>
 
 </struts>
