@@ -18,7 +18,7 @@
 
 <div class="page-hd">
 
-    <div class="login-icon tcenter"><img src="asserts/images/faces/admin.jpg"></div>
+    <div class="login-icon tcenter"><img src="asserts/images/faces/wechat.gif"></div>
 
     <form id="form" action="user-login" method="post">
 
@@ -49,7 +49,7 @@
 
         </div>
         <div class="weui_btn_area">
-            <a id="formSubmitBtn" href="javascript:;" class="weui_btn weui_btn_primary bg-blue">登录</a>
+            <a id="formSubmitBtn" href="javascript:;" class="weui_btn weui_btn_primary bg-green">登录</a>
         </div>
     </form>
 

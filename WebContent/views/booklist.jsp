@@ -14,8 +14,8 @@
 </head>
 <body ontouchstart style="background-color: #f8f8f8;">
 
-<div class="weui-header bg-blue">
-    <div class="weui-header-left"><a class="icon icon-109 f-white">返回</a></div>
+<div class="weui-header bg-green">
+    <div class="weui-header-left"><a href="user-login" class="icon icon-109 f-white">返回</a></div>
     <h1 class="weui-header-title">书单:世界名著</h1>
     <div class="weui-header-right"><a href="main.html" class="icon icon-27 f-white"></a></div>
 </div>

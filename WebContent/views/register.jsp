@@ -120,7 +120,7 @@
 
 
         <div class="weui_btn_area">
-            <a class="weui_btn weui_btn_primary bg-blue" id="registersubmit">注册</a>
+            <a class="weui_btn weui_btn_primary bg-green" id="registersubmit">注册</a>
         </div>
 
 

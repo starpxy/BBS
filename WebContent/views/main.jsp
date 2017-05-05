@@ -61,7 +61,7 @@
 
     <h3>&nbsp;图书分类</h3>
     <div class="weui_grids">
-        <a href="booklist.html" class="weui_grid js_grid">
+        <a href="booklist.jsp" class="weui_grid js_grid">
 
             <p class="weui_grid_label">
                 经典名著
