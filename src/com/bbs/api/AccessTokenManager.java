@@ -6,7 +6,19 @@ import java.net.URL;
 import java.util.Date;
 
 import javax.net.ssl.HttpsURLConnection;
-
+/**
+ * 07/05/2017
+ * 
+ * @author Star
+ * 
+ * AccessTokenManager is a class to get the access token from Wechat Server.
+ * 
+ * The static method is to get the access token.
+ * 
+ * It will simply return the exiting token if we have one which is not expired.
+ *  
+ * Otherwise, we will get it from the server again.
+ */
 public class AccessTokenManager {
 	private static String accessToken = "";
 	private static int expiresTime = 0;

@@ -3,7 +3,17 @@ package com.bbs.converters;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
+/**
+ * 07/05/2017
+ * 
+ * @author Star
+ *
+ * 1) Instance the class.
+ * 
+ * 2) Call the method convertToJson to convert a Map into Json packet.
+ * 
+ * 3) Call the method convertToMap to convert Json packet to a Map.
+ */
 public class JsonConverter {
 	public String convertToJson(Map<String, Object> args){
 		String result = "{";
@@ -35,6 +45,11 @@ public class JsonConverter {
 			}
 			String[] values = blocks[i].split(":");
 			if (values[1].startsWith("\"")) {
+				for (int j = 1; j < values.length; j++) {
+					if (j>1) {
+						values[1]+=(":"+values[j]);
+					}
+				}
 				result.put(values[0].substring(1, values[0].length()-1), values[1].substring(1, values[1].length()-1));
 			}
 			else{
