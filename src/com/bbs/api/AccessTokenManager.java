@@ -34,7 +34,7 @@ public class AccessTokenManager {
 			}
 		}
 		try {
-			url = new URL("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx95311e6c3749af30&secret=c9cf6453de2e7b471625f4747f79e75f");
+			url = new URL("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+BasicAccountParam.getAppId()+"&secret="+BasicAccountParam.getAppSecrete());
 			httpsURLConnection = (HttpsURLConnection) url.openConnection();
 			inputStreamReader = new InputStreamReader(httpsURLConnection.getInputStream());
 			int i = inputStreamReader.read();

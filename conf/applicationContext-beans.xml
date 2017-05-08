@@ -8,10 +8,19 @@
 	<bean id="userAction" class="com.bbs.actions.UserAction">
 		<property name="userService" ref="userService"></property>
 	</bean>
+	<bean id="reservationAction" class="com.bbs.actions.ReservationAction">
+		<property name="reservationService" ref="reservationServices"></property>
+	</bean>
 	<bean id="userService" class="com.bbs.services.UserService">
 		<property name="userDao" ref="userDao"></property>
 	</bean>
+	<bean id="reservationServices" class="com.bbs.services.ReservationServices">
+		<property name="reservationDao" ref="reservationDao"></property>
+	</bean>
 	<bean id="userDao" class="com.bbs.dao.UserDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="reservationDao" class="com.bbs.dao.ReservationDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 </beans>

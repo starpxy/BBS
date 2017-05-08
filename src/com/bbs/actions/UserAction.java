@@ -1,9 +1,10 @@
 package com.bbs.actions;
 
+import com.bbs.api.AuthorizationManager;
+import com.bbs.api.NoneCodeException;
 import com.bbs.entities.User;
 import com.bbs.services.UserService;
 import com.opensymphony.xwork2.ModelDriven;
-import com.opensymphony.xwork2.Preparable;
 
 public class UserAction extends BaseAction implements ModelDriven<User>{
 
@@ -18,6 +19,13 @@ public class UserAction extends BaseAction implements ModelDriven<User>{
 		this.userService = userService;
 	}
 	public String login(){
+		String openid = null;
+		try {
+			openid = new AuthorizationManager().getAccessToken();
+		} catch (NoneCodeException e) {
+			e.printStackTrace();
+		}
+		user.setWeChat(openid);
 		if (session.get("user")!=null) {
 			return "granted";
 		}
@@ -36,6 +44,13 @@ public class UserAction extends BaseAction implements ModelDriven<User>{
 		user = new User();
 	}
 	public String register(){
+		String openid = null;
+		try {
+			openid = new AuthorizationManager().getAccessToken();
+		} catch (NoneCodeException e) {
+			e.printStackTrace();
+		}
+		user.setWeChat(openid);
 		user.setRole("user");
 		user.setRecommendFre(1);
 		userService.register(user);
