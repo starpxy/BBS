@@ -27,13 +27,13 @@
             <column name="VERSION_NUMBER" />
         </property>
         <property name="preface" type="java.lang.String">
-            <column name="PREFACE" />
+            <column name="PREFACE" sql-type="LONGTEXT"/>
         </property>
         <property name="directory" type="java.lang.String">
-            <column name="DIRECTORY" />
+            <column name="DIRECTORY" sql-type="LONGTEXT"/>
         </property>
         <property name="introduction" type="java.lang.String">
-            <column name="INTRODUCTION" />
+            <column name="INTRODUCTION" sql-type="LONGTEXT"/>
         </property>
         <property name="type" type="java.lang.String">
             <column name="TYPE" />

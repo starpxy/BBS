@@ -19,13 +19,13 @@ public class UserAction extends BaseAction implements ModelDriven<User>{
 		this.userService = userService;
 	}
 	public String login(){
-		String openid = null;
-		try {
-			openid = new AuthorizationManager().getOpenID();
-		} catch (NoneCodeException e) {
-			e.printStackTrace();
-		}
-		user.setWeChat(openid);
+//		String openid = null;
+//		try {
+//			openid = new AuthorizationManager().getOpenID();
+//		} catch (NoneCodeException e) {
+//			e.printStackTrace();
+//		}
+//		user.setWeChat(openid);
 		if (session.get("user")!=null) {
 			return "granted";
 		}

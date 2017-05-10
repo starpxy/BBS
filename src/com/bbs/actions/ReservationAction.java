@@ -1,6 +1,5 @@
 package com.bbs.actions;
 
-import javax.imageio.spi.RegisterableService;
 
 import com.bbs.entities.Reservation;
 import com.bbs.entities.User;
