@@ -21,7 +21,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>{
 	public String login(){
 		String openid = null;
 		try {
-			openid = new AuthorizationManager().getAccessToken();
+			openid = new AuthorizationManager().getOpenID();
 		} catch (NoneCodeException e) {
 			e.printStackTrace();
 		}
@@ -46,7 +46,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>{
 	public String register(){
 		String openid = null;
 		try {
-			openid = new AuthorizationManager().getAccessToken();
+			openid = new AuthorizationManager().getOpenID();
 		} catch (NoneCodeException e) {
 			e.printStackTrace();
 		}

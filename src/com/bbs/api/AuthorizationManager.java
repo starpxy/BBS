@@ -22,10 +22,35 @@ public class AuthorizationManager {
 		code = argv;
 	}
 
-	public String getAccessToken() throws NoneCodeException {
+	public String getOpenID() throws NoneCodeException {
 		if (startTime != null) {
 			if ((new Date().getTime() - startTime.getTime()) < (long) ((expiresTime - 1) * 1000L)) {
-				return accessToken;
+				return openId;
+			}
+			else {
+				try {
+					URL url = new URL("https://api.weixin.qq.com/sns/oauth2/refresh_token?appid="+BasicAccountParam.getAppId()+"&grant_type=refresh_token&refresh_token="+refreshToken);
+					HttpsURLConnection httpsURLConnection = (HttpsURLConnection) url.openConnection();
+					InputStreamReader inputStreamReader = new InputStreamReader(httpsURLConnection.getInputStream());
+					int i = inputStreamReader.read();
+					String jsonMsg = "";
+					while (i != -1) {
+						jsonMsg += (char) i;
+						i = inputStreamReader.read();
+					}
+					Map<String, Object> map = new JsonConverter().convertTonMap(jsonMsg);
+					if (map.get("access_token")!=null) {
+						accessToken = (String) map.get("access_token");
+						expiresTime = (Integer) map.get("expires_in");
+						refreshToken = (String) map.get("refresh_token");
+						openId = (String) map.get("openid");
+						return openId;
+					}
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		try {
@@ -53,6 +78,6 @@ public class AuthorizationManager {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return accessToken;
+		return openId;
 	}
 }
