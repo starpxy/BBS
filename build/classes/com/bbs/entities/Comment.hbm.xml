@@ -15,7 +15,7 @@
             <column name="BOOK_ID" />
         </many-to-one>
         <property name="content" type="java.lang.String">
-            <column name="CONTENT" />
+            <column name="CONTENT" sql-type="LONGTEXT"/>
         </property>
         <property name="updateAt" type="java.util.Date">
             <column name="UPDATE_AT" />

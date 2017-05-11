@@ -4,8 +4,11 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
+import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
+
+import com.bbs.converters.JsonConverter;
 /**
  * 07/05/2017
  * 
@@ -45,9 +48,10 @@ public class AccessTokenManager {
 			}
 			startTime = new Date();
 			System.out.println("get new");
-			String[] strings = temp.split("\"");
-			accessToken = strings[3];
-			expiresTime = Integer.valueOf(strings[6].substring(1,5));
+			JsonConverter converter = new JsonConverter();
+			Map<String, Object> map = converter.convertTonMap(temp);
+			accessToken = (String) map.get("access_token");
+			expiresTime = (int) map.get("expires_in");
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
