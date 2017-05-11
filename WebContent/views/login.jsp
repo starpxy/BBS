@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <title>Login Page</title>
-
     <link rel="stylesheet" href="asserts/weui/css/weui.css"/>
     <link rel="stylesheet" href="asserts/weui/css/weui2.css"/>
     <link rel="stylesheet" href="asserts/weui/css/weui3.css"/>
@@ -101,6 +100,9 @@
 <!--<script src="asserts/jquery.min.js"></script>-->
 
 
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js">
+	
+</script>
 <script src="asserts/weui/js/zepto.min.js"></script>
 <script type="text/javascript">
 
