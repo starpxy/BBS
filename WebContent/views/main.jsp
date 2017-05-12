@@ -23,7 +23,12 @@
 <!--<div class="weui-header-right"><a href="#" class="icon icon-29 f-white">主页</a></div>-->
 <!--</div>-->
 
-<div class="searchbar_wrap"></div>
+<div class="searchbar_wrap">
+</div>
+<form action="searchHistory-searchBooks" method="post">
+<input name="keyword" type="text"/>
+<input type="submit"/>
+</form>
 
 
 <div class="slide" id="slide1">

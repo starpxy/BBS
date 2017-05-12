@@ -13,7 +13,7 @@ public class ReservationAction extends BaseAction implements ModelDriven<Reserva
 	public void setReservationService(ReservationServices reservationService) {
 		this.reservationService = reservationService;
 	}
-	public String createReservation(Reservation reservation) {
+	public String createReservation() {
 		reservation.setUser((User) session.get("user"));
 		reservationService.createReservation(reservation);
 		request.put("reservation", reservation);

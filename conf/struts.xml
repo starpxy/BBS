@@ -30,6 +30,9 @@
 			<result name="newMember"></result>
 			<result name="success">main.jsp</result>
 		</action>
+		<action name="searchHistory-*" class="searchHistoryAction" method="{1}">
+			<result name="search">TestSearch.jsp</result>
+		</action>
     </package>
 
 </struts>

@@ -14,6 +14,9 @@
 	<bean id="authorizationAction" class="com.bbs.actions.AuthorizationAction">
 		<property name="authorizationService" ref="authorizationService"></property>
 	</bean>
+	<bean id="searchHistoryAction" class="com.bbs.actions.SearchHistoryAction">
+		<property name="searchHistoryService" ref="searchHistoryService"></property>
+	</bean>
 	<bean id="userService" class="com.bbs.services.UserService">
 		<property name="userDao" ref="userDao"></property>
 	</bean>
@@ -23,6 +26,9 @@
 	<bean id="authorizationService" class="com.bbs.services.AuthorizationService">
 		<property name="authorizationDao" ref="authorizationDao"></property>
 	</bean>
+	<bean id="searchHistoryService" class="com.bbs.services.SearchHistoryService">
+		<property name="searchHistoryDao" ref="searchHistoryDao"></property>
+	</bean>
 	<bean id="userDao" class="com.bbs.dao.UserDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
@@ -30,6 +36,9 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	<bean id="authorizationDao" class="com.bbs.dao.AuthorizationDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="searchHistoryDao" class="com.bbs.dao.SearchHistoryDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 </beans>
