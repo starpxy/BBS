@@ -26,6 +26,10 @@
 		<action name="reservation-*" class="reservationAction" method="{1}">
 			<result name="reservation">main.jsp</result>
 		</action>
+		<action name="au-*" class="authorizationAction" method="{1}">
+			<result name="newMember"></result>
+			<result name="success">main.jsp</result>
+		</action>
     </package>
 
 </struts>
