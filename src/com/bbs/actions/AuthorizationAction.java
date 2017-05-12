@@ -18,11 +18,11 @@ public class AuthorizationAction extends BaseAction implements ModelDriven<Autho
 	}
 	public String wechatLogin(){
 		User wUser = authorizationService.wechatLogin(manager);
+		session.put("user", wUser);
 		if (wUser.getPhoneNumber()==null) {
 			return "newMember";
 		}
 		else {
-			session.put("user", wUser);
 			return SUCCESS;
 		}
 	}

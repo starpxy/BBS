@@ -27,8 +27,8 @@
 			<result name="reservation">main.jsp</result>
 		</action>
 		<action name="au-*" class="authorizationAction" method="{1}">
-			<result name="newMember"></result>
-			<result name="success">main.jsp</result>
+			<result name="newMember">register.jsp</result>
+			<result name="success">user-login</result>
 		</action>
 		<action name="searchHistory-*" class="searchHistoryAction" method="{1}">
 			<result name="search">TestSearch.jsp</result>
