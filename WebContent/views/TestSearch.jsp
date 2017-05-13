@@ -14,11 +14,13 @@
 		<s:else>
 		<table border="1" cellpadding="10" cellspacing="0">
 			<tr>
+				<td>图标</td>
 				<td>书名</td>
 				<td>作者</td>
 			</tr>
 			<s:iterator value="#request.books">
 				<tr>
+					<td><img alt="hh" src="${simpleChart }"></td>
 					<td>${bookTitle}</td>
 					<td>${author}</td>
 				</tr> 

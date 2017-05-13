@@ -10,6 +10,7 @@ import org.apache.lucene.queryparser.classic.ParseException;
 
 import com.bbs.entities.Book;
 import com.bbs.entities.SearchHistory;
+import com.bbs.entities.User;
 import com.bbs.search.Search;
 
 public class SearchHistoryDao extends BaseDao {
@@ -28,7 +29,10 @@ public class SearchHistoryDao extends BaseDao {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+		String hql2 = "FROM User WHERE phoneNumber='"+searchHistory.getUser().getPhoneNumber()+"'";
+		searchHistory.setUser((User)(getSession().createQuery(hql2).list().get(0)));
+		System.out.println(searchHistory.getUser().getUserId());
+		System.out.println(searchHistory.getUser().getPhoneNumber());
 		searchHistory.setUpdateAt(new Date());
 		getSession().saveOrUpdate(searchHistory);
 		return rankedBook;
