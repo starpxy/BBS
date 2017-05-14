@@ -17,16 +17,38 @@ public class AuthorizationAction extends BaseAction implements ModelDriven<Autho
 		this.authorizationService = authorizationService;
 	}
 	public String wechatLogin(){
-		User wUser = authorizationService.wechatLogin(manager);
-		session.put("user", wUser);
-		if (wUser.getPhoneNumber()==null) {
+		User user = authorizationService.wechatLogin(manager);
+		session.put("openId", user.getWeChat());
+		if (user.getPhoneNumber()==null) {
 			return "newMember";
 		}
-		else {
+		else if (user.getWeChat()!=null) 
+		{
+			session.put("user", authorizationService.getUserInfo(user.getWeChat()));
 			return SUCCESS;
+		}
+		else {
+			return ERROR;
+		}
+	}
+	public String register(){
+		User user = authorizationService.wechatLogin(manager);
+		session.put("openId", user.getWeChat());
+		if (user.getPhoneNumber()!=null) {
+			session.put("user", authorizationService.getUserInfo(user.getWeChat()));
+			return "exist";
+		}
+		else if(user.getWeChat()!=null){
+			return "newMember";
+		}
+		else{
+			return ERROR;
 		}
 	}
 	public void prepareWechatLogin(){
+		manager = new AuthorizationManager();
+	}
+	public void prepareRegister(){
 		manager = new AuthorizationManager();
 	}
 	@Override

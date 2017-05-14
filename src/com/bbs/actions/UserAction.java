@@ -38,11 +38,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>{
 	}
 	public String register(){
 		String openid = null;
-		try {
-			openid = new AuthorizationManager().getOpenID();
-		} catch (NoneCodeException e) {
-			e.printStackTrace();
-		}
+		openid = (String) session.get("openId");
 		user.setWeChat(openid);
 		user.setRole("user");
 		user.setRecommendFre(1);

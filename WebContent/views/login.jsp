@@ -54,7 +54,7 @@
 
     <div class="below-links">
         <a class="left" href="forgetpass.jsp">忘记密码?</a>
-        <a class="right" href="register.jsp">注册账号</a>
+        <a class="right" href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx95311e6c3749af30&redirect_uri=http%3a%2f%2fpxyzmy.com.cn%2fBBS%2fviews%2fau-register&response_type=code&scope=snsapi_userinfo&state=STATE">注册账号</a>
 
     </div>
 
@@ -67,7 +67,7 @@
 
     <a href="#" class="icon icon-13 f-black" id="qqlogin"></a>
 
-    <a id="wechatlogin" href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx95311e6c3749af30&redirect_uri=http%3a%2f%2fpxyzmy.com.cn&response_type=code&scope=snsapi_userinfo&state=STATE" class="icon icon-14 f-green"></a>
+    <a id="wechatlogin" href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx95311e6c3749af30&redirect_uri=http%3a%2f%2fpxyzmy.com.cn%2fBBS%2fviews%2fau-wechatLogin&response_type=code&scope=snsapi_userinfo&state=STATE" class="icon icon-14 f-green"></a>
 
     <a id="webologin" href="#" class="icon icon-15 f-red"></a>
 
@@ -112,7 +112,9 @@
     $("#webologin").click(function () {
         $.toast("this funciton is building now",'wrong');
     });
-
+    $("#wechatlogin").click(function () {
+        $.toast("登录中...请稍候...");
+    });
     $("#checkbox").click(function () {
         if (!$("#checkbox").get(0).checked) {
             $("#formSubmitBtn").removeClass("weui_btn_disabled");
@@ -131,26 +133,17 @@
         if ($(this).hasClass('weui_btn_disabled')) {
             return;
         }
-      /*   $form.validate(function (error) {
+         $form.validate(function (error) {
             if (error) {
 
             } else {
                 $.showLoading('登录中');
                 setTimeout(function () {
-                    $.hideLoading();
-                    if ($("#account").val() == "admin" && $("#password").val() == "123") {
-                        $.toast("登录成功");
-                        setTimeout(function () {
-                            $form.submit();
-                        }, 1000);
-
-                    } else {
-                        $.toptips('密码或账号错误');
-                    }
+                    
                 }, 1000);
             }
         });
- */
+ 
         $form.submit();
     });
 

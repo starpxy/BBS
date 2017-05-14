@@ -12,4 +12,7 @@ public class AuthorizationService {
 	public User wechatLogin(AuthorizationManager authorizationManager){
 		return authorizationDao.wechatLogin(authorizationManager);
 	}
+	public User getUserInfo(String openId){
+		return authorizationDao.getUserInfo(openId);
+	}
 }

@@ -4,54 +4,24 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import com.bbs.converters.JsonConverter;
+
+import net.sf.json.JSONObject;
 
 public class AuthorizationManager {
 	private String code = null;
-	private String accessToken = null;
-	private String refreshToken = null;
-	private int expiresTime = 0;
-	private Date startTime = null;
 	private String openId = null;
 	public void setCode(String argv) {
 		code = argv;
 	}
 
 	public String getOpenID() throws NoneCodeException {
-		if (startTime != null) {
-			if ((new Date().getTime() - startTime.getTime()) < (long) ((expiresTime - 1) * 1000L)) {
-				return openId;
-			}
-			else {
-				try {
-					URL url = new URL("https://api.weixin.qq.com/sns/oauth2/refresh_token?appid="+BasicAccountParam.getAppId()+"&grant_type=refresh_token&refresh_token="+refreshToken);
-					HttpsURLConnection httpsURLConnection = (HttpsURLConnection) url.openConnection();
-					InputStreamReader inputStreamReader = new InputStreamReader(httpsURLConnection.getInputStream());
-					int i = inputStreamReader.read();
-					String jsonMsg = "";
-					while (i != -1) {
-						jsonMsg += (char) i;
-						i = inputStreamReader.read();
-					}
-					Map<String, Object> map = new JsonConverter().convertTonMap(jsonMsg);
-					if (map.get("access_token")!=null) {
-						accessToken = (String) map.get("access_token");
-						expiresTime = (Integer) map.get("expires_in");
-						refreshToken = (String) map.get("refresh_token");
-						openId = (String) map.get("openid");
-						return openId;
-					}
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
+		if (openId!=null) {
+			return openId;
 		}
 		try {
 			if (code == null) {
@@ -68,11 +38,16 @@ public class AuthorizationManager {
 				jsonMsg += (char) i;
 				i = inputStreamReader.read();
 			}
-			Map<String, Object> map = new JsonConverter().convertTonMap(jsonMsg);
-			accessToken = (String) map.get("access_token");
-			expiresTime = (Integer) map.get("expires_in");
-			refreshToken = (String) map.get("refresh_token");
-			openId = (String) map.get("openid");
+			System.out.println(jsonMsg);
+			Map<String, Object> map = new HashMap<>();
+			map.put("openid", String.class);
+			map.put("errcode", Integer.class);
+			JSONObject jsonObject = JSONObject.fromObject(jsonMsg);
+			Map<String, Object> resultmap = (Map<String, Object>) JSONObject.toBean(jsonObject,Map.class,map);
+			openId = (String) resultmap.get("openid");
+			if (openId==null) {
+				return jsonMsg+"THIS IS ERROR CODE";
+			}
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
