@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h2>success</h2>
-	<s:if test="#request.searchHistory==null||request.searchHistory.size()==0">
+<%-- 	<s:if test="#request.searchHistory==null||request.searchHistory.size()==0">
 	</s:if>
 		<s:else>
 			<s:iterator value="#request.searchHistory">
@@ -17,6 +17,15 @@
 					<br>
 			</s:iterator>
 		</s:else>
-
+ --%>
+ 	<s:if test="#request.borrowedRecord==null||request.borrowedRecord.size()==0">
+	</s:if>
+		<s:else>
+			<s:iterator value="#request.borrowedRecord">
+					<h5>${borrowedAt}</h5>
+					<br>
+			</s:iterator>
+		</s:else>
+ 
 </body>
 </html>

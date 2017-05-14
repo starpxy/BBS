@@ -31,7 +31,8 @@
 </form>
 
 <a href="searchHistory-checkSearchHistory" >my search history</a>
-
+<br>
+<a href="borrowedRecord-checkBorrowedRecord">my borrowed list</a>
 <div class="slide" id="slide1">
 
     <ul>
