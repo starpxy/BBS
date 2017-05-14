@@ -5,6 +5,7 @@ import java.util.List;
 import com.bbs.dao.SearchHistoryDao;
 import com.bbs.entities.Book;
 import com.bbs.entities.SearchHistory;
+import com.bbs.entities.User;
 
 public class SearchHistoryService {
 	private SearchHistoryDao searchHistoryDao;
@@ -13,6 +14,9 @@ public class SearchHistoryService {
 	}
 	public List<Book> searchBooks(SearchHistory searchHistory){
 		return searchHistoryDao.searchBooks(searchHistory);
+	}
+	public List<String> checkSearchHistory(User user){
+		return searchHistoryDao.checkSearchHistory(user);
 	}
 	
 

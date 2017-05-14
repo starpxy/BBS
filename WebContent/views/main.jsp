@@ -30,8 +30,10 @@
 <input type="submit"/>
 </form>
 
+<a href="searchHistory-checkSearchHistory" >my search history</a>
 
 <div class="slide" id="slide1">
+
     <ul>
         <li>
             <a href="#">

@@ -17,6 +17,17 @@
 	<bean id="searchHistoryAction" class="com.bbs.actions.SearchHistoryAction">
 		<property name="searchHistoryService" ref="searchHistoryService"></property>
 	</bean>
+	<bean id="commentAction" class="com.bbs.actions.CommentAction">
+		<property name="commentService" ref="commentService"></property>
+	</bean>
+	<bean id="bookAction" class="com.bbs.actions.BookAction">
+		<property name="bookService" ref="bookService"></property>
+	</bean>
+	<bean id="borrowedRecordAction" class="com.bbs.actions.BorrowedRecordAction">
+		<property name="borrowedRecordService" ref="borrowedRecordService"></property>
+	</bean>
+	
+	
 	<bean id="userService" class="com.bbs.services.UserService">
 		<property name="userDao" ref="userDao"></property>
 	</bean>
@@ -29,6 +40,18 @@
 	<bean id="searchHistoryService" class="com.bbs.services.SearchHistoryService">
 		<property name="searchHistoryDao" ref="searchHistoryDao"></property>
 	</bean>
+	<bean id="commentService" class="com.bbs.services.CommentService">
+		<property name="commentDao" ref="commentDao"></property>
+	</bean>
+	<bean id="bookService" class="com.bbs.services.BookService">
+		<property name="bookDao" ref="bookDao"></property>
+	</bean>
+	<bean id="borrowedRecordService" class="com.bbs.services.BorrowedRecordService">
+		<property name="borrowedRecordDao" ref="borrowedRecordDao"></property>
+	</bean>
+	
+	
+	
 	<bean id="userDao" class="com.bbs.dao.UserDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
@@ -39,6 +62,15 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	<bean id="searchHistoryDao" class="com.bbs.dao.SearchHistoryDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="commentDao" class="com.bbs.dao.CommentDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="bookDao" class="com.bbs.dao.BookDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="borrowedRecordDao" class="com.bbs.dao.BorrowedRecordDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 </beans>

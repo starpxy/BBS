@@ -25,6 +25,7 @@
 		</action>
 		<action name="reservation-*" class="reservationAction" method="{1}">
 			<result name="reservation">main.jsp</result>
+			<result name="checkReservationList"></result>
 		</action>
 		<action name="au-*" class="authorizationAction" method="{1}">
 			<result name="newMember">register.jsp</result>
@@ -34,6 +35,17 @@
 		</action>
 		<action name="searchHistory-*" class="searchHistoryAction" method="{1}">
 			<result name="search">TestSearch.jsp</result>
+			<result name="checkSearchHistory">searchHistory.jsp</result>
+		</action>
+		<action name="comment-*" class="commentAction" method="{1}">
+			<result name="comment">TestSearch.jsp</result>
+		</action>
+		<action name="book-*" class="bookAction" method="{1}">
+			<result name="bookDetails"></result>
+		</action>
+		
+		<action name="borrowedRecord-*" class="borrowedRecordAction" method="{1}">
+			<result name="checkBorrowedRecord"></result>
 		</action>
     </package>
 

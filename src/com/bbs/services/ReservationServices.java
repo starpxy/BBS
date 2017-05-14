@@ -1,7 +1,10 @@
 package com.bbs.services;
 
+import java.util.List;
+
 import com.bbs.dao.ReservationDao;
 import com.bbs.entities.Reservation;
+import com.bbs.entities.User;
 
 public class ReservationServices {
 	private ReservationDao reservationDao;
@@ -11,5 +14,9 @@ public class ReservationServices {
 	}
 	public void createReservation(Reservation reservation) {
 		 reservationDao.createReservation(reservation);
+	}
+	
+	public List<Reservation> checkReservationList(User user){
+		return reservationDao.checkReservationList(user);
 	}
 }
