@@ -14,4 +14,7 @@ public class UserService {
 	public void register(User user){
 		userDao.register(user);
 	}
+	public User getInfo(User user){
+		return userDao.getInfo(user);
+	}
 }

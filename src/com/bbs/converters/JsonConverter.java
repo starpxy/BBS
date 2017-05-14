@@ -1,5 +1,6 @@
 package com.bbs.converters;
 
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -53,7 +54,7 @@ public class JsonConverter {
 				result.put(values[0].substring(1, values[0].length()-1), values[1].substring(1, values[1].length()-1));
 			}
 			else {
-				result.put(values[0].substring(1, values[0].length()-1), values[1]);
+				result.put(values[0].substring(1, values[0].length()-1), Integer.valueOf(values[1]));
 			}
 		}
 		return result;

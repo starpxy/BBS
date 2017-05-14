@@ -29,4 +29,14 @@ public class UserDao extends BaseDao {
 	public void register(User user){
 		getSession().saveOrUpdate(user);
 	}
+	public User getInfo(User user){
+		String hql = "FROM User WHERE phoneNumber='"+user.getPhoneNumber()+"' and password='"+user.getPassword()+"'";
+		List<User> list = getSession().createQuery(hql).list();
+		if (list.size()!=0) {
+			return list.get(0);
+		}
+		else {
+			return null;
+		}
+	}
 }

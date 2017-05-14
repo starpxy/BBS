@@ -65,7 +65,7 @@
 
 <div class="social-login tcenter">
 
-    <a href="#" class="icon icon-13 f-black" id="qqlogin"></a>
+    <a href="user-pushing" class="icon icon-13 f-black" id="qqlogin"></a>
 
     <a id="wechatlogin" href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx95311e6c3749af30&redirect_uri=http%3a%2f%2fpxyzmy.com.cn%2fBBS%2fviews%2fau-wechatLogin&response_type=code&scope=snsapi_userinfo&state=STATE" class="icon icon-14 f-green"></a>
 
