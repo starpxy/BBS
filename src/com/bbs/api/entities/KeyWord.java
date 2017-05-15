@@ -1,6 +1,6 @@
-package com.bbs.api.models;
+package com.bbs.api.entities;
 
-public class KeyNotes {
+public class KeyWord {
 	private String value;
 	private String color;
 
@@ -20,7 +20,7 @@ public class KeyNotes {
 		this.color = color;
 	}
 
-	public KeyNotes(String value, String color) {
+	public KeyWord(String value, String color) {
 		super();
 		this.value = value;
 		this.color = color;

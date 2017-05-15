@@ -1,6 +1,6 @@
-package com.bbs.api.models;
+package com.bbs.api.entities;
 
-public class Templete {
+public class Template {
 	private String touser;
 	private String template_id;
 	private String url;
@@ -46,7 +46,7 @@ public class Templete {
 		this.data = data;
 	}
 
-	public Templete(String touser, String template_id, String url, Data data) {
+	public Template(String touser, String template_id, String url, Data data) {
 		super();
 		this.touser = touser;
 		this.template_id = template_id;
@@ -54,7 +54,7 @@ public class Templete {
 		this.data = data;
 	}
 
-	public Templete(String touser, String template_id, Data data) {
+	public Template(String touser, String template_id, Data data) {
 		super();
 		this.touser = touser;
 		this.template_id = template_id;

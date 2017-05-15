@@ -1,5 +1,15 @@
 package com.bbs.api;
-
+/**
+ * 
+ * 15/05/2017
+ * 
+ * @author Star
+ * 
+ * This class is to store the AppId and secrete of WeChat public account.
+ * 
+ * You can use this project for other account by changing appId and appSecrete below.
+ *
+ */
 public class BasicAccountParam {
 	private static final String appId="wx95311e6c3749af30";
 	private static final String appSecrete="c9cf6453de2e7b471625f4747f79e75f";
