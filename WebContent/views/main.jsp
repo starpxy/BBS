@@ -29,10 +29,11 @@
 <input name="keyword" type="text"/>
 <input type="submit"/>
 </form>
-
+<!-- 用于测试的链接 -->
 <a href="searchHistory-checkSearchHistory" >my search history</a>
 <br>
 <a href="borrowedRecord-checkBorrowedRecord">my borrowed list</a>
+<br>
 <div class="slide" id="slide1">
 
     <ul>

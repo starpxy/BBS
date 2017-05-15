@@ -5,6 +5,14 @@ public class Templete {
 	private String template_id;
 	private String url;
 	private Data data;
+	private String topcolor;
+	public String getTopcolor() {
+		return topcolor;
+	}
+
+	public void setTopcolor(String topcolor) {
+		this.topcolor = topcolor;
+	}
 
 	public String getTouser() {
 		return touser;
