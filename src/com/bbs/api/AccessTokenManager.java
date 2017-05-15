@@ -52,6 +52,7 @@ public class AccessTokenManager {
 			Map<String, Object> map = converter.convertTonMap(temp);
 			accessToken = (String) map.get("access_token");
 			expiresTime = (int) map.get("expires_in");
+			System.out.println(accessToken);
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
