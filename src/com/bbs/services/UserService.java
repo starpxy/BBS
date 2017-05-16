@@ -17,4 +17,8 @@ public class UserService {
 	public User getInfo(User user){
 		return userDao.getInfo(user);
 	}
+	
+	public void setRecomFreq(User user) {
+		userDao.setRecomFreq(user);
+	}
 }

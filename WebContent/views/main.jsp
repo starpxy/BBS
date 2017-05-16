@@ -34,6 +34,11 @@
 <br>
 <a href="borrowedRecord-checkBorrowedRecord">my borrowed list</a>
 <br>
+<form action="user-setRecomFreq?" method="post">
+<input name="recommendFre" type="text"/>
+<input type="submit"/>
+</form>
+
 <div class="slide" id="slide1">
 
     <ul>

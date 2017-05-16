@@ -46,6 +46,19 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 		userService.register(user);
 		return "register";
 	}
+	
+	public String setRecomFreq(){
+		User user=(User) session.get("user");
+		user.setRecommendFre(this.user.getRecommendFre());
+		if(user!=null){
+			userService.setRecomFreq(user);
+		}
+		return "setRecomFreq";
+	}
+	
+	public void prepareSetRecomFreq(){
+		user = new User();
+	}
 
 	@Override
 	public User getModel() {

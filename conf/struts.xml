@@ -22,6 +22,7 @@
 			<result name="granted">main.jsp</result>
 			<result name="refused">register.jsp</result>
 			<result name="register">login.jsp</result>
+			<result name="setRecomFreq">setRecomTest.jsp</result>
 		</action>
 		<action name="reservation-*" class="reservationAction" method="{1}">
 			<result name="reservation">main.jsp</result>
