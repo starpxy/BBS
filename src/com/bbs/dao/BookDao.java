@@ -1,5 +1,7 @@
 package com.bbs.dao;
 
+import java.util.List;
+
 import com.bbs.entities.Book;
 
 public class BookDao extends BaseDao{
@@ -14,5 +16,13 @@ public class BookDao extends BaseDao{
 		}
 		return newBook;
 		
+	}
+	
+	public List<Book> bookList(Book book) {
+		List<Book> bookList=null;
+		String type=book.getType();
+		String hql="FROM Book WHERE type='"+type+"'";
+		bookList=getSession().createQuery(hql).list();
+		return bookList;
 	}
 }

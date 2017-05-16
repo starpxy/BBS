@@ -1,5 +1,7 @@
 package com.bbs.actions;
 
+import java.util.List;
+
 import com.bbs.entities.Book;
 import com.bbs.services.BookService;
 import com.opensymphony.xwork2.ModelDriven;
@@ -15,6 +17,16 @@ public class BookAction extends BaseAction implements ModelDriven<Book>{
 		Book newBook=BookService.bookDetails(book);
 		request.put("book", newBook);
 		return "bookDetails";
+	}
+	
+	public String bookList() {
+		List<Book> bookList=BookService.bookList(book);
+		request.put("bookList", bookList);
+		return "bookList";
+	}
+	
+	public void prepareBookList() {
+		this.book=new Book();
 	}
 	public void prepareBookDetails(){
 		this.book=new Book();
