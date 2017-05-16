@@ -38,9 +38,6 @@ public class IdentifyCode {
 		this.codeMap.put('8', '4');
 		this.codeMap.put('9', '5');
 	}
-	public Map<Character, Character> getCodeMap() {
-		return codeMap;
-	}
 	public String getCipherCode() {
 		char[] chars=this.code.toCharArray();
 		for (int i=0;i<chars.length;i++){
@@ -51,7 +48,7 @@ public class IdentifyCode {
 		return cipherCode;
 	}
 //	public static void main(String[] args) {
-//		IdentifyCode code=new IdentifyCode(4, 3);
+//		IdentifyCode code=new IdentifyCode(75, 1);
 //		
 //		code.getCipherCode();
 //	}

@@ -27,8 +27,17 @@ public class Decipher {
 		int rawUserId=(this.chars[0]-'0')*100+(this.chars[1]-'0')*10+(this.chars[2]-'0');
 		int rawReservationId=(this.chars[3]-'0')*100+(this.chars[4]-'0')*10+(this.chars[5]-'0');
 //		System.out.println("rawUserId= "+rawUserId+" rawReservationId= "+rawReservationId);
-		this.reservationId=(rawReservationId+3)/14;
-		this.userId=rawUserId-this.reservationId*13-8;
+		double rId=(float)(rawReservationId+3)/14;
+		double uId=(float)(rawUserId-rId*13-8);
+//		System.out.println(rId+" : "+uId);
+		if(rId==(int)rId&&uId==(int)uId&&rId>0&&uId>0){
+			this.reservationId=(int)rId;
+			this.userId=(int)uId;
+		}
+		else{
+			this.reservationId=-1;
+			this.userId=-1;
+		}
 	}
 	public int getUserId() {
 		return this.userId;
@@ -38,7 +47,7 @@ public class Decipher {
 	}
 	
 //	public static void main(String[] args) {
-//		Decipher decipher=new Decipher("327315");
+//		Decipher decipher=new Decipher("358399");
 //		System.out.println("userId= "+decipher.getUserId()+" ReservationId= "+decipher.getReservationId());
 //	}
 }
