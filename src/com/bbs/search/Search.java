@@ -34,13 +34,13 @@ import com.bbs.entities.Book;
 
 public class Search {
 	public List<Book> doSearch(List<Book> list, String query) throws ParseException, IOException {
-		Map<Integer, Integer> AuthorRankIDs=new HashMap<Integer, Integer>();
-		Map<Integer, Integer> TitleRankIDs=new TreeMap<Integer, Integer>();
+		Map<Integer, Float> AuthorRankIDs=new HashMap<Integer, Float>();
+		Map<Integer, Float> TitleRankIDs=new TreeMap<Integer, Float>();
 		Map<Integer, Book> books=new HashMap<Integer, Book>();
 		List<Book> rankedBooks=new ArrayList<Book>();
 		StandardAnalyzer analyzer = new StandardAnalyzer();
 		Directory index = new RAMDirectory();
-		int lastRank1=0,lastRank2=0;
+		float lastRank1=0,lastRank2=0;
 		IndexWriterConfig config = new IndexWriterConfig(analyzer);
 		
 		IndexWriter w = null;
@@ -63,7 +63,7 @@ public class Search {
 	    Query qTitle = new QueryParser("title", analyzer).parse(query);
 	    Query qAuthor = new QueryParser("author", analyzer).parse(query);
 	    Query qISBN = new QueryParser("isbn", analyzer).parse(query);
-	    int hitsPerPage = 30;
+	    int hitsPerPage = 50;
 	    IndexReader reader = DirectoryReader.open(index);
 	    IndexSearcher searcher = new IndexSearcher(reader);
 	    TopScoreDocCollector collector1 = TopScoreDocCollector.create(hitsPerPage);
@@ -90,11 +90,11 @@ public class Search {
 		    for(i=0;i<hitsTitle.length;++i) {
 		      int docId = hitsTitle[i].doc;
 		      Document d = searcher.doc(docId);
-		      TitleRankIDs.put(Integer.parseInt(d.get("id").toString()), i);
+		      TitleRankIDs.put(Integer.parseInt(d.get("id").toString()), hitsTitle[i].score);
+		      lastRank1=hitsTitle[i].score;
 //		      System.out.println("rank="+TitleRankIDs.get(Integer.parseInt(d.get("id").toString())));
 //		      System.out.println((i + 1) + "\t" + d.get("title")+"\t"+d.get("author"));
 		    }
-		    lastRank1=i;
 		    TopScoreDocCollector collector2 = TopScoreDocCollector.create(hitsPerPage);
 		    //search with the author
 		    searcher.search(qAuthor, collector2);
@@ -106,16 +106,16 @@ public class Search {
 		      int docId = hitsAuthor[j].doc;
 		      Document d = searcher.doc(docId);
 		      int id=Integer.parseInt(d.get("id").toString());
-		      AuthorRankIDs.put(id, j);
-//		      System.out.println((j + 1) + d.get("author")+"\t");
+		      AuthorRankIDs.put(id, hitsAuthor[j].score);
+//		      System.out.println(hitsAuthor[j].score + d.get("author")+"\t");
+		      lastRank2=hitsAuthor[j].score;
 		    }
-		    lastRank2=j;
 		    //add to the rankedBooks in order of the rank
 		    Iterator<Integer> iterator1=books.keySet().iterator();
 		    while(iterator1.hasNext()){
 		    	int id=iterator1.next();
-		    	int rank1=lastRank1;
-		    	int rank2=lastRank2; 
+		    	float rank1=lastRank1;
+		    	float rank2=lastRank2; 
 		    	if(TitleRankIDs.containsKey(id)){
 		    		rank1=TitleRankIDs.get(id);
 			    	if(AuthorRankIDs.containsKey(id))
@@ -134,16 +134,16 @@ public class Search {
 //		    	System.out.println("rank1="+rank1+" rank2="+rank2+"  rank= "+(rank1+rank2)/2+"author="+books.get(id).getAuthor()+"   title="+books.get(id).getBookTitle());
 		    }
 		    //这里将map.entrySet()转换成list
-	        List<Map.Entry<Integer,Integer>> temp = new ArrayList<Map.Entry<Integer,Integer>>(TitleRankIDs.entrySet());
+	        List<Map.Entry<Integer,Float>> temp = new ArrayList<Map.Entry<Integer,Float>>(TitleRankIDs.entrySet());
 	        //然后通过比较器来实现排序
-	        Collections.sort(temp,new Comparator<Map.Entry<Integer,Integer>>() {
+	        Collections.sort(temp,new Comparator<Map.Entry<Integer,Float>>() {
 
 				@Override
-				public int compare(Entry<Integer, Integer> o1, Entry<Integer, Integer> o2) {
-					return o1.getValue().compareTo(o2.getValue());
+				public int compare(Entry<Integer, Float> o1, Entry<Integer, Float> o2) {
+					return o2.getValue().compareTo(o1.getValue());
 				}
 			});
-	        for(Map.Entry<Integer,Integer> mapping:temp){ 
+	        for(Map.Entry<Integer,Float> mapping:temp){ 
 	        	int id=mapping.getKey();
 	        	rankedBooks.add(books.get(id));
 //	        	System.out.println(books.get(id).getAuthor()+"---------"+books.get(id).getBookTitle());
