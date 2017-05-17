@@ -48,6 +48,8 @@
 		
 		<action name="borrowedRecord-*" class="borrowedRecordAction" method="{1}">
 			<result name="checkBorrowedRecord">searchHistory.jsp</result>
+			<result name="createBorrowedRecord"></result>
+			<result name="outOfBorrowLimit"></result>
 		</action>
     </package>
 
