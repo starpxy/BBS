@@ -35,7 +35,7 @@
 			<result name="error">login.jsp</result>
 		</action>
 		<action name="searchHistory-*" class="searchHistoryAction" method="{1}">
-			<result name="search">TestSearch.jsp</result>
+			<result name="search">booklist.jsp</result>
 			<result name="checkSearchHistory">searchHistory.jsp</result>
 		</action>
 		<action name="comment-*" class="commentAction" method="{1}">

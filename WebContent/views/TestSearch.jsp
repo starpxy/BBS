@@ -18,13 +18,13 @@
 				<td>书名</td>
 				<td>作者</td>
 			</tr>
-			<s:iterator value="#request.books">
+			<%-- <s:iterator value="#request.books">
 				<tr>
 					<td><img alt="hh" src="${simpleChart }"></td>
 					<td>${bookTitle}</td>
 					<td>${author}</td>
 				</tr> 
-			</s:iterator>
+			</s:iterator> --%>
 		</table>
 	</s:else>
 	
@@ -33,9 +33,21 @@
   src='http://demo.easyrec.org:8080/api-js/easyrec.js'
   type='text/javascript'>
 </script>
+<script type="text/javascript" src="asserts/jquery.min.js">
+	
+
+</script>
+
 <script type='text/javascript'>
   var apiKey      = "3570f6da7aea44f8abd15e3399b6d978";
   var tenantId    = "BBSTenant";
+</script>
+
+<script>
+
+$("tr").after('<s:iterator value="#request.books"><tr id="tr"><td><img alt="hh" src="${simpleChart }"></td><td>${bookTitle}</td><td>${author}</td></tr></s:iterator> ');
+
+
 </script>
 <!--
 Useage : easyrec_sendAction(actionType,parameters);

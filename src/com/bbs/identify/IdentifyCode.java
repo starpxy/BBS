@@ -44,13 +44,13 @@ public class IdentifyCode {
 			chars[i]=this.codeMap.get(chars[i]);
 		}
 		this.cipherCode=String.valueOf(chars);
-//		System.out.println("After cipher"+cipherCode);
+		System.out.println("After cipher"+cipherCode);
 		return cipherCode;
 	}
-//	public static void main(String[] args) {
-//		IdentifyCode code=new IdentifyCode(75, 1);
-//		
-//		code.getCipherCode();
-//	}
+	public static void main(String[] args) {
+		IdentifyCode code=new IdentifyCode(8, 1);
+		
+		code.getCipherCode();
+	}
 	
 }

@@ -1,38 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <title>Title</title>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,user-scalable=0">
+<title>Title</title>
 
-    <link rel="stylesheet" href="asserts/weui/css/weui.css"/>
-    <link rel="stylesheet" href="asserts/weui/css/weui2.css"/>
-    <link rel="stylesheet" href="asserts/weui/css/weui3.css"/>
-    <link rel="stylesheet" href="asserts/mycss/index.css">
+<link rel="stylesheet" href="asserts/weui/css/weui.css" />
+<link rel="stylesheet" href="asserts/weui/css/weui2.css" />
+<link rel="stylesheet" href="asserts/weui/css/weui3.css" />
+<link rel="stylesheet" href="asserts/mycss/index.css">
 </head>
 <body ontouchstart style="background-color: #f8f8f8;">
 
-<div class="weui-header bg-green">
-    <div class="weui-header-left"><a href="user-login" class="icon icon-109 f-white">返回</a></div>
-    <h1 class="weui-header-title">书单:世界名著</h1>
-    <div class="weui-header-right"><a href="main.html" class="icon icon-27 f-white"></a></div>
-</div>
+	<div class="weui-header bg-green">
+		<div class="weui-header-left">
+			<a href="user-login" class="icon icon-109 f-white">返回</a>
+		</div>
+		<h1 class="weui-header-title">书单:世界名著</h1>
+		<div class="weui-header-right">
+			<a href="main.html" class="icon icon-27 f-white"></a>
+		</div>
+	</div>
 
 
-<div class="page-hd">
-    <p class="page-hd-desc">自动加载更多,上拉加载,下拉刷新</p>
-</div>
+	<div class="page-hd">
+		<p class="page-hd-desc">自动加载更多,上拉加载,下拉刷新</p>
+	</div>
 
-<div class="weui_panel weui_panel_access">
+	<div class="weui_panel weui_panel_access">
 
-    <div class="weui_panel_bd">
-
-
-    </div>
-</div>
+		<div class="weui_panel_bd"></div>
+	</div>
 </body>
 
 
@@ -63,24 +65,28 @@
                 domLoad: '<div class="dropload-load f15"><span class="weui-loading"></span>正在加载中...</div>'
             },
             loadUpFn: function (me) {//刷新
-                $.ajax({
+
+
+                
+
+
+                 $.ajax({
                     type: 'GET',
                     url: 'famous.json',
                     dataType: 'json',
                     success: function (data) {
-                        var result = '';
-                        for (var i = 0; i < data.books.length; i++) {
-                            result += '  <a href="'+data.books[i].alt+'" class="weui_media_box weui_media_appmsg">'
+ 				var result = '';
+                result += '<s:iterator value="#request.books">  <a href="" class="weui_media_box weui_media_appmsg">'
                                     + '<div class="weui_media_hd weui-updown">'
-                                    + '<img class="weui_media_appmsg_thumb lazyload" src="' + data.books[i].image + '" alt="" data-img="' + data.books[i].image + '">'
+                                    + '<img class="weui_media_appmsg_thumb lazyload" src="${simpleChart}" alt="" data-img="${simpleChart}">'
                                     + '</div>'
                                     + '<div class="weui_media_bd">'
-                                    + '<h4 class="weui_media_title">'+i+'&nbsp;' + data.books[i].title + '&nbsp;[' + data.books[i].origin_title + ']&nbsp;&nbsp;&nbsp;&nbsp;' + data.books[i].author + '<span style="display: none">&nbsp;&nbsp;&nbsp;&nbsp;'+data.books[i].id+'</span></h4>'
+                                    + '<h4 class="weui_media_title">'+i+'&nbsp;${bookTitle}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${author}<span style="display: none">&nbsp;&nbsp;&nbsp;&nbsp;${bookId}</span></h4>'
                                     + '<p class="weui_media_desc"><br><span style="color:red">一个月:2元&nbsp;&nbsp;&nbsp;&nbsp;</span>评价: 15</p>'
-                                    + '<p class="weui_media_desc"><br>总借量:40&nbsp;&nbsp;&nbsp;&nbsp;总存储量: 5本&nbsp;&nbsp;&nbsp;&nbsp;已借:3/5本</p>'
+                                    + '<p class="weui_media_desc"><br>总借量:1&nbsp;&nbsp;&nbsp;&nbsp;总存储量: ${bookVolume}本&nbsp;&nbsp;&nbsp;&nbsp;已借:3/5本</p>'
                                     + '</div>'
-                                    + '</a>';
-                        }
+                                    + '</a></s:iterator>';
+                                    
 
 
 
@@ -131,19 +137,18 @@
                         var arrLen = data.books.length;
                         if (arrLen > 0) {
 //                            data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUAAAAFACAYAAADNkKWqAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAwNi8wNS8xNrqrthwAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzbovLKMAAAEMElEQVR4nO3UQQEAEADAQPRvqIESxPDYXYK9Nvc+dwAErd8BAL8YIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBAlgECWQYIZBkgkGWAQJYBAlkGCGQZIJBlgECWAQJZBghkGSCQZYBA1gPYJgYfB4WzDQAAAABJRU5ErkJggg==
-                            for (var i = 0; i < data.books.length; i++) {
-                                var j=i+1;
-                                result += '<a href="'+data.books[i].alt+'" class="weui_media_box weui_media_appmsg">'
-                                        + '<div class="weui_media_hd weui-updown">'
-                                        + '<img class="weui_media_appmsg_thumb lazyload" src="' + data.books[i].image + '" alt="" data-img="' + data.books[i].image + '">'
-                                        + '</div>'
-                                        + '<div class="weui_media_bd">'
-                                        + '<h4 class="weui_media_title">'+j+'&nbsp;' + data.books[i].title + '&nbsp;' + data.books[i].origin_title + '&nbsp;&nbsp;&nbsp;&nbsp;' + data.books[i].author + '<span style="display: none">&nbsp;&nbsp;&nbsp;&nbsp;'+data.books[i].id+'</span></h4>'
-                                        + '<p class="weui_media_desc"><br><span style="color:red">一个月:2元&nbsp;&nbsp;&nbsp;&nbsp;</span>评价: 15</p>'
-                                        + '<p class="weui_media_desc"><br>总借量:40&nbsp;&nbsp;&nbsp;&nbsp;总存储量: 5本&nbsp;&nbsp;&nbsp;&nbsp;已借:3/5本</p>'
-                                        + '</div>'
-                                        + '</a>';
-                            }
+                            result += '<s:iterator value="#request.books">  <a href="" class="weui_media_box weui_media_appmsg">'
+                                    + '<div class="weui_media_hd weui-updown">'
+                                    + '<img class="weui_media_appmsg_thumb lazyload" src="${simpleChart}" alt="" data-img="${simpleChart}">'
+                                    + '</div>'
+                                    + '<div class="weui_media_bd">'
+                                    + '<h4 class="weui_media_title">&nbsp;${bookTitle}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${author}<span style="display: none">&nbsp;&nbsp;&nbsp;&nbsp;${bookId}</span></h4>'
+                                    + '<p class="weui_media_desc"><br><span style="color:red">一个月:2元&nbsp;&nbsp;&nbsp;&nbsp;</span>评价: 15</p>'
+                                    + '<p class="weui_media_desc"><br>总借量:1&nbsp;&nbsp;&nbsp;&nbsp;总存储量: ${bookVolume}本&nbsp;&nbsp;&nbsp;&nbsp;已借:3/5本</p>'
+                                    + '</div>'
+                                    + '</a></s:iterator>';
+                                    
+
                             // 如果没有数据
                         } else {
                             // 锁定

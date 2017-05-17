@@ -47,7 +47,7 @@ public class Decipher {
 	}
 	
 //	public static void main(String[] args) {
-//		Decipher decipher=new Decipher("358399");
+//		Decipher decipher=new Decipher("389477");
 //		System.out.println("userId= "+decipher.getUserId()+" ReservationId= "+decipher.getReservationId());
 //	}
 }
