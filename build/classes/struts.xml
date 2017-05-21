@@ -39,16 +39,16 @@
 			<result name="checkSearchHistory">searchHistory.jsp</result>
 		</action>
 		<action name="comment-*" class="commentAction" method="{1}">
-			<result name="comment">TestSearch.jsp</result>
+			<result name="comment"></result>
 		</action>
 		<action name="book-*" class="bookAction" method="{1}">
-			<result name="bookDetails"></result>
+			<result name="bookDetails">book.jsp</result>
 			<result name="bookList">booklist.jsp</result>
 		</action>
 		
 		<action name="borrowedRecord-*" class="borrowedRecordAction" method="{1}">
 			<result name="checkBorrowedRecord">searchHistory.jsp</result>
-			<result name="createBorrowedRecord"></result>
+			<result name="createBorrowedRecord">borrowlist.jsp</result>
 			<result name="outOfBorrowLimit"></result>
 		</action>
     </package>
