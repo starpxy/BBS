@@ -157,6 +157,7 @@ public class TemplateMessagePushing {
 		}
 	}
 //	public static void main(String[] args) {
-//		new TemplateMessagePushing().pushDepositConfirming("oQe5IuOG4oLF1N57aEQjmGEg5peU", 2, new IdentifyCode(1, 29).getCipherCode());
+//		new TemplateMessagePushing().pushDepositConfirming("oQe5IuE5_HM6rkTKIxOUOCj_-DEY", 2, new IdentifyCode(1, 29).getCipherCode());
+//		new TemplateMessagePushing().pushReturningBooks("oQe5IuBxLw5PKLiQDyfKuCnpDxg0", "可爱的萌宝儿", 1);
 //	}
 }
