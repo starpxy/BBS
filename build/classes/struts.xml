@@ -49,8 +49,11 @@
 		<action name="borrowedRecord-*" class="borrowedRecordAction" method="{1}">
 			<result name="checkBorrowedRecord">searchHistory.jsp</result>
 <<<<<<< HEAD
+<<<<<<< HEAD
 			<result name="createBorrowedRecord">borrowlist.jsp</result>
 			<result name="outOfBorrowLimit"></result>
+=======
+>>>>>>> parent of 4b662bc... 用户提交借书单
 =======
 >>>>>>> parent of 4b662bc... 用户提交借书单
 		</action>
