@@ -19,7 +19,8 @@ public class SearchHistoryAction extends BaseAction implements ModelDriven<Searc
 		if (tempUser != null && searchHistory != null) {
 			searchHistory.setUser(tempUser);
 		}
-		request.put("books", searchHistoryService.searchBooks(searchHistory));
+		request.put("keyword", searchHistory.getKeyword());
+		request.put("bookList", searchHistoryService.searchBooks(searchHistory));
 		return "search";
 	}
 	public String checkSearchHistory(){

@@ -19,10 +19,8 @@ public class BookDao extends BaseDao{
 	}
 	
 	public List<Book> bookList(Book book) {
-		List<Book> bookList=null;
 		String type=book.getType();
 		String hql="FROM Book WHERE type='"+type+"'";
-		bookList=getSession().createQuery(hql).list();
-		return bookList;
+		return getSession().createQuery(hql).list();
 	}
 }

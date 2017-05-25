@@ -25,10 +25,11 @@ public class SearchHistoryDao extends BaseDao {
 		}
 		String hql2 = "FROM User WHERE phoneNumber='"+searchHistory.getUser().getPhoneNumber()+"'";
 		searchHistory.setUser((User)(getSession().createQuery(hql2).list().get(0)));
-		System.out.println(searchHistory.getUser().getUserId());
-		System.out.println(searchHistory.getUser().getPhoneNumber());
 		searchHistory.setUpdateAt(new Date());
-		getSession().saveOrUpdate(searchHistory);
+		/*
+		 * 先加上注释，以后需要用的时候取消注释
+		 */
+//		getSession().saveOrUpdate(searchHistory);
 		return rankedBook;
 	}
 	public List<String> checkSearchHistory(User user) {

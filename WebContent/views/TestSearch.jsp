@@ -18,13 +18,13 @@
 				<td>书名</td>
 				<td>作者</td>
 			</tr>
-			<%-- <s:iterator value="#request.books">
+			 <s:iterator value="#request.books">
 				<tr>
 					<td><img alt="hh" src="${simpleChart }"></td>
 					<td>${bookTitle}</td>
 					<td>${author}</td>
 				</tr> 
-			</s:iterator> --%>
+			</s:iterator>
 		</table>
 	</s:else>
 	

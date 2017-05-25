@@ -21,6 +21,7 @@ public class BookAction extends BaseAction implements ModelDriven<Book>{
 	
 	public String bookList() {
 		List<Book> bookList=BookService.bookList(book);
+		request.put("type", book.getType());
 		request.put("bookList", bookList);
 		return "bookList";
 	}
