@@ -18,6 +18,7 @@ public class CommentAction extends BaseAction implements ModelDriven<Comment> {
 	public String createComment() {
 		comment.setUser((User) session.get("user"));
 		comment.setBook((Book) session.get("book"));
+		System.out.println(((Book) session.get("book")).getBookTitle());
 		commentService.createComment(comment);
 		request.put("comment", comment);
 		return "comment";

@@ -39,7 +39,7 @@
 			<result name="checkSearchHistory">searchHistory.jsp</result>
 		</action>
 		<action name="comment-*" class="commentAction" method="{1}">
-			<result name="comment"></result>
+			<result name="comment">#</result>
 		</action>
 		<action name="book-*" class="bookAction" method="{1}">
 			<result name="bookDetails">book.jsp</result>

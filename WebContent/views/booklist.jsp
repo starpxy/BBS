@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width,initial-scale=1,user-scalable=0">
-<title>Title</title>
+<title>图书列表</title>
 
 <link rel="stylesheet" href="asserts/weui/css/weui.css" />
 <link rel="stylesheet" href="asserts/weui/css/weui2.css" />

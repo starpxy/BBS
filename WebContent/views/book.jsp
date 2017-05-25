@@ -199,13 +199,15 @@
     <!--<div class="weui_cells_title">输入评论</div>-->
 
     <div class="weui_cells weui_cells_form">
-
+	
 
         <div class="weui_cell">
 
 
             <div class="weui_cell_bd weui_cell_primary">
-                <textarea id="textarea" class="weui_textarea" placeholder="请输入评论" rows="8"></textarea>
+            	<form action="comment-createComment" method="post" id="commentform">
+                	<textarea id="textarea" name="content" class="weui_textarea" placeholder="请输入评论" rows="8"></textarea>
+                </form>
                 <div class="weui_textarea_counter"><span id='count'>0</span>/<span id='count_max'>120</span></div>
             </div>
         </div>
@@ -352,13 +354,17 @@
                     type: 1,
                     title: '输入评论',
                     content: $('#commentadd'),
+                    shadeClose: true,  
+                    shade: false,  
+                    maxmin: true,  
                     btn: ['确定'],
                     area: ['300px', '400px']
                 });
 				
             });
 
-
+			
+			
             $('.rate-book').click(function () {
 
                 $(this).removeClass('icon-49').addClass('icon-48');
