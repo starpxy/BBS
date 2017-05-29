@@ -1,15 +1,27 @@
 package com.bbs.actions;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 
 import com.bbs.entities.Book;
 import com.bbs.services.BookService;
 import com.opensymphony.xwork2.ModelDriven;
 
+import net.sf.json.JSONArray;
+
 public class BookAction extends BaseAction implements ModelDriven<Book>{
 	private static final long serialVersionUID = 1L;
 	private Book book;
 	private BookService BookService;
+	private Map<String,Object> books;
+	public void setBooks(Map<String, Object> books) {
+		this.books = books;
+	}
+	public Map<String, Object> getBooks() {
+		return books;
+	}
 	public void setBookService(BookService bookService) {
 		this.BookService = bookService;
 	}
@@ -21,12 +33,20 @@ public class BookAction extends BaseAction implements ModelDriven<Book>{
 	}
 	
 	public String bookList() {
-		List<Book> bookList=BookService.bookList(book);
 		request.put("type", book.getType());
-		request.put("bookList", bookList);
 		return "bookList";
 	}
-	
+	public String listBooks(){
+		request.put("type", book.getType());
+		List<Book> bookList=BookService.bookList(book);
+		books = new HashMap<String,Object>();
+		books.put("books", JSONArray.fromObject(bookList));
+		System.out.println(JSONArray.fromObject(bookList));
+		return "listBooks";
+	}
+	public void prepareListBooks(){
+		this.book = new Book();
+	}
 	public void prepareBookList() {
 		this.book=new Book();
 	}

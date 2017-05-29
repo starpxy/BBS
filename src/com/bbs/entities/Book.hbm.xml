@@ -44,9 +44,9 @@
         <property name="updateAt" type="java.util.Date">
             <column name="UPDATE_AT" />
         </property>
-        <set name="comments" table="COMMENTS" inverse="true">
+       <!--  <set name="comments" table="COMMENTS" inverse="true" lazy="false">
         	<key column="COMMENT_ID"></key>
         	<one-to-many class="com.bbs.entities.Comment"/>
-        </set>
+        </set> -->
     </class>
 </hibernate-mapping>

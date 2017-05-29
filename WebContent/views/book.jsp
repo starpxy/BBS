@@ -358,6 +358,8 @@
                     shade: false,  
                     maxmin: true,  
                     btn: ['确定'],
+                    yes:function(){
+                    },
                     area: ['300px', '400px']
                 });
 				

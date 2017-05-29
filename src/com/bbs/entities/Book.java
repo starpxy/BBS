@@ -18,18 +18,9 @@ public class Book {
 	private String type;
 	private Integer bookVolume;
 	private Date updateAt;
-	private Set<Comment> comments = new HashSet<>();
 
 	public Integer getBookId() {
 		return bookId;
-	}
-
-	public Set<Comment> getComments() {
-		return comments;
-	}
-
-	public void setComments(Set<Comment> comments) {
-		this.comments = comments;
 	}
 
 	public void setBookId(Integer bookId) {

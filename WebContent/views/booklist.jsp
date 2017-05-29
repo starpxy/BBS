@@ -20,7 +20,7 @@
 		<div class="weui-header-left">
 			<a class="icon icon-109 f-white" href="user-login">返回</a>
 		</div>
-		<h1 class="weui-header-title">
+		<h1 class="weui-header-title" id="h1">
 			<s:if test="#request.type!=null">图书类目：${request.type }</s:if>
 			<s:else>关键词：${request.keyword }</s:else>
 		</h1>
@@ -72,27 +72,52 @@
 								domLoad : '<div class="dropload-load f15"><span class="weui-loading"></span>正在加载中...</div>'
 							},
 							loadUpFn : function(me) {//刷新
-								$
-										.ajax({
-											type : 'GET',
-											url : 'famous.json',
+								$.ajax({
+											type : 'POST',
+											url : function(){
+													if ($('#h1')==''){
+													}
+													else{
+														
+													}
+												},
 											dataType : 'json',
-											success : function() {
-												var result = '';
-												var i = 0;
-												result += '<s:if test="#request.bookList==null||request.bookList.size()==0"></s:if><s:else>'
-														+ '<s:iterator value="#request.bookList">  <a href="" class="weui_media_box weui_media_appmsg">'
-														+ '<div class="weui_media_hd weui-updown">'
-														+ '<img class="weui_media_appmsg_thumb lazyload" src="${simpleChart }" alt="" data-img="${simpleChart }">'
-														+ '</div>'
-														+ '<div class="weui_media_bd">'
-														+ '<h4 class="weui_media_title">&nbsp;${bookTitle}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${author}<span style="display: none">&nbsp;&nbsp;&nbsp;&nbsp;${bookId}</span></h4>'
-														+ '<p class="weui_media_desc"><br><span style="color:red">一个月:1元&nbsp;&nbsp;&nbsp;&nbsp;</span>评价: </p>'
-														+ '<p class="weui_media_desc"><br>总借量:10&nbsp;&nbsp;&nbsp;&nbsp;总存储量: ${bookVolume}本&nbsp;&nbsp;&nbsp;&nbsp;已借:1/${bookVolume}本</p>'
-														+ '</div>'
-														+ '</a></s:iterator></s:else>';
-
-												// 为了测试，延迟1秒加载
+											success : function(data) {
+												var arrLen = data.books.length;
+												alert(data.books.length
+														+ 'hhhh');
+												if (arrLen > 0) {
+													for (var i = 0; i < data.books.length; i++) {
+														var j = i + 1;
+														result += '<a href="" class="weui_media_box weui_media_appmsg">'
+																+ '<div class="weui_media_hd weui-updown">'
+																+ '<img class="weui_media_appmsg_thumb lazyload" src="' + data.books[i].simpleChart + '" alt="" data-img="' + data.books[i].simpleChart + '">'
+																+ '</div>'
+																+ '<div class="weui_media_bd">'
+																+ '<h4 class="weui_media_title">'
+																+ j
+																+ '&nbsp;'
+																+ data.books[i].bookTitle
+																+ '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+																+ data.books[i].author
+																+ '<span style="display: none">&nbsp;&nbsp;&nbsp;&nbsp;'
+																+ data.books[i].bookId
+																+ '</span></h4>'
+																+ '<p class="weui_media_desc"><br><span style="color:red">一个月:2元&nbsp;&nbsp;&nbsp;&nbsp;</span>评价: 15</p>'
+																+ '<p class="weui_media_desc"><br>总借量:40&nbsp;&nbsp;&nbsp;&nbsp;总存储量: '
+																+ data.books[i].bookVolume
+																+ '本&nbsp;&nbsp;&nbsp;&nbsp;已借:3/'
+																+ data.books[i].bookVolume
+																+ '本</p>'
+																+ '</div>'
+																+ '</a>';
+													}
+												} else {
+													// 锁定
+													me.lock();
+													// 无数据
+													me.noData();
+												}
 												setTimeout(
 														function() {
 															$('.weui_panel_bd')
@@ -135,28 +160,42 @@
 								page++;
 								window.history.pushState(null, document.title,
 										window.location.href);
-								var booklistlen = '${request.bookList.size()}';
-								var count = booklistlen;
+								var result='';
 								$
 										.ajax({
 											type : 'GET',
-											url : 'famous.json',
+											url : 'book-listBooks?type=${request.type}',
 											dataType : 'json',
-											success : function() {
-												var result = '';
-												var i = 0;
-												result += '<s:if test="#request.bookList==null||request.bookList.size()==0"></s:if><s:else>'
-														+ '<s:iterator value="#request.bookList">  <a href="book-bookDetails?bookId=${bookId}" class="weui_media_box weui_media_appmsg">'
-														+ '<div class="weui_media_hd weui-updown">'
-														+ '<img class="weui_media_appmsg_thumb lazyload" src="${simpleChart }" alt="" data-img="${simpleChart }">'
-														+ '</div>'
-														+ '<div class="weui_media_bd">'
-														+ '<h4 class="weui_media_title">&nbsp;${bookTitle}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${author}<span style="display: none">&nbsp;&nbsp;&nbsp;&nbsp;${bookId}</span></h4>'
-														+ '<p class="weui_media_desc"><br><span style="color:red">一个月:1元&nbsp;&nbsp;&nbsp;&nbsp;</span>评价: </p>'
-														+ '<p class="weui_media_desc"><br>总借量:10&nbsp;&nbsp;&nbsp;&nbsp;总存储量: ${bookVolume}本&nbsp;&nbsp;&nbsp;&nbsp;已借:1/${bookVolume}本</p>'
-														+ '</div>'
-														+ '</a></s:iterator></s:else>';
-												// 如果没有数据
+											success : function(data) {
+												var arrLen = data.books.length;
+												if (arrLen > 0) {
+													for (var i = 0; i < data.books.length; i++) {
+														result += '<a href="book.jsp?bookId" class="weui_media_box weui_media_appmsg">'
+																+ '<div class="weui_media_hd weui-updown">'
+																+ '<img class="weui_media_appmsg_thumb lazyload" src="' + data.books[i].simpleChart + '" alt="" data-img="' + data.books[i].simpleChart + '">'
+																+ '</div>'
+																+ '<div class="weui_media_bd">'
+																+ '<h4 class="weui_media_title">'
+																+ '&nbsp;'
+																+ data.books[i].bookTitle
+																+ '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+																+ data.books[i].author
+																+ '</h4>'
+																+ '<p class="weui_media_desc"><br><span style="color:red">一个月:2元&nbsp;&nbsp;&nbsp;&nbsp;</span>评价: 15</p>'
+																+ '<p class="weui_media_desc"><br>总借量:40&nbsp;&nbsp;&nbsp;&nbsp;总存储量: '
+																+ data.books[i].bookVolume
+																+ '本&nbsp;&nbsp;&nbsp;&nbsp;已借:3/'
+																+ data.books[i].bookVolume
+																+ '本</p>'
+																+ '</div>'
+																+ '</a>';
+													}
+												} else {
+													// 锁定
+													me.lock();
+													// 无数据
+													me.noData();
+												}
 												// 为了测试，延迟1秒加载
 												setTimeout(
 														function() {

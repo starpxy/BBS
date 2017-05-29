@@ -7,7 +7,7 @@
 
     <constant name="struts.enable.DynamicMethodInvocation" value="false" />
     <constant name="struts.devMode" value="true" />
-    <package name="default" namespace="/" extends="struts-default">
+    <package name="default" namespace="/" extends="json-default">
 		<!-- 定义新的拦截器栈 -->
 		<interceptors>
 			<interceptor-stack name="bbsStack">
@@ -39,11 +39,14 @@
 			<result name="checkSearchHistory">searchHistory.jsp</result>
 		</action>
 		<action name="comment-*" class="commentAction" method="{1}">
-			<result name="comment">#</result>
+			<result name="comment"></result>
 		</action>
-		<action name="book-*" class="bookAction" method="{1}">
+		<action name="book-*" class="bookAction" method="{1}" >
 			<result name="bookDetails">book.jsp</result>
 			<result name="bookList">booklist.jsp</result>
+			<result type="json" name="listBooks">
+				<param name="root">books</param>
+			</result>
 		</action>
 		
 		<action name="borrowedRecord-*" class="borrowedRecordAction" method="{1}">
