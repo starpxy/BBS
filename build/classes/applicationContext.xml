@@ -34,11 +34,10 @@
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="get*" read-only="true"/>
-			<tx:method name="*"/>
+			<tx:method name="*" propagation="REQUIRES_NEW" rollback-for="Exception"/>
 		</tx:attributes>
 	</tx:advice>
 	<!-- 配置事务切入点，把事务属性和事务切入点关联起来 -->
-	<!-- 详情见尚硅谷教程的Spring4中的22节教程 -->
 	<aop:config>
 		<aop:pointcut expression="execution(* com.bbs.services.*.*(..))" id="txPointCut"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCut"/>

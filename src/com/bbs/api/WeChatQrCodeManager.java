@@ -17,7 +17,7 @@ import com.bbs.api.entities.QrCode;
 
 import net.sf.json.JSONObject;
 
-public class QrCodeManager {
+public class WeChatQrCodeManager {
 	public String generateTempQrCodeTicket(int sceneId,int expireTime){
 		String ticket = null;
 		IdScene idScene = new IdScene(sceneId);

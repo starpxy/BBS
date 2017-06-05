@@ -19,30 +19,10 @@
 
 
 	<div class="weui-header bg-green">
-		<div class="weui-header-left">
-			<a href="login.jsp" class="icon icon-109 f-white">返回</a>
-		</div>
 		<h1 class="weui-header-title">无微不至的借阅伴侣</h1>
-		<div class="weui-header-right">
-			<a href="#" class="icon icon-29 f-white">主页</a>
-		</div>
 	</div>
 	<div class="searchbar_wrap">
 	</div>
-	<!-- <form action="searchHistory-searchBooks" method="post">
-<input name="keyword" type="text"/>
-<input type="submit"/>
-</form>
-用于测试的链接
-<a href="searchHistory-checkSearchHistory" >my search history</a>
-<br>
-<a href="borrowedRecord-checkBorrowedRecord">my borrowed list</a>
-<br>
-<form action="user-setRecomFreq?" method="post">
-<input name="recommendFre" type="text"/>
-<input type="submit"/>
-</form> -->
-
 	<div class="slide" id="slide1">
 
 		<ul>
@@ -119,46 +99,52 @@
 		</div>
 	</div>
 
-	<div class="weui_cells_title" style="height: 60px;">&nbsp;</div>
-	<section class="weui-menu">
-	<div class="weui-menu-inner">
-		<em></em>
-		<!--<span>图书操作</span>-->
-		<span>搜书</span>
-		<ul>
-			<em></em>
-			<li>搜书</li>
-			<li>借书</li>
-			<li>还书</li>
-		</ul>
-	</div>
-	<div class="weui-menu-inner">
-		<em></em>
-		<!--<span>图书管理</span>-->
-		<span>借书单</span>
-		<ul>
-			<em></em>
-			<li>借书单</li>
-			<li>预约单</li>
-			<li>借阅历史</li>
-			<li>搜索历史</li>
-		</ul>
-	</div>
-	<div class="weui-menu-inner">
-		<em></em>
-		<!--<span>我的</span>-->
-		<span>个人信息</span>
-		<ul>
-			<em></em>
-			<li>个人信息</li>
-			<li>提醒设置</li>
-			<li>系统消息</li>
-			<li>退出</li>
-		</ul>
-	</div>
+<div class="weui_cells_title" style="height:60px;">&nbsp;</div>
+<section class="weui-menu">
+    <div class="weui-menu-inner">
+        <em></em>
+        <!--<span>图书操作</span>-->
+        <span>搜书</span>
+        <ul>
+            <em></em>
+            <li>搜书</li>
+            <a id="scan">
+                <li>借书</li>
+            </a>
+            <li>还书</li>
+        </ul>
+    </div>
+    <div class="weui-menu-inner">
+        <em></em>
+        <!--<span>图书管理</span>-->
+        <span>借书单</span>
+        <ul>
+            <em></em>
+
+            <li><a href="borrowlist.jsp">借书单</a></li>
+
+            <li><a href="#">预约单</a></li>
+
+            <li><a href="borrowhistory.jsp">借阅历史</a></li>
+
+            <li>搜索历史</li>
+
+        </ul>
+    </div>
+    <div class="weui-menu-inner">
+        <em></em>
+        <!--<span>我的</span>-->
+        <span>个人信息</span>
+        <ul>
+            <em></em>
+            <li>系统消息</li>
+            <li class="user-info">个人信息</li>
+            <li class="log-out">注销</li>
+        </ul>
+    </div>
 
 
-	</section>
+</section>
 
 
 	<script src="asserts/weui/js/zepto.min.js"></script>
@@ -167,7 +153,23 @@
 
 	<script type="text/javascript">
 		$(function() {
+			 $(".user-info").click(function () {
+		            window.location.href = 'userinfo.jsp';
 
+		        });
+
+		        $(".log-out").click(function () {
+
+		            $.confirm("确定要注销当前帐号吗？", '注销确认', function () {
+		                window.location.href = 'user-logout';
+		            }, function () {
+
+		            });
+
+
+
+		        });
+					
 			$('.searchbar_wrap').searchBar({
 				cancelText : "取消",
 				searchText : '书名／作者／ISBN',

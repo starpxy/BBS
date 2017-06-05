@@ -34,6 +34,7 @@ public class BookAction extends BaseAction implements ModelDriven<Book>{
 	
 	public String bookList() {
 		request.put("type", book.getType());
+		request.put("status", 1);
 		return "bookList";
 	}
 	public String listBooks(){
@@ -41,7 +42,6 @@ public class BookAction extends BaseAction implements ModelDriven<Book>{
 		List<Book> bookList=BookService.bookList(book);
 		books = new HashMap<String,Object>();
 		books.put("books", JSONArray.fromObject(bookList));
-		System.out.println(JSONArray.fromObject(bookList));
 		return "listBooks";
 	}
 	public void prepareListBooks(){

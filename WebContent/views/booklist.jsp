@@ -20,7 +20,7 @@
 		<div class="weui-header-left">
 			<a class="icon icon-109 f-white" href="user-login">返回</a>
 		</div>
-		<h1 class="weui-header-title" id="h1">
+		<h1 class="weui-header-title">
 			<s:if test="#request.type!=null">图书类目：${request.type }</s:if>
 			<s:else>关键词：${request.keyword }</s:else>
 		</h1>
@@ -72,20 +72,19 @@
 								domLoad : '<div class="dropload-load f15"><span class="weui-loading"></span>正在加载中...</div>'
 							},
 							loadUpFn : function(me) {//刷新
+								var ajurl = '';
+								if (status == 1){
+									ajurl = 'book-listBooks?type=${request.type}';
+								}
+								else if (status == 2){
+									ajurl = 'searchHistory-bookSearch?keyword=${request.keyword}';
+								}
 								$.ajax({
 											type : 'POST',
-											url : function(){
-													if ($('#h1')==''){
-													}
-													else{
-														
-													}
-												},
+											url : ajurl,
 											dataType : 'json',
 											success : function(data) {
 												var arrLen = data.books.length;
-												alert(data.books.length
-														+ 'hhhh');
 												if (arrLen > 0) {
 													for (var i = 0; i < data.books.length; i++) {
 														var j = i + 1;
@@ -161,16 +160,25 @@
 								window.history.pushState(null, document.title,
 										window.location.href);
 								var result='';
+								var status = '${request.status}'
+								var ajurl = '';
+									if (status == 1){
+										ajurl = 'book-listBooks?type=${request.type}';
+									}
+									else if (status == 2){
+										ajurl = 'searchHistory-bookSearch?keyword=${request.keyword}';
+									}
+				
 								$
 										.ajax({
 											type : 'GET',
-											url : 'book-listBooks?type=${request.type}',
+											url :  ajurl,
 											dataType : 'json',
 											success : function(data) {
 												var arrLen = data.books.length;
 												if (arrLen > 0) {
 													for (var i = 0; i < data.books.length; i++) {
-														result += '<a href="book.jsp?bookId" class="weui_media_box weui_media_appmsg">'
+														result += '<a href="book-bookDetails?bookId='+data.books[i].bookId+'" class="weui_media_box weui_media_appmsg">'
 																+ '<div class="weui_media_hd weui-updown">'
 																+ '<img class="weui_media_appmsg_thumb lazyload" src="' + data.books[i].simpleChart + '" alt="" data-img="' + data.books[i].simpleChart + '">'
 																+ '</div>'
@@ -182,7 +190,7 @@
 																+ data.books[i].author
 																+ '</h4>'
 																+ '<p class="weui_media_desc"><br><span style="color:red">一个月:2元&nbsp;&nbsp;&nbsp;&nbsp;</span>评价: 15</p>'
-																+ '<p class="weui_media_desc"><br>总借量:40&nbsp;&nbsp;&nbsp;&nbsp;总存储量: '
+																+ '<p class="weui_media_desc"><br>总借量:20&nbsp;&nbsp;&nbsp;&nbsp;总存储量: '
 																+ data.books[i].bookVolume
 																+ '本&nbsp;&nbsp;&nbsp;&nbsp;已借:3/'
 																+ data.books[i].bookVolume

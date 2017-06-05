@@ -1,7 +1,5 @@
 package com.bbs.entities;
 
-import java.util.HashSet;
-import java.util.Set;
 
 public class User {
 	private Integer userId;
@@ -13,7 +11,15 @@ public class User {
 	private String gender; 
 	private String role;
 	private Integer recommendFre;
-
+	private String avatar;
+	
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+	
+	public String getAvatar() {
+		return avatar;
+	}
 
 	public Integer getUserId() {
 		return userId;

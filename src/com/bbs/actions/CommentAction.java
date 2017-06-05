@@ -1,26 +1,38 @@
 package com.bbs.actions;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.bbs.entities.Book;
 import com.bbs.entities.Comment;
 import com.bbs.entities.User;
 import com.bbs.services.CommentService;
 import com.opensymphony.xwork2.ModelDriven;
 
+import net.sf.json.JSONObject;
+
 public class CommentAction extends BaseAction implements ModelDriven<Comment> {
 	private static final long serialVersionUID = 1L;
 	private CommentService commentService;
 	private Comment comment;
-
+	private Map<String, Object> status;
+	public void setStatus(Map<String, Object> status) {
+		this.status = status;
+	}
+	public Map<String, Object> getStatus() {
+		return status;
+	}
 	public void setCommentService(CommentService commentService) {
 		this.commentService = commentService;
 	}
 
-	public String createComment() {
+	public String makeComment() {
 		comment.setUser((User) session.get("user"));
 		comment.setBook((Book) session.get("book"));
-		System.out.println(((Book) session.get("book")).getBookTitle());
-		commentService.createComment(comment);
+		commentService.makeComment(comment);
 		request.put("comment", comment);
+		status = new HashMap<String,Object>();
+		status.put("state", 1);
 		return "comment";
 	}
 
@@ -29,7 +41,7 @@ public class CommentAction extends BaseAction implements ModelDriven<Comment> {
 		return comment;
 	}
 
-	public void prepareCreateComment() {
+	public void prepareMakeComment() {
 		comment = new Comment();
 	}
 

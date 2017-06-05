@@ -18,7 +18,7 @@
 <body ontouchstart style="background-color: #f8f8f8;">
 
 <div class="weui-header bg-green">
-    <div class="weui-header-left"><a class="icon icon-109 f-white" href="user-login">返回</a></div>
+    <div class="weui-header-left"><a class="icon icon-109 f-white" id="back" href="">返回</a></div>
     <h1 class="weui-header-title">${request.book.bookTitle }</h1>
     <div class="weui-header-right"><a href="user-login" class="icon icon-27 f-white"></a></div>
 </div>
@@ -315,7 +315,7 @@
 
             $("#book").click(function () {
 
-                window.location.href="booksubmit.html";
+                window.location.href="booksubmit.jsp";
 
 //                $.confirm("不好意思,你想借的书已经被借,你可以去预约", "去预约", function () {
 //
@@ -347,10 +347,13 @@
 
             });
 
+			$('#back').click(function(){
+					history.back();
+				});
 
             $('#addcomment').click(function () {
 
-                layer.open({
+               layer.open({
                     type: 1,
                     title: '输入评论',
                     content: $('#commentadd'),
@@ -359,6 +362,25 @@
                     maxmin: true,  
                     btn: ['确定'],
                     yes:function(){
+                        $.ajax({
+                            type:'POST',
+                            url:'comment-makeComment?content='+$('#textarea').val()+'&starClass=',
+                            dataType : 'json',
+                            success: function (data){
+                               if(data.state==1){
+                                    layer.closeAll();                           	   
+                                    layer.msg('评论成功',{icon:1,anim:2,time:1000});
+									$('#textarea').val('');
+                                }
+                               else{
+                            	   layer.closeAll();   
+                                   layer.msg('您已经评论过此书',{icon:3,anim:2,time:1000});                        	   
+                               }
+                            },
+                            error: function(){
+                            	layer.msg('服务器错误',{icon:2,anim:2,time:1000});
+                            }
+                         });
                     },
                     area: ['300px', '400px']
                 });

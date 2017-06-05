@@ -39,7 +39,12 @@ public class UserDao extends BaseDao {
 			return null;
 		}
 	}
-	
+	public void changePass(User user){
+		String hql="FROM User WHERE userId="+user.getUserId();
+		User user2=(User) getSession().createQuery(hql).list().get(0);
+		user2.setPassword(user.getPassword());
+		getSession().update(user2);
+	}
 	public void setRecomFreq(User user) {
 		int frq=user.getRecommendFre();
 		System.out.println(frq+"-----");

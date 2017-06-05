@@ -27,7 +27,6 @@ import com.bbs.api.entities.Data;
 import com.bbs.api.entities.KeyWord;
 import com.bbs.api.entities.NewData;
 import com.bbs.api.entities.Template;
-import com.bbs.identify.IdentifyCode;
 
 import net.sf.json.JSONObject;
 

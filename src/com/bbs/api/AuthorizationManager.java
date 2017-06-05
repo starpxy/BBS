@@ -55,4 +55,7 @@ public class AuthorizationManager {
 		}
 		return openId;
 	}
+//	public String getAvatar() throws NoneCodeException {
+//		
+//	}
 }

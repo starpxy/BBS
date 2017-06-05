@@ -17,6 +17,12 @@
         <property name="content" type="java.lang.String">
             <column name="CONTENT" sql-type="LONGTEXT"/>
         </property>
+        <property name="state" type="java.lang.String">
+            <column name="STATE" />
+        </property>
+        <property name="starClass" type="java.lang.Integer">
+            <column name="STAR_CLASS" />
+        </property>
         <property name="updateAt" type="java.util.Date">
             <column name="UPDATE_AT" />
         </property>

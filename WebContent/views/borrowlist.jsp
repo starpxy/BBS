@@ -13,11 +13,13 @@
 </head>
 
 <body ontouchstart class="page-bg">
+    <div class="weui-header bg-green">
+	    <div class="weui-header-left"><a class="icon icon-109 f-white" id="back" href="user-login">返回</a></div>
+	    <h1 class="weui-header-title">借书单</h1>
+	    <div class="weui-header-right"><a href="user-login" class="icon icon-27 f-white"></a></div>
+	</div>
+	<div class="page-hd">
 
-<div class="page-hd">
-    <h1 class="page-hd-title">
-        借书单
-    </h1>
     <span style="float: right;color: grey">共2本</span>
     <span style="color: red">总计:4元</span>
 

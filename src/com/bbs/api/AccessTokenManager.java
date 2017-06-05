@@ -31,7 +31,7 @@ public class AccessTokenManager {
 		HttpsURLConnection httpsURLConnection;
 		InputStreamReader inputStreamReader;
 		if (startTime!=null) {
-			if ((new Date().getTime()-startTime.getTime())<(expiresTime*1000-1000L)) {
+			if ((new Date().getTime()-startTime.getTime())<(expiresTime*1000-10000L)) {
 				System.out.println("reuse");
 				return accessToken;
 			}

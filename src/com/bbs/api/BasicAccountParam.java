@@ -13,6 +13,14 @@ package com.bbs.api;
 public class BasicAccountParam {
 	private static final String appId="wx95311e6c3749af30";
 	private static final String appSecrete="c9cf6453de2e7b471625f4747f79e75f";
+	private static final String mchId="1423223602";
+	private static final String key="star1234567890abcdefghijklmnopqr";
+	protected static String getKey() {
+		return key;
+	}
+	protected static String getMchid() {
+		return mchId;
+	}
 	protected static String getAppId() {
 		return appId;
 	}

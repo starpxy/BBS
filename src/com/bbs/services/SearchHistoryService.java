@@ -15,6 +15,9 @@ public class SearchHistoryService {
 	public List<Book> searchBooks(SearchHistory searchHistory){
 		return searchHistoryDao.searchBooks(searchHistory);
 	}
+	public List<Book> bookSearch(SearchHistory searchHistory){
+		return searchHistoryDao.bookSearch(searchHistory);
+	}
 	public List<String> checkSearchHistory(User user){
 		return searchHistoryDao.checkSearchHistory(user);
 	}

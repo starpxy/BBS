@@ -7,7 +7,25 @@ public class Comment {
 	private User user;
 	private Book book;
 	private String content;
+	private int starClass;
+	private String state;
 	private Date updateAt;
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setStarClass(int starClass) {
+		this.starClass = starClass;
+	}
+
+	public int getStarClass() {
+		return starClass;
+	}
 
 	public Integer getCommentId() {
 		return commentId;

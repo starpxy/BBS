@@ -8,8 +8,7 @@ public class CommentService {
 	public void setCommentDao(CommentDao commentDao) {
 		this.commentDao = commentDao;
 	}
-	public void createComment(Comment comment){
-		commentDao.createComment(comment);
+	public void makeComment(Comment comment){
+		commentDao.makeComment(comment);
 	}
-
 }

@@ -32,6 +32,20 @@ public class SearchHistoryDao extends BaseDao {
 //		getSession().saveOrUpdate(searchHistory);
 		return rankedBook;
 	}
+	public List<Book> bookSearch(SearchHistory searchHistory) {
+		Search search = new Search();
+		String hql = "FROM Book";
+		List<Book> list = getSession().createQuery(hql).list();
+		List<Book> rankedBook = null;
+		try {
+			rankedBook = search.doSearch(list, searchHistory.getKeyword());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return rankedBook;
+	}
 	public List<String> checkSearchHistory(User user) {
 		List<String> history=null;
 		String hql="FROM SearchHistory WHERE user.userId="+user.getUserId();
