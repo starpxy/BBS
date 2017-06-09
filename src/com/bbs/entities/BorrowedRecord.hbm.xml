@@ -14,8 +14,14 @@
         <many-to-one name="bookItem" class="com.bbs.entities.BookItem">
             <column name="ITEM_ID" />
         </many-to-one>
+        <many-to-one name="bookItem2" class="com.bbs.entities.BookItem">
+            <column name="ITEM_ID" />
+        </many-to-one>
         <property name="borrowedAt" type="java.util.Date">
             <column name="BORROWED_AT" />
+        </property>
+        <property name="outTradeNo" type="java.util.String">
+            <column name="OUT_TRADE_NO" />
         </property>
         <property name="returnAt" type="java.util.Date">
             <column name="RETURN_AT" />

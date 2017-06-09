@@ -122,9 +122,6 @@
                             href="javascript:;"
                             class="weui_btn weui_btn_plain_primary" id="addcomment">发表评论</a>
                     </div>
-                    </p>
-
-
                 </div>
             </div>
         </div>
@@ -136,28 +133,22 @@
 
 <div style="margin-top: 100px">&nbsp;</div>
 
-<div class="weui-footer-fixed-bottom page-bd">
+<div style="position:fixed;bottom: 0px;width: 100%">
     <div class="weui_panel weui_panel_access">
         <!--<div class="weui_panel_hd">文字组合列表</div>-->
         <div class="weui_panel_bd">
             <div class="weui_media_box weui_media_text">
                 <!--<h4 class="weui_media_title">标题一</h4>-->
-                <p class="weui_media_desc"><a href="javascript:;" class="weui_btn bg-green" id="book">借书</a></p>
+                <p class="weui_media_desc"><a href=" " class="weui_btn bg-green" id="book">借书</a ></p >
             </div>
         </div>
     </div>
 </div>
 
-
 <div class="page-bd-15" style="display: none" id="commentcheck">
     <div class="weui_cells_title">用户评论</div>
     <ul class="weui-comment">
-
         <li class="weui-comment-item">
-
-            <!--<div class="tright">-->
-                <!--评价:五星-->
-            <!--</div>-->
             <div class="weui-comment-li"><span class="check checked"> <i
                     class="weui-comment-icon"></i> <span class="weui-comment-num">5</span> </span></div>
 
@@ -167,29 +158,6 @@
 
             <p class="time">今天</p>
         </li>
-        <hr>
-
-
-        <li class="weui-comment-item">
-            <div class="weui-comment-li"><span class="check checked"> <i
-                    class="weui-comment-icon"></i> <span class="weui-comment-num">1</span> </span></div>
-            <div class="userinfo"><strong class="nickname">潘星宇</strong> <img class="avatar" src=""></div>
-            <div class="weui-comment-msg"><span class="status"></span> 我觉得这本书烂透了</div>
-            <p class="time">昨天</p>
-        </li>
-
-        <hr>
-
-        <li class="weui-comment-item">
-            <div class="weui-comment-li"><span class="check checked"> <i
-                    class="weui-comment-icon"></i> <span class="weui-comment-num">3</span> </span></div>
-            <div class="userinfo"><strong class="nickname">正萌芽</strong> <img class="avatar" src=""></div>
-            <div class="weui-comment-msg"><span class="status"></span> 还行,还行</div>
-            <p class="time">前天</p>
-        </li>
-
-
-
     </ul>
 </div>
 
@@ -336,7 +304,7 @@
 
 
             $('#checkcomment').click(function () {
-
+				
                 layer.open({
                     type: 1,
                     title: '查看评论',
@@ -344,7 +312,19 @@
                     btn: ['yes'],
                     area: ['300px', '400px']
                 });
-
+                $.ajax({
+                    type:'POST',
+                    url:'comment-showComments?book=${request.book}',
+                    dataType : 'json',
+                    success: function (data){
+                        
+                    },
+                    error: function(){
+                    	layui.use('layer', function(){
+                            layer.msg('服务器错误',{icon:2,anim:2,time:2000});
+                        });
+                    }
+                 });
             });
 
 			$('#back').click(function(){

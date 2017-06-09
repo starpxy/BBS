@@ -6,10 +6,28 @@ public class BorrowedRecord {
 	private Integer borrowedId;
 	private User user;
 	private BookItem bookItem;
+	private BookItem bookItem2;
 	private Date borrowedAt;
 	private Date returnAt;
 	private String status;
 	private Date updateAt;
+	private String outTradeNo;
+
+	public void setOutTradeNo(String outTradeNo) {
+		this.outTradeNo = outTradeNo;
+	}
+
+	public String getOutTradeNo() {
+		return outTradeNo;
+	}
+
+	public BookItem getBookItem2() {
+		return bookItem2;
+	}
+
+	public void setBookItem2(BookItem bookItem2) {
+		this.bookItem2 = bookItem2;
+	}
 
 	public Integer getBorrowedId() {
 		return borrowedId;

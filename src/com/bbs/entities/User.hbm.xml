@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2017-4-26 16:43:06 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bbs.entities.User" table="USERS" dynamic-insert="true">
+    <class name="com.bbs.entities.User" table="USERS">
         <id name="userId" type="java.lang.Integer">
             <column name="USER_ID" />
             <generator class="native" />
@@ -33,7 +33,7 @@
             <column name="RECOMMEND_FRE" />
         </property>
         <property name="avatar" type="java.lang.String">
-            <column name="AVATAR" default="asserts/images/faces/wechat.gif"/>
+            <column name="AVATAR" />
         </property>
         <!-- 做的时候要先插入1的一端：即User端，再插入reservation和borrowedRecords（为了减少维护） -->
         <!-- <set name="reservations" table="RESERVATIONS" inverse="true" lazy="false">

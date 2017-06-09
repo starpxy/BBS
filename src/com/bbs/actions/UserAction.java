@@ -3,27 +3,40 @@ package com.bbs.actions;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.interceptor.ServletRequestAware;
+
+import com.bbs.api.entities.QrCode;
 import com.bbs.entities.User;
 import com.bbs.services.UserService;
 import com.opensymphony.xwork2.ModelDriven;
 
-public class UserAction extends BaseAction implements ModelDriven<User> {
+public class UserAction extends BaseAction implements ModelDriven<User>, ServletRequestAware {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private HttpServletRequest request;
 	private UserService userService;
 	private User user;
 	private Map<String, Object> status;
+
 	public Map<String, Object> getStatus() {
 		return status;
 	}
+
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
-	public String changePass(){
+
+	public String showQrCode() {
+		
+		return null;
+	}
+
+	public String changePass() {
 		userService.changePass(user);
 		status = new HashMap<>();
 		status.put("state", 1);
@@ -33,6 +46,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 		session.put("user", user);
 		return "changeSucceed";
 	}
+
 	public String login() {
 		if (session.get("user") != null) {
 			return "granted";
@@ -62,16 +76,18 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 		}
 		return "setRecomFreq";
 	}
-	
-	public String logout(){
+
+	public String logout() {
 		if (session.containsKey("user")) {
 			session.remove("user");
 		}
 		return "logout";
 	}
-	public void prepareChangePass(){
+
+	public void prepareChangePass() {
 		user = new User();
 	}
+
 	public void prepareLogin() {
 		user = new User();
 	}
@@ -84,8 +100,17 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 		user = new User();
 	}
 
+	public void prepareShowQrCode() {
+		user = new User();
+	}
+
 	@Override
 	public User getModel() {
 		return user;
+	}
+
+	@Override
+	public void setServletRequest(HttpServletRequest request) {
+		this.request = request;
 	}
 }
