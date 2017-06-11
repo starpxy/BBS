@@ -26,6 +26,9 @@
 			<result name="changeSucceed" type="json">
 				<param name="root">status</param>
 			</result>
+			<result name="showQrCode" type="json">
+				<param name="root">status</param>
+			</result>
 			<result name="logout">login.jsp</result>
 		</action>
 		<action name="reservation-*" class="reservationAction" method="{1}">

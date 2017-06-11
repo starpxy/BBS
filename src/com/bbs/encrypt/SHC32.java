@@ -72,6 +72,9 @@ public class SHC32 {
 	public void setKey(long key){
 		shcManager.setKey(key);
 	}
+	public long getKey(){
+		return shcManager.getKey();
+	}
 	private SHC32(){
 		shcManager = SHCManager.getInstance();
 	}

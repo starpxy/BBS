@@ -23,6 +23,7 @@ public class UserDao extends BaseDao {
 			return true;
 		}
 		else {
+			System.out.println("fuck");
 			return false;
 		}
 	}

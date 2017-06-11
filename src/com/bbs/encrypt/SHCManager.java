@@ -65,6 +65,7 @@ class SHCManager {
 	}
 	private void generateMapping(){
 		random = new Random(key);
+		map = new HashMap<>();
 		for (int i = 0; i < 62; i++) {
 			if (i<10) {
 				map.put((char)(i+48), (char)generateCharater());
@@ -112,6 +113,7 @@ class SHCManager {
 	}
 	public void setKey(long key) {
 		this.key = key;
+		generateMapping();
 	}
 	public long getKey() {
 		return key;

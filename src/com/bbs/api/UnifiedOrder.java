@@ -155,7 +155,7 @@ public class UnifiedOrder {
 		String result = buf.toString();
 		resultMap.put("appId", appid);
 		resultMap.put("nonceStr", nonceStr);
-		resultMap.put("package", "prepay_id="+prepayId);
+		resultMap.put("pac", "prepay_id="+prepayId);
 		resultMap.put("signType", "MD5");
 		resultMap.put("timeStamp", timeStamp);
 		resultMap.put("paySign", result.toUpperCase());

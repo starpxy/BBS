@@ -7,10 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
 
+import com.bbs.api.TopScanManager;
 import com.bbs.api.entities.QrCode;
+import com.bbs.encrypt.ClearTextOutOfBoundException;
+import com.bbs.encrypt.SHC32;
 import com.bbs.entities.User;
 import com.bbs.services.UserService;
 import com.opensymphony.xwork2.ModelDriven;
+
+import net.sf.json.JSONObject;
 
 public class UserAction extends BaseAction implements ModelDriven<User>, ServletRequestAware {
 
@@ -18,7 +23,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private HttpServletRequest request;
+	private HttpServletRequest httpServletRequest;
 	private UserService userService;
 	private User user;
 	private Map<String, Object> status;
@@ -32,8 +37,20 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 	}
 
 	public String showQrCode() {
-		
-		return null;
+		String QrCode = TopScanManager.getQrCode(user.getUserId()+"");
+		String ip = httpServletRequest.getHeader("x-forwarded-for");
+		if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		ip = httpServletRequest.getHeader("Proxy-Client-IP");
+		}
+		if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		ip = httpServletRequest.getHeader("WL-Proxy-Client-IP");
+		}
+		if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		ip = httpServletRequest.getRemoteAddr();
+		}
+		status = new HashMap<>();
+		status.put("QrCode", QrCode);
+		return "showQrCode";
 	}
 
 	public String changePass() {
@@ -111,6 +128,6 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
-		this.request = request;
+		this.httpServletRequest = request;
 	}
 }

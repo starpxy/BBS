@@ -138,6 +138,7 @@
         <ul>
             <em></em>
             <li>系统消息</li>
+            <li class="user-qrCode">我的借书二维码</li>
             <li class="user-info">个人信息</li>
             <li class="log-out">注销</li>
         </ul>
@@ -157,7 +158,10 @@
 		            window.location.href = 'userinfo.jsp';
 
 		        });
+			 $(".user-qrCode").click(function () {
+		            window.location.href = 'qrCode.jsp';
 
+		       });
 		        $(".log-out").click(function () {
 
 		            $.confirm("确定要注销当前帐号吗？", '注销确认', function () {

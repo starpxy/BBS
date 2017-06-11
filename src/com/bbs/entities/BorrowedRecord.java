@@ -6,7 +6,6 @@ public class BorrowedRecord {
 	private Integer borrowedId;
 	private User user;
 	private BookItem bookItem;
-	private BookItem bookItem2;
 	private Date borrowedAt;
 	private Date returnAt;
 	private String status;
@@ -19,14 +18,6 @@ public class BorrowedRecord {
 
 	public String getOutTradeNo() {
 		return outTradeNo;
-	}
-
-	public BookItem getBookItem2() {
-		return bookItem2;
-	}
-
-	public void setBookItem2(BookItem bookItem2) {
-		this.bookItem2 = bookItem2;
 	}
 
 	public Integer getBorrowedId() {
