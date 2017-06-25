@@ -25,7 +25,7 @@
 			<s:else>关键词：${request.keyword }</s:else>
 		</h1>
 		<div class="weui-header-right">
-			<a href="main.jsp" class="icon icon-27 f-white"></a>
+			<a href="user-login" class="icon icon-27 f-white"></a>
 		</div>
 	</div>
 

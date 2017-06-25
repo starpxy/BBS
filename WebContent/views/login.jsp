@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="asserts/weui/css/weui3.css"/>
     <link rel="stylesheet" href="asserts/mycss/index.css">
 
-
 </head>
 <body ontouchstart style="background-color: #f8f8f8;">
 

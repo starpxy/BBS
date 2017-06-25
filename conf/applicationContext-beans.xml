@@ -22,10 +22,15 @@
 	</bean>
 	<bean id="bookAction" class="com.bbs.actions.BookAction">
 		<property name="bookService" ref="bookService"></property>
+		<property name="userService" ref="userService"></property>
 	</bean>
 	<bean id="borrowedRecordAction" class="com.bbs.actions.BorrowedRecordAction">
 		<property name="borrowedRecordService" ref="borrowedRecordService"></property>
 	</bean>
+	<bean id="bookItemAction" class="com.bbs.actions.BookItemAction">
+		<property name="bookItemService" ref="bookItemService"></property>
+	</bean>
+	
 	
 	
 	<bean id="userService" class="com.bbs.services.UserService">
@@ -45,6 +50,9 @@
 	</bean>
 	<bean id="bookService" class="com.bbs.services.BookService">
 		<property name="bookDao" ref="bookDao"></property>
+	</bean>
+	<bean id="bookItemService" class="com.bbs.services.BookItemService">
+		<property name="bookItemDao" ref="bookItemDao"></property>
 	</bean>
 	<bean id="borrowedRecordService" class="com.bbs.services.BorrowedRecordService">
 		<property name="borrowedRecordDao" ref="borrowedRecordDao"></property>
@@ -68,6 +76,9 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	<bean id="bookDao" class="com.bbs.dao.BookDao">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="bookItemDao" class="com.bbs.dao.BookItemDao">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	<bean id="borrowedRecordDao" class="com.bbs.dao.BorrowedRecordDao">

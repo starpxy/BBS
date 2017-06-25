@@ -5,11 +5,15 @@ import java.util.Date;
 import com.bbs.entities.Comment;
 
 public class CommentDao extends BaseDao{
-	public void makeComment(Comment comment){
+	public boolean makeComment(Comment comment){
 		comment.setUpdateAt(new Date());
-		System.out.println(comment.getBook().getBookId()+"====="+comment.getUser().getUserId());
-		System.out.println(comment.getContent());
-		getSession().saveOrUpdate(comment);
-		System.out.println("yes");
+		String hql = "FROM Comment WHERE user.userId="+comment.getUser().getUserId()+" AND book.bookId="+comment.getBook().getBookId()+" AND state='unselected'";
+		if (getSession().createQuery(hql).list().isEmpty()) {
+			getSession().save(comment);
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 }

@@ -41,6 +41,9 @@
         <property name="bookVolume" type="java.lang.Integer">
             <column name="BOOK_VOLUME" />
         </property>
+        <property name="starClass" type="java.lang.Float">
+            <column name="STAR_CLASS" />
+        </property>
         <property name="updateAt" type="java.util.Date">
             <column name="UPDATE_AT" />
         </property>

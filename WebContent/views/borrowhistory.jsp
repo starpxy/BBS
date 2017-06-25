@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <!doctype html>
 <html>
 <head>
@@ -14,14 +15,34 @@
 
 <body ontouchstart class="page-bg">
 
-<div class="page-hd">
-    <h1 class="page-hd-title">
-        借书历史详情
-    </h1>
+<div class="weui-header bg-green">
+    <div class="weui-header-left"><a id="back" href="javascript:;" class="icon icon-109 f-white">返回</a></div>
+    <h1 class="weui-header-title">借阅历史</h1>
+    <div class="weui-header-right"><a href="main.html" class="icon icon-27 f-white"></a></div>
+</div>
 
+<div class="weui_cells">
+
+    <div class="weui_cell weui_cell_select weui_select_after">
+
+        <div class="weui_cell_hd">
+            <label for="" class="weui_label">过滤显示</label>
+        </div>
+
+        <div class="weui_cell_bd weui_cell_primary">
+
+            <select class="weui_select select2" name="select2">
+                <option value="1">全部</option>
+                <option value="2">已借未还</option>
+                <option value="3">已借已还</option>
+            </select>
+
+        </div>
+    </div>
 
 </div>
 
+<div style="margin-top: 10px">&nbsp;</div>
 
 <div class="weui-form-preview">
     <div>
@@ -55,7 +76,7 @@
         </div>
 
         <div class="weui-form-preview-ft">
-            <a class="weui-form-preview-btn weui-form-preview-btn-primary f-gray" style="cursor:not-allowed">已借未还</a>
+            <a class="weui-form-preview-btn weui-form-preview-btn-primary borrow-status">已借未还</a>
         </div>
 
     </div>
@@ -99,7 +120,7 @@
         </div>
 
         <div class="weui-form-preview-ft">
-            <a class="weui-form-preview-btn weui-form-preview-btn-primary f-gray" style="cursor:not-allowed">已借已还</a>
+            <a class="weui-form-preview-btn weui-form-preview-btn-primary borrow-status">已借未还</a>
         </div>
     </div>
 
@@ -138,7 +159,7 @@
         </div>
 
         <div class="weui-form-preview-ft">
-            <a class="weui-form-preview-btn weui-form-preview-btn-primary f-gray" style="cursor:not-allowed">已借未还</a>
+            <a class="weui-form-preview-btn weui-form-preview-btn-primary f-gray borrow-status">已借已还</a>
         </div>
 
     </div>
@@ -182,7 +203,7 @@
         </div>
 
         <div class="weui-form-preview-ft">
-            <a class="weui-form-preview-btn weui-form-preview-btn-primary f-gray" style="cursor:not-allowed">已借已还</a>
+            <a class="weui-form-preview-btn weui-form-preview-btn-primary f-gray borrow-status" style="cursor:not-allowed">已借已还</a>
         </div>
     </div>
 
@@ -195,6 +216,46 @@
 <script>
     $(function () {
 
+    	$('#back').click(function(){
+            history.back();
+        });
+
+        $(".select2").change(function(){
+
+//            alert($(this).val());
+            var borrowstatus=$(this).val();
+
+            var allstatus=$('.borrow-status');
+
+            if (borrowstatus==1){
+                allstatus.each(function () {
+                    $(this).parent().parent().parent().show();
+                });
+            }else if(borrowstatus==2){
+
+                allstatus.each(function () {
+                    if ($(this).text()==="已借未还"){
+                        $(this).parent().parent().parent().show();
+                    }else{
+                        $(this).parent().parent().parent().hide();
+                    }
+                });
+
+            }else if(borrowstatus==3){
+
+                allstatus.each(function () {
+                    if ($(this).text()==="已借已还"){
+                        $(this).parent().parent().parent().show();
+                    }else{
+                        $(this).parent().parent().parent().hide();
+                    }
+                });
+
+            }
+
+
+
+        });
 
 
 

@@ -108,9 +108,7 @@
         <ul>
             <em></em>
             <li>搜书</li>
-            <a id="scan">
-                <li>借书</li>
-            </a>
+                <li id="scan">借书</li>
             <li>还书</li>
         </ul>
     </div>
@@ -150,10 +148,103 @@
 
 	<script src="asserts/weui/js/zepto.min.js"></script>
 	<script src="asserts/weui/js/swipe.js"></script>
-
-
+	<script src="layui/layui.js"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"> </script>
 	<script type="text/javascript">
 		$(function() {
+			$.ajax({
+        		type:'POST',
+                url:'user-initialAPI',
+                dataType : 'json',
+                data: {"url":"http://pxyzmy.com.cn/BBS/views/user-login"},
+                success: function (data){
+                    wx.config({
+                        debug: false,
+                        appId: data.appId,
+                        timestamp: data.timeStamp,
+                        nonceStr: data.nonceStr,
+                        signature: data.signature,
+                        jsApiList: [
+                            'checkJsApi',
+                            'onMenuShareTimeline',
+                            'onMenuShareAppMessage',
+                            'onMenuShareQQ',
+                            'onMenuShareWeibo',
+                            'hideMenuItems',
+                            'showMenuItems',
+                            'hideAllNonBaseMenuItem',
+                            'showAllNonBaseMenuItem',
+                            'translateVoice',
+                            'startRecord',
+                            'stopRecord',
+                            'onRecordEnd',
+                            'playVoice',
+                            'pauseVoice',
+                            'stopVoice',
+                            'uploadVoice',
+                            'downloadVoice',
+                            'chooseImage',
+                            'previewImage',
+                            'uploadImage',
+                            'downloadImage',
+                            'getNetworkType',
+                            'openLocation',
+                            'getLocation',
+                            'hideOptionMenu',
+                            'showOptionMenu',
+                            'closeWindow',
+                            'scanQRCode',
+                            'chooseWXPay',
+                            'openProductSpecificView',
+                            'addCard',
+                            'chooseCard',
+                            'openCard'
+                        ]
+                    });
+                    
+                    wx.error(function (res) {
+                        alert(res.errMsg);
+                    });
+        },
+        error: function(){
+            layer.msg('服务器错误',{icon:2,anim:2,time:1000});
+        }
+    });
+			
+            document.querySelector('#scan').onclick = function () {
+                wx.scanQRCode({
+                    needResult: 1,
+                    desc: 'scanQRCode desc',
+                    success: function (res) {
+                    	var data = res.resultStr;
+                    	var ids = $.parseJSON(data);
+                    	alert(ids);
+                    	alert(ids.itemId+' '+ids.bookId);
+                    	$.ajax({
+                            type:'POST',
+                            url:'item-ava?itemId='+ids.itemId,
+                            dataType : 'json',
+                            success: function (data){
+                                if(data.state==1){
+                                	window.location.href = "book-bookSubmit?bookId="+ids.bookId;
+                                }
+                                else if(data.state==2){
+                                    alert('对不起，此书已被其他人预定！');
+                                }
+                                else if(data.state==3){
+                                	alert('啊哦！你预定的书不是我哦！');
+                                }
+                                else{
+                                	alert('此书处于被借出状态！有疑问请联系管理员');
+                                }
+                            },
+                            error: function(){
+                                alert('服务器错误');
+                            }
+                        });
+					}
+                });
+            };
 			 $(".user-info").click(function () {
 		            window.location.href = 'userinfo.jsp';
 

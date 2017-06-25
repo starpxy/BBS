@@ -8,6 +8,15 @@ public class Reservation {
 	private BookItem bookItem;
 	private Date createAt;
 	private Date updateAt;
+	private String status;
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getStatus() {
+		return status;
+	}
 
 	public Integer getReservationId() {
 		return reservationId;

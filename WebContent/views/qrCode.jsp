@@ -15,7 +15,7 @@
 <body ontouchstart style="background-color: #439057;">
 
 <div class="weui-header" style="background-color: #439057">
-    <div class="weui-header-left"><a class="icon icon-109 f-white">返回</a></div>
+    <div class="weui-header-left"><a href="user-login" class="icon icon-109 f-white">返回</a></div>
     <h1 class="weui-header-title">我的二维码</h1>
     <div class="weui-header-right"><a href="user-login" class="icon icon-27 f-white"></a></div>
 </div>
@@ -87,29 +87,6 @@
                         //为qrcode img赋值
                         var qrcode = data.QrCode;
                         $("#qrcode img").attr("src", qrcode);
-                       
-                    },
-                    error: function (xhr, type) {
-                        layer.msg("二维码定时更新错误", {anim: 6, icon: 2, time: 1000});
-                        layer.close(index);
-                    }
-
-                });
-
-            }, 1000);
-
-            //每1000毫秒刷新pay状态
-            setInterval(function () {
-
-
-                $.ajax({
-                    type: 'POST',
-                    url: '',//由star填写
-                    dataType: 'json',
-                    success: function (data) {
-                        //为qrcode img赋值
-                        var qrcode = data.QrCode;
-                        $("#qrcode img").attr("src", qrcode);
                         if (data.pay == 1) {
                             //调起微信支付
                             function onBridgeReady() {
@@ -147,13 +124,35 @@
                         }
                     },
                     error: function (xhr, type) {
-                        layer.msg("刷新pay状态错误", {anim: 6, icon: 2, time: 1000});
+                        layer.msg("二维码定时更新错误", {anim: 6, icon: 2, time: 1000});
                         layer.close(index);
                     }
 
                 });
 
             }, 1000);
+
+            //每1000毫秒刷新pay状态
+         /*    setInterval(function () {
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: '',//由star填写
+                    dataType: 'json',
+                    success: function (data) {
+                        //为qrcode img赋值
+                        var qrcode = data.QrCode;
+                       
+                    },
+                    error: function (xhr, type) {
+                        layer.msg("刷新pay状态错误", {anim: 6, icon: 2, time: 1000});
+                        layer.close(index);
+                    }
+
+                });
+
+            }, 1000); */
 			
 
 
@@ -169,9 +168,7 @@
 
                         //为qrcode img赋值
                         var qrcode = data.QrCode;
-
                         $("#qrcode img").attr("src", qrcode);
-
                         layer.close(index);
                     },
                     error: function (xhr, type) {

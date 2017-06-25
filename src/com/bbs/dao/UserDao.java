@@ -2,6 +2,7 @@ package com.bbs.dao;
 
 import java.util.List;
 
+import com.bbs.entities.BorrowedRecord;
 import com.bbs.entities.User;
 
 
@@ -23,7 +24,6 @@ public class UserDao extends BaseDao {
 			return true;
 		}
 		else {
-			System.out.println("fuck");
 			return false;
 		}
 	}
@@ -32,6 +32,16 @@ public class UserDao extends BaseDao {
 	}
 	public User getInfo(User user){
 		String hql = "FROM User WHERE phoneNumber='"+user.getPhoneNumber()+"' and password='"+user.getPassword()+"'";
+		List<User> list = getSession().createQuery(hql).list();
+		if (list.size()!=0) {
+			return list.get(0);
+		}
+		else {
+			return null;
+		}
+	}
+	public User getUserInfo(User user){
+		String hql = "FROM User WHERE userId="+user.getUserId();
 		List<User> list = getSession().createQuery(hql).list();
 		if (list.size()!=0) {
 			return list.get(0);
@@ -54,5 +64,24 @@ public class UserDao extends BaseDao {
 		user2.setRecommendFre(frq);
 		System.out.println(user2.getRecommendFre());
 		getSession().update(user2);
+	}
+	public List<BorrowedRecord> payState(User user){
+		String hql = "FROM BorrowedRecord user.userId="+user.getUserId()+" AND status='confirmed'";
+		List<BorrowedRecord> list = (List<BorrowedRecord>) getSession().createQuery(hql).list();
+		if (list.size()==0) {
+			return null;
+		}
+		else{
+			return list;
+		}
+	}
+	public String adminLogin(User user){
+		String hql = "FROM User WHERE phoneNumber='"+user.getPhoneNumber()+"' AND password='"+user.getPassword()+"' AND role='admin'";
+		if (getSession().createQuery(hql).list().isEmpty()) {
+			return "fail";
+		}
+		else{
+			return "success";
+		}
 	}
 }

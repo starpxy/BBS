@@ -17,7 +17,16 @@ public class Book {
 	private String introduction;
 	private String type;
 	private Integer bookVolume;
+	private Float starClass;
 	private Date updateAt;
+
+	public void setStarClass(Float starClass) {
+		this.starClass = starClass;
+	}
+
+	public Float getStarClass() {
+		return starClass;
+	}
 
 	public Integer getBookId() {
 		return bookId;

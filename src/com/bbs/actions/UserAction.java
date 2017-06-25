@@ -1,21 +1,19 @@
 package com.bbs.actions;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
 
+import com.bbs.api.JSAPIInitial;
 import com.bbs.api.TopScanManager;
-import com.bbs.api.entities.QrCode;
-import com.bbs.encrypt.ClearTextOutOfBoundException;
-import com.bbs.encrypt.SHC32;
+import com.bbs.entities.BorrowedRecord;
 import com.bbs.entities.User;
 import com.bbs.services.UserService;
 import com.opensymphony.xwork2.ModelDriven;
-
-import net.sf.json.JSONObject;
 
 public class UserAction extends BaseAction implements ModelDriven<User>, ServletRequestAware {
 
@@ -36,20 +34,40 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		this.userService = userService;
 	}
 
+	public String adminLogin() {
+		String phoneNumber = httpServletRequest.getParameter("account");
+		String password = httpServletRequest.getParameter("password");
+		User user = new User();
+		user.setPhoneNumber(phoneNumber);
+		user.setPassword(password);
+		status = new HashMap<>();
+		status.put("state", userService.adminLogin(user));
+		return "adminLogin";
+	}
+
 	public String showQrCode() {
-		String QrCode = TopScanManager.getQrCode(user.getUserId()+"");
+		String QrCode = TopScanManager.getQrCode(user.getUserId() + "");
+		List<BorrowedRecord> payState = userService.payState(user);
 		String ip = httpServletRequest.getHeader("x-forwarded-for");
-		if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-		ip = httpServletRequest.getHeader("Proxy-Client-IP");
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = httpServletRequest.getHeader("Proxy-Client-IP");
 		}
-		if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-		ip = httpServletRequest.getHeader("WL-Proxy-Client-IP");
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = httpServletRequest.getHeader("WL-Proxy-Client-IP");
 		}
-		if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-		ip = httpServletRequest.getRemoteAddr();
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = httpServletRequest.getRemoteAddr();
 		}
 		status = new HashMap<>();
 		status.put("QrCode", QrCode);
+		if (payState != null) {
+			status.put("pay", 1);
+			Map<String, Object> map = new HashMap<>();
+			map.put("book1", payState.get(0).getBookItem().getBook());
+			status.put("payState", 1);
+		} else {
+			status.put("pay", 0);
+		}
 		return "showQrCode";
 	}
 
@@ -73,6 +91,13 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		} else {
 			return "refused";
 		}
+	}
+
+	public String initialAPI() {
+		JSAPIInitial jsapiInitial = new JSAPIInitial();
+		String URL = httpServletRequest.getParameter("url");
+		status = jsapiInitial.initialAPI(URL);
+		return "initialAPI";
 	}
 
 	public String register() {

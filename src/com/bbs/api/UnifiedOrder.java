@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -133,26 +134,14 @@ public class UnifiedOrder {
 		Map<String,Object> resultMap = new HashMap<String,Object>();
 		Date date = new Date();
 		String timeStamp = (date.getTime()/1000)+"";
-		String star = "appId="+appid+"&nonceStr="+nonceStr+"&package=prepay_id="+prepayId+"&signType=MD5"+"&timeStamp="+timeStamp+"&key="+key;
-		MessageDigest messageDigest=null;
-		try {
-			messageDigest = MessageDigest.getInstance("MD5");
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		messageDigest.update(star.getBytes());
-		byte b[] = messageDigest.digest();
-		int i;
-		StringBuffer buf = new StringBuffer("");
-		for (int offset = 0; offset < b.length; offset++) {
-			i = b[offset];
-			if (i < 0)
-				i += 256;
-			if (i < 16)
-				buf.append("0");
-			buf.append(Integer.toHexString(i));
-		}
-		String result = buf.toString();
+		TreeMap<String, String> map = new TreeMap<>();
+		map.put("appId", appid);
+		map.put("nonceStr", nonceStr);
+		map.put("packeage=prepay_id", prepayId);
+		map.put("signType", "MD5");
+		map.put("timeStamp", timeStamp);
+		map.put("key", key);
+		String result = Signature.signMD5(map);
 		resultMap.put("appId", appid);
 		resultMap.put("nonceStr", nonceStr);
 		resultMap.put("pac", "prepay_id="+prepayId);
@@ -163,29 +152,19 @@ public class UnifiedOrder {
 		return resultMap;
 	}
 	private String calculateSign(){
-		String star = "" + "appid=" + appid + "&body=" + body + "&mch_id=" + mchId + "&nonce_str=" + nonceStr
-				+ "&notify_url=" + notifyURL + "&openid=" + openId + "&out_trade_no=" + outTradeNo
-				+ "&spbill_create_ip=" + spbillCreateIp + "&total_fee=" + totalFee + "&trade_type=" + tradeType
-				+ "&key=" + key;
-		MessageDigest messageDigest=null;
-		try {
-			messageDigest = MessageDigest.getInstance("MD5");
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		messageDigest.update(star.getBytes());
-		byte b[] = messageDigest.digest();
-		int i;
-		StringBuffer buf = new StringBuffer("");
-		for (int offset = 0; offset < b.length; offset++) {
-			i = b[offset];
-			if (i < 0)
-				i += 256;
-			if (i < 16)
-				buf.append("0");
-			buf.append(Integer.toHexString(i));
-		}
-		String result = buf.toString();
+		TreeMap<String, String> map = new TreeMap<>();
+		map.put("appid", appid);
+		map.put("body", body);
+		map.put("mch_id", mchId);
+		map.put("nonce_str", nonceStr);
+		map.put("notify_url", notifyURL);
+		map.put("openid", openId);
+		map.put("out_trade_no", outTradeNo);
+		map.put("spbill_create_ip", spbillCreateIp);
+		map.put("total_fee", totalFee+"");
+		map.put("trade_type", tradeType);
+		map.put("key", key);
+		String result = Signature.signMD5(map);
 		return result.toUpperCase();
 	}
 

@@ -1,5 +1,6 @@
 package com.bbs.entities;
 
+import java.util.Date;
 
 public class User {
 	private Integer userId;
@@ -8,15 +9,24 @@ public class User {
 	private String name;
 	private String password;
 	private String identityId;
-	private String gender; 
+	private String gender;
 	private String role;
 	private Integer recommendFre;
 	private String avatar;
-	
+	private Date lastRecommend;
+
+	public void setLastRecommend(Date lastRecommend) {
+		this.lastRecommend = lastRecommend;
+	}
+
+	public Date getLastRecommend() {
+		return lastRecommend;
+	}
+
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
-	
+
 	public String getAvatar() {
 		return avatar;
 	}

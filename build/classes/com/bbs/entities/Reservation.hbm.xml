@@ -20,5 +20,8 @@
         <property name="updateAt" type="java.util.Date">
             <column name="UPDATE_AT" />
         </property>
+        <property name="status" type="java.lang.String">
+        	<column name="STATUS"></column>
+        </property>
     </class>
 </hibernate-mapping>
