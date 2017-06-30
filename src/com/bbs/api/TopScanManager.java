@@ -10,7 +10,7 @@ public class TopScanManager {
 	private static long startTime;
 	public static String getQrCode(String userId){
 		Date date = new Date();
-		if ((date.getTime()-startTime)>=6000000L) {
+		if ((date.getTime()-startTime)>=600000L) {
 			startTime = date.getTime();
 		}
 		SHC32 shc32 = SHC32.getInstance();

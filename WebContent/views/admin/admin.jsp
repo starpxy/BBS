@@ -370,7 +370,7 @@
                                     		BookItem bookItem = null;
                                     		int i = 0;
                                     		int j = 0;
-                                    		while(i<bookItems.size()){
+                                    		while(i<bookItems.size()&i<30){
                                     			bookItem = bookItems.get(i);
                                     %>
                                     <tr>
@@ -413,13 +413,14 @@
 				%>
                 <tr>
                   <td class="item-id"><%=bookItem.getItemId() %></td>
-                  <td class="item-qrcode"><a><img src='http://qr.liantu.com/api.php?text={"bookId":<%=bookItem.getBook().getBookId() %>,"itemId":<%=bookItem.getItemId() %>}' width="50px" height="50px"></a></td>
+                  <td class="item-qrcode"><a><img alt="点击查看二维码详情" src='http://qr.liantu.com/api.php?text={"bookId":<%=bookItem.getBook().getBookId() %>,"itemId":<%=bookItem.getItemId() %>}' width="50px" height="50px"></a></td>
+                  <input type="hidden" value='http://qr.liantu.com/api.php?text={"bookId":<%=bookItem.getBook().getBookId() %>,"itemId":<%=bookItem.getItemId() %>}'/>
                   <td class="item-status"><%=bookItem.getStatus() %></td>
                     <td class="item-operations">
                         <a data-toggle="tooltip" data-placement="left"
-                           title="生成二维码" class="generate-item-qrcode"><i
-                                class="fa fa-plus"></i></a>
-
+                           title="打印二维码" class="print-qrcode"><i
+                                class="fa fa-print"></i>
+                          </a>
                     <a data-toggle="tooltip" data-placement="right"
                        title="删除这个条目" class="delete-item"><i
                             class="fa fa-trash"></i></a>
@@ -687,7 +688,6 @@
         layer.msg('服务器错误',{icon:2,anim:2,time:1000});
     }
 });
-
          document.querySelector('#scan').onclick = function () {
             wx.scanQRCode({
                 needResult: 1,
@@ -851,7 +851,7 @@
                                dataType: 'json',
                                 success: function (data) {
                                     
-                            layer.msg("成功为该书(已存在)增加一个item", {anim: 1, icon: 1, time: 2000});
+                           		 	layer.msg("成功为该书(已存在)增加一个item", {anim: 1, icon: 1, time: 2000});
                                     //TODO 2
                             //刷新页面
                                    
@@ -960,16 +960,18 @@
             return currentdate;
         }
 
-
+		$('.item-qrcode').click(function(){
+			window.location.href = $(this).next().val();
+			});
         $(".print-qrcode").click(function () {
 
-            var printdiv = $(this).parent().siblings('.item-qrcode').children("div");
+            var printdiv = $(this).parent().parent().siblings('.item-qrcode').children("div");
             printdiv.show();
             var html = printdiv.html();
             $("body").html(html);
             window.print();
             //TODO
-            window.location.href = "admin.html";
+            window.location.href = "user-adminLogin";
 
         });
 
