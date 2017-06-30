@@ -23,7 +23,7 @@ public class SearchHistoryDao extends BaseDao {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		String hql2 = "FROM User WHERE phoneNumber='"+searchHistory.getUser().getPhoneNumber()+"'";
+		String hql2 = "FROM User WHERE userId="+searchHistory.getUser().getPhoneNumber();
 		searchHistory.setUser((User)(getSession().createQuery(hql2).list().get(0)));
 		searchHistory.setUpdateAt(new Date());
 		/*

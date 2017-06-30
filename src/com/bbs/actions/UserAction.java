@@ -14,7 +14,6 @@ import com.bbs.api.UnifiedOrder;
 import com.bbs.encrypt.IncorrectCipherTextLengthException;
 import com.bbs.encrypt.SHC32;
 import com.bbs.entities.BorrowedRecord;
-import com.bbs.entities.Reservation;
 import com.bbs.entities.User;
 import com.bbs.services.UserService;
 import com.opensymphony.xwork2.ModelDriven;

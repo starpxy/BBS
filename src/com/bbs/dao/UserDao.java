@@ -34,7 +34,9 @@ public class UserDao extends BaseDao {
 		}
 	}
 	public void register(User user){
-		getSession().saveOrUpdate(user);
+		if (user.getPhoneNumber()!=null&&user.getWeChat()!=null) {
+			getSession().save(user);
+		}
 	}
 	public User getInfo(User user){
 		String hql = "FROM User WHERE phoneNumber='"+user.getPhoneNumber()+"' and password='"+user.getPassword()+"'";

@@ -102,7 +102,7 @@ public class TemplateMessagePushing {
 					data);
 			template.setTopcolor("#000000");
 			JSONObject jsonObject = JSONObject.fromObject(template);
-			PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(httpsURLConnection.getOutputStream()));
+			PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(httpsURLConnection.getOutputStream(),"UTF-8"));
 			printWriter.print(jsonObject.toString());
 			printWriter.flush();
 			printWriter.close();
@@ -146,7 +146,7 @@ public class TemplateMessagePushing {
 			Template template = new Template(openid, "Exm4J9gALXY_RUNezo3ligodLpaW2lWDNQ5ikN7uoiw", data);
 			template.setTopcolor("#000000");
 			JSONObject jsonObject = JSONObject.fromObject(template);
-			PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(httpsURLConnection.getOutputStream()));
+			PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(httpsURLConnection.getOutputStream(),"UTF-8"));
 			printWriter.print(jsonObject.toString());
 			printWriter.flush();
 			printWriter.close();
@@ -193,7 +193,7 @@ public class TemplateMessagePushing {
 			Template template = new Template(openid, "rTDou8851rtrLfcfGJIkRemb2FYh2LpQ-7Ji5itSoLA", reserveData);
 			template.setTopcolor("#000000");
 			JSONObject jsonObject = JSONObject.fromObject(template);
-			PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(httpsURLConnection.getOutputStream()));
+			PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(httpsURLConnection.getOutputStream(),"UTF-8"));
 			printWriter.print(jsonObject.toString());
 			printWriter.flush();
 			printWriter.close();

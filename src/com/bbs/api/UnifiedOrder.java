@@ -91,7 +91,7 @@ public class UnifiedOrder {
 			httpsURLConnection.setUseCaches(false);
 			httpsURLConnection.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
 			httpsURLConnection.connect();
-			PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(httpsURLConnection.getOutputStream()));
+			PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(httpsURLConnection.getOutputStream(),"UTF-8"));
 			printWriter.print(document.asXML());
 			printWriter.flush();
 			printWriter.close();
