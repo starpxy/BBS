@@ -170,7 +170,6 @@
                             //调起微信支付
                             clearInterval(intervalId);
                             function onBridgeReady() {
-                                //以下参数需要star 判断是否走正确 TODO
                                 WeixinJSBridge.invoke(
                                         'getBrandWCPayRequest', {
                                             "appId": "" + params.appId + "",     //公众号名称，由商户传入
@@ -188,8 +187,10 @@
                                                     url: 'user-paySucceed',//由star填写
                                                     dataType: 'json',
                                                     success: function (data) {
+                                                        
                                                     },
                                                     error: function (xhr, type) {
+                                                        
                                                     }
 
                                                 });
@@ -198,7 +199,7 @@
                                         }
                                 );
                             }
-
+							
                             if (typeof WeixinJSBridge == "undefined") {
                                 if (document.addEventListener) {
                                     document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
@@ -209,10 +210,11 @@
                             } else {
                                 onBridgeReady();
                             }
-
-//                        layer.msg("success",{anim:2,icon:1,time:1000});
+                            wx.error(function (res) {
+                                alert(res.errMsg);
+                            });
                         } else {
-//                        layer.msg("wrong",{anim:6,icon:2,time:1000});
+                            
                         }
                     },
                     error: function (xhr, type) {
