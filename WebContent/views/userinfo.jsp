@@ -74,28 +74,6 @@
 </div>
 
 
-<div class="weui_cells">
-
-    <div class="weui_cell weui_cell_select weui_select_after">
-
-        <div class="weui_cell_hd">
-            <label for="" class="weui_label f14">设置还书提醒</label>
-        </div>
-
-        <div class="weui_cell_bd weui_cell_primary">
-
-            <select class="weui_select select2 f13" name="select2">
-                <option value="1">一天</option>
-                <option value="7">一星期</option>
-                <option value="14">半个月</option>
-
-            </select>
-
-        </div>
-    </div>
-
-</div>
-
 
 <div class="weui-footer-fixed-bottom page-bd">
     <div class="weui_panel weui_panel_access">
