@@ -91,7 +91,7 @@ public class BookAction extends BaseAction implements ModelDriven<Book>,ServletR
 		books.put("books", JSONArray.fromObject(bookList));
 		return "listBooks";
 	}
-
+	
 	public void prepareBookSubmit() {
 		this.book = new Book();
 	}

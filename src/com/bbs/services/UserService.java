@@ -3,7 +3,10 @@ package com.bbs.services;
 import java.util.List;
 
 import com.bbs.dao.UserDao;
+import com.bbs.entities.BookItem;
 import com.bbs.entities.BorrowedRecord;
+import com.bbs.entities.Comment;
+import com.bbs.entities.Reservation;
 import com.bbs.entities.User;
 
 public class UserService {
@@ -33,7 +36,7 @@ public class UserService {
 		return userDao.getUserInfo(user);
 	}
 
-	public String adminLogin(User user) {
+	public boolean adminLogin(User user) {
 		return userDao.adminLogin(user);
 	}
 
@@ -43,5 +46,32 @@ public class UserService {
 
 	public void setRecomFreq(User user) {
 		userDao.setRecomFreq(user);
+	}
+
+	public List<BookItem> adminInitial() {
+		return userDao.adminInitial();
+	}
+
+	public List<User> adminUsers() {
+		return userDao.adminUsers();
+	}
+
+	public List<BorrowedRecord> adminListRecords() {
+		return userDao.adminListRecords();
+	}
+
+	public List<Reservation> adminListReservations() {
+		return userDao.adminListReservations();
+	}
+
+	public List<Comment> adminListComments() {
+		return userDao.adminListComments();
+	}
+	
+	public void paySucceed(String outTradeNumber,int[] records){
+		userDao.paySucceed(outTradeNumber, records);
+	}
+	public boolean confrimBook(String userId){
+		return userDao.confrimBook(userId);
 	}
 }

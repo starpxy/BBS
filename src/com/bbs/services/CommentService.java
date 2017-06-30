@@ -13,5 +13,7 @@ public class CommentService {
 	public boolean makeComment(Comment comment) {
 		return commentDao.makeComment(comment);
 	}
-
+	public boolean deleteComment(String commentId){
+		return commentDao.deleteComment(commentId);
+	}
 }

@@ -13,24 +13,30 @@ import com.bbs.entities.User;
 import com.bbs.services.CommentService;
 import com.opensymphony.xwork2.ModelDriven;
 
-
-public class CommentAction extends BaseAction implements ModelDriven<Comment>,ServletRequestAware{
+public class CommentAction extends BaseAction implements ModelDriven<Comment>, ServletRequestAware {
 	private static final long serialVersionUID = 1L;
 	private CommentService commentService;
 	private Comment comment;
 	private Map<String, Object> status;
 	private HttpServletRequest httpServletRequest;
-	
-	public void setStatus(Map<String, Object> status) {
-		this.status = status;
+
+	public void setCommentService(CommentService commentService) {
+		this.commentService = commentService;
 	}
 
 	public Map<String, Object> getStatus() {
 		return status;
 	}
 
-	public void setCommentService(CommentService commentService) {
-		this.commentService = commentService;
+	public String deleteComment() {
+		String commentId = httpServletRequest.getParameter("commentId");
+		status = new HashMap<>();
+		if (commentService.deleteComment(commentId)) {
+			status.put("state", 1);
+		} else {
+			status.put("state", 2);
+		}
+		return "deleteComment";
 	}
 
 	public String makeComment() {
@@ -38,14 +44,13 @@ public class CommentAction extends BaseAction implements ModelDriven<Comment>,Se
 		String starClass = httpServletRequest.getParameter("starClass");
 		comment.setContent(content);
 		comment.setStarClass(Integer.valueOf(starClass));
-		comment.setBook((Book)session.get("book"));
-		comment.setUser((User)session.get("user"));
+		comment.setBook((Book) session.get("book"));
+		comment.setUser((User) session.get("user"));
 		comment.setState("unselected");
 		status = new HashMap<String, Object>();
 		if (commentService.makeComment(comment)) {
 			status.put("state", 1);
-		}
-		else{
+		} else {
 			status.put("state", 2);
 		}
 		return "comment";

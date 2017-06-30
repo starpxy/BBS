@@ -1,0 +1,80 @@
+body{
+    font-family: '楷体', '微软雅黑';
+}
+
+
+.completer-container {
+    position: absolute;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: normal;
+    list-style: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-bottom-color: #39f;
+}
+
+.completer-container li {
+    padding: .5em .8em;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.completer-container .completer-selected,
+.completer-container li:hover {
+    margin-left: -1px;
+    background-color: #eee;
+    border-left: 1px solid #39f;
+}
+
+.check-user-books{
+    position: relative;
+    z-index: 2;
+}
+
+.check-user-books:hover{
+    z-index: 3;
+}
+
+.check-user-books span{
+    display: none;
+}
+
+.check-user-books:hover span{
+    display: block;
+    position: absolute;
+}
+
+
+.check-volum{
+    position: relative;
+    z-index: 2;
+}
+
+.check-volum:hover{
+    z-index: 3;
+}
+
+.check-volum span{
+    display: none;
+}
+
+.check-volum:hover span{
+    display: block;
+    position: absolute;
+}
+
+
+
+
+

@@ -18,12 +18,18 @@
 		<property name="initialPoolSize" value="${jdbc.initialPoolSize}"></property>
 		<property name="maxPoolSize" value="${jdbc.maxPoolSize}"></property>
 		<property name="jdbcUrl" value="${jdbc.jdbcUrl}"></property>
+		<property name="maxIdleTime" value="1800"></property>
 	</bean>
 	<!-- 配置sessionFactory -->
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
 		<property name="mappingLocations" value="classpath:com/bbs/entities/*.hbm.xml"></property>
+		<property name="hibernateProperties">  
+		   <props>  
+		        <prop key="hibernate.autoReconnect">true</prop>   
+		  </props>  
+		</property>  
 	</bean>
 	<!-- 配置Spring的声明式事务 -->
 	<!-- 配置hibernate的事务管理器 -->

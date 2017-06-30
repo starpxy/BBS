@@ -38,6 +38,9 @@
         <property name="lastRecommend" type="java.util.Date">
             <column name="LAST_RECOMMEND" />
         </property>
+        <property name="updateAt" type="java.util.Date">
+            <column name="UPDATE_AT" />
+        </property>
         <!-- 做的时候要先插入1的一端：即User端，再插入reservation和borrowedRecords（为了减少维护） -->
         <!-- <set name="reservations" table="RESERVATIONS" inverse="true" lazy="false">
         	<key column="RESERVATION_ID"></key>

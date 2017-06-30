@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
@@ -75,8 +76,13 @@ public class JSAPIInitial {
 			return generateCharacter(random);
 		}
 	}
-//	public static void main(String[] args) {
-//		JSAPIInitial jsapiInitial = new JSAPIInitial();
-//		jsapiInitial.initialAPI();
-//	}
+	public static void main(String[] args) {
+		JSAPIInitial jsapiInitial = new JSAPIInitial();
+		Map<String , Object> map = jsapiInitial.initialAPI("http://pxyzmy.com.cn/jssdk.html");
+		Iterator<String> iterator = map.keySet().iterator();
+		while(iterator.hasNext()){
+			String temp = iterator.next();
+			System.out.println(temp+" : "+ map.get(temp));
+		}
+	}
 }

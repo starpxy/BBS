@@ -46,7 +46,6 @@
 
 <script>
     $(function () {
-
         $("#con").click(function () {
         	$.ajax({
                 type:'POST',

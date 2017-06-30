@@ -4,7 +4,7 @@ public class Template {
 	private String touser;
 	private String template_id;
 	private String url;
-	private Data data;
+	private DataUtil data;
 	private String topcolor;
 	public String getTopcolor() {
 		return topcolor;
@@ -38,15 +38,15 @@ public class Template {
 		this.url = url;
 	}
 
-	public Data getData() {
+	public DataUtil getData() {
 		return data;
 	}
 
-	public void setData(Data data) {
+	public void setData(DataUtil data) {
 		this.data = data;
 	}
 
-	public Template(String touser, String template_id, String url, Data data) {
+	public Template(String touser, String template_id, String url, DataUtil data) {
 		super();
 		this.touser = touser;
 		this.template_id = template_id;
@@ -54,7 +54,7 @@ public class Template {
 		this.data = data;
 	}
 
-	public Template(String touser, String template_id, Data data) {
+	public Template(String touser, String template_id, DataUtil data) {
 		super();
 		this.touser = touser;
 		this.template_id = template_id;

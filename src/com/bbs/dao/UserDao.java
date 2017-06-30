@@ -1,8 +1,14 @@
 package com.bbs.dao;
 
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
+import com.bbs.entities.Book;
+import com.bbs.entities.BookItem;
 import com.bbs.entities.BorrowedRecord;
+import com.bbs.entities.Comment;
+import com.bbs.entities.Reservation;
 import com.bbs.entities.User;
 
 
@@ -58,30 +64,83 @@ public class UserDao extends BaseDao {
 	}
 	public void setRecomFreq(User user) {
 		int frq=user.getRecommendFre();
-		System.out.println(frq+"-----");
 		String hql="FROM User WHERE userId="+user.getUserId();
 		User user2=(User) getSession().createQuery(hql).list().get(0);
 		user2.setRecommendFre(frq);
-		System.out.println(user2.getRecommendFre());
 		getSession().update(user2);
 	}
 	public List<BorrowedRecord> payState(User user){
-		String hql = "FROM BorrowedRecord user.userId="+user.getUserId()+" AND status='confirmed'";
+		String hql = "FROM BorrowedRecord b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.bookItem c LEFT OUTER JOIN FETCH c.book WHERE b.user.userId="+user.getUserId()+" AND b.status='confirmed'";
 		List<BorrowedRecord> list = (List<BorrowedRecord>) getSession().createQuery(hql).list();
-		if (list.size()==0) {
+		if (list.isEmpty()) {
 			return null;
 		}
 		else{
 			return list;
 		}
 	}
-	public String adminLogin(User user){
+	public boolean adminLogin(User user){
 		String hql = "FROM User WHERE phoneNumber='"+user.getPhoneNumber()+"' AND password='"+user.getPassword()+"' AND role='admin'";
 		if (getSession().createQuery(hql).list().isEmpty()) {
-			return "fail";
+			return false;
 		}
 		else{
-			return "success";
+			return true;
+		}
+	}
+	public List<BookItem> adminInitial(){
+		String hql = "FROM BookItem b LEFT OUTER JOIN FETCH b.book";
+		List<BookItem> bookItems = getSession().createQuery(hql).list();
+		return bookItems;
+	}
+	public List<User> adminUsers(){
+		String hql = "FROM User";
+		return getSession().createQuery(hql).list();
+	}
+	public List<BorrowedRecord> adminListRecords(){
+		String hql = "FROM BorrowedRecord b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.bookItem c LEFT OUTER JOIN FETCH c.book";
+		List<BorrowedRecord> borrowedRecords = getSession().createQuery(hql).list();
+		Collections.reverse(borrowedRecords);
+		return borrowedRecords;
+	}
+	public List<Reservation> adminListReservations(){
+		String hql = "FROM Reservation b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.bookItem c LEFT OUTER JOIN FETCH c.book";
+		List<Reservation> reservations = getSession().createQuery(hql).list();
+		Collections.reverse(reservations);
+		return reservations;
+	}
+	public List<Comment> adminListComments(){
+		String hql = "FROM Comment b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.book";
+		List<Comment> comments = getSession().createQuery(hql).list();
+		Collections.reverse(comments);
+		return comments;
+	}
+	public void paySucceed(String outTradeNumber,int[] records){
+		for (int i = 0; i < records.length; i++) {
+			String hql = "FROM BorrowedRecord b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.bookItem c LEFT OUTER JOIN FETCH c.book WHERE b.borrowedId"+i;
+			List<BorrowedRecord> borrowedRecords = getSession().createQuery(hql).list();
+			if (!borrowedRecords.isEmpty()) {
+				BorrowedRecord borrowedRecord = borrowedRecords.get(0);
+				borrowedRecord.setStatus("borrowed");
+				getSession().save(borrowedRecord);
+			}
+		}
+	}
+	public boolean confrimBook(String userId){
+		String hql = "FROM BorrowedRecord b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.bookItem c LEFT OUTER JOIN FETCH c.book WHERE b.user.userId="+userId+" AND b.status='unconfirmed'";
+		List<BorrowedRecord> borrowedRecords = getSession().createQuery(hql).list();
+		System.out.println("in");
+		if (!borrowedRecords.isEmpty()) {
+			Iterator<BorrowedRecord> iterator = borrowedRecords.iterator();
+			while(iterator.hasNext()){
+				BorrowedRecord borrowedRecord = iterator.next();
+				borrowedRecord.setStatus("confirmed");
+				getSession().update(borrowedRecord);
+			}
+			return true;
+ 		}
+		else{
+			return false;
 		}
 	}
 }

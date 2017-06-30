@@ -13,7 +13,16 @@ public class User {
 	private String role;
 	private Integer recommendFre;
 	private String avatar;
+	private Date updateAt;
 	private Date lastRecommend;
+
+	public void setUpdateAt(Date updateAt) {
+		this.updateAt = updateAt;
+	}
+
+	public Date getUpdateAt() {
+		return updateAt;
+	}
 
 	public void setLastRecommend(Date lastRecommend) {
 		this.lastRecommend = lastRecommend;

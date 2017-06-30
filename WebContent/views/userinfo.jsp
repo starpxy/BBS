@@ -5,7 +5,8 @@
 <html lang="cn">
 <head>
     <meta charset="UTF-8">
-    <title>User Information page</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>我的个人信息</title>
 </head>
 
 <link rel="stylesheet" href="asserts/weui/css/weui.css"/>
@@ -29,7 +30,7 @@
 <div class="page-hd">
 
     <div class="tcenter"><img style="border-radius: 100px;width: 100px;height:100px;"
-                              src="${session.user.avatar }"></div>
+                              src="asserts/images/faces/wechat.gif"></div>
 
 
 </div>
@@ -58,7 +59,7 @@
 
         <div class="weui_media_box weui_media_text">
 
-            <h4 class="weui_media_desc" style="float: right">${session.user.gender }</h4>
+            <h4 class="weui_media_desc" style="float: right">${session.user.gender}</h4>
             <h4 class="weui_media_desc f-black">性别:</h4>
 
         </div>
@@ -152,12 +153,7 @@
 
 
         $(".upload_face").change(function(){
-
-//            if ($(this).val()!=""){
-//
-//            }
-
-            //file type check goes here
+			
         });
 
 

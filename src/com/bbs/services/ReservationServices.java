@@ -12,11 +12,19 @@ public class ReservationServices {
 	public void setReservationDao(ReservationDao reservationDao) {
 		this.reservationDao = reservationDao;
 	}
-	public void createReservation(Reservation reservation) {
-		 reservationDao.createReservation(reservation);
+
+	public int createReservation(Reservation reservation, String bookId) {
+		return reservationDao.createReservation(reservation, bookId);
 	}
-	
-	public List<Reservation> checkReservationList(User user){
+
+	public List<Reservation> checkReservationList(User user) {
 		return reservationDao.checkReservationList(user);
+	}
+
+	public List<Reservation> reservelist(User user){
+		return reservationDao.reservelist(user);
+	}
+	public int cancel(User user,String reservationId){
+		return reservationDao.cancel(user, reservationId);
 	}
 }

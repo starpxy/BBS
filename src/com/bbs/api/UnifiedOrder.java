@@ -117,6 +117,7 @@ public class UnifiedOrder {
 		} catch (DocumentException e) {
 			e.printStackTrace();
 		}
+		result.put("outTradeNumber", outTradeNo);
 		return result;
 	}
 	public String getOutTradeNo() {
@@ -193,7 +194,7 @@ public class UnifiedOrder {
 	}
 //	public static void main(String[] args) {
 //		UnifiedOrder unifiedOrder = new UnifiedOrder();
-//		Map<String,Object> map = unifiedOrder.createOrder("oQe5IuBxLw5PKLiQDyfKuCnpDxg0", "113.242.248.187", 1);
+//		Map<String,Object> map = unifiedOrder.createOrder("oQe5IuBxLw5PKLiQDyfKuCnpDxg0", "223.104.3.167", 1);
 //		Iterator<String> iterator = map.keySet().iterator();
 //		while(iterator.hasNext()){
 //			String temp = iterator.next();

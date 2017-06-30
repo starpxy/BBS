@@ -139,7 +139,7 @@ pageEncoding="UTF-8"%>
         <div class="weui_panel_bd">
             <div class="weui_media_box weui_media_text">
                 <!--<h4 class="weui_media_title">标题一</h4>-->
-                <p class="weui_media_desc"><a href="javascript:;" class="weui_btn bg-green" id="book">预订2</a ></p >
+                <p class="weui_media_desc"><a href="javascript:;" class="weui_btn bg-green" id="book">预订</a ></p >
             </div>
         </div>
     </div>
@@ -216,7 +216,36 @@ pageEncoding="UTF-8"%>
 
     $(function () {
         	$('#book').click(function(){
-				
+        		 $.ajax({
+                     type:'POST',
+                     data:{"bookId":'${request.book.bookId}'},
+                     url:'reservation-reserve',
+                     dataType : 'json',
+                     success: function (data){
+                    	 if(data.state==1){
+                    		 layer.msg('预定成功！',{icon:1,anim:2,time:2000});
+                    		 $.ajax({
+                                 type:'POST',
+                                 data:{"bookTitle":'${request.book.bookTitle}'},
+                                 url:'reservation-templatePushing',
+                                 dataType : 'json',
+                                 success: function (data){
+            					 },
+                                 error: function(){
+                                 }
+                             });
+                       	 }
+                    	 else if (data.state==2){
+                    		 layer.msg('对不起，这本书已经被订光了，晚点来试试吧！',{icon:2,anim:2,time:2000});
+                       	 }
+                    	 else{
+                    		 layer.msg('您最多可同时预定两本书！',{icon:2,anim:2,time:2000});
+                         }
+					 },
+                     error: function(){
+                         layer.msg('服务器错误',{icon:2,anim:6,time:1000});
+                     }
+                 });
            	});
             layui.use('layer', function () {
                 $(".addtowishlist").click(function () {

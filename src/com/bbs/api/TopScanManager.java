@@ -10,7 +10,7 @@ public class TopScanManager {
 	private static long startTime;
 	public static String getQrCode(String userId){
 		Date date = new Date();
-		if ((date.getTime()-startTime)>=60000L) {
+		if ((date.getTime()-startTime)>=6000000L) {
 			startTime = date.getTime();
 		}
 		SHC32 shc32 = SHC32.getInstance();
@@ -23,6 +23,9 @@ public class TopScanManager {
 		}
 		String QrCode = "http://qr.topscan.com/api.php?text="+qrText;
 		return QrCode;
+	}
+	public static long getStartTime() {
+		return startTime;
 	}
 //	public static String scanUser(String cipherText){
 //		

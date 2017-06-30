@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script src="asserts/jquery.min.js"></script>
+<script>
+
+    var isbn = 9787300213194;
+//
+//       $.ajax({
+//            type: 'GET',
+//            url: "https://api.douban.com/v2/book/search?q=" + isbn,
+//            dataType: 'jsonp',
+//            data:{},
+////            crossDomain: true,
+//            success: function (e) {
+//                console.log(e);
+//            },
+//            error: function(xhr, type){
+//                console.log(xhr);
+//            }
+//        });
+
+
+//    $.ajax({
+//        type : "GET",
+//        url : "http://127.0.0.1/json.txt?callback=?",
+//        dataType : "jsonp",
+//        jsonp: 'callback',
+//        jsonpCallback:"success_jsonpCallback",//不写的话，需要 动态页面获取,如php页面 $_GET['callback']({"msg":"this is a jquery jsonp test message!"})
+//        success : function(json){
+//            alert(json.msg);
+//        }
+//
+//    });
+
+//
+    var url = 'http://v.juhe.cn/weather/index';
+    $.ajax(url, {
+        data: {
+//            'cityname': '襄阳',
+//            'dtype': 'jsonp',
+//            'key': 'xxxx',
+//            '_': new Date().getTime()
+        },
+        dataType: 'jsonp',
+        crossDomain: true,
+        success: function (data) {
+            console.log(data);
+            if (data && data.resultcode == '200') {
+                console.log(data.result.today);
+            }
+        },
+        error: function (xhr, type) {
+            console.log(xhr);
+        }
+    });
+
+
+//    var url2 = 'http://v.juhe.cn/weather/index?callback=?';
+//    $.getJSON(url2, {
+//        'cityname': '北京',
+//        'dtype': 'jsonp',
+//        'key': 'xxxx',
+//        '_': new Date().getTime()
+//    }, function (data) {
+//        if (data && data.resultcode == '200') {
+//            console.log(data.result.today);
+//        }
+//    });
+
+
+    //
+//        $.getJSON("http://congcongxyz.cn?callback=?", function (data) {
+//            console.log(data);
+//    });
+
+
+</script>
+</body>
+</html>

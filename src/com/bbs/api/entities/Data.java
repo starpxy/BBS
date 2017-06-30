@@ -1,6 +1,6 @@
 package com.bbs.api.entities;
 
-public class Data {
+public class Data implements DataUtil{
 	private KeyWord first;
 	private KeyWord keyword1;
 	private KeyWord keyword2;

@@ -26,15 +26,12 @@
 	<div class="slide" id="slide1">
 
 		<ul>
-			<li><a href="#"> <img src="asserts/images/faces/cc.jpg">
-			</a>
+			<li><img src="asserts/images/faces/cc.jpg">
 				<div class="slide-desc">前端开发：王聪聪</div></li>
-			<li><a href="#"> <img
+			<li> <img
 					src="asserts/images/faces/mengmeng.jpg">
-			</a>
 				<div class="slide-desc">后台开发：郑萌芽</div></li>
-			<li><a href="#"> <img src="asserts/images/faces/star.jpg">
-			</a>
+			<li><img src="asserts/images/faces/star.jpg">
 				<div class="slide-desc">接口调用：潘星宇</div></li>
 		</ul>
 
@@ -104,12 +101,9 @@
     <div class="weui-menu-inner">
         <em></em>
         <!--<span>图书操作</span>-->
-        <span>搜书</span>
+        <span>借书</span>
         <ul>
-            <em></em>
-            <li>搜书</li>
-                <li id="scan">借书</li>
-            <li>还书</li>
+                <li id="scan">扫一扫借书</li>
         </ul>
     </div>
     <div class="weui-menu-inner">
@@ -117,15 +111,13 @@
         <!--<span>图书管理</span>-->
         <span>借书单</span>
         <ul>
-            <em></em>
+			<li>敬请期待</li>
+            <li><a href="borrowedRecord-borrowlist">我的借书单</a></li>
 
-            <li><a href="borrowlist.jsp">借书单</a></li>
+            <li><a href="reservation-reservelist">我的预约单</a></li>
 
-            <li><a href="#">预约单</a></li>
+            <li><a href="borrowedRecord-borrowHistory">我的借阅历史</a></li>
 
-            <li><a href="borrowhistory.jsp">借阅历史</a></li>
-
-            <li>搜索历史</li>
 
         </ul>
     </div>
@@ -134,11 +126,10 @@
         <!--<span>我的</span>-->
         <span>个人信息</span>
         <ul>
-            <em></em>
-            <li>系统消息</li>
-            <li class="user-qrCode">我的借书二维码</li>
-            <li class="user-info">个人信息</li>
-            <li class="log-out">注销</li>
+        	<li>敬请期待</li>
+            <li id="user-info">个人信息</li>
+            <li id="user-qrCode">我的借书二维码</li>
+            <li id="log-out">注销</li>
         </ul>
     </div>
 
@@ -216,17 +207,16 @@
                     needResult: 1,
                     desc: 'scanQRCode desc',
                     success: function (res) {
+                    	
                     	var data = res.resultStr;
                     	var ids = $.parseJSON(data);
-                    	alert(ids);
-                    	alert(ids.itemId+' '+ids.bookId);
                     	$.ajax({
                             type:'POST',
                             url:'item-ava?itemId='+ids.itemId,
                             dataType : 'json',
                             success: function (data){
                                 if(data.state==1){
-                                	window.location.href = "book-bookSubmit?bookId="+ids.bookId;
+                                	window.location.href = "book-bookSubmit?bookId="+ids.bookId+"&itemId="+ids.itemId;
                                 }
                                 else if(data.state==2){
                                     alert('对不起，此书已被其他人预定！');
@@ -245,15 +235,15 @@
 					}
                 });
             };
-			 $(".user-info").click(function () {
+			 $("#user-info").click(function () {
 		            window.location.href = 'userinfo.jsp';
 
 		        });
-			 $(".user-qrCode").click(function () {
-		            window.location.href = 'qrCode.jsp';
+			 $("#user-qrCode").click(function () {
+		            window.location.href = 'user-qrCode';
 
 		       });
-		        $(".log-out").click(function () {
+		        $("#log-out").click(function () {
 
 		            $.confirm("确定要注销当前帐号吗？", '注销确认', function () {
 		                window.location.href = 'user-logout';

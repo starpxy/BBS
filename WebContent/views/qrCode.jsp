@@ -27,7 +27,7 @@
 
     <div class="weui_panel_bd tcenter">
 
-        <a id="qrcode"><img src="" style="margin-top: 20px"></a>
+        <a id="qrcode"><img src="" style="margin-top: 20px;margin-bottom: 20px"></a>
 
     </div>
     <!--<a class="weui_panel_ft" href="javascript:void(0);">查看更多</a>-->
@@ -52,11 +52,67 @@
     $(function () {
 
         layui.use('layer', function () {
-
-
+            
             var layer = layui.layer;
-
-
+            //初始化微信支付接口
+            $.ajax({
+        		type:'POST',
+                url:'user-initialAPI',
+                dataType : 'json',
+                data: {"url":"http://pxyzmy.com.cn/BBS/views/user-qrCode"},
+                success: function (data){
+                    wx.config({
+                        debug: false,
+                        appId: data.appId,
+                        timestamp: data.timeStamp,
+                        nonceStr: data.nonceStr,
+                        signature: data.signature,
+                        jsApiList: [
+                            'checkJsApi',
+                            'onMenuShareTimeline',
+                            'onMenuShareAppMessage',
+                            'onMenuShareQQ',
+                            'onMenuShareWeibo',
+                            'hideMenuItems',
+                            'showMenuItems',
+                            'hideAllNonBaseMenuItem',
+                            'showAllNonBaseMenuItem',
+                            'translateVoice',
+                            'startRecord',
+                            'stopRecord',
+                            'onRecordEnd',
+                            'playVoice',
+                            'pauseVoice',
+                            'stopVoice',
+                            'uploadVoice',
+                            'downloadVoice',
+                            'chooseImage',
+                            'previewImage',
+                            'uploadImage',
+                            'downloadImage',
+                            'getNetworkType',
+                            'openLocation',
+                            'getLocation',
+                            'hideOptionMenu',
+                            'showOptionMenu',
+                            'closeWindow',
+                            'scanQRCode',
+                            'chooseWXPay',
+                            'openProductSpecificView',
+                            'addCard',
+                            'chooseCard',
+                            'openCard'
+                        ]
+                    });
+                    
+                    wx.error(function (res) {
+                        alert(res.errMsg);
+                    });
+        },
+        error: function(){
+        }
+    });
+           
             //初始化qrcode
             $.ajax({
                 type: 'POST',
@@ -68,7 +124,6 @@
                     $("#qrcode img").attr("src", qrcode);
                 },
                 error: function (xhr, type) {
-                    layer.msg("初始化失败", {anim: 6, icon: 2, time: 1000});
                     layer.close(index);
                 }
 
@@ -87,21 +142,58 @@
                         //为qrcode img赋值
                         var qrcode = data.QrCode;
                         $("#qrcode img").attr("src", qrcode);
+                    },
+                    error: function (xhr, type) {
+                        layer.close(index);
+                    }
+
+                });
+
+            }, 1000);
+
+          //每1000毫秒刷新paystate
+            var intervalId = setInterval(function () {
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'user-payState',//由star填写
+                    dataType: 'json',
+                    success: function (data) {
                         if (data.pay == 1) {
+                            var params = $.parseJSON(data.params);
+                            var recordIds=[];
+                            var i = 0;
+                            for (i=0;i<data.payState.length;i++){
+                                recordIds[i] = data.payState[i].borrowedId;
+                             }
                             //调起微信支付
+                            clearInterval(intervalId);
                             function onBridgeReady() {
                                 //以下参数需要star 判断是否走正确 TODO
                                 WeixinJSBridge.invoke(
                                         'getBrandWCPayRequest', {
-                                            "appId": "" + data.appId + "",     //公众号名称，由商户传入
-                                            "timeStamp": "" + data.timeStamp + "",         //时间戳，自1970年以来的秒数
-                                            "nonceStr": "" + data.nonceStr + "", //随机串
-                                            "package":  ""+data.pac+ "",
+                                            "appId": "" + params.appId + "",     //公众号名称，由商户传入
+                                            "timeStamp": "" + params.timeStamp + "",         //时间戳，自1970年以来的秒数
+                                            "nonceStr": "" + params.nonceStr + "", //随机串
+                                            "package":  ""+params.pac+ "",
                                             "signType": "MD5",         //微信签名方式：
-                                            "paySign": "" + data.paySign + "" //微信签名
+                                            "paySign": "" + params.paySign + "" //微信签名
                                         },
                                         function (res) {
                                             if (res.err_msg == "get_brand_wcpay_request:ok") {
+                                            	$.ajax({
+                                                    type: 'POST',
+                                                    data:{"outTradeNumber":data.payState.outTradeNumber,"ids":JSON.stringify(data.recordIds)},
+                                                    url: 'user-paySucceed',//由star填写
+                                                    dataType: 'json',
+                                                    success: function (data) {
+                                                    },
+                                                    error: function (xhr, type) {
+                                                    }
+
+                                                });
+                                                                                
                                             }     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
                                         }
                                 );
@@ -124,37 +216,12 @@
                         }
                     },
                     error: function (xhr, type) {
-                        layer.msg("二维码定时更新错误", {anim: 6, icon: 2, time: 1000});
                         layer.close(index);
                     }
 
                 });
 
             }, 1000);
-
-            //每1000毫秒刷新pay状态
-         /*    setInterval(function () {
-
-
-                $.ajax({
-                    type: 'POST',
-                    url: '',//由star填写
-                    dataType: 'json',
-                    success: function (data) {
-                        //为qrcode img赋值
-                        var qrcode = data.QrCode;
-                       
-                    },
-                    error: function (xhr, type) {
-                        layer.msg("刷新pay状态错误", {anim: 6, icon: 2, time: 1000});
-                        layer.close(index);
-                    }
-
-                });
-
-            }, 1000); */
-			
-
 
             //点击刷新
             $("#qrcode").click(function () {
@@ -172,34 +239,12 @@
                         layer.close(index);
                     },
                     error: function (xhr, type) {
-                        layer.msg("二维码点击更新错误", {anim: 6, icon: 2, time: 1000});
                         layer.close(index);
                     }
 
                 });
 
             });
-
-
-            //要用下列代码就uncomment掉
-//        //还书点击事件
-//        $("#return-book").click(function () {
-//            //
-//        });
-//
-//
-//        //借书详情点击事件
-//        $("#borrow-detail").click(function () {
-//            //
-//        });
-//
-//
-//        //还书详情点击事件
-//        $("#return-detail").click(function () {
-//            //
-//        });
-
-
         });
     });
 </script>

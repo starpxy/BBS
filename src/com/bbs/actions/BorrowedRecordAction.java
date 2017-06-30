@@ -14,16 +14,17 @@ import com.bbs.entities.User;
 import com.bbs.services.BorrowedRecordService;
 import com.opensymphony.xwork2.ModelDriven;
 
-
-public class BorrowedRecordAction extends BaseAction implements ModelDriven<BorrowedRecord>,ServletRequestAware{
+public class BorrowedRecordAction extends BaseAction implements ModelDriven<BorrowedRecord>, ServletRequestAware {
 	private static final long serialVersionUID = 1L;
 	private BorrowedRecordService borrowedRecordService;
 	private BorrowedRecord borrowedRecord;
 	private HttpServletRequest httpServletRequest;
 	private Map<String, Object> borrowedMap;
+
 	public Map<String, Object> getBorrowedMap() {
 		return borrowedMap;
 	}
+
 	public void setBorrowedRecord(BorrowedRecord borrowedRecord) {
 		this.borrowedRecord = borrowedRecord;
 	}
@@ -43,11 +44,9 @@ public class BorrowedRecordAction extends BaseAction implements ModelDriven<Borr
 		}
 		return "checkBorrowedRecord";
 	}
-//	public String borrowlist(){
-//		
-//	}
+
 	public String createRecord() {
-		borrowedRecord.setUser((User)session.get("user"));
+		borrowedRecord.setUser((User) session.get("user"));
 		borrowedRecord.setUpdateAt(new Date());
 		borrowedRecord.setStatus("unconfirmed");
 		BookItem bookItem = new BookItem();
@@ -55,17 +54,39 @@ public class BorrowedRecordAction extends BaseAction implements ModelDriven<Borr
 		borrowedRecord.setBookItem(bookItem);
 		borrowedRecord.setBorrowedAt(new Date());
 		int i = borrowedRecordService.createRecord(borrowedRecord);
-		borrowedMap= new HashMap<>();
+		borrowedMap = new HashMap<>();
 		borrowedMap.put("state", i);
 		return "createRecord";
 	}
-	public String borrowlist(){
+	public String returnRemaining(){
+		String userId = httpServletRequest.getParameter("userId");
+		String borrowedId = httpServletRequest.getParameter("borrowedId");
+		borrowedMap = new HashMap<>();
+		System.out.println(userId+borrowedId);
+		if (borrowedRecordService.returnRemaining(userId, borrowedId)) {
+			borrowedMap.put("state", 1);
+		}
+		else{
+			borrowedMap.put("state", 2);
+		}
+		return "remained";
+	}
+
+	public String borrowlist() {
 		User user = (User) session.get("user");
+		request.put("records", borrowedRecordService.borrowlist(user));
 		return "borrowlist";
 	}
-	public void prepareCreateRecord(){
+	public String cancel() {
+		User user = (User) session.get("user");
+		borrowedMap = new HashMap<>();
+		borrowedMap.put("state", borrowedRecordService.cancel(user, httpServletRequest.getParameter("recordId")));
+		return "cancel";
+	}
+	public void prepareCreateRecord() {
 		this.borrowedRecord = new BorrowedRecord();
 	}
+
 	@Override
 	public BorrowedRecord getModel() {
 		return null;

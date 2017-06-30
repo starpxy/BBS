@@ -10,10 +10,17 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.bbs.api.JSAPIInitial;
 import com.bbs.api.TopScanManager;
+import com.bbs.api.UnifiedOrder;
+import com.bbs.encrypt.IncorrectCipherTextLengthException;
+import com.bbs.encrypt.SHC32;
 import com.bbs.entities.BorrowedRecord;
+import com.bbs.entities.Reservation;
 import com.bbs.entities.User;
 import com.bbs.services.UserService;
 import com.opensymphony.xwork2.ModelDriven;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 public class UserAction extends BaseAction implements ModelDriven<User>, ServletRequestAware {
 
@@ -34,19 +41,141 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		this.userService = userService;
 	}
 
-	public String adminLogin() {
-		String phoneNumber = httpServletRequest.getParameter("account");
-		String password = httpServletRequest.getParameter("password");
-		User user = new User();
-		user.setPhoneNumber(phoneNumber);
-		user.setPassword(password);
-		status = new HashMap<>();
-		status.put("state", userService.adminLogin(user));
-		return "adminLogin";
+	public String adminUsers() {
+		User user = (User) session.get("user");
+		if (user != null && user.getRole().equals("admin")) {
+			request.put("users", userService.adminUsers());
+			return "adminUsers";
+		} else if (user != null) {
+			return "adminLoginFail";
+		} else {
+			return "adminLoginFail";
+		}
+	}
+	
+	public String userChart() {
+		User user = (User) session.get("user");
+		if (user != null && user.getRole().equals("admin")) {
+			return "userChart";
+		} else if (user != null) {
+			return "adminLoginFail";
+		} else {
+			return "adminLoginFail";
+		}
 	}
 
+	public String adminUsersAjax() {
+		User user = (User) session.get("user");
+		status = new HashMap<>();
+		if (user != null && user.getRole().equals("admin")) {
+			status.put("users", JSONArray.fromObject(userService.adminUsers()));
+			status.put("state", 1);
+		} else if (user != null) {
+			status.put("state", 2);
+		} else {
+			status.put("state", 2);
+		}
+		return "adminUsersAjax";
+	}
+
+	public String adminLogin() {
+		User user = (User) session.get("user");
+		if (user != null && user.getRole().equals("admin")) {
+			request.put("books", userService.adminInitial());
+			return "adminLoginSuccess";
+		} else if (user != null) {
+			return "adminLoginFail";
+		}
+
+		boolean check = userService.adminLogin(this.user);
+		if (check) {
+			session.put("user", userService.getInfo(this.user));
+			request.put("books", userService.adminInitial());
+			return "adminLoginSuccess";
+		} else {
+			return "adminLoginFail";
+		}
+	}
+
+	public String adminLogout() {
+		if (session.containsKey("user")) {
+			session.remove("user");
+		}
+		status = new HashMap<>();
+		status.put("state", 1);
+		return "adminLogout";
+	}
+
+	public String adminListRecords() {
+		User user = (User) session.get("user");
+		if (user != null && user.getRole().equals("admin")) {
+			request.put("records", userService.adminListRecords());
+			return "adminListRecords";
+		} else if (user != null) {
+			return "adminLoginFail";
+		} else {
+			return "adminLoginFail";
+		}
+	}
+	
+	public String adminListReservations() {
+		User user = (User) session.get("user");
+		if (user != null && user.getRole().equals("admin")) {
+			request.put("reservations", userService.adminListReservations());
+			return "adminListReservations";
+		} else if (user != null) {
+			return "adminLoginFail";
+		} else {
+			return "adminLoginFail";
+		}
+	}
+
+	public String adminListComments() {
+		User user = (User) session.get("user");
+		if (user != null && user.getRole().equals("admin")) {
+			request.put("comments", userService.adminListComments());
+			return "adminListComments";
+		} else if (user != null) {
+			return "adminLoginFail";
+		} else {
+			return "adminLoginFail";
+		}
+	}
+	public String adminConfirmBook(){
+		String userInfo = httpServletRequest.getParameter("userInfo");
+		SHC32 shc32 = SHC32.getInstance();
+		shc32.setKey(TopScanManager.getStartTime());
+		try {
+			String text = shc32.decrypt(userInfo);
+			System.out.println(text);
+			String userId = null;
+			status = new HashMap<>();
+			if (text.startsWith("userId")&&text.endsWith("SHC")) {
+				userId = text.substring(6, text.length()-3);
+				if (userService.confrimBook(userId)) {
+					status.put("state", 1);
+				}
+				else{
+					status.put("state", 2);
+				}
+			}
+			else {
+				status.put("state", 2);
+			}
+		} catch (IncorrectCipherTextLengthException e) {
+			e.printStackTrace();
+		}
+		return "confirmBook";
+	}
 	public String showQrCode() {
 		String QrCode = TopScanManager.getQrCode(user.getUserId() + "");
+		status = new HashMap<>();
+		status.put("QrCode", QrCode);
+		return "showQrCode";
+	}
+	public String payState(){
+		status = new HashMap<>();
+		user = (User) session.get("user");
 		List<BorrowedRecord> payState = userService.payState(user);
 		String ip = httpServletRequest.getHeader("x-forwarded-for");
 		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
@@ -58,19 +187,24 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
 			ip = httpServletRequest.getRemoteAddr();
 		}
-		status = new HashMap<>();
-		status.put("QrCode", QrCode);
 		if (payState != null) {
+			UnifiedOrder unifiedOrder = new UnifiedOrder();
+			JSONObject jsonObject = JSONObject.fromObject(unifiedOrder.createOrder(user.getWeChat(), ip, 1*payState.size()));
+			status.put("params", jsonObject.toString());
 			status.put("pay", 1);
-			Map<String, Object> map = new HashMap<>();
-			map.put("book1", payState.get(0).getBookItem().getBook());
-			status.put("payState", 1);
+			status.put("payState", JSONArray.fromObject(payState));
 		} else {
 			status.put("pay", 0);
 		}
-		return "showQrCode";
+		return "payState";
 	}
-
+	public String paySucceed(){
+		String recordIds = httpServletRequest.getParameter("recordIds");
+		String outTradeNumber = httpServletRequest.getParameter("outTradeNumber");
+		int[] records = (int[]) JSONArray.toArray(JSONArray.fromObject(recordIds));
+		userService.paySucceed(outTradeNumber, records);
+		return "paySucceed";
+	}
 	public String changePass() {
 		userService.changePass(user);
 		status = new HashMap<>();
@@ -124,6 +258,18 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 			session.remove("user");
 		}
 		return "logout";
+	}
+	public String qrCode(){
+		User user = (User) session.get("user");
+		if (user!=null) {
+			return "qrCodeSucceed";
+		}
+		else{
+			return "qrCodeFail";
+		}
+	}
+	public void prepareAdminLogin() {
+		user = new User();
 	}
 
 	public void prepareChangePass() {

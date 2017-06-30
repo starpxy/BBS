@@ -26,20 +26,49 @@
 			<result name="changeSucceed" type="json">
 				<param name="root">status</param>
 			</result>
-			<result name="adminLogin" type="json">
+			<result name="adminLoginSuccess">admin.jsp</result>
+			<result name="userChart">user-chart.jsp</result>
+			<result name="adminListRecords">borrow-details.jsp</result>
+			<result name="adminListComments">admin-comments.jsp</result>
+			<result name="adminListReservations">book-reservation.jsp</result>
+			<result name="adminUsers">admin-users.jsp</result>
+			<result name="adminLoginFail">admin-login.jsp</result>
+			<result name="qrCodeSucceed">qrCode.jsp</result>
+			<result name="qrCodeFail">user-login</result>
+			<result name="paySucceed" type="json">
+				<param name="root">status</param>
+			</result>
+			<result name="confirmBook" type="json">
 				<param name="root">status</param>
 			</result>
 			<result name="initialAPI" type="json">
 				<param name="root">status</param>
 			</result>
+			<result name="payState" type="json">
+				<param name="root">status</param>
+			</result>
 			<result name="showQrCode" type="json">
+				<param name="root">status</param>
+			</result>
+			<result name="adminUsersAjax" type="json">
+				<param name="root">status</param>
+			</result>
+			<result name="adminLogout" type="json">
 				<param name="root">status</param>
 			</result>
 			<result name="logout">login.jsp</result>
 		</action>
 		<action name="reservation-*" class="reservationAction" method="{1}">
-			<result name="reservation">main.jsp</result>
+			<result name="reserve" type="json">
+				<param name="root">reserveMap</param>
+			</result>
+			<result name="cancel" type="json">
+				<param name="root">reserveMap</param>
+			</result>
+			<result name="pushed" type="json">
+			</result>
 			<result name="checkReservationList"></result>
+			<result name="reservelist">reservelist.jsp</result>
 		</action>
 		<action name="au-*" class="authorizationAction" method="{1}">
 			<result name="newMember">register.jsp</result>
@@ -58,6 +87,9 @@
 			<result name="checkSearchHistory">searchHistory.jsp</result>
 		</action>
 		<action name="comment-*" class="commentAction" method="{1}">
+			<result name="deleteComment" type="json">
+				<param name="root">status</param>
+			</result>
 			<result name="comment" type="json">
 				<param name="root">status</param>
 			</result>
@@ -85,6 +117,13 @@
 			<result type="json" name="createRecord">
 				<param name="root">borrowedMap</param>
 			</result>
+			<result type="json" name="cancel">
+				<param name="root">borrowedMap</param>
+			</result>
+			<result type="json" name="remained">
+				<param name="root">borrowedMap</param>
+			</result>
+			
 		</action>
     </package>
 

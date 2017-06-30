@@ -4,15 +4,18 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.struts2.util.StrutsTypeConverter;
+
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 public class DateConverter extends StrutsTypeConverter {
 
 	private DateFormat dateFormat;
 	{
-		dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss.0");
 	}
 	@Override
 	public Object convertFromString(Map arg0, String[] arg1, Class arg2) {
@@ -36,10 +39,10 @@ public class DateConverter extends StrutsTypeConverter {
 		}
 		return null;
 	}
-//	public static void main(String[] args) {
-//		String[] strings = {"2017-02-09"};
-//		Map<Object, Object> map = new HashMap<Object,Object>();
-//		
-//		System.out.println(new DateConverter().convertFromString(map, strings, Date.class));
-//	}
+	public static void main(String[] args) {
+		String[] strings = {"2017-02-09"};
+		Map<Object, Object> map = new HashMap<Object,Object>();
+		System.out.println(new DateConverter().convertToString(map, new Date()));
+		System.out.println(new DateConverter().convertFromString(map, strings, Date.class));
+	}
 }

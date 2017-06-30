@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <title>Register Page</title>
+    <title>注册页面</title>
 
     <link rel="stylesheet" href="asserts/weui/css/weui.css"/>
     <link rel="stylesheet" href="asserts/weui/css/weui2.css"/>
@@ -16,7 +16,7 @@
 
 <div class="page-hd">
     <div class="tcenter">用户注册</div>
-
+	
     <form id="form" method="post" action="user-register">
 
         <div class="weui_cells_title">帐号</div>

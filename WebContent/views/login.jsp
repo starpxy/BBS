@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <title>Login Page</title>
+    <title>无微不至的借阅伴侣－登录界面</title>
     <link rel="stylesheet" href="asserts/weui/css/weui.css"/>
     <link rel="stylesheet" href="asserts/weui/css/weui2.css"/>
     <link rel="stylesheet" href="asserts/weui/css/weui3.css"/>
@@ -25,7 +25,7 @@
             <div class="weui_cell">
                 <div class="weui_cell_hd"><label class="weui_label">账号</label></div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input name="phoneNumber" class="weui_input" type="text" id="account" required placeholder="手机号/微信ID" emptyTips="请输入账号"
+                    <input name="phoneNumber" class="weui_input" type="text" id="account" required placeholder="手机号" emptyTips="请输入账号"
                            pattern="[0-9a-zA-Z]{3,21}" maxlength="21" notMatchTips="请输入正确的帐号">
                 </div>
                 <div class="weui_cell_ft">
@@ -52,7 +52,7 @@
     </form>
 
     <div class="below-links">
-        <a class="left" href="forgetpass.jsp">忘记密码?</a>
+        <a id="forgot" class="left" href="javascript:;">忘记密码?</a>
         <a class="right" href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx95311e6c3749af30&redirect_uri=http%3a%2f%2fpxyzmy.com.cn%2fBBS%2fviews%2fau-register&response_type=code&scope=snsapi_userinfo&state=STATE">注册账号</a>
 
     </div>
@@ -106,10 +106,13 @@
 <script type="text/javascript">
 
     $("#qqlogin").click(function () {
-        $.toast("this funciton is building now");
+        $.toast("功能暂未开放");
+    });
+    $("#forgot").click(function () {
+        $.toast("功能暂未开放");
     });
     $("#webologin").click(function () {
-        $.toast("this funciton is building now",'wrong');
+        $.toast("功能暂未开放");
     });
     $("#wechatlogin").click(function () {
         $.toast("登录中...请稍候...");
