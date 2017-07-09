@@ -2,7 +2,11 @@ package com.bbs.dao;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.lucene.queryparser.classic.ParseException;
 
 import com.bbs.entities.Book;
@@ -23,15 +27,13 @@ public class SearchHistoryDao extends BaseDao {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		String hql2 = "FROM User WHERE userId="+searchHistory.getUser().getPhoneNumber();
-		searchHistory.setUser((User)(getSession().createQuery(hql2).list().get(0)));
+		String hql2 = "FROM User WHERE userId=" + searchHistory.getUser().getUserId();
+		searchHistory.setUser((User) (getSession().createQuery(hql2).list().get(0)));
 		searchHistory.setUpdateAt(new Date());
-		/*
-		 * 先加上注释，以后需要用的时候取消注释
-		 */
-//		getSession().saveOrUpdate(searchHistory);
+		getSession().save(searchHistory);
 		return rankedBook;
 	}
+
 	public List<Book> bookSearch(SearchHistory searchHistory) {
 		Search search = new Search();
 		String hql = "FROM Book";
@@ -46,11 +48,49 @@ public class SearchHistoryDao extends BaseDao {
 		}
 		return rankedBook;
 	}
+
 	public List<String> checkSearchHistory(User user) {
-		List<String> history=null;
-		String hql="FROM SearchHistory WHERE user.userId="+user.getUserId();
-		history=getSession().createQuery(hql).list();
+		List<String> history = null;
+		String hql = "FROM SearchHistory WHERE user.userId=" + user.getUserId();
+		history = getSession().createQuery(hql).list();
 		return history;
 	}
 
+	public Map<Book, List<Book>> recommendBook(User user) {
+		String hql = "FROM SearchHistory WHERE user.userId="+user.getUserId();
+		List<SearchHistory> searchHistories = getSession().createQuery(hql).list();
+		Map<Book, List<Book>> result = new HashMap<>();
+		if (!searchHistories.isEmpty()) {
+			Iterator<SearchHistory> iterator = searchHistories.iterator();
+			int count = 0;
+			while(iterator.hasNext()&&count<5){
+				SearchHistory searchHistory = iterator.next();
+				hql = "FROM Book";
+				List<Book> list = getSession().createQuery(hql).list();
+				Search search = new Search();
+				Book book = null;
+				try {
+					List<Book> tempBooks =  search.doSearch(list, searchHistory.getKeyword());
+					if (tempBooks.isEmpty()) {
+						continue;
+					}
+					else{
+						book = search.doSearch(list, searchHistory.getKeyword()).get(0);
+					}
+				} catch (ParseException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				hql = "FROM Book WHERE type='"+book.getType()+"'";
+				List<Book> booklist = getSession().createQuery(hql).list();
+				result.put(book, booklist);
+				count++;
+			}
+			return result;
+		}
+		else {
+			return null;
+		}
+	}
 }

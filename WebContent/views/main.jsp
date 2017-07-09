@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width,initial-scale=1,user-scalable=0">
-<title>无微不至的借阅伴侣</title>
+<title>Ebook主页</title>
 
 <link rel="stylesheet" href="asserts/weui/css/weui.css" />
 <link rel="stylesheet" href="asserts/weui/css/weui2.css" />
@@ -19,10 +19,42 @@
 
 
 	<div class="weui-header bg-green">
-		<h1 class="weui-header-title">无微不至的借阅伴侣</h1>
+		<h1 class="weui-header-title">${session.user.name}的Ebook主页</h1>
 	</div>
-	<div class="searchbar_wrap">
-	</div>
+	
+	<div class="search-box">
+
+    <div class="searchbar_wrap">
+
+
+    </div>
+
+
+<span class="search-span">
+    <div class="weui_panel weui_panel_access search-div">
+
+        <div class="weui_panel_hd"><span class="icon icon-96 f-green"></span> 猜你喜欢<a href="javascript:;"
+                                                                                     id="change-recom"
+                                                                                     style="float: right"
+                                                                                     class="f-green"><span
+                class="icon icon-21"></span> 换一批</a></div>
+
+        <div class="weui_panel_bd recom-div">
+
+
+        </div>
+
+        <div class="weui_media_box weui_media_text">
+                <p class="weui_media_desc"><a href="javascript:;" class="weui_btn bg-green" id="cancel-recom"><span
+                        class="icon icon-95"></span> 取消</a></p>
+        </div>
+
+
+    </div>
+</span>
+</div>
+
+
 	<div class="slide" id="slide1">
 
 		<ul>
@@ -143,6 +175,43 @@
 	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"> </script>
 	<script type="text/javascript">
 		$(function() {
+			$(".search-span").hide();
+			var itemslist = '';
+	         var books ;
+	         var i = 0;
+	         $.ajax({
+                   type: 'POST',
+                   url: 'searchHistory-recommendBook',
+                   dataType: 'json',
+                   success: function (data) {
+                       if(data.state==1){
+                       	books = data.books;
+	                    }
+                       else{
+	                    }
+                       itemslist = '';
+                       var count = 0;
+                  	 while (books!=null&&count<5&&count<books.length) {
+                           itemslist += '<a href="book-bookDetails?bookId=' + books[i].bookId + '" class="weui_media_box weui_media_appmsg">';
+                           itemslist += '    <div class="weui_media_hd">';
+                           itemslist += '      <img class="weui_media_appmsg_thumb"';
+                           itemslist += '             src=' + books[i].simpleChart + '';
+                           itemslist += '         alt="not found">';
+                           itemslist += '  </div>';
+                           itemslist += '  <div class="weui_media_bd">';
+                           itemslist += '      <h4 class="weui_media_title">' + books[i].bookTitle + '</h4>';
+                           itemslist += '      <p class="weui_media_desc">ISBN:' + books[i].isbn + ' 作者:' + books[i].author + '</p>';
+                           itemslist += '   </div>';
+                           itemslist += '  </a>';
+                           count++;
+                           i++;
+                       }
+                  	 $(".recom-div").html(itemslist);
+                   },
+                   error: function (xhr, type) {
+                   }
+                   });
+		
 			$.ajax({
         		type:'POST',
                 url:'user-initialAPI',
@@ -254,30 +323,60 @@
 
 
 		        });
-					
-			$('.searchbar_wrap').searchBar({
-				cancelText : "取消",
-				searchText : '书名／作者／ISBN',
-				onfocus : function(value) {
-					//                window.location.href="login.html";
-				},
-				onblur : function(value) {
-				},
-				oninput : function(value) {
+		        		        $("#change-recom").click(function () {
+		        	itemslist = '';
+                    var count = 0;
+	               	 while (books!=null&&count<5&&count<books.length) {
+		               	 	if(i==books.length){
+			               	 	i = 0;
+			               	 }
+	                        itemslist += '<a href="book-bookDetails?bookId=' + books[i].bookId + '" class="weui_media_box weui_media_appmsg">';
+	                        itemslist += '    <div class="weui_media_hd">';
+	                        itemslist += '      <img class="weui_media_appmsg_thumb"';
+	                        itemslist += '             src=' + books[i].simpleChart + '';
+	                        itemslist += '         alt="not found">';
+	                        itemslist += '  </div>';
+	                        itemslist += '  <div class="weui_media_bd">';
+	                        itemslist += '      <h4 class="weui_media_title">' + books[i].bookTitle + '</h4>';
+	                        itemslist += '      <p class="weui_media_desc">ISBN:' + books[i].isbn + ' 作者:' + books[i].author + '</p>';
+	                        itemslist += '   </div>';
+	                        itemslist += '  </a>';
+	                        count++;
+	                        i++;
+	                    }
+               	        $(".recom-div").html(itemslist);      
+		        });
 
-				},
-				onsubmit : function(value) {
-					window.location.href="searchHistory-searchBooks?keyword="+value;
-				},
-				oncancel : function(value) {
-					value="";
-				},
+		        $("#cancel-recom").click(function () {
+		            $(".search-span").hide();
+		        });
+						
+		        $('.searchbar_wrap').searchBar({
+		            cancelText: "取消",
+		            searchText: '书名/作者/ISBN码',
+		            onfocus: function () {
+		                $(".search-span").show();
+		                //TODO,当聚焦搜索框时,这里需要向后台发一个ajax请求,获取根据该用户搜索记录计算出的第一批推荐书籍列表(这里暂定一批有五本,即相似度排名最高的五本书),再在前端按以下方式呈现,ajax由star处理,前端这里由静态值作展示
+		            },
+		            onblur: function () {
+			            
+		            },
+		            oninput: function () {
 
-				onclear : function() {
-					//                $.toast('yes to clear');
+		            },
+		            onsubmit: function (value) {
+		                window.location.href = "searchHistory-searchBooks?keyword=" + value;
+		                $(".search-span").hide();
+		            },
 
-				}
-			});
+		            oncancel: function () {
+		            	$(".search-span").hide();
+		            },
+
+		            onclear: function () {
+		            	$(".search-span").hide();
+		            }
+		        });
 
 			$('.weui-menu-inner').click(
 					function() {

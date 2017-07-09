@@ -29,6 +29,7 @@ import com.bbs.api.entities.KeyWord;
 import com.bbs.api.entities.NewData;
 import com.bbs.api.entities.ReserveData;
 import com.bbs.api.entities.Template;
+import com.bbs.encrypt.IdentifyCode;
 
 import net.sf.json.JSONObject;
 
@@ -54,7 +55,7 @@ public class TemplateMessagePushing {
 			Template template = new Template(openid, "DqUQWPy9BQcvBfiYWVy4k1DkJ3ZTHp3YB8kQuAJgRDw", data);
 			template.setTopcolor("#000000");
 			JSONObject jsonObject = JSONObject.fromObject(template);
-			PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(httpsURLConnection.getOutputStream()));
+			PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(httpsURLConnection.getOutputStream(),"UTF-8"));
 			printWriter.print(jsonObject.toString());
 			printWriter.flush();
 			printWriter.close();
@@ -77,7 +78,7 @@ public class TemplateMessagePushing {
 		}
 	}
 
-	public void pushDepositConfirming(String openid, int bookNum, String identifiCode) {
+	public void pushDepositConfirming(String openid, int bookNum) {
 		try {
 			URL url = new URL("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="
 					+ AccessTokenManager.getAccessToken());
@@ -89,16 +90,15 @@ public class TemplateMessagePushing {
 			httpsURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 			httpsURLConnection.connect();
 			KeyWord first = new KeyWord("您的" + bookNum + "份图书押金已经支付成功。", "#000000");
-			KeyWord keynote1 = new KeyWord(identifiCode, "#000079");
+			KeyWord keynote1 = new KeyWord("无需验证，扫描用户二维码", "#000000");
 			Date date = new Date();
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
-			KeyWord keynote2 = new KeyWord(simpleDateFormat.format(date), "#000079");
-			Data data = new NewData(first, keynote1, new KeyWord(bookNum + "", "#000079"),
-					new KeyWord(20 * bookNum + "元", "#000079"), keynote2,
-					new KeyWord("您可以点击本链接打开退款二维码或向管理员提交退款验证码进行退款。", "#000079"));
+			KeyWord keynote2 = new KeyWord(simpleDateFormat.format(date), "#000000");
+			Data data = new NewData(first, keynote1, new KeyWord(bookNum + "", "#000000"),
+					new KeyWord(20 * bookNum + "元", "#000000"), keynote2,
+					new KeyWord("由于证书无法下载，暂时不能进行退款。", "#000079"));
 			Template template = new Template(openid, "-mDlmXytJHmD5c7w58PA6jkloX12O934b0Em8wiY7xU",
-					"http://qr.liantu.com/api.php?text=http://pxyzmy.com.cn/BBS/views/admin-confirmReturn?identifiCode="
-							+ identifiCode + "&bg=f3f3f3&fg=ff2200&gc=22ff22&w=300&el=l",
+					"http://qr.liantu.com/api.php?text=测试数据",
 					data);
 			template.setTopcolor("#000000");
 			JSONObject jsonObject = JSONObject.fromObject(template);
@@ -181,8 +181,8 @@ public class TemplateMessagePushing {
 			httpsURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 			httpsURLConnection.connect();
 			KeyWord first = new KeyWord("书籍预定成功通知", "#000000");
-			KeyWord type = new KeyWord("图书馆", "#000000");
-			KeyWord name = new KeyWord("SHC无微不至的借阅伴侣", "#000000");
+			KeyWord type = new KeyWord("开发团队", "#000000");
+			KeyWord name = new KeyWord("SHC小组Ebook图书借阅系统", "#000000");
 			KeyWord productType = new KeyWord("书籍", "#000000");
 			KeyWord serviceName = new KeyWord(bookTitle, "#000000");
 			KeyWord remark = new KeyWord("请尽快到图书馆取您预定的书籍！", "#000000");
@@ -215,12 +215,11 @@ public class TemplateMessagePushing {
 			e.printStackTrace();
 		}
 	}
-	// public static void main(String[] args) {
-	// new
-	// TemplateMessagePushing().pushDepositConfirming("oQe5IuE5_HM6rkTKIxOUOCj_-DEY",
-	// 2, new IdentifyCode(1, 29).getCipherCode());
-	// new
-	// TemplateMessagePushing().pushReturningBooks("oQe5IuNgiocNx9qMzWjbeUMgJEkc",
-	// "聪聪智障", 1);
-	// }
+//	 public static void main(String[] args) {
+//	 new
+//	 TemplateMessagePushing().pushDepositConfirming("oQe5IuOG4oLF1N57aEQjmGEg5peU",2, new IdentifyCode(1, 29).getCipherCode());
+//	 new
+//	 TemplateMessagePushing().pushReturningBooks("oQe5IuNgiocNx9qMzWjbeUMgJEkc",
+//	 "聪聪智障", 1);
+//	 }
 }

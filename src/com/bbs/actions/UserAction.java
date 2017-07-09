@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.bbs.api.JSAPIInitial;
+import com.bbs.api.TemplateMessagePushing;
 import com.bbs.api.TopScanManager;
 import com.bbs.api.UnifiedOrder;
 import com.bbs.encrypt.IncorrectCipherTextLengthException;
@@ -51,7 +52,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 			return "adminLoginFail";
 		}
 	}
-	
+
 	public String userChart() {
 		User user = (User) session.get("user");
 		if (user != null && user.getRole().equals("admin")) {
@@ -116,7 +117,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 			return "adminLoginFail";
 		}
 	}
-	
+
 	public String adminListReservations() {
 		User user = (User) session.get("user");
 		if (user != null && user.getRole().equals("admin")) {
@@ -140,39 +141,88 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 			return "adminLoginFail";
 		}
 	}
-	public String adminConfirmBook(){
+	public String adminScanUser() {
 		String userInfo = httpServletRequest.getParameter("userInfo");
 		SHC32 shc32 = SHC32.getInstance();
-		shc32.setKey(TopScanManager.getStartTime());
 		try {
 			String text = shc32.decrypt(userInfo);
 			System.out.println(text);
 			String userId = null;
 			status = new HashMap<>();
-			if (text.startsWith("userId")&&text.endsWith("SHC")) {
-				userId = text.substring(6, text.length()-3);
-				if (userService.confrimBook(userId)) {
+			if (text.startsWith("userId") && text.endsWith("SHC")) {
+				userId = text.substring(6, text.length() - 3);
+				User user = userService.adminScanUser(userId);
+				if (user != null) {
 					status.put("state", 1);
-				}
-				else{
+					status.put("user", user);
+				} else {
 					status.put("state", 2);
 				}
-			}
-			else {
-				status.put("state", 2);
+			} else {
+				status.put("state", 3);
 			}
 		} catch (IncorrectCipherTextLengthException e) {
 			e.printStackTrace();
 		}
-		return "confirmBook";
+		return "adminScanUser";
 	}
+
+	public String adminBorrow() {
+		String userId = httpServletRequest.getParameter("userId");
+		status = new HashMap<>();
+		List<BorrowedRecord> borrowedRecords = userService.adminBorrow(userId);
+		if (borrowedRecords.isEmpty()) {
+			status.put("state", 2);
+		} else {
+			status.put("state", 1);
+			status.put("records", JSONArray.fromObject(borrowedRecords));
+		}
+		return "adminBorrow";
+	}
+
+	public String adminConfirmBorrow() {
+		String msg = httpServletRequest.getParameter("selecteditems");
+		JSONArray jsonArray = JSONArray.fromObject(msg);
+		String[] ids = new String[jsonArray.size()];
+		for (int i = 0; i < jsonArray.size(); i++) {
+			ids[i] = jsonArray.getString(i);
+		}
+		userService.adminConfirmBorrow(ids);
+		return "adminConfirmBorrow";
+	}
+
+	public String adminReturn() {
+		String userId = httpServletRequest.getParameter("userId");
+		status = new HashMap<>();
+		List<BorrowedRecord> borrowedRecords = userService.adminReturn(userId);
+		if (borrowedRecords.isEmpty()) {
+			status.put("state", 2);
+		} else {
+			status.put("state", 1);
+			status.put("records", JSONArray.fromObject(borrowedRecords));
+		}
+		return "adminReturn";
+	}
+
+	public String adminConfirmReturn() {
+		String msg = httpServletRequest.getParameter("selecteditems");
+		JSONArray jsonArray = JSONArray.fromObject(msg);
+		String[] ids = new String[jsonArray.size()];
+		for (int i = 0; i < jsonArray.size(); i++) {
+			ids[i] = jsonArray.getString(i);
+		}
+		userService.adminConfirmReturn(ids);
+		return "adminConfirmReturn";
+	}
+
 	public String showQrCode() {
 		String QrCode = TopScanManager.getQrCode(user.getUserId() + "");
 		status = new HashMap<>();
 		status.put("QrCode", QrCode);
 		return "showQrCode";
 	}
-	public String payState(){
+
+	public String payState() {
 		status = new HashMap<>();
 		user = (User) session.get("user");
 		List<BorrowedRecord> payState = userService.payState(user);
@@ -186,24 +236,34 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
 			ip = httpServletRequest.getRemoteAddr();
 		}
-		if (payState != null) {
+		if (payState != null&&!payState.isEmpty()) {
 			UnifiedOrder unifiedOrder = new UnifiedOrder();
-			JSONObject jsonObject = JSONObject.fromObject(unifiedOrder.createOrder(user.getWeChat(), ip, 1*payState.size()));
+			JSONObject jsonObject = JSONObject
+					.fromObject(unifiedOrder.createOrder(user.getWeChat(), ip, 1 * payState.size()));
 			status.put("params", jsonObject.toString());
 			status.put("pay", 1);
+			status.put("ip", ip);
 			status.put("payState", JSONArray.fromObject(payState));
 		} else {
 			status.put("pay", 0);
 		}
 		return "payState";
 	}
-	public String paySucceed(){
-		String recordIds = httpServletRequest.getParameter("recordIds");
+
+	public String paySucceed() {
+		String recordIds = httpServletRequest.getParameter("ids");
 		String outTradeNumber = httpServletRequest.getParameter("outTradeNumber");
-		int[] records = (int[]) JSONArray.toArray(JSONArray.fromObject(recordIds));
+		JSONArray jsonArray = JSONArray.fromObject(recordIds);
+		String[] records = new String[jsonArray.size()];
+		for (int i = 0; i < jsonArray.size(); i++) {
+			records[i] = jsonArray.getString(i);
+		}
 		userService.paySucceed(outTradeNumber, records);
+		TemplateMessagePushing templateMessagePushing = new TemplateMessagePushing();
+		templateMessagePushing.pushDepositConfirming(((User)session.get("user")).getWeChat(), records.length);
 		return "paySucceed";
 	}
+
 	public String changePass() {
 		userService.changePass(user);
 		status = new HashMap<>();
@@ -258,15 +318,16 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		}
 		return "logout";
 	}
-	public String qrCode(){
+
+	public String qrCode() {
 		User user = (User) session.get("user");
-		if (user!=null) {
+		if (user != null) {
 			return "qrCodeSucceed";
-		}
-		else{
+		} else {
 			return "qrCodeFail";
 		}
 	}
+
 	public void prepareAdminLogin() {
 		user = new User();
 	}

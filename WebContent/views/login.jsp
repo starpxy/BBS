@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <title>无微不至的借阅伴侣－登录界面</title>
+    <title>Ebook－登录界面</title>
     <link rel="stylesheet" href="asserts/weui/css/weui.css"/>
     <link rel="stylesheet" href="asserts/weui/css/weui2.css"/>
     <link rel="stylesheet" href="asserts/weui/css/weui3.css"/>

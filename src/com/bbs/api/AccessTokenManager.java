@@ -30,12 +30,12 @@ public class AccessTokenManager {
 		URL url;
 		HttpsURLConnection httpsURLConnection;
 		InputStreamReader inputStreamReader;
-		if (startTime!=null) {
-			if ((new Date().getTime()-startTime.getTime())<(expiresTime*1000-10000L)) {
-				System.out.println("reuse");
-				return accessToken;
-			}
-		}
+//		if (startTime!=null) {
+//			if ((new Date().getTime()-startTime.getTime())<(expiresTime*1000-10000L)&&!accessToken.equals("")) {
+//				System.out.println("reuse");
+//				return accessToken;
+//			}
+//		}
 		try {
 			url = new URL("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+BasicAccountParam.getAppId()+"&secret="+BasicAccountParam.getAppSecrete());
 			httpsURLConnection = (HttpsURLConnection) url.openConnection();

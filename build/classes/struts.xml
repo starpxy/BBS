@@ -38,8 +38,18 @@
 			<result name="paySucceed" type="json">
 				<param name="root">status</param>
 			</result>
-			<result name="confirmBook" type="json">
+			<result name="adminScanUser" type="json">
 				<param name="root">status</param>
+			</result>
+			<result name="adminBorrow" type="json">
+				<param name="root">status</param>
+			</result>
+			<result name="adminReturn" type="json">
+				<param name="root">status</param>
+			</result>
+			<result name="adminConfirmBorrow" type="json">
+			</result>
+			<result name="adminConfirmReturn" type="json">
 			</result>
 			<result name="initialAPI" type="json">
 				<param name="root">status</param>
@@ -101,6 +111,9 @@
 				<param name="root">books</param>
 			</result>
 			<result name="showComments" type="json">
+				<param name="root">books</param>
+			</result>
+			<result name="addBook" type="json">
 				<param name="root">books</param>
 			</result>
 			<result name="bookSubmit">booksubmit.jsp</result>

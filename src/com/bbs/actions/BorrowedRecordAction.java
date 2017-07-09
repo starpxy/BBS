@@ -58,15 +58,20 @@ public class BorrowedRecordAction extends BaseAction implements ModelDriven<Borr
 		borrowedMap.put("state", i);
 		return "createRecord";
 	}
-	public String returnRemaining(){
+
+	public String borrowHistory() {
+		
+		return "";
+	}
+
+	public String returnRemaining() {
 		String userId = httpServletRequest.getParameter("userId");
 		String borrowedId = httpServletRequest.getParameter("borrowedId");
 		borrowedMap = new HashMap<>();
-		System.out.println(userId+borrowedId);
+		System.out.println(userId + borrowedId);
 		if (borrowedRecordService.returnRemaining(userId, borrowedId)) {
 			borrowedMap.put("state", 1);
-		}
-		else{
+		} else {
 			borrowedMap.put("state", 2);
 		}
 		return "remained";
@@ -77,12 +82,14 @@ public class BorrowedRecordAction extends BaseAction implements ModelDriven<Borr
 		request.put("records", borrowedRecordService.borrowlist(user));
 		return "borrowlist";
 	}
+
 	public String cancel() {
 		User user = (User) session.get("user");
 		borrowedMap = new HashMap<>();
 		borrowedMap.put("state", borrowedRecordService.cancel(user, httpServletRequest.getParameter("recordId")));
 		return "cancel";
 	}
+
 	public void prepareCreateRecord() {
 		this.borrowedRecord = new BorrowedRecord();
 	}

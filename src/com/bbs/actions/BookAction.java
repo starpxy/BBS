@@ -1,8 +1,11 @@
 package com.bbs.actions;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,13 +13,14 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.bbs.entities.Book;
 import com.bbs.entities.Comment;
+import com.bbs.recommend.RankAlgorithm;
 import com.bbs.services.BookService;
 import com.bbs.services.UserService;
 import com.opensymphony.xwork2.ModelDriven;
 
 import net.sf.json.JSONArray;
 
-public class BookAction extends BaseAction implements ModelDriven<Book>,ServletRequestAware{
+public class BookAction extends BaseAction implements ModelDriven<Book>, ServletRequestAware {
 	private HttpServletRequest httpServletRequest;
 	private static final long serialVersionUID = 1L;
 	private Book book;
@@ -56,9 +60,7 @@ public class BookAction extends BaseAction implements ModelDriven<Book>,ServletR
 			list.get(count - 1).setUser(userService.getUserInfo(list.get(count - 1).getUser()));
 			count--;
 		}
-		System.out.println(list.size());
 		JSONArray jsonArray = JSONArray.fromObject(list);
-		System.out.println(jsonArray);
 		books = new HashMap<>();
 		books.put("lists", jsonArray.toString());
 		return "showComments";
@@ -91,7 +93,37 @@ public class BookAction extends BaseAction implements ModelDriven<Book>,ServletR
 		books.put("books", JSONArray.fromObject(bookList));
 		return "listBooks";
 	}
-	
+
+	public String addBookOld() {
+		String isbn = httpServletRequest.getParameter("isbn");
+		books = new HashMap<>();
+		books.put("state", BookService.addBookOld(isbn));
+		return "addBook";
+	}
+
+	public String addBookNew() {
+		books = new HashMap<>();
+		books.put("state", BookService.addBookNew(book));
+		return "addBook";
+	}
+
+	public String recommendBook() throws IOException {
+		Book book = (Book) session.get("book");
+		List<Book> list = BookService.bookList(book);
+		List<Map.Entry<Book, Double>> temp = RankAlgorithm.getRecomBookList(book, list, book.getType());
+		List<Book> result = new LinkedList<>();
+		for (Entry<Book, Double> entry : temp) {
+			result.add(entry.getKey());
+		}
+		books = new HashMap<>();
+		books.put("books", JSONArray.fromObject(result));
+		return "addBook";
+	}
+
+	public void prepareAddBookNew() {
+		book = new Book();
+	}
+
 	public void prepareBookSubmit() {
 		this.book = new Book();
 	}

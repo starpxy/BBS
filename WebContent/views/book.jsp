@@ -6,7 +6,7 @@ pageEncoding="UTF-8"%>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <title>book</title>
+    <title>${request.book.bookTitle }</title>
     <link rel="stylesheet" href="asserts/weui/css/weui.css"/>
     <link rel="stylesheet" href="asserts/weui/css/weui2.css"/>
     <link rel="stylesheet" href="asserts/weui/css/weui3.css"/>
@@ -130,6 +130,23 @@ pageEncoding="UTF-8"%>
 
 
 </div>
+<div class="weui_panel weui_panel_access search-div">
+
+    <div class="weui_panel_hd"><span class="icon icon-96 f-green"></span> 猜你喜欢<a href="javascript:;"
+                                                                                 id="change-recom"
+                                                                                 style="float: right"
+                                                                                 class="f-green"><span
+            class="icon icon-21"></span> 换一批</a></div>
+
+    <div class="weui_panel_bd recom-div">
+
+        <!--下面的需要动态替换-->
+ 
+    </div>
+    <!--<a href="javascript:void(0);" class="weui_panel_ft">更多</a>-->
+
+
+</div>
 
 <div style="margin-top: 100px">&nbsp;</div>
 
@@ -215,7 +232,42 @@ pageEncoding="UTF-8"%>
 <script type="text/javascript">
 
     $(function () {
+         var itemslist = '';
+         var books ;
+         var i = 0;
+    	 $.ajax({
+             type: 'POST',
+             url: 'book-recommendBook',
+             dataType: 'json',
+             success: function (data) {
+                 books = data.books;
+                 itemslist = '';
+                 var count = 0;
+            	 while (count<5&&count<books.length) {
+                     itemslist += '<a href="book-bookDetails?bookId=' + books[i].bookId + '" class="weui_media_box weui_media_appmsg">';
+                     itemslist += '    <div class="weui_media_hd">';
+                     itemslist += '      <img class="weui_media_appmsg_thumb"';
+                     itemslist += '             src=' + books[i].simpleChart + '';
+                     itemslist += '         alt="not found">';
+                     itemslist += '  </div>';
+                     itemslist += '  <div class="weui_media_bd">';
+                     itemslist += '      <h4 class="weui_media_title">' + books[i].bookTitle + '</h4>';
+                     itemslist += '      <p class="weui_media_desc">ISBN:' + books[i].isbn + ' 作者:' + books[i].author + '</p>';
+                     itemslist += '   </div>';
+                     itemslist += '  </a>';
+                     count++;
+                     i ++;
+                 }
+            	 $(".recom-div").html(itemslist);
+             },
+             error: function (xhr, type) {
+             }
+             });
         	$('#book').click(function(){
+        		layer.msg('预订中，请稍候...', {
+        			  icon: 16
+        			  ,shade: 0.01
+        			});
         		 $.ajax({
                      type:'POST',
                      data:{"bookId":'${request.book.bookId}'},
@@ -251,7 +303,34 @@ pageEncoding="UTF-8"%>
                 $(".addtowishlist").click(function () {
                     $.toast("clicked add to wish list");
                 });
+    			var count = 1;
+                $('#change-recom').click(function () {
 
+                    //TODO,当聚焦搜索框时,这里需要向后台发一个ajax请求,获取根据该用户搜索记录计算出的下一批推荐书籍列表(这里暂定一批有五本书,即在后台排名次靠后的书籍),再在前端按以下方式呈现,ajax由star处理,前端这里由静态值作展示
+                    //count 是为了前端静态测试定义的,到时移除即可
+                	itemslist = '';
+                    var count = 0;
+	               	 while (count<5&&count<books.length) {
+		               	 	if(i==books.length){
+			               	 	i = 0;
+			               	 }
+	                        itemslist += '<a href="book-bookDetails?bookId=' + books[i].bookId + '" class="weui_media_box weui_media_appmsg">';
+	                        itemslist += '    <div class="weui_media_hd">';
+	                        itemslist += '      <img class="weui_media_appmsg_thumb"';
+	                        itemslist += '             src=' + books[i].simpleChart + '';
+	                        itemslist += '         alt="not found">';
+	                        itemslist += '  </div>';
+	                        itemslist += '  <div class="weui_media_bd">';
+	                        itemslist += '      <h4 class="weui_media_title">' + books[i].bookTitle + '</h4>';
+	                        itemslist += '      <p class="weui_media_desc">ISBN:' + books[i].isbn + ' 作者:' + books[i].author + '</p>';
+	                        itemslist += '   </div>';
+	                        itemslist += '  </a>';
+	                        count++;
+	                        i ++;
+	                    }
+               	 $(".recom-div").html(itemslist);      
+
+                });
 
 
                 layer = layui.layer;

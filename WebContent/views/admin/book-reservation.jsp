@@ -142,7 +142,6 @@
                         <li><a href="user-adminLogin"><i class="fa fa-circle-o"></i>录入与查看</a></li>
                         <li><a href="user-adminListRecords"><i class="fa fa-circle-o"></i>借阅详情</a></li>
                         <li class="active"><a href="user-adminListReservations"><i class="fa fa-circle-o"></i>预定详情</a></li>
-                        <li><a href="index2.html"><i class="fa fa-circle-o"></i>推荐系统</a></li>
                     </ul>
                 </li>
 
@@ -169,7 +168,7 @@
 
 
                 <li>
-                    <a href="#">
+                    <a href="javascript:;">
                         <i class="fa fa-info"></i> <span>消息管理</span>
 
             <span class="pull-right-container">
@@ -188,9 +187,9 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="user-chart.html"><i class="fa fa-circle-o"></i>用户统计</a></li>
-                        <li><a href="book-chart.html"><i class="fa fa-circle-o"></i>图书统计</a></li>
-                        <li><a href="comment-chart.html"><i class="fa fa-circle-o"></i>评论统计</a></li>
+                        <li><a href="user-userChart"><i class="fa fa-circle-o"></i>用户统计</a></li>
+                        <li><a href="user-bookChart"><i class="fa fa-circle-o"></i>图书统计</a></li>
+                        <li><a href="user-commentChart"><i class="fa fa-circle-o"></i>评论统计</a></li>
                     </ul>
                 </li>
 
@@ -490,7 +489,30 @@
 
         });
 
-
+        $("#sign-out").click(function () {
+            layer.open({
+                title: "注销",
+                content: "你确认退出?",
+                yes: function () {
+                	$.ajax({
+                        type: 'POST',
+                        url: 'user-adminLogout',
+                        dataType: 'json',
+                        success: function (data) {
+							if (data.state==1){
+	                        	window.location.href = 'user-adminLogin';
+							}
+							else{
+								
+							}
+                        },
+                        error: function (xhr, type) {
+                        }
+                    });
+                }
+            });
+        });
+        
         $(".delete-item").click(function () {
             //TODO
             var thisele=$(this);

@@ -27,7 +27,7 @@
 
     <div class="weui_panel_bd tcenter">
 
-        <a id="qrcode"><img src="" style="margin-top: 20px;margin-bottom: 20px"></a>
+        <a id="qrcode"><img src="" style="margin-top: 20px; width:80%"></a>
 
     </div>
     <!--<a class="weui_panel_ft" href="javascript:void(0);">查看更多</a>-->
@@ -53,63 +53,62 @@
 
         layui.use('layer', function () {
             
-            var layer = layui.layer;
-            //初始化微信支付接口
             $.ajax({
         		type:'POST',
                 url:'user-initialAPI',
                 dataType : 'json',
                 data: {"url":"http://pxyzmy.com.cn/BBS/views/user-qrCode"},
                 success: function (data){
-                    wx.config({
-                        debug: false,
-                        appId: data.appId,
-                        timestamp: data.timeStamp,
-                        nonceStr: data.nonceStr,
-                        signature: data.signature,
-                        jsApiList: [
-                            'checkJsApi',
-                            'onMenuShareTimeline',
-                            'onMenuShareAppMessage',
-                            'onMenuShareQQ',
-                            'onMenuShareWeibo',
-                            'hideMenuItems',
-                            'showMenuItems',
-                            'hideAllNonBaseMenuItem',
-                            'showAllNonBaseMenuItem',
-                            'translateVoice',
-                            'startRecord',
-                            'stopRecord',
-                            'onRecordEnd',
-                            'playVoice',
-                            'pauseVoice',
-                            'stopVoice',
-                            'uploadVoice',
-                            'downloadVoice',
-                            'chooseImage',
-                            'previewImage',
-                            'uploadImage',
-                            'downloadImage',
-                            'getNetworkType',
-                            'openLocation',
-                            'getLocation',
-                            'hideOptionMenu',
-                            'showOptionMenu',
-                            'closeWindow',
-                            'scanQRCode',
-                            'chooseWXPay',
-                            'openProductSpecificView',
-                            'addCard',
-                            'chooseCard',
-                            'openCard'
-                        ]
-                    });
-                    
-                    wx.error(function (res) {
-                        alert(res.errMsg);
-                    });
+                	 wx.config({
+                         debug: false,
+                         appId: data.appId,
+                         timestamp: data.timeStamp,
+                         nonceStr: data.nonceStr,
+                         signature: data.signature,
+                         jsApiList: [
+                             'checkJsApi',
+                             'onMenuShareTimeline',
+                             'onMenuShareAppMessage',
+                             'onMenuShareQQ',
+                             'onMenuShareWeibo',
+                             'hideMenuItems',
+                             'showMenuItems',
+                             'hideAllNonBaseMenuItem',
+                             'showAllNonBaseMenuItem',
+                             'translateVoice',
+                             'startRecord',
+                             'stopRecord',
+                             'onRecordEnd',
+                             'playVoice',
+                             'pauseVoice',
+                             'stopVoice',
+                             'uploadVoice',
+                             'downloadVoice',
+                             'chooseImage',
+                             'previewImage',
+                             'uploadImage',
+                             'downloadImage',
+                             'getNetworkType',
+                             'openLocation',
+                             'getLocation',
+                             'hideOptionMenu',
+                             'showOptionMenu',
+                             'closeWindow',
+                             'scanQRCode',
+                             'chooseWXPay',
+                             'openProductSpecificView',
+                             'addCard',
+                             'chooseCard',
+                             'openCard'
+                         ]
+                     });
+                     
+                     wx.error(function (res) {
+                         alert(res.errMsg);
+                     });
         },
         error: function(){
+        	layer.msg("发送ajax异常", {anim: 1, icon: 2, time: 2000});
         }
     });
            
@@ -181,21 +180,23 @@
                                         },
                                         function (res) {
                                             if (res.err_msg == "get_brand_wcpay_request:ok") {
-                                            	$.ajax({
-                                                    type: 'POST',
-                                                    data:{"outTradeNumber":data.payState.outTradeNumber,"ids":JSON.stringify(data.recordIds)},
-                                                    url: 'user-paySucceed',//由star填写
-                                                    dataType: 'json',
-                                                    success: function (data) {
-                                                        
-                                                    },
-                                                    error: function (xhr, type) {
-                                                        
-                                                    }
+                                            	 $.ajax({
+                                                     type: 'POST',
+                                                     data:{"outTradeNumber":data.payState.outTradeNumber,"ids":JSON.stringify(recordIds)},
+                                                     url: 'user-paySucceed',//由star填写
+                                                     dataType: 'json',
+                                                     success: function (data) {
+                                                    	 layer.msg("支付成功",{anim:1,icon:1,time:1000});
+                                                     },
+                                                     error: function (xhr, type) {
+                                                     }
 
-                                                });
-                                                                                
+                                                 });                                                                                
                                             }     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+                                            else if (res.err_msg == "get_brand_wcpay_request:fail") {
+                                            	alert(JSON.stringify(res));
+                                            	layer.msg("微信服务器异常",{anim:6,icon:2,time:1000});
+                                            }
                                         }
                                 );
                             }
@@ -213,7 +214,7 @@
                             wx.error(function (res) {
                                 alert(res.errMsg);
                             });
-                        } else {
+                         } else {
                             
                         }
                     },

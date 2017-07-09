@@ -6,8 +6,6 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -36,7 +34,7 @@ public class UnifiedOrder {
 	private final String mchId = "1423223602";
 	private String nonceStr;
 	private String sign;
-	private String body = "test";
+	private String body = "SHC: Book Fee";
 	private String outTradeNo;
 	private int totalFee;
 	private String spbillCreateIp;
@@ -138,7 +136,7 @@ public class UnifiedOrder {
 		TreeMap<String, String> map = new TreeMap<>();
 		map.put("appId", appid);
 		map.put("nonceStr", nonceStr);
-		map.put("packeage=prepay_id", prepayId);
+		map.put("package", "prepay_id="+prepayId);
 		map.put("signType", "MD5");
 		map.put("timeStamp", timeStamp);
 		map.put("key", key);
@@ -192,13 +190,4 @@ public class UnifiedOrder {
 		String result = date.getTime() + nonceStr;
 		return result;
 	}
-//	public static void main(String[] args) {
-//		UnifiedOrder unifiedOrder = new UnifiedOrder();
-//		Map<String,Object> map = unifiedOrder.createOrder("oQe5IuBxLw5PKLiQDyfKuCnpDxg0", "223.104.3.167", 1);
-//		Iterator<String> iterator = map.keySet().iterator();
-//		while(iterator.hasNext()){
-//			String temp = iterator.next();
-//			System.out.println(temp+" : "+ map.get(temp));
-//		}
-//	}
 }

@@ -34,7 +34,13 @@ public class JSAPIInitial {
 			}
 			JsonConverter converter = new JsonConverter();
 			Map<String, Object> map = converter.convertTonMap(temp);
-			ticket = (String) map.get("ticket");
+			if (map.get("errcode")!=null&&((int)map.get("errcode"))==0) {
+				ticket = (String) map.get("ticket");
+				System.out.println(map.get("ticket"));
+			}
+			else{
+				System.out.println(map.get("errcode"));
+			}
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -76,13 +82,13 @@ public class JSAPIInitial {
 			return generateCharacter(random);
 		}
 	}
-	public static void main(String[] args) {
-		JSAPIInitial jsapiInitial = new JSAPIInitial();
-		Map<String , Object> map = jsapiInitial.initialAPI("http://pxyzmy.com.cn/jssdk.html");
-		Iterator<String> iterator = map.keySet().iterator();
-		while(iterator.hasNext()){
-			String temp = iterator.next();
-			System.out.println(temp+" : "+ map.get(temp));
-		}
-	}
+//	public static void main(String[] args) {
+//		JSAPIInitial jsapiInitial = new JSAPIInitial();
+//		Map<String , Object> map = jsapiInitial.initialAPI("http://pxyzmy.com.cn/jssdk.html");
+//		Iterator<String> iterator = map.keySet().iterator();
+//		while(iterator.hasNext()){
+//			String temp = iterator.next();
+//			System.out.println(temp+" : "+ map.get(temp));
+//		}
+//	}
 }

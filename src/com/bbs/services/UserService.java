@@ -67,11 +67,28 @@ public class UserService {
 	public List<Comment> adminListComments() {
 		return userDao.adminListComments();
 	}
-	
-	public void paySucceed(String outTradeNumber,int[] records){
+
+	public void paySucceed(String outTradeNumber, String[] records) {
 		userDao.paySucceed(outTradeNumber, records);
 	}
-	public boolean confrimBook(String userId){
-		return userDao.confrimBook(userId);
+
+	public User adminScanUser(String userId) {
+		return userDao.adminScanUser(userId);
+	}
+
+	public List<BorrowedRecord> adminBorrow(String userId) {
+		return userDao.adminBorrow(userId);
+	}
+
+	public void adminConfirmBorrow(String[] ids) {
+		userDao.adminConfirmBorrow(ids);
+	}
+
+	public List<BorrowedRecord> adminReturn(String userId) {
+		return userDao.adminReturn(userId);
+	}
+
+	public void adminConfirmReturn(String[] ids) {
+		userDao.adminConfirmReturn(ids);
 	}
 }

@@ -23,6 +23,25 @@
 #qqlogin:active,#webologin:active,#wechatlogin:active{
     font-size: 45px;
 }
+.search-span {
+    display: none;
+    position: absolute;
+    width: 100%;
+    /*z-index: 13;*/
+    /*height:100%;*/
+}
+
+.search-div {
+    /*margin: 0 10px;*/
+    /*padding: 10px;*/
+    /*border: 1px solid #666;*/
+    -moz-box-shadow: 3px 3px 4px #666;
+    -webkit-box-shadow: 3px 3px 4px #666;
+    box-shadow: 3px 3px 4px #666;
+    background: #fff;
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135,
+    Color='#666');
+}
 
 
 

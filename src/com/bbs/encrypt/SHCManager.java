@@ -31,9 +31,7 @@ class SHCManager {
 		}
 	}
 	public String encrypt(String clearText,int count){
-		if (map.isEmpty()) {
-			generateMapping();
-		}
+		generateMapping();
 		if (count!=0) {
 			String cipherText = "";
 			for (char c : clearText.toCharArray()) {
@@ -47,9 +45,7 @@ class SHCManager {
 		}
 	}
 	public String decrypt(String cipherText,int count){
-		if (map.isEmpty()) {
-			generateMapping();
-		}
+		generateMapping();
 		initialInverseMap();
 		if (count!=0) {
 			String clearText = "";
@@ -103,12 +99,11 @@ class SHCManager {
 		inverseMap = new HashMap<Character,Character>();
 	}
 	private void initialInverseMap(){
-		if (inverseMap.isEmpty()) {
-			Iterator<Character> iterator = map.keySet().iterator();
-			while (iterator.hasNext()) {
-				char c = iterator.next();
-				inverseMap.put(map.get(c), c);
-			}
+		inverseMap = new HashMap<>();
+		Iterator<Character> iterator = map.keySet().iterator();
+		while (iterator.hasNext()) {
+			char c = iterator.next();
+			inverseMap.put(map.get(c), c);
 		}
 	}
 	public void setKey(long key) {
