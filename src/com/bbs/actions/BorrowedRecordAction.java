@@ -13,6 +13,7 @@ import com.bbs.entities.BorrowedRecord;
 import com.bbs.entities.User;
 import com.bbs.services.BorrowedRecordService;
 import com.opensymphony.xwork2.ModelDriven;
+import com.sun.org.apache.regexp.internal.REUtil;
 
 public class BorrowedRecordAction extends BaseAction implements ModelDriven<BorrowedRecord>, ServletRequestAware {
 	private static final long serialVersionUID = 1L;
@@ -60,8 +61,7 @@ public class BorrowedRecordAction extends BaseAction implements ModelDriven<Borr
 	}
 
 	public String borrowHistory() {
-		
-		return "";
+		return "borrowHistory";
 	}
 
 	public String returnRemaining() {

@@ -136,7 +136,7 @@
 			<result type="json" name="remained">
 				<param name="root">borrowedMap</param>
 			</result>
-			
+			<result name="borrowHistory">borrowhistory.jsp</result>
 		</action>
     </package>
 
