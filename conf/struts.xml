@@ -98,10 +98,10 @@
 		</action>
 		<action name="comment-*" class="commentAction" method="{1}">
 			<result name="deleteComment" type="json">
-				<param name="root">status</param>
+				<param name="root">commentStatus</param>
 			</result>
 			<result name="comment" type="json">
-				<param name="root">status</param>
+				<param name="root">commentStatus</param>
 			</result>
 		</action>
 		<action name="book-*" class="bookAction" method="{1}" >

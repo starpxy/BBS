@@ -17,24 +17,24 @@ public class CommentAction extends BaseAction implements ModelDriven<Comment>, S
 	private static final long serialVersionUID = 1L;
 	private CommentService commentService;
 	private Comment comment;
-	private Map<String, Object> status;
+	private Map<String, Object> commentStatus;
 	private HttpServletRequest httpServletRequest;
 
 	public void setCommentService(CommentService commentService) {
 		this.commentService = commentService;
 	}
 
-	public Map<String, Object> getStatus() {
-		return status;
+	public Map<String, Object> getCommentStatus() {
+		return commentStatus;
 	}
 
 	public String deleteComment() {
 		String commentId = httpServletRequest.getParameter("commentId");
-		status = new HashMap<>();
+		commentStatus = new HashMap<>();
 		if (commentService.deleteComment(commentId)) {
-			status.put("state", 1);
+			commentStatus.put("state", 1);
 		} else {
-			status.put("state", 2);
+			commentStatus.put("state", 2);
 		}
 		return "deleteComment";
 	}
@@ -47,11 +47,11 @@ public class CommentAction extends BaseAction implements ModelDriven<Comment>, S
 		comment.setBook((Book) session.get("book"));
 		comment.setUser((User) session.get("user"));
 		comment.setStatus(0);
-		status = new HashMap<String, Object>();
+		commentStatus = new HashMap<String, Object>();
 		if (commentService.makeComment(comment)) {
-			status.put("state", 1);
+			commentStatus.put("state", 1);
 		} else {
-			status.put("state", 2);
+			commentStatus.put("state", 2);
 		}
 		return "comment";
 	}
