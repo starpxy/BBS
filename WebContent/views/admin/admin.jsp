@@ -413,7 +413,7 @@
                   <td class="item-qrcode"><a><img alt="点击查看二维码详情" src='http://qr.liantu.com/api.php?text={"bookId":<%=bookItem.getBook().getBookId() %>,"itemId":<%=bookItem.getItemId() %>}' width="50px" height="50px"></a></td>
                   <input type="hidden" value='http://qr.liantu.com/api.php?text={"bookId":<%=bookItem.getBook().getBookId() %>,"itemId":<%=bookItem.getItemId() %>}'/>
                   <td class="item-status"><%=bookItem.getStatus() %></td>
-                  <% if(bookItem.getStatus().equals("borrowed")) count++;%>
+                  <% if(bookItem.getStatus()==2) count++;%>
                     <td class="item-operations">
                         <a data-toggle="tooltip" data-placement="left"
                            title="打印二维码" class="print-qrcode"><i
@@ -991,7 +991,7 @@
             '<td class="item-qrcode"><a><img alt="点击查看二维码详情" src=\'http://qr.liantu.com/api.php?text={"bookId":<%=bookItem.getBook().getBookId() %>,"itemId":<%=bookItem.getItemId() %>}\' width="50px" height="50px"></a></td>'+
             '<input type="hidden" value=\'http://qr.liantu.com/api.php?text={"bookId":<%=bookItem.getBook().getBookId() %>,"itemId":<%=bookItem.getItemId() %>}\'/>'+
             '<td class="item-status"><%=bookItem.getStatus() %></td>'+
-            '<% if(bookItem.getStatus().equals("borrowed")) count++;%>'+
+            '<% if(bookItem.getStatus()==2) count++;%>'+
 			'<td class="item-operations">'+
 			            '<a data-toggle="tooltip" data-placement="left"'+
 			    'title="打印二维码" class="print-qrcode"><i'+
