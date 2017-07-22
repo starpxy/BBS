@@ -8,13 +8,13 @@ public class Reservation {
 	private BookItem bookItem;
 	private Date createAt;
 	private Date updateAt;
-	private String status;
+	private int status;
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 

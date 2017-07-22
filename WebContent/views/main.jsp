@@ -12,22 +12,76 @@
 <link rel="stylesheet" href="asserts/weui/css/weui2.css" />
 <link rel="stylesheet" href="asserts/weui/css/weui3.css" />
 <link rel="stylesheet" href="asserts/mycss/index.css">
+<link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        div.search {
+            padding: 10px 0;
+        }
+
+        form {
+            position: relative;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        input, button {
+            border: none;
+            outline: none;
+        }
+
+        input {
+            width: 100%;
+            height: 42px;
+            padding-left: 13px;
+        }
+
+        button {
+            height: 42px;
+            width: 42px;
+            cursor: pointer;
+            position: absolute;
+        }
+
+        /*搜索框1*/
+
+        .bar1 input {
+        	height:30px;
+            border: 2px solid #7BA7AB;
+            border-radius: 5px;
+            background: #f9f2eb;
+            color: #9E9C9C;
+        }
+
+        .bar1 button {
+        	height:30px;
+            top: 2px;
+            right: -17px;
+            background: #7aab7a;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .bar1 button:before {
+            content: "\f002";
+            font-family: FontAwesome;
+            font-size: 16px;
+            color: #F9F0DA;
+        }
+
+</style>
 
 
 </head>
 <body ontouchstart style="background-color: #f8f8f8;">
 
-
-	<div class="weui-header bg-green">
-		<h1 class="weui-header-title">${session.user.name}的Ebook主页</h1>
-	</div>
-	
 	<div class="search-box">
 
-    <div class="searchbar_wrap">
-
-
+    <div class="search bar1">
+        <form action="searchHistory-searchBooks" method="post" onsubmit="return check()">
+            <input id="keyword" type="text" name="keyword" placeholder="搜索书名／作者／ISBN...">
+            <button type="submit"></button>
+        </form>
     </div>
+
 
 
 <span class="search-span">
@@ -60,8 +114,7 @@
 		<ul>
 			<li><img src="asserts/images/faces/cc.jpg">
 				<div class="slide-desc">前端开发：王聪聪</div></li>
-			<li> <img
-					src="asserts/images/faces/mengmeng.jpg">
+			<li> <img src="asserts/images/faces/mengmeng.jpg">
 				<div class="slide-desc">后台开发：郑萌芽</div></li>
 			<li><img src="asserts/images/faces/star.jpg">
 				<div class="slide-desc">接口调用：潘星宇</div></li>
@@ -73,100 +126,190 @@
 		</div>
 	</div>
 
+<div class="page-hd-desc" style="margin-top: 20px">
+    <h3>&nbsp;图书分类</h3>
+    <div class="weui_grids">
+        <a href="book-bookList?type=经典名著" class="weui_grid js_grid">
+            <div class="weui_grid_icon">
+                <img src="asserts/icons/icon_nav_article.png" alt="">
+            </div>
+            <p class="weui_grid_label">
+                经典名著
+            </p>
+        </a>
+        <a href="book-bookList?type=生活保健" class="weui_grid js_grid">
+            <div class="weui_grid_icon">
+                <img src="asserts/icons/icon_nav_button.png" alt="">
+            </div>
+            <p class="weui_grid_label">
+                生活保健
+            </p>
+        </a>
+        <a href="book-bookList?type=经管理财" class="weui_grid js_grid">
+            <div class="weui_grid_icon">
+                <img src="asserts/icons/icon_nav_cell.png" alt="">
+            </div>
+            <p class="weui_grid_label">
+                经管理财
+            </p>
+        </a>
+        <a href="book-bookList?type=成人教育" class="weui_grid js_grid">
+            <div class="weui_grid_icon">
+                <img src="asserts/icons/icon_nav_tab.png" alt="">
+            </div>
+            <p class="weui_grid_label">
+                成人教育
+            </p>
+        </a>
+        <a href="book-bookList?type=小说传记" class="weui_grid js_grid">
+            <div class="weui_grid_icon">
+                <img src="asserts/icons/icon_nav_article.png" alt="">
+            </div>
+            <p class="weui_grid_label">
+                小说传记
+            </p>
+        </a>
+        <a href="book-bookList?type=历史军事" class="weui_grid js_grid">
+            <div class="weui_grid_icon">
+                <img src="asserts/icons/icon_nav_button.png" alt="">
+            </div>
+            <p class="weui_grid_label">
+                历史军事
+            </p>
+        </a>
+        <a href="book-bookList?type=文学技术" class="weui_grid js_grid">
+            <div class="weui_grid_icon">
+                <img src="asserts/icons/icon_nav_cell.png" alt="">
+            </div>
+            <p class="weui_grid_label">
+                文学技术
+            </p>
+        </a>
+        <a href="book-bookList?type=人文社科" class="weui_grid js_grid">
+            <div class="weui_grid_icon">
+                <img src="asserts/icons/icon_nav_tab.png" alt="">
+            </div>
+            <p class="weui_grid_label">
+                人文社科
+            </p>
+        </a>
+        <a href="book-bookList?type=计算机科学" class="weui_grid js_grid">
+            <div class="weui_grid_icon">
+                <img src="asserts/icons/icon_nav_article.png" alt="">
+            </div>
+            <p class="weui_grid_label">
+                计算机科学
+            </p>
+        </a>
+        <a href="book-bookList?type=人际关系" class="weui_grid js_grid">
+            <div class="weui_grid_icon">
+                <img src="asserts/icons/icon_nav_button.png" alt="">
+            </div>
+            <p class="weui_grid_label">
+                人际关系
+            </p>
+        </a>
+        <a href="book-bookList?type=语言学习" class="weui_grid js_grid">
+            <div class="weui_grid_icon">
+                <img src="asserts/icons/icon_nav_cell.png" alt="">
+            </div>
+            <p class="weui_grid_label">
+                语言学习
+            </p>
+        </a>
+        <a href="book-bookList?type=人物传记" class="weui_grid js_grid">
+            <div class="weui_grid_icon">
+                <img src="asserts/icons/icon_nav_tab.png" alt="">
+            </div>
+            <p class="weui_grid_label">
+                人物传记
+            </p>
+        </a>
+        <a href="book-bookList?type=西方哲学" class="weui_grid js_grid">
+            <div class="weui_grid_icon">
+                <img src="asserts/icons/icon_nav_article.png" alt="">
+            </div>
+            <p class="weui_grid_label">
+                西方哲学
+            </p>
+        </a>
+        <a href="book-bookList?type=生物医学" class="weui_grid js_grid">
+            <div class="weui_grid_icon">
+                <img src="asserts/icons/icon_nav_button.png" alt="">
+            </div>
+            <p class="weui_grid_label">
+                生物医学
+            </p>
+        </a>
+        <a href="book-bookList?type=更多" class="weui_grid js_grid">
+            <div class="weui_grid_icon">
+                <img src="asserts/icons/icon_nav_cell.png" alt="">
+            </div>
+            <p class="weui_grid_label">
+                更多
+            </p>
+        </a>
+    </div>
+</div>
 
-	<div class="page-hd-desc" style="margin-top: 20px">
-
-		<h3>&nbsp;图书分类</h3>
-		<div class="weui_grids">
-			<a href="book-bookList?type=经典名著" class="weui_grid js_grid">
-
-				<p class="weui_grid_label">经典名著</p>
-			</a> <a href="book-bookList?type=生活保健" class="weui_grid js_grid">
-
-				<p class="weui_grid_label">生活保健</p>
-			</a> <a href="book-bookList?type=经管理财" class="weui_grid js_grid">
-
-				<p class="weui_grid_label">经管理财</p>
-			</a> <a href="book-bookList?type=成人教育" class="weui_grid js_grid">
-
-				<p class="weui_grid_label">成人教育</p>
-			</a> <a href="book-bookList?type=小说传记" class="weui_grid js_grid">
-
-				<p class="weui_grid_label">小说传记</p>
-			</a> <a href="book-bookList?type=历史军事" class="weui_grid js_grid">
-
-				<p class="weui_grid_label">历史军事</p>
-			</a> <a href="book-bookList?type=文学技术" class="weui_grid js_grid">
-
-				<p class="weui_grid_label">文学技术</p>
-			</a> <a href="book-bookList?type=人文社科" class="weui_grid js_grid">
-
-				<p class="weui_grid_label">人文社科</p>
-			</a> <a href="book-bookList?type=计算机科学" class="weui_grid js_grid">
-
-				<p class="weui_grid_label">计算机科学</p>
-			</a> <a href="book-bookList?type=人际关系" class="weui_grid js_grid">
-
-				<p class="weui_grid_label">人际关系</p>
-			</a> <a href="book-bookList?type=语言学习" class="weui_grid js_grid">
-
-				<p class="weui_grid_label">语言学习</p>
-			</a> <a href="book-bookList?type=人物传记" class="weui_grid js_grid">
-
-				<p class="weui_grid_label">人物传记</p>
-			</a> <a href="book-bookList?type=西方哲学" class="weui_grid js_grid">
-
-				<p class="weui_grid_label">西方哲学</p>
-			</a> <a href="book-bookList?type=生物医学" class="weui_grid js_grid">
-
-				<p class="weui_grid_label">生物医学</p>
-			</a> <a href="book-bookList?type=更多" class="weui_grid js_grid">
-
-				<p class="weui_grid_label">更多</p>
-			</a>
-
-		</div>
-	</div>
 
 <div class="weui_cells_title" style="height:60px;">&nbsp;</div>
-<section class="weui-menu">
-    <div class="weui-menu-inner">
-        <em></em>
-        <!--<span>图书操作</span>-->
-        <span>借书</span>
-        <ul>
-                <li id="scan">扫一扫借书</li>
-        </ul>
+<div style="position:fixed;bottom: 0px;width: 100%">
+    <div class="weui_panel weui_panel_access">
+        <!--<div class="weui_panel_hd">文字组合列表</div>-->
+        <div class="weui_panel_bd">
+            <div class="weui-flex">
+                <div class="weui-flex-item">
+
+                    <a id="scan" href="javascript:;" class="weui_tabbar_item weui_bar_item_on">
+                        <div class="weui_tabbar_icon">
+                            <img src="asserts/icons/icon_nav_search_bar.png" alt="">
+                        </div>
+                        <p class="weui_tabbar_label">借书</p>
+                    </a>
+                </div>
+                <div class="weui-flex-item">
+
+                    <a href="reservation-reservelist" class="weui_tabbar_item weui_bar_item_on">
+                        <div class="weui_tabbar_icon">
+                            <img src="asserts/icons/icon_nav_icons.png" alt="">
+                        </div>
+                        <p class="weui_tabbar_label">预约单</p>
+                    </a>
+                </div>
+                <div class="weui-flex-item">
+
+                    <a href="borrowedRecord-borrowlist" class="weui_tabbar_item weui_bar_item_on">
+
+                        <div class="weui_tabbar_icon">
+                            <img src="asserts/icons/icon_nav_msg.png" alt="">
+                        </div>
+
+                        <p class="weui_tabbar_label">借书单</p>
+                    </a>
+
+                </div>
+                <div class="weui-flex-item">
+                    <a href="borrowedRecord-borrowHistory" class="weui_tabbar_item weui_bar_item_on">
+                        <div class="weui_tabbar_icon">
+                            <img src="asserts/icons/icon_nav_panel.png" alt="">
+                        </div>
+                        <p class="weui_tabbar_label">借阅历史</p>
+                    </a>
+                </div>
+                <div class="weui-flex-item">
+                    <a href="userinfo.jsp" class="weui_tabbar_item weui_bar_item_on">
+                        <div class="weui_tabbar_icon">
+                            <img src="asserts/icons/icon_nav_actionSheet.png" alt="">
+                        </div>
+                        <p class="weui_tabbar_label">个人信息</p>
+                    </a>
+                </div>
+            </div>
+
+        </div>
     </div>
-    <div class="weui-menu-inner">
-        <em></em>
-        <!--<span>图书管理</span>-->
-        <span>借书单</span>
-        <ul>
-			<li>敬请期待</li>
-            <li><a href="borrowedRecord-borrowlist">我的借书单</a></li>
-
-            <li><a href="reservation-reservelist">我的预约单</a></li>
-
-            <li><a href="borrowedRecord-borrowHistory">我的借阅历史</a></li>
-
-
-        </ul>
-    </div>
-    <div class="weui-menu-inner">
-        <em></em>
-        <!--<span>我的</span>-->
-        <span>个人信息</span>
-        <ul>
-        	<li>敬请期待</li>
-            <li id="user-info">个人信息</li>
-            <li id="user-qrCode">我的借书二维码</li>
-            <li id="log-out">注销</li>
-        </ul>
-    </div>
-
-
-</section>
+</div>
 
 
 	<script src="asserts/weui/js/zepto.min.js"></script>
@@ -304,26 +447,8 @@
 					}
                 });
             };
-			 $("#user-info").click(function () {
-		            window.location.href = 'userinfo.jsp';
 
-		        });
-			 $("#user-qrCode").click(function () {
-		            window.location.href = 'user-qrCode';
-
-		       });
-		        $("#log-out").click(function () {
-
-		            $.confirm("确定要注销当前帐号吗？", '注销确认', function () {
-		                window.location.href = 'user-logout';
-		            }, function () {
-
-		            });
-
-
-
-		        });
-		        		        $("#change-recom").click(function () {
+		    $("#change-recom").click(function () {
 		        	itemslist = '';
                     var count = 0;
 	               	 while (books!=null&&count<5&&count<books.length) {
@@ -350,59 +475,14 @@
 		        $("#cancel-recom").click(function () {
 		            $(".search-span").hide();
 		        });
-						
-		        $('.searchbar_wrap').searchBar({
-		            cancelText: "取消",
-		            searchText: '书名/作者/ISBN码',
-		            onfocus: function () {
-		                $(".search-span").show();
-		                //TODO,当聚焦搜索框时,这里需要向后台发一个ajax请求,获取根据该用户搜索记录计算出的第一批推荐书籍列表(这里暂定一批有五本,即相似度排名最高的五本书),再在前端按以下方式呈现,ajax由star处理,前端这里由静态值作展示
-		            },
-		            onblur: function () {
-			            
-		            },
-		            oninput: function () {
+		     // 将原来的   $('.searchbar_wrap').searchBar({...}) 中onfoucus 的内容copy到这个focus方法中;TODO
+		      //再把原来的 $(".weui_panel_bd").html(itemslist); 更改成 $(".search-div .weui_panel_bd").html(itemslist); 
 
-		            },
-		            onsubmit: function (value) {
-		                window.location.href = "searchHistory-searchBooks?keyword=" + value;
-		                $(".search-span").hide();
-		            },
+		      $("input[name='keyword']").focus(function () {
+						$(".search-span").show();
+		                //$(".search-div .weui_panel_bd").html(itemslist);
 
-		            oncancel: function () {
-		            	$(".search-span").hide();
-		            },
-
-		            onclear: function () {
-		            	$(".search-span").hide();
-		            }
-		        });
-
-			$('.weui-menu-inner').click(
-					function() {
-						var $menu = $(this).find('ul'), height = $menu
-								.find('li').length
-								* 40 + 15 + 'px', opacity = $menu
-								.css('opacity');
-
-						$('.weui-menu-inner ul').css({
-							'top' : '0',
-							'opacity' : '0'
-						});
-
-						if (opacity == 0) {
-							$menu.css({
-								'top' : '-' + height,
-								'opacity' : 1
-							});
-						} else {
-							$menu.css({
-								'top' : 0,
-								'opacity' : 0
-							});
-						}
-					});
-
+		      });		
 			$('#slide1')
 					.swipeSlide(
 							{
@@ -423,6 +503,15 @@
 							});
 
 		});
+		function check(){
+			var keyword = $('#keyword').val();
+			if(keyword==''){
+				return false;
+			}
+			else{
+				return true;
+			}
+		}
 	</script>
 
 

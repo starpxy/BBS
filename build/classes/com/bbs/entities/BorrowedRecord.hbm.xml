@@ -23,7 +23,7 @@
         <property name="returnAt" type="java.util.Date">
             <column name="RETURN_AT" />
         </property>
-        <property name="status" type="java.lang.String">
+        <property name="status" type="java.lang.Integer">
             <column name="STATUS" />
         </property>
         <property name="updateAt" type="java.util.Date">

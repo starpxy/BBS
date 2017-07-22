@@ -18,7 +18,7 @@ public class BookItemDao extends BaseDao {
 			}
 			else {
 				BookItem bookItem2 = bookItems.get(0);
-				if (bookItem2.getStatus().equals("reserved")) {
+				if (bookItem2.getStatus()==2) {
 					return 2;
 				}
 				else{

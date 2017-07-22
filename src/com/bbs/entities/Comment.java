@@ -2,23 +2,29 @@ package com.bbs.entities;
 
 import java.util.Date;
 
+import com.bbs.entities.rules.CommentRule;
+
 public class Comment {
 	private Integer commentId;
 	private User user;
 	private Book book;
 	private String content;
 	private int starClass;
-	private String state;
+	private int status;
 	private Date updateAt;
 
-	public void setState(String state) {
-		this.state = state;
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
-	public String getState() {
-		return state;
+	public int getStatus() {
+		return status;
 	}
-
+	
+	public String getStatus(Class<String> class1){
+		return CommentRule.getStatus(status);
+	}
+	
 	public void setStarClass(int starClass) {
 		this.starClass = starClass;
 	}

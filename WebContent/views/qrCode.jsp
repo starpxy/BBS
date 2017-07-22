@@ -15,7 +15,7 @@
 <body ontouchstart style="background-color: #439057;">
 
 <div class="weui-header" style="background-color: #439057">
-    <div class="weui-header-left"><a href="user-login" class="icon icon-109 f-white">返回</a></div>
+    <div class="weui-header-left"><a id="back" href="javascript:;" class="icon icon-109 f-white">返回</a></div>
     <h1 class="weui-header-title">我的二维码</h1>
     <div class="weui-header-right"><a href="user-login" class="icon icon-27 f-white"></a></div>
 </div>
@@ -225,7 +225,9 @@
                 });
 
             }, 1000);
-
+			$("#back").click(function(){
+				history.back();
+			});
             //点击刷新
             $("#qrcode").click(function () {
 

@@ -8,8 +8,9 @@ import com.bbs.entities.Comment;
 public class CommentDao extends BaseDao{
 	public boolean makeComment(Comment comment){
 		comment.setUpdateAt(new Date());
-		String hql = "FROM Comment WHERE user.userId="+comment.getUser().getUserId()+" AND book.bookId="+comment.getBook().getBookId()+" AND state='unselected'";
+		String hql = "FROM Comment WHERE user.userId="+comment.getUser().getUserId()+" AND book.bookId="+comment.getBook().getBookId()+" AND state=0";
 		if (getSession().createQuery(hql).list().isEmpty()) {
+			System.out.println("in");
 			getSession().save(comment);
 			return true;
 		}

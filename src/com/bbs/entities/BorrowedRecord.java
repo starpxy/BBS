@@ -2,13 +2,15 @@ package com.bbs.entities;
 
 import java.util.Date;
 
+import com.bbs.entities.rules.BorrowedRecordRule;
+
 public class BorrowedRecord {
 	private Integer borrowedId;
 	private User user;
 	private BookItem bookItem;
 	private Date borrowedAt;
 	private Date returnAt;
-	private String status;
+	private int status;
 	private Date updateAt;
 	private String outTradeNo;
 
@@ -60,11 +62,19 @@ public class BorrowedRecord {
 		this.returnAt = returnAt;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
+	public String getStatus(Class<String> class1) {
+		return BorrowedRecordRule.getStatus(status);
+	}
+
 	public void setStatus(String status) {
+		setStatus(BorrowedRecordRule.getStatus(status));
+	}
+
+	public void setStatus(int status) {
 		this.status = status;
 	}
 

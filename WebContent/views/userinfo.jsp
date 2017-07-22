@@ -65,7 +65,7 @@
         </div>
 
     </div>
-
+	 <a href="user-qrCode" class="weui_panel_ft f-black" >我的个人二维码</a>
     <a href="javascript:void(0);" class="weui_panel_ft f-black" id="alter-password">修改密码</a>
     <a href="javascript:void(0);" class="weui_panel_ft f-black" id="alter-face">更改头像</a>
     <input style="display: none" class="upload_face" type="file">
@@ -138,17 +138,6 @@
 
 
             $(".upload_face").trigger('click');
-//
-//            $.modal({
-//                title: "支付方式",
-//                text: "选择你的支付方式",
-//                media:"<h1>adsada</h1>",
-//                buttons: [
-//                    { text: "支付宝", onClick: function(){ $.alert("你选择了支付宝"); } },
-//                    { text: "微信支付", onClick: function(){ $.alert("你选择了微信支付"); } },
-//                    { text: "取消", className: "default"},
-//                ]
-//            });
 
         });
 

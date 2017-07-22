@@ -11,10 +11,7 @@
         <many-to-one name="book" class="com.bbs.entities.Book">
             <column name="BOOK_ID" />
         </many-to-one>
-        <property name="qrCode" type="java.lang.String">
-            <column name="QR_CODE" />
-        </property>
-        <property name="status" type="java.lang.String">
+        <property name="status" type="java.lang.Integer">
             <column name="STATUS" />
         </property>
     </class>

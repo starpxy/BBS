@@ -78,7 +78,7 @@ public class UserDao extends BaseDao {
 
 	public List<BorrowedRecord> payState(User user) {
 		String hql = "FROM BorrowedRecord b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.bookItem c LEFT OUTER JOIN FETCH c.book WHERE b.user.userId="
-				+ user.getUserId() + " AND b.status='confirmed'";
+				+ user.getUserId() + " AND b.status=1";
 		List<BorrowedRecord> list = (List<BorrowedRecord>) getSession().createQuery(hql).list();
 		if (list.isEmpty()) {
 			return null;
@@ -136,7 +136,7 @@ public class UserDao extends BaseDao {
 			List<BorrowedRecord> borrowedRecords = getSession().createQuery(hql).list();
 			if (!borrowedRecords.isEmpty()) {
 				BorrowedRecord borrowedRecord = borrowedRecords.get(0);
-				borrowedRecord.setStatus("borrowed");
+				borrowedRecord.setStatus(2);
 				borrowedRecord.setOutTradeNo(outTradeNumber);
 				borrowedRecord.setUpdateAt(new Date());
 				getSession().update(borrowedRecord);
@@ -167,7 +167,7 @@ public class UserDao extends BaseDao {
 			List<BorrowedRecord> borrowedRecords = getSession().createQuery(hql).list();
 			if (!borrowedRecords.isEmpty()) {
 				BorrowedRecord borrowedRecord = borrowedRecords.get(0);
-				borrowedRecord.setStatus("confirmed");
+				borrowedRecord.setStatus(1);
 				borrowedRecord.setUpdateAt(new Date());
 				getSession().update(borrowedRecord);
 			}
@@ -176,7 +176,7 @@ public class UserDao extends BaseDao {
 
 	public List<BorrowedRecord> adminReturn(String userId) {
 		String hql = "FROM BorrowedRecord b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.bookItem c LEFT OUTER JOIN FETCH c.book WHERE b.user.userId="
-				+ userId + " AND b.status='borrowed'";
+				+ userId + " AND b.status=2";
 		return getSession().createQuery(hql).list();
 	}
 
@@ -187,7 +187,7 @@ public class UserDao extends BaseDao {
 			List<BorrowedRecord> borrowedRecords = getSession().createQuery(hql).list();
 			if (!borrowedRecords.isEmpty()) {
 				BorrowedRecord borrowedRecord = borrowedRecords.get(0);
-				borrowedRecord.setStatus("returned");
+				borrowedRecord.setStatus(3);
 				borrowedRecord.setUpdateAt(new Date());
 				getSession().update(borrowedRecord);
 			}

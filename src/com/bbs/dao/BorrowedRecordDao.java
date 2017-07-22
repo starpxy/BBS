@@ -14,19 +14,19 @@ import com.bbs.entities.User;
 public class BorrowedRecordDao extends BaseDao {
 	public List<BorrowedRecord> checkBorrowedRecord(User user) {
 		List<BorrowedRecord> records = null;
-		String hql = "FROM BorrowedRecord WHERE user.userId=" + user.getUserId() + " AND status<>'unconfirmed'";
+		String hql = "FROM BorrowedRecord WHERE user.userId=" + user.getUserId() + " AND status<>0";
 		records = getSession().createQuery(hql).list();
 		return records;
 	}
 
 	public int createRecord(BorrowedRecord borrowedRecord) {
 		String hql = "FROM BookItem WHERE itemId=" + borrowedRecord.getBookItem().getItemId()
-				+ " AND status='available'";
+				+ " AND status=0";
 		List<BookItem> bookItems = getSession().createQuery(hql).list();
 		hql = "FROM BorrowedRecord WHERE user.userId=" + borrowedRecord.getUser().getUserId()
-				+ " AND status='unconfirmed'";
+				+ " AND status=0";
 		List<BorrowedRecord> borrowedRecords = getSession().createQuery(hql).list();
-		hql = "FROM Reservation WHERE user.userId=" + borrowedRecord.getUser().getUserId() + " AND status='reserved'";
+		hql = "FROM Reservation WHERE user.userId=" + borrowedRecord.getUser().getUserId() + " AND status=0";
 		List<Reservation> reservations = getSession().createQuery(hql).list();
 		if (bookItems.isEmpty()) {
 			return 0;
@@ -42,10 +42,10 @@ public class BorrowedRecordDao extends BaseDao {
 			hql = "FROM User WHERE userId=" + borrowedRecord.getUser().getUserId();
 			User user = (User) getSession().createQuery(hql).list().get(0);
 			borrowedRecord.setUser(user);
-			bookItem.setStatus("ready");
+			bookItem.setStatus("已添加借书单");
 			if (!reservations.isEmpty()) {
 				Reservation reservation = reservations.get(0);
-				reservation.setStatus("borrowed");
+				reservation.setStatus(2);
 				getSession().update(reservation);
 			}
 			getSession().update(bookItem);
@@ -56,7 +56,7 @@ public class BorrowedRecordDao extends BaseDao {
 
 	public boolean returnRemaining(String userId, String borrowedId) {
 		String hql = "FROM BorrowedRecord b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.bookItem c LEFT OUTER JOIN FETCH c.book WHERE b.borrowedId="
-				+ borrowedId + " AND b.user.userId=" + userId + " AND b.status='borrowed'";
+				+ borrowedId + " AND b.user.userId=" + userId + " AND b.status=2";
 		List<BorrowedRecord> borrowedRecords = getSession().createQuery(hql).list();
 		if (borrowedRecords.isEmpty()) {
 			return false;
@@ -77,7 +77,7 @@ public class BorrowedRecordDao extends BaseDao {
 
 	public List<BorrowedRecord> borrowlist(User user) {
 		String hql = "FROM BorrowedRecord b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.bookItem c LEFT OUTER JOIN FETCH c.book WHERE b.user.userId="
-				+ user.getUserId() + " AND b.status='unconfirmed'";
+				+ user.getUserId() + " AND b.status=0";
 		List<BorrowedRecord> borrowedRecords = getSession().createQuery(hql).list();
 		return borrowedRecords;
 	}
@@ -87,9 +87,9 @@ public class BorrowedRecordDao extends BaseDao {
 		if (!borrowedRecords.isEmpty()) {
 			BorrowedRecord borrowedRecord = borrowedRecords.get(0);
 			if (borrowedRecord.getUser().getUserId()==user.getUserId()) {
-				if (borrowedRecord.getStatus().equals("unconfirmed")) {
+				if (borrowedRecord.getStatus()==0) {
 					BookItem bookItem = borrowedRecord.getBookItem();
-					bookItem.setStatus("available");
+					bookItem.setStatus("可借阅");
 					getSession().update(bookItem);
 					getSession().delete(borrowedRecord);
 					return 1;

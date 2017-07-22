@@ -49,7 +49,7 @@ public class BorrowedRecordAction extends BaseAction implements ModelDriven<Borr
 	public String createRecord() {
 		borrowedRecord.setUser((User) session.get("user"));
 		borrowedRecord.setUpdateAt(new Date());
-		borrowedRecord.setStatus("unconfirmed");
+		borrowedRecord.setStatus(0);
 		BookItem bookItem = new BookItem();
 		bookItem.setItemId(Integer.valueOf(httpServletRequest.getParameter("itemId")));
 		borrowedRecord.setBookItem(bookItem);

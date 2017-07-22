@@ -1,10 +1,11 @@
 package com.bbs.entities;
 
+import com.bbs.entities.rules.BookItemRule;
+
 public class BookItem {
 	private Integer itemId;
 	private Book book;
-	private String qrCode;
-	private String status;
+	private int status;
 
 	public Integer getItemId() {
 		return itemId;
@@ -22,19 +23,19 @@ public class BookItem {
 		this.book = book;
 	}
 
-	public String getQrCode() {
-		return qrCode;
-	}
-
-	public void setQrCode(String qrCode) {
-		this.qrCode = qrCode;
-	}
-
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public String getStatus(Class<String> class1) {
+		return BookItemRule.getStatus(status);
+	}
+
+	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public void setStatus(String status) {
+		setStatus(BookItemRule.getStatus(status));
 	}
 }

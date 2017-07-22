@@ -46,7 +46,7 @@ public class CommentAction extends BaseAction implements ModelDriven<Comment>, S
 		comment.setStarClass(Integer.valueOf(starClass));
 		comment.setBook((Book) session.get("book"));
 		comment.setUser((User) session.get("user"));
-		comment.setState("unselected");
+		comment.setStatus(0);
 		status = new HashMap<String, Object>();
 		if (commentService.makeComment(comment)) {
 			status.put("state", 1);
