@@ -20,11 +20,14 @@ public class ReservationDao extends BaseDao {
 			return 3;
 		} else {
 			BookItem bookItem = bookItems.get(0);
-			bookItem.setStatus("已被预定");
+			bookItem.setStatus(1);
+			getSession().update(bookItem);
 			reservation.setBookItem(bookItem);
+			reservation.setCreateAt(new Date());
+			reservation.setFetchDate(new Date());
 			reservation.setStatus(0);
 			reservation.setUpdateAt(new Date());
-			getSession().update(bookItem);
+			System.out.println(reservation.getBookItem().getStatus()+" "+reservation.getBookItem().getItemId()+" "+reservation.getUser().getUserId());
 			getSession().save(reservation);
 			return 1;
 		}
@@ -53,7 +56,7 @@ public class ReservationDao extends BaseDao {
 			if (reservation.getUser().getUserId() == user.getUserId()) {
 				if (reservation.getStatus() == 0) {
 					BookItem bookItem = reservation.getBookItem();
-					bookItem.setStatus("可借阅");
+					bookItem.setStatus(0);
 					getSession().update(bookItem);
 					getSession().delete(reservation);
 					return 1;

@@ -7,8 +7,17 @@ public class Reservation {
 	private User user;
 	private BookItem bookItem;
 	private Date createAt;
+	private Date fetchDate;
 	private Date updateAt;
 	private int status;
+
+	public void setFetchDate(Date fetchDate) {
+		this.fetchDate = fetchDate;
+	}
+
+	public Date getFetchDate() {
+		return fetchDate;
+	}
 
 	public void setStatus(int status) {
 		this.status = status;

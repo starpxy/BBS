@@ -42,7 +42,7 @@ public class BorrowedRecordDao extends BaseDao {
 			hql = "FROM User WHERE userId=" + borrowedRecord.getUser().getUserId();
 			User user = (User) getSession().createQuery(hql).list().get(0);
 			borrowedRecord.setUser(user);
-			bookItem.setStatus("已添加借书单");
+			bookItem.setStatus(2);
 			if (!reservations.isEmpty()) {
 				Reservation reservation = reservations.get(0);
 				reservation.setStatus(2);
@@ -89,7 +89,7 @@ public class BorrowedRecordDao extends BaseDao {
 			if (borrowedRecord.getUser().getUserId()==user.getUserId()) {
 				if (borrowedRecord.getStatus()==0) {
 					BookItem bookItem = borrowedRecord.getBookItem();
-					bookItem.setStatus("可借阅");
+					bookItem.setStatus(0);
 					getSession().update(bookItem);
 					getSession().delete(borrowedRecord);
 					return 1;

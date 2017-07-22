@@ -1,6 +1,5 @@
 package com.bbs.entities;
 
-import com.bbs.entities.rules.BookItemRule;
 
 public class BookItem {
 	private Integer itemId;
@@ -27,15 +26,8 @@ public class BookItem {
 		return status;
 	}
 
-	public String getStatus(Class<String> class1) {
-		return BookItemRule.getStatus(status);
-	}
-
 	public void setStatus(int status) {
 		this.status = status;
 	}
 
-	public void setStatus(String status) {
-		setStatus(BookItemRule.getStatus(status));
-	}
 }

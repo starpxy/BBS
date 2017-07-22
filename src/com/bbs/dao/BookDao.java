@@ -32,7 +32,7 @@ public class BookDao extends BaseDao {
 			book.setBookVolume(book.getBookVolume() + 1);
 			BookItem bookItem = new BookItem();
 			bookItem.setBook(book);
-			bookItem.setStatus("可借阅");
+			bookItem.setStatus(0);
 			getSession().save(bookItem);
 			return 1;
 		}
@@ -52,7 +52,7 @@ public class BookDao extends BaseDao {
 		if (newBook!=null) {
 			BookItem bookItem = new BookItem();
 			bookItem.setBook(newBook);
-			bookItem.setStatus("可借阅");
+			bookItem.setStatus(0);
 			getSession().save(bookItem);
 			return 1;
 		}
