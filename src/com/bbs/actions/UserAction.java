@@ -1,5 +1,6 @@
 package com.bbs.actions;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,8 +15,11 @@ import com.bbs.api.TopScanManager;
 import com.bbs.api.UnifiedOrder;
 import com.bbs.encrypt.IncorrectCipherTextLengthException;
 import com.bbs.encrypt.SHC32;
+import com.bbs.entities.AccessLog;
 import com.bbs.entities.BorrowedRecord;
 import com.bbs.entities.User;
+import com.bbs.logs.IPUtil;
+import com.bbs.logs.LogUtil;
 import com.bbs.services.UserService;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -236,16 +240,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		status = new HashMap<>();
 		user = (User) session.get("user");
 		List<BorrowedRecord> payState = userService.payState(user);
-		String ip = httpServletRequest.getHeader("x-forwarded-for");
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = httpServletRequest.getHeader("Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = httpServletRequest.getHeader("WL-Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = httpServletRequest.getRemoteAddr();
-		}
+		String ip = IPUtil.getIp(httpServletRequest);
 		if (payState != null&&!payState.isEmpty()) {
 			UnifiedOrder unifiedOrder = new UnifiedOrder();
 			JSONObject jsonObject = JSONObject
@@ -290,6 +285,15 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 			return "granted";
 		} else if (userService.login(user)) {
 			session.put("user", userService.getInfo(user));
+			AccessLog accessLog = new AccessLog();
+			accessLog.setUser((User)session.get("user"));
+			accessLog.setLogAt(new Date());
+			accessLog.setIp(IPUtil.getIp(httpServletRequest));
+			Map<String, Object> map = LogUtil.getInfo(accessLog.getIp());
+			accessLog.setArea((String)map.get("area"));
+			accessLog.setLocation((String)map.get("location"));
+			accessLog.setMethod(0);
+			userService.writeLog(accessLog);
 			return "granted";
 		} else {
 			return "refused";

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.bbs.api.AuthorizationManager;
 import com.bbs.api.NoneCodeException;
+import com.bbs.entities.AccessLog;
 import com.bbs.entities.User;
 
 public class AuthorizationDao extends BaseDao {
@@ -36,5 +37,8 @@ public class AuthorizationDao extends BaseDao {
 		} else {
 			return null;
 		}
+	}
+	public void writeLog(AccessLog accessLog){
+		getSession().save(accessLog);
 	}
 }

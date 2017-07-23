@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-23 16:29:30 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.bbs.entities.AccessLog" table="ACCESS_LOG">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <many-to-one name="user" class="com.bbs.entities.User" fetch="join">
+            <column name="USER" />
+        </many-to-one>
+        <property name="ip" type="java.lang.String">
+            <column name="IP" />
+        </property>
+        <property name="area" type="java.lang.String">
+            <column name="AREA" />
+        </property>
+        <property name="location" type="java.lang.String">
+            <column name="LOCATION" />
+        </property>
+        <property name="method" type="java.lang.Integer">
+            <column name="METHOD" />
+        </property>
+        <property name="logAt" type="java.util.Date">
+            <column name="LOG_AT" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -3,6 +3,7 @@ package com.bbs.services;
 import java.util.List;
 
 import com.bbs.dao.UserDao;
+import com.bbs.entities.AccessLog;
 import com.bbs.entities.BookItem;
 import com.bbs.entities.BorrowedRecord;
 import com.bbs.entities.Comment;
@@ -90,5 +91,9 @@ public class UserService {
 
 	public void adminConfirmReturn(String[] ids) {
 		userDao.adminConfirmReturn(ids);
+	}
+
+	public void writeLog(AccessLog accessLog) {
+		userDao.writeLog(accessLog);
 	}
 }

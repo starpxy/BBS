@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import com.bbs.entities.AccessLog;
 import com.bbs.entities.Book;
 import com.bbs.entities.BookItem;
 import com.bbs.entities.BorrowedRecord;
@@ -106,16 +107,15 @@ public class UserDao extends BaseDao {
 		BookItem buffer = null;
 		List<BookItem> resultList = new ArrayList<BookItem>();
 		int count = 0;
-		while(iterator.hasNext()){
+		while (iterator.hasNext()) {
 			BookItem temp = iterator.next();
-			if (buffer==null) {
+			if (buffer == null) {
 				buffer = temp;
 			}
-			if(buffer.getBook().getBookId()==temp.getBook().getBookId()&&count/15==(page-1)){
+			if (buffer.getBook().getBookId() == temp.getBook().getBookId() && count / 15 == (page - 1)) {
 				resultList.add(temp);
-			}
-			else if(buffer.getBook().getBookId()!=temp.getBook().getBookId()){
-				if (count/15==(page-1)) {
+			} else if (buffer.getBook().getBookId() != temp.getBook().getBookId()) {
+				if (count / 15 == (page - 1)) {
 					resultList.add(temp);
 				}
 				buffer = temp;
@@ -214,5 +214,9 @@ public class UserDao extends BaseDao {
 				getSession().update(borrowedRecord);
 			}
 		}
+	}
+
+	public void writeLog(AccessLog accessLog) {
+		getSession().save(accessLog);
 	}
 }

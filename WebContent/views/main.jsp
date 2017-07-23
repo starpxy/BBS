@@ -272,7 +272,7 @@
 
                     <a href="reservation-reservelist" class="weui_tabbar_item weui_bar_item_on">
                         <div class="weui_tabbar_icon">
-                            <img src="asserts/icons/icon_nav_icons.png" alt="">
+                            <img src="asserts/icons/icon_nav_msg.png" alt="">
                         </div>
                         <p class="weui_tabbar_label">预约单</p>
                     </a>
@@ -292,7 +292,7 @@
                 <div class="weui-flex-item">
                     <a href="borrowedRecord-borrowHistory" class="weui_tabbar_item weui_bar_item_on">
                         <div class="weui_tabbar_icon">
-                            <img src="asserts/icons/icon_nav_msg.png" alt="">
+                            <img src="asserts/icons/icon_nav_icons.png" alt="">
                         </div>
                         <p class="weui_tabbar_label">借阅历史</p>
                     </a>
