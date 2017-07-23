@@ -111,10 +111,13 @@ public class UserDao extends BaseDao {
 			if (buffer==null) {
 				buffer = temp;
 			}
-			else if(buffer.getBook().getBookId()==temp.getBook().getBookId()&&count/19==page){
+			if(buffer.getBook().getBookId()==temp.getBook().getBookId()&&count/15==(page-1)){
 				resultList.add(temp);
 			}
 			else if(buffer.getBook().getBookId()!=temp.getBook().getBookId()){
+				if (count/15==(page-1)) {
+					resultList.add(temp);
+				}
 				buffer = temp;
 				count++;
 			}

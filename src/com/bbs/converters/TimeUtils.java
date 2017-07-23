@@ -20,5 +20,10 @@ public class TimeUtils {
 		}
 		return days;
 	}
+	
+	public static String getFormatedTime(Date date){
+		DateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日");
+		return dateFormat.format(date);
+	}
 
 }

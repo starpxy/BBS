@@ -1,3 +1,4 @@
+<%@page import="com.bbs.converters.TimeUtils"%>
 <%@page import="com.bbs.entities.rules.BookItemRule"%>
 <%@page import="com.bbs.entities.BookItem"%>
 <%@page import="java.util.List"%>
@@ -208,7 +209,7 @@
 
 
     <!--主内容-->
-    <div class="content-wrapper" style="min-height: 916px;">
+    <div class="content-wrapper" style="min-height: 100px;">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
@@ -339,9 +340,9 @@
                     <div class="box box-primary">
                         <div class="box-header">
                         </div>
-                        <div class="box-body no-padding">
+                        <div class="box-body">
                             <div class="table-responsive"
-                                 style="overflow-x: auto; overflow-y: auto; height: 800px; width: 100%;">
+                                 style="overflow-x: auto; overflow-y: auto; height: 750px; width: 100%;">
 
                                 <table id='booktable' class="table table-striped">
                                     <thead>
@@ -354,7 +355,6 @@
                                         <th>已借</th>
                                         <th>价格</th>
                                         <th>种类</th>
-                                        <th>录入时间</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -373,11 +373,11 @@
                                         <td class="book-id"><%=bookItem.getBook().getBookId() %></td>
                                         <td class="book-isbn"><%=bookItem.getBook().getIsbn() %></td>
                                         <td class="book-title">
-                                            <div style="width: 100px; overflow: hidden; text-overflow:ellipsis; white-space: nowrap;">
+                                            <div style="width: 140px; overflow: hidden; text-overflow:ellipsis; white-space: nowrap;">
                                                 <%=bookItem.getBook().getBookTitle() %>
                                             </div>
                                         </td>
-                                        <td class="book-author"><div style="width: 100px; overflow: hidden; text-overflow:ellipsis; white-space: nowrap;"><%=bookItem.getBook().getAuthor() %></div></td>
+                                        <td class="book-author"><div style="width: 110px; overflow: hidden; text-overflow:ellipsis; white-space: nowrap;"><%=bookItem.getBook().getAuthor() %></div></td>
                                         <td class="book-volum"><a class="check-volum"><i
                                                 class="label label-info"><%=bookItem.getBook().getBookVolume()%></i><span>
 
@@ -394,7 +394,7 @@
                 <tr>
 
                   <th>ID</th>
-                  <th>QR</th>
+                  <th>二维码</th>
                   <th>状态</th>
                   <th>操作</th>
 
@@ -437,14 +437,13 @@
                                         <td class="book-borrowed"><span class="label label-success"><%=count %></span></td>
                                         <td class="book-price">0.01元/月</td>
                                         <td class="book-type"><%=bookItem.getBook().getType() %></td>
-                                        <td class="updated-at">
-                                            <%=bookItem.getBook().getUpdateAt() %>
-                                        </td>
                                         <td class="options">
-                                            <!--<a data-toggle="tooltip" data-placement="left" title="destroy this file"-->
-                                            <!--class="deletefile"><i class="fa fa-trash-o"></i><span class='file-path'-->
-                                            <!--style="display: none">{{$result->filepath}}</span></a>-->
-                                            <!--&nbsp;&nbsp;&nbsp;&nbsp;-->
+                                            <a data-toggle="tooltip" data-placement="left"
+                                               title="查看书籍详情" class="view-book"><span
+                                                    class="glyphicon glyphicon-eye-open"></span></a>
+                                            <a data-toggle="tooltip" data-placement="left"
+                                               title="编辑图书详情" class="edit-book"><span
+                                                    class="glyphicon glyphicon-pencil"></span></a>
                                             <a data-toggle="tooltip" data-placement="left"
                                                title="删除这本书及其库存" class="delete-book"><span
                                                     class="glyphicon glyphicon-remove"></span></a>
@@ -949,82 +948,6 @@
             $("#import-block").toggle(1000);
         });
         
-		$('#more').click(function(){
-			var rows = '';
-			<% List<BookItem> bookItems = (List<BookItem>)request.getAttribute("books");
-			   BookItem bookItem = null;
-			   ct = 0;
-			   while(i<bookItems.size()&&ct<17){
-				   bookItem = bookItems.get(i);
-				   ct++;
-			%>
-			rows+= ' <tr>'+
-            '<td class="book-id"><%=bookItem.getBook().getBookId() %></td>'+
-            '<td class="book-isbn"><%=bookItem.getBook().getIsbn() %></td>'+
-            '<td class="book-title">'+
-            '<div style="width: 100px; overflow: hidden; text-overflow:ellipsis; white-space: nowrap;">'+
-    		'<%=bookItem.getBook().getBookTitle() %>'+
-            '</div>'+
-            '</td>'+
-            '<td class="book-author"><div style="width: 100px; overflow: hidden; text-overflow:ellipsis; white-space: nowrap;"><%=bookItem.getBook().getAuthor() %></div></td>'+
-            '<td class="book-volum"><a class="check-volum"><i class="label label-info"><%=bookItem.getBook().getBookVolume()%></i><span>'+
-            '<div class="box box-success">'+
-    		'<div class="box-body no-padding" style="border: 1px solid green;width: 300px">'+
-            '<table class="table table-striped">'+
-            '<thead>'+
-            '<tr>'+
-            '<th>ID</th>'+
-            '<th>QR</th>'+
-            '<th>状态</th>'+
-            '<th>操作</th>'+
-            '</tr>'+
-            '</thead>'+
-            '<tbody>';
-            <% int count=0;
-            while(j+1<bookItems.size()&&bookItems.get(j+1).getBook().getBookId()==bookItem.getBook().getBookId()) {
-                j++;
-                bookItem = bookItems.get(j);
-            %>
-            rows+='<tr>'+
-            '<td class="item-id"><%=bookItem.getItemId() %></td>'+
-            '<td class="item-qrcode"><a><img alt="点击查看二维码详情" src=\'http://qr.liantu.com/api.php?text={"bookId":<%=bookItem.getBook().getBookId() %>,"itemId":<%=bookItem.getItemId() %>}\' width="50px" height="50px"></a></td>'+
-            '<input type="hidden" value=\'http://qr.liantu.com/api.php?text={"bookId":<%=bookItem.getBook().getBookId() %>,"itemId":<%=bookItem.getItemId() %>}\'/>'+
-            '<td class="item-status"><%=bookItem.getStatus() %></td>'+
-            '<% if(bookItem.getStatus()==2) count++;%>'+
-			'<td class="item-operations">'+
-			            '<a data-toggle="tooltip" data-placement="left"'+
-			    'title="打印二维码" class="print-qrcode"><i'+
-			'class="fa fa-print"></i>'+
-			            '</a>'+
-			            '<a data-toggle="tooltip" data-placement="right"'+
-			    'title="删除这个条目" class="delete-item"><i'+
-			'class="fa fa-trash"></i></a> </td> </tr>';
-			 <%} %>
-			rows+= '</tbody>'+
-			'</table>'+
-			'</div>'+
-			'</div>';
-			<%	bookItem = bookItems.get(i); %>
-			rows+='</span></a></td>'+
-            '<td class="book-borrowed"><span class="label label-success"><%=count %></span></td>'+
-            '<td class="book-price">0.01元/月</td>'+
-		    '<td class="book-type"><%=bookItem.getBook().getType() %></td>'+
-		            '<td class="updated-at">'+
-		    '<%=bookItem.getBook().getUpdateAt() %>'+
-		            '</td>'+
-		            '<td class="options">'+
-		           '<!--<a data-toggle="tooltip" data-placement="left" title="destroy this file"-->'+
-		    '<!--class="deletefile"><i class="fa fa-trash-o"></i><span class=\'file-path\'-->'+
-		    '<!--style="display: none">{{$result->filepath}}</span></a>-->'+
-		    '<!--&nbsp;&nbsp;&nbsp;&nbsp;-->'+
-		    '<a data-toggle="tooltip" data-placement="left" title="删除这本书及其库存" class="delete-book"><span class="glyphicon glyphicon-remove"></span></a>'+
-		    '</td>'+
-		    '</tr>';
-		    <% i=j;
-               i++;%>
-			<% } %>
-		$('#bookbody').append(rows);
-		});
         $("#cancel-import").click(function () {
             $("#import-block").hide(1000);
         });
