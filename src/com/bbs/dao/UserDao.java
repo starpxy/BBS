@@ -1,5 +1,6 @@
 package com.bbs.dao;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
@@ -36,6 +37,7 @@ public class UserDao extends BaseDao {
 
 	public void register(User user) {
 		if (user.getPhoneNumber() != null && user.getWeChat() != null) {
+			user.setUpdateAt(new Date());
 			getSession().save(user);
 		}
 	}
@@ -97,10 +99,27 @@ public class UserDao extends BaseDao {
 		}
 	}
 
-	public List<BookItem> adminInitial() {
+	public List<BookItem> adminInitial(int page) {
 		String hql = "FROM BookItem b LEFT OUTER JOIN FETCH b.book";
 		List<BookItem> bookItems = getSession().createQuery(hql).list();
-		return bookItems;
+		Iterator<BookItem> iterator = bookItems.iterator();
+		BookItem buffer = null;
+		List<BookItem> resultList = new ArrayList<BookItem>();
+		int count = 0;
+		while(iterator.hasNext()){
+			BookItem temp = iterator.next();
+			if (buffer==null) {
+				buffer = temp;
+			}
+			else if(buffer.getBook().getBookId()==temp.getBook().getBookId()&&count/19==page){
+				resultList.add(temp);
+			}
+			else if(buffer.getBook().getBookId()!=temp.getBook().getBookId()){
+				buffer = temp;
+				count++;
+			}
+		}
+		return resultList;
 	}
 
 	public List<User> adminUsers() {

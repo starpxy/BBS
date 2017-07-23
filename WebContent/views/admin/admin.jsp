@@ -1,3 +1,4 @@
+<%@page import="com.bbs.entities.rules.BookItemRule"%>
 <%@page import="com.bbs.entities.BookItem"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Iterator"%>
@@ -365,9 +366,8 @@
                                     	if(request.getAttribute("books")!=null){ 
                                     		List<BookItem> bookItems = (List<BookItem>)request.getAttribute("books");
                                     		BookItem bookItem = null;
-                                    		while(i<bookItems.size()&&ct<17){
+                                    		while(i<bookItems.size()){
                                     			bookItem = bookItems.get(i);
-                                    			ct++;
                                     %>
                                     <tr>
                                         <td class="book-id"><%=bookItem.getBook().getBookId() %></td>
@@ -412,7 +412,7 @@
                   <td class="item-id"><%=bookItem.getItemId() %></td>
                   <td class="item-qrcode"><a><img alt="点击查看二维码详情" src='http://qr.liantu.com/api.php?text={"bookId":<%=bookItem.getBook().getBookId() %>,"itemId":<%=bookItem.getItemId() %>}' width="50px" height="50px"></a></td>
                   <input type="hidden" value='http://qr.liantu.com/api.php?text={"bookId":<%=bookItem.getBook().getBookId() %>,"itemId":<%=bookItem.getItemId() %>}'/>
-                  <td class="item-status"><%=bookItem.getStatus() %></td>
+                  <td class="item-status"><%=BookItemRule.getStatus(bookItem.getStatus()) %></td>
                   <% if(bookItem.getStatus()==2) count++;%>
                     <td class="item-operations">
                         <a data-toggle="tooltip" data-placement="left"
@@ -458,7 +458,6 @@
 
                                     </tbody>
                                 </table><br>
-                                <div id="more" style="text-align: center;"><a href="javascript:;">点击加载更多.....</a></div>
                             </div>
                         </div>
                     </div>

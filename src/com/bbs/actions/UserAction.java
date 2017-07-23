@@ -81,7 +81,12 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 	public String adminLogin() {
 		User user = (User) session.get("user");
 		if (user != null && user.getRole().equals("admin")) {
-			request.put("books", userService.adminInitial());
+			String p = httpServletRequest.getParameter("page");
+			int page = 1;
+			if (p!=null) {
+				page = Integer.valueOf(p);
+			}
+			request.put("books", userService.adminInitial(page));
 			return "adminLoginSuccess";
 		} else if (user != null) {
 			return "adminLoginFail";
@@ -90,7 +95,12 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		boolean check = userService.adminLogin(this.user);
 		if (check) {
 			session.put("user", userService.getInfo(this.user));
-			request.put("books", userService.adminInitial());
+			String p = httpServletRequest.getParameter("page");
+			int page = 1;
+			if (p!=null) {
+				page = Integer.valueOf(p);
+			}
+			request.put("books", userService.adminInitial(page));
 			return "adminLoginSuccess";
 		} else {
 			return "adminLoginFail";

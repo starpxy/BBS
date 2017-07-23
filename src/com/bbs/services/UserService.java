@@ -48,8 +48,8 @@ public class UserService {
 		userDao.setRecomFreq(user);
 	}
 
-	public List<BookItem> adminInitial() {
-		return userDao.adminInitial();
+	public List<BookItem> adminInitial(int page) {
+		return userDao.adminInitial(page);
 	}
 
 	public List<User> adminUsers() {
