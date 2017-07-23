@@ -137,60 +137,60 @@
                 经典名著
             </p>
         </a>
-        <a href="book-bookList?type=生活保健" class="weui_grid js_grid">
+        <a href="book-bookList?type= 侦探推理" class="weui_grid js_grid">
             <div class="weui_grid_icon">
                 <img src="asserts/icons/icon_nav_button.png" alt="">
             </div>
             <p class="weui_grid_label">
-                生活保健
+                侦探推理
             </p>
         </a>
-        <a href="book-bookList?type=经管理财" class="weui_grid js_grid">
+        <a href="book-bookList?type=绘本漫画" class="weui_grid js_grid">
             <div class="weui_grid_icon">
                 <img src="asserts/icons/icon_nav_cell.png" alt="">
             </div>
             <p class="weui_grid_label">
-                经管理财
+                绘本漫画
             </p>
         </a>
-        <a href="book-bookList?type=成人教育" class="weui_grid js_grid">
+        <a href="book-bookList?type=流行青春" class="weui_grid js_grid">
             <div class="weui_grid_icon">
                 <img src="asserts/icons/icon_nav_tab.png" alt="">
             </div>
             <p class="weui_grid_label">
-                成人教育
+                流行青春
             </p>
         </a>
-        <a href="book-bookList?type=小说传记" class="weui_grid js_grid">
+        <a href="book-bookList?type=经济理财" class="weui_grid js_grid">
             <div class="weui_grid_icon">
                 <img src="asserts/icons/icon_nav_article.png" alt="">
             </div>
             <p class="weui_grid_label">
-                小说传记
+                经济理财
             </p>
         </a>
-        <a href="book-bookList?type=历史军事" class="weui_grid js_grid">
+        <a href="book-bookList?type=商业管理" class="weui_grid js_grid">
             <div class="weui_grid_icon">
                 <img src="asserts/icons/icon_nav_button.png" alt="">
             </div>
             <p class="weui_grid_label">
-                历史军事
+                商业管理
             </p>
         </a>
-        <a href="book-bookList?type=文学技术" class="weui_grid js_grid">
+        <a href="book-bookList?type=人物传记" class="weui_grid js_grid">
             <div class="weui_grid_icon">
                 <img src="asserts/icons/icon_nav_cell.png" alt="">
             </div>
             <p class="weui_grid_label">
-                文学技术
+                人物传记
             </p>
         </a>
-        <a href="book-bookList?type=人文社科" class="weui_grid js_grid">
+        <a href="book-bookList?type=心理学" class="weui_grid js_grid">
             <div class="weui_grid_icon">
                 <img src="asserts/icons/icon_nav_tab.png" alt="">
             </div>
             <p class="weui_grid_label">
-                人文社科
+                心理学
             </p>
         </a>
         <a href="book-bookList?type=计算机科学" class="weui_grid js_grid">
@@ -201,44 +201,44 @@
                 计算机科学
             </p>
         </a>
-        <a href="book-bookList?type=人际关系" class="weui_grid js_grid">
+        <a href="book-bookList?type=历史哲学" class="weui_grid js_grid">
             <div class="weui_grid_icon">
                 <img src="asserts/icons/icon_nav_button.png" alt="">
             </div>
             <p class="weui_grid_label">
-                人际关系
+                历史哲学
             </p>
         </a>
-        <a href="book-bookList?type=语言学习" class="weui_grid js_grid">
+        <a href="book-bookList?type=科学科普" class="weui_grid js_grid">
             <div class="weui_grid_icon">
                 <img src="asserts/icons/icon_nav_cell.png" alt="">
             </div>
             <p class="weui_grid_label">
-                语言学习
+                科学科普
             </p>
         </a>
-        <a href="book-bookList?type=人物传记" class="weui_grid js_grid">
+        <a href="book-bookList?type=励志成长" class="weui_grid js_grid">
             <div class="weui_grid_icon">
                 <img src="asserts/icons/icon_nav_tab.png" alt="">
             </div>
             <p class="weui_grid_label">
-                人物传记
+                励志成长
             </p>
         </a>
-        <a href="book-bookList?type=西方哲学" class="weui_grid js_grid">
+        <a href="book-bookList?type=交互设计" class="weui_grid js_grid">
             <div class="weui_grid_icon">
                 <img src="asserts/icons/icon_nav_article.png" alt="">
             </div>
             <p class="weui_grid_label">
-                西方哲学
+                交互设计
             </p>
         </a>
-        <a href="book-bookList?type=生物医学" class="weui_grid js_grid">
+        <a href="book-bookList?type= 生活旅行" class="weui_grid js_grid">
             <div class="weui_grid_icon">
                 <img src="asserts/icons/icon_nav_button.png" alt="">
             </div>
             <p class="weui_grid_label">
-                生物医学
+                生活旅行
             </p>
         </a>
         <a href="book-bookList?type=更多" class="weui_grid js_grid">
@@ -282,7 +282,7 @@
                     <a href="borrowedRecord-borrowlist" class="weui_tabbar_item weui_bar_item_on">
 
                         <div class="weui_tabbar_icon">
-                            <img src="asserts/icons/icon_nav_msg.png" alt="">
+                            <img src="asserts/icons/icon_nav_panel.png" alt="">
                         </div>
 
                         <p class="weui_tabbar_label">借书单</p>
@@ -292,7 +292,7 @@
                 <div class="weui-flex-item">
                     <a href="borrowedRecord-borrowHistory" class="weui_tabbar_item weui_bar_item_on">
                         <div class="weui_tabbar_icon">
-                            <img src="asserts/icons/icon_nav_panel.png" alt="">
+                            <img src="asserts/icons/icon_nav_msg.png" alt="">
                         </div>
                         <p class="weui_tabbar_label">借阅历史</p>
                     </a>

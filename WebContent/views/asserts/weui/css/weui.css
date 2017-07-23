@@ -1475,9 +1475,6 @@ a.weui_media_box:active {
 	height: 100%
 }
 
-.weui_grid_icon+.weui_grid_label {
-	margin-top: 5px
-}
 
 .weui_grid_label {
 	display: block;
