@@ -137,7 +137,7 @@
                 经典名著
             </p>
         </a>
-        <a href="book-bookList?type= 侦探推理" class="weui_grid js_grid">
+        <a href="book-bookList?type=侦探推理" class="weui_grid js_grid">
             <div class="weui_grid_icon">
                 <img src="asserts/icons/icon_nav_button.png" alt="">
             </div>
