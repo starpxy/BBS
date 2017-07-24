@@ -87,7 +87,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		if (user != null && user.getRole().equals("admin")) {
 			String p = httpServletRequest.getParameter("page");
 			int page = 1;
-			if (p!=null) {
+			if (p != null) {
 				page = Integer.valueOf(p);
 			}
 			request.put("books", userService.adminInitial(page));
@@ -101,7 +101,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 			session.put("user", userService.getInfo(this.user));
 			String p = httpServletRequest.getParameter("page");
 			int page = 1;
-			if (p!=null) {
+			if (p != null) {
 				page = Integer.valueOf(p);
 			}
 			request.put("books", userService.adminInitial(page));
@@ -155,6 +155,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 			return "adminLoginFail";
 		}
 	}
+
 	public String adminScanUser() {
 		String userInfo = httpServletRequest.getParameter("userInfo");
 		SHC32 shc32 = SHC32.getInstance();
@@ -241,10 +242,9 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		user = (User) session.get("user");
 		List<BorrowedRecord> payState = userService.payState(user);
 		String ip = IPUtil.getIp(httpServletRequest);
-		if (payState != null&&!payState.isEmpty()) {
+		if (payState != null && !payState.isEmpty()) {
 			UnifiedOrder unifiedOrder = new UnifiedOrder();
-			JSONObject jsonObject = JSONObject
-					.fromObject(unifiedOrder.createOrder(user.getWeChat(), ip, 1 * payState.size()));
+			JSONObject jsonObject = JSONObject.fromObject(unifiedOrder.createOrder(user.getWeChat(), ip, 1 * payState.size()));
 			status.put("params", jsonObject.toString());
 			status.put("pay", 1);
 			status.put("ip", ip);
@@ -265,7 +265,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		}
 		userService.paySucceed(outTradeNumber, records);
 		TemplateMessagePushing templateMessagePushing = new TemplateMessagePushing();
-		templateMessagePushing.pushDepositConfirming(((User)session.get("user")).getWeChat(), records.length);
+		templateMessagePushing.pushDepositConfirming(((User) session.get("user")).getWeChat(), records.length);
 		return "paySucceed";
 	}
 
@@ -286,12 +286,12 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		} else if (userService.login(user)) {
 			session.put("user", userService.getInfo(user));
 			AccessLog accessLog = new AccessLog();
-			accessLog.setUser((User)session.get("user"));
+			accessLog.setUser((User) session.get("user"));
 			accessLog.setLogAt(new Date());
 			accessLog.setIp(IPUtil.getIp(httpServletRequest));
 			Map<String, Object> map = LogUtil.getInfo(accessLog.getIp());
-			accessLog.setArea((String)map.get("area"));
-			accessLog.setLocation((String)map.get("location"));
+			accessLog.setArea((String) map.get("area"));
+			accessLog.setLocation((String) map.get("location"));
 			accessLog.setMethod(0);
 			userService.writeLog(accessLog);
 			return "granted";

@@ -318,6 +318,8 @@
 	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"> </script>
 	<script type="text/javascript">
 		$(function() {
+			$.toptips("欢迎回来，xxx，本次登陆时间，上次登录时间之类的",'ok');
+			
 			$(".search-span").hide();
 			var itemslist = '';
 	         var books ;
