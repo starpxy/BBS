@@ -112,10 +112,10 @@ public class UserDao extends BaseDao {
 			if (buffer == null) {
 				buffer = temp;
 			}
-			if (buffer.getBook().getBookId() == temp.getBook().getBookId() && count / 15 == (page - 1)) {
+			if (buffer.getBook().getBookId() == temp.getBook().getBookId() && count / 13 == (page - 1)) {
 				resultList.add(temp);
 			} else if (buffer.getBook().getBookId() != temp.getBook().getBookId()) {
-				if (count / 15 == (page - 1)) {
+				if (count / 13 == (page - 1)) {
 					resultList.add(temp);
 				}
 				buffer = temp;
@@ -178,7 +178,7 @@ public class UserDao extends BaseDao {
 
 	public List<BorrowedRecord> adminBorrow(String userId) {
 		String hql = "FROM BorrowedRecord b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.bookItem c LEFT OUTER JOIN FETCH c.book WHERE b.user.userId="
-				+ userId + " AND b.status='unconfirmed'";
+				+ userId + " AND b.status=0";
 		return getSession().createQuery(hql).list();
 	}
 

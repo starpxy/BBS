@@ -130,6 +130,12 @@ pageEncoding="UTF-8"%>
 
 
 </div>
+<div class="weui_cell">
+    <div class="weui_cell_hd"><label for="" class="weui_label">选择预定时间:</label></div>
+    <div class="weui_cell_bd weui_cell_primary">
+        <input class="weui_input" type="text" value="" id='time'/>
+    </div>
+</div>
 <div class="weui_panel weui_panel_access search-div">
 
     <div class="weui_panel_hd"><span class="icon icon-96 f-green"></span> 猜你喜欢<a href="javascript:;"
@@ -225,6 +231,7 @@ pageEncoding="UTF-8"%>
 <script src="asserts/weui/js/zepto.min.js"></script>
 <script src="asserts/weui/js/app-wechat.js.js"></script>
 <script src="asserts/layui/layui.js"></script>
+<script src="asserts/picker.js"></script>
 <!--TODO-->
 
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"> </script>
@@ -303,6 +310,7 @@ pageEncoding="UTF-8"%>
                 $(".addtowishlist").click(function () {
                     $.toast("clicked add to wish list");
                 });
+                $("#time").datetimePicker({title:"选择日期时间"});
     			var count = 1;
                 $('#change-recom').click(function () {
 

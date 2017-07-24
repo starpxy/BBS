@@ -457,12 +457,19 @@
 
                                     </tbody>
                                 </table><br>
+                                <ul class="pagination pagination-sm pull-right" style="margin-right: 50px">
+                                    <li><a href=" ">«</a ></li>
+                                    <li class="active"><a href="#">1</a ></li>
+                                    <li><a href="#">2</a ></li>
+                                    <li><a href="#">3</a ></li>
+                                    <li><a href="#">»</a ></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
+		<div id="pager"></div>
         </section>
         <!-- /.content -->
     </div>
@@ -641,7 +648,6 @@
 
 
     layui.use('layer', function () {
-
     	$.ajax({
     		type:'POST',
             url:'user-initialAPI',
@@ -1000,8 +1006,7 @@
 
 
         });
-
-
+		
         $("#confirm-import").click(function () {
 
             if (($("input[name='isbn']").val().trim() != "") && ($("input[name='title']").val().trim() != "") && ($("input[name='author']").val().trim() != "")) {
