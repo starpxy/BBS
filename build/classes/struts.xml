@@ -26,8 +26,6 @@
 			<result name="changeSucceed" type="json">
 				<param name="root">status</param>
 			</result>
-			
-			
 			<result name="adminLoginSuccess">admin.jsp</result>
 			<result name="userChart">user-chart.jsp</result>
 			<result name="adminListRecords">borrow-details.jsp</result>
