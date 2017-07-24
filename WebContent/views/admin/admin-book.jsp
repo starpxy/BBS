@@ -266,25 +266,23 @@
 
                                    <select id="book-type" class="form-control" name="type" placeholder="类型">
                                         <option value="经典名著">经典名著</option>
-                                        <option value="生活保健">生活保健</option>
-                                        <option value="经管理财">经管理财</option>
-                                        <option value="成人教育">成人教育</option>
-                                        <option value="小说传记">小说传记</option>
-                                        <option value="历史军事">历史军事</option>
-                                        <option value="文学技术">文学技术</option>
-                                        <option value="人文社科">人文社科</option>
-                                        <option value="计算机科学">计算机科学</option>
-                                        <option value="人际关系">人际关系</option>
-                                        <option value="语言学习">语言学习</option>
+                                        <option value="侦探推理">侦探推理</option>
+                                        <option value="绘本漫画">绘本漫画</option>
+                                        <option value="流行青春">流行青春</option>
+                                        <option value="经济理财">经济理财</option>
+                                        <option value="商业管理">商业管理</option>
                                         <option value="人物传记">人物传记</option>
-                                        <option value="西方哲学">西方哲学</option>
-                                        <option value="生物科学">生物医学</option>
+                                        <option value="心理学">心理学</option>
+                                        <option value="计算机科学">计算机科学</option>
+                                        <option value="历史哲学">历史哲学</option>
+                                        <option value="科学科普">科学科普</option>
+                                        <option value="励志成长">励志成长</option>
+                                        <option value="交互设计">交互设计</option>
+                                        <option value="生活旅行">生活旅行</option>
                                         <option value="更多">更多</option>
                                     </select>
                                 </div>
-
                             </div>
-
 
                             <br>
                             <div class="row">

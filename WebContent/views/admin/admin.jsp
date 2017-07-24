@@ -88,8 +88,6 @@
 				<li><a href="#" data-toggle="control-sidebar"><i
 						class="fa fa-info-circle"></i> <span class="label label-success">15</span></a>
 				</li>
-
-
 			</ul>
 
 		</div>

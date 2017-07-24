@@ -45,10 +45,10 @@
 			<ul class="nav navbar-nav">
 
 				<!-- Messages: style can be found in dropdown.less-->
-				<li class="dropdown messages-menu"><a href="#"> <i
+	<!-- 			<li class="dropdown messages-menu"><a href="#"> <i
 						class="fa fa-qrcode"></i>
 
-				</a></li>
+				</a></li> -->
 
 				<!-- User Account: style can be found in dropdown.less -->
 				<li class="dropdown user user-menu"><a href="#"
