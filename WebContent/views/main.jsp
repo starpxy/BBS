@@ -44,6 +44,13 @@ button {
 	position: absolute;
 }
 
+.bar1 button:hover {
+	background: #5e835d;
+}
+
+.weui-flex-item a:hover {
+	background: #d1d1d1;
+}
 /*搜索框1*/
 .bar1 input {
 	height: 30px;
@@ -93,8 +100,7 @@ button {
 						class="f-green"><span class="icon icon-21"></span> 换一批</a>
 				</div>
 
-				<div class="weui_panel_bd recom-div">
-				</div>
+				<div class="weui_panel_bd recom-div"></div>
 
 				<div class="weui_media_box weui_media_text">
 					<p class="weui_media_desc">
@@ -442,7 +448,7 @@ button {
 			$("#cancel-recom").click(function() {
 				$(".search-span").hide();
 			});
-			
+
 			// 将原来的   $('.searchbar_wrap').searchBar({...}) 中onfoucus 的内容copy到这个focus方法中;TODO
 			//再把原来的 $(".weui_panel_bd").html(itemslist); 更改成 $(".search-div .weui_panel_bd").html(itemslist); 
 

@@ -81,9 +81,9 @@
 		<div class="weui_panel_hd">更多</div>
 
 		<a href="javascript:void(0);" class="weui_panel_ft f-black"
-			id="check-login-history">查看我的历史登录</a> <a href="javascript:void(0);"
+			id="check-login-history">查看我的历史登录</a> <!-- <a href="javascript:void(0);"
 			class="weui_panel_ft f-black" id="alter-face">更改头像</a> <input
-			style="display: none" class="upload_face" type="file">
+			style="display: none" class="upload_face" type="file"> -->
 
 	</div>
 
