@@ -130,7 +130,8 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li class="header">管理导航</li>
-
+       		<li><a href="user-adminLogin"> <i class="fa fa-gear"></i> <span>管理员主页</span>
+			</a></li>
                 <li class="active treeview">
                     <a href="#">
                         <i class="fa fa-book"></i> <span>图书管理</span>
@@ -139,7 +140,7 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="user-adminLogin"><i class="fa fa-circle-o"></i>录入与查看</a></li>
+                        <li><a href="admin-book.jsp"><i class="fa fa-circle-o"></i>录入与查看</a></li>
                         <li class="active"><a href="user-adminListRecords"><i class="fa fa-circle-o"></i>借阅详情</a></li>
                         <li><a href="user-adminListReservations"><i class="fa fa-circle-o"></i>预定详情</a></li>
                     </ul>

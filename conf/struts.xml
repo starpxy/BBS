@@ -5,9 +5,16 @@
 
 <struts>
 
-    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
-    <constant name="struts.devMode" value="true" />
-    <package name="default" namespace="/" extends="json-default">
+	<constant
+		name="struts.enable.DynamicMethodInvocation"
+		value="false" />
+	<constant
+		name="struts.devMode"
+		value="true" />
+	<package
+		name="default"
+		namespace="/"
+		extends="json-default">
 		<!-- 定义新的拦截器栈 -->
 		<interceptors>
 			<interceptor-stack name="bbsStack">
@@ -16,18 +23,25 @@
 				</interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
-		
+
 		<default-interceptor-ref name="bbsStack"></default-interceptor-ref>
-		<action name="user-*" class="userAction" method="{1}">
+		<action
+			name="user-*"
+			class="userAction"
+			method="{1}">
 			<result name="granted">main.jsp</result>
 			<result name="refused">login.jsp</result>
 			<result name="register">login.jsp</result>
 			<result name="setRecomFreq">setRecomTest.jsp</result>
-			<result name="changeSucceed" type="json">
+			<result
+				name="changeSucceed"
+				type="json">
 				<param name="root">status</param>
 			</result>
 			<result name="adminLoginSuccess">admin.jsp</result>
 			<result name="userChart">user-chart.jsp</result>
+			<result name="bookChart">book-chart.jsp</result>
+			<result name="commentChart">comment-chart.jsp</result>
 			<result name="adminListRecords">borrow-details.jsp</result>
 			<result name="adminListComments">admin-comments.jsp</result>
 			<result name="adminListReservations">book-reservation.jsp</result>
@@ -35,109 +49,180 @@
 			<result name="adminLoginFail">admin-login.jsp</result>
 			<result name="qrCodeSucceed">qrCode.jsp</result>
 			<result name="qrCodeFail">user-login</result>
-			<result name="paySucceed" type="json">
+			<result
+				name="paySucceed"
+				type="json">
 				<param name="root">status</param>
 			</result>
-			<result name="adminScanUser" type="json">
+			<result
+				name="adminScanUser"
+				type="json">
 				<param name="root">status</param>
 			</result>
-			<result name="adminBorrow" type="json">
+			<result
+				name="adminBorrow"
+				type="json">
 				<param name="root">status</param>
 			</result>
-			<result name="adminReturn" type="json">
+			<result
+				name="adminReturn"
+				type="json">
 				<param name="root">status</param>
 			</result>
-			<result name="adminConfirmBorrow" type="json">
+			<result
+				name="adminConfirmBorrow"
+				type="json">
 			</result>
-			<result name="adminConfirmReturn" type="json">
+			<result
+				name="adminConfirmReturn"
+				type="json">
 			</result>
-			<result name="initialAPI" type="json">
+			<result
+				name="initialAPI"
+				type="json">
 				<param name="root">status</param>
 			</result>
-			<result name="payState" type="json">
+			<result
+				name="payState"
+				type="json">
 				<param name="root">status</param>
 			</result>
-			<result name="showQrCode" type="json">
+			<result
+				name="showQrCode"
+				type="json">
 				<param name="root">status</param>
 			</result>
-			<result name="adminUsersAjax" type="json">
+			<result
+				name="adminUsersAjax"
+				type="json">
 				<param name="root">status</param>
 			</result>
-			<result name="adminLogout" type="json">
+			<result
+				name="adminLogout"
+				type="json">
 				<param name="root">status</param>
 			</result>
 			<result name="logout">login.jsp</result>
 		</action>
-		<action name="reservation-*" class="reservationAction" method="{1}">
-			<result name="reserve" type="json">
+		<action
+			name="reservation-*"
+			class="reservationAction"
+			method="{1}">
+			<result
+				name="reserve"
+				type="json">
 				<param name="root">reserveMap</param>
 			</result>
-			<result name="cancel" type="json">
+			<result
+				name="cancel"
+				type="json">
 				<param name="root">reserveMap</param>
 			</result>
-			<result name="pushed" type="json">
+			<result
+				name="pushed"
+				type="json">
 			</result>
 			<result name="checkReservationList"></result>
 			<result name="reservelist">reservelist.jsp</result>
 		</action>
-		<action name="au-*" class="authorizationAction" method="{1}">
+		<action
+			name="au-*"
+			class="authorizationAction"
+			method="{1}">
 			<result name="newMember">register.jsp</result>
 			<result name="success">temp.jsp</result>
 			<result name="exist">temp.jsp</result>
 			<result name="error">login.jsp</result>
 		</action>
-		<action name="searchHistory-*" class="searchHistoryAction" method="{1}">
+		<action
+			name="searchHistory-*"
+			class="searchHistoryAction"
+			method="{1}">
 			<result name="search">booklist.jsp</result>
-			<result name="bookSearch" type="json">
+			<result
+				name="bookSearch"
+				type="json">
 				<param name="root">books</param>
 			</result>
-			<result name="showComments" type="json">
+			<result
+				name="showComments"
+				type="json">
 				<param name="root">books</param>
 			</result>
 			<result name="checkSearchHistory">searchHistory.jsp</result>
 		</action>
-		<action name="comment-*" class="commentAction" method="{1}">
-			<result name="deleteComment" type="json">
+		<action
+			name="comment-*"
+			class="commentAction"
+			method="{1}">
+			<result
+				name="deleteComment"
+				type="json">
 				<param name="root">commentStatus</param>
 			</result>
-			<result name="comment" type="json">
+			<result
+				name="comment"
+				type="json">
 				<param name="root">commentStatus</param>
 			</result>
 		</action>
-		<action name="book-*" class="bookAction" method="{1}" >
+		<action
+			name="book-*"
+			class="bookAction"
+			method="{1}">
 			<result name="bookDetails">book.jsp</result>
 			<result name="bookList">booklist.jsp</result>
-			<result type="json" name="listBooks">
+			<result
+				type="json"
+				name="listBooks">
 				<param name="root">books</param>
 			</result>
-			<result name="showComments" type="json">
+			<result
+				name="showComments"
+				type="json">
 				<param name="root">books</param>
 			</result>
-			<result name="addBook" type="json">
+			<result
+				name="addBook"
+				type="json">
 				<param name="root">books</param>
 			</result>
 			<result name="bookSubmit">booksubmit.jsp</result>
 		</action>
-		<action name="item-*" class="bookItemAction" method="{1}">
-			<result name="AvaSucceed" type="json">
+		<action
+			name="item-*"
+			class="bookItemAction"
+			method="{1}">
+			<result
+				name="AvaSucceed"
+				type="json">
 				<param name="root">map</param>
 			</result>
 		</action>
-		
-		<action name="borrowedRecord-*" class="borrowedRecordAction" method="{1}">
+
+		<action
+			name="borrowedRecord-*"
+			class="borrowedRecordAction"
+			method="{1}">
 			<result name="checkBorrowedRecord">borrowhistory.jsp</result>
 			<result name="borrowlist">borrowlist.jsp</result>
-			<result type="json" name="createRecord">
+			<result
+				type="json"
+				name="createRecord">
 				<param name="root">borrowedMap</param>
 			</result>
-			<result type="json" name="cancel">
+			<result
+				type="json"
+				name="cancel">
 				<param name="root">borrowedMap</param>
 			</result>
-			<result type="json" name="remained">
+			<result
+				type="json"
+				name="remained">
 				<param name="root">borrowedMap</param>
 			</result>
 			<result name="borrowHistory">borrowhistory.jsp</result>
 		</action>
-    </package>
+	</package>
 
 </struts>

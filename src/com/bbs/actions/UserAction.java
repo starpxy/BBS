@@ -68,6 +68,28 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		}
 	}
 
+	public String bookChart() {
+		User user = (User) session.get("user");
+		if (user != null && user.getRole().equals("admin")) {
+			return "bookChart";
+		} else if (user != null) {
+			return "adminLoginFail";
+		} else {
+			return "adminLoginFail";
+		}
+	}
+
+	public String commentChart() {
+		User user = (User) session.get("user");
+		if (user != null && user.getRole().equals("admin")) {
+			return "commentChart";
+		} else if (user != null) {
+			return "adminLoginFail";
+		} else {
+			return "adminLoginFail";
+		}
+	}
+
 	public String adminUsersAjax() {
 		User user = (User) session.get("user");
 		status = new HashMap<>();

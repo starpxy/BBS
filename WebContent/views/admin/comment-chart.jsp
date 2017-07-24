@@ -134,7 +134,8 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li class="header">管理导航</li>
-
+       		<li><a href="user-adminLogin"> <i class="fa fa-gear"></i> <span>管理员主页</span>
+			</a></li>
                 <li class="active treeview">
                     <a href="#">
                         <i class="fa fa-book"></i> <span>图书管理</span>
@@ -143,16 +144,15 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="admin.html"><i class="fa fa-circle-o"></i>录入与查看</a></li>
-                        <li><a href="borrow-details.html"><i class="fa fa-circle-o"></i>借阅详情</a></li>
-                        <li><a href="admin-comments.html"><i class="fa fa-circle-o"></i>预定详情</a></li>
-                        <li><a href="index2.html"><i class="fa fa-circle-o"></i>推荐系统</a></li>
+                        <li><a href="admin-book.jsp"><i class="fa fa-circle-o"></i>录入与查看</a></li>
+                        <li><a href="user-adminListRecords"><i class="fa fa-circle-o"></i>借阅详情</a></li>
+                        <li><a href="user-adminListReservations"><i class="fa fa-circle-o"></i>预定详情</a></li>
                     </ul>
                 </li>
 
 
                 <li>
-                    <a href="admin-users.html">
+                    <a href="user-adminUsers">
                         <i class="fa fa-user"></i> <span>用户管理</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">users</small>
@@ -162,7 +162,7 @@
 
 
                 <li>
-                    <a href="admin-comments.html">
+                    <a href="user-adminListComments">
                         <i class="fa fa-info"></i> <span>评论管理</span>
 
             <span class="pull-right-container">
