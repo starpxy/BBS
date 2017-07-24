@@ -112,10 +112,10 @@ public class UserDao extends BaseDao {
 			if (buffer == null) {
 				buffer = temp;
 			}
-			if (buffer.getBook().getBookId() == temp.getBook().getBookId() && count / 13 == (page - 1)) {
+			if (buffer.getBook().getBookId() == temp.getBook().getBookId() && count / 14 == (page - 1)) {
 				resultList.add(temp);
 			} else if (buffer.getBook().getBookId() != temp.getBook().getBookId()) {
-				if (count / 13 == (page - 1)) {
+				if (count / 14 == (page - 1)) {
 					resultList.add(temp);
 				}
 				buffer = temp;
@@ -123,6 +123,12 @@ public class UserDao extends BaseDao {
 			}
 		}
 		return resultList;
+	}
+
+	public int getPages() {
+		String hql = "FROM Book";
+		List<Book> books = getSession().createQuery(hql).list();
+		return (books.size() / 15) + 1;
 	}
 
 	public List<User> adminUsers() {

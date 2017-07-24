@@ -91,6 +91,8 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 				page = Integer.valueOf(p);
 			}
 			request.put("books", userService.adminInitial(page));
+			request.put("pages", userService.getPages());
+			request.put("page", page);
 			return "adminLoginSuccess";
 		} else if (user != null) {
 			return "adminLoginFail";
@@ -105,6 +107,8 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 				page = Integer.valueOf(p);
 			}
 			request.put("books", userService.adminInitial(page));
+			request.put("pages", userService.getPages());
+			request.put("page", page);
 			return "adminLoginSuccess";
 		} else {
 			return "adminLoginFail";

@@ -21,6 +21,10 @@ public class UserService {
 		this.userDao = userDao;
 	}
 
+	public int getPages() {
+		return userDao.getPages();
+	}
+
 	public boolean login(User user) {
 		return userDao.login(user);
 	}

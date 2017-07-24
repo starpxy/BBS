@@ -458,11 +458,20 @@
                                     </tbody>
                                 </table><br>
                                 <ul class="pagination pagination-sm pull-right" style="margin-right: 50px">
-                                    <li><a href=" ">«</a ></li>
-                                    <li class="active"><a href="#">1</a ></li>
-                                    <li><a href="#">2</a ></li>
-                                    <li><a href="#">3</a ></li>
-                                    <li><a href="#">»</a ></li>
+                                    <li><a id="first" href="javascript:;">«</a ></li>
+                                	<%
+                                	if(request.getAttribute("pages")!=null){
+                                		int pages = (int)request.getAttribute("pages"); 
+                                		for(int m = 1;m<=pages;m++){
+                                			if(request.getAttribute("page")!=null&&m==(int)request.getAttribute("page")){
+                                	%>
+                                		<li class="active temp-page"><a href="user-adminLogin?page=<%=m %>"><%=m %></a ></li>
+                                	<%}else{ %>
+                                    	<li class="temp-page"><a href="user-adminLogin?page=<%=m %>"><%=m %></a ></li>
+                                    <%}
+                                    } 
+                                  }%>
+                                    <li><a id="last" href="javascript:;">»</a ></li>
                                 </ul>
                             </div>
                         </div>
@@ -645,8 +654,6 @@
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 
 <script>
-
-
     layui.use('layer', function () {
     	$.ajax({
     		type:'POST',
@@ -896,16 +903,7 @@
 			 	}
             }); 
    }; 
-
-
-//        console.log($.parseJSON(name));
-
-
         var layer = layui.layer;
-
-//        $("#type-autocomplete").attr('data-source', '["经典名著", "人文社科", "计算机科学", "成人教育", "生活保健", "小说传记", "文学技术"]');
-
-
         var isbns = new Array();
         $(".book-isbn").each(function (value) {
             isbns.push('"' + $(this).text() + '"');
@@ -1033,9 +1031,6 @@
                                     else{
                                		 	layer.msg("对不起，该书目不存在", {anim: 1, icon: 2, time: 2000});
                                     }
-                                    //TODO 2
-                            //刷新页面
-                                   
                                 },
                                 error: function (xhr, type) {
                                 	layer.msg("书籍录入错误", {anim: 1, icon: 2, time: 2000});
@@ -1044,10 +1039,8 @@
 
 
                        
-//                            $(".check-volum span").text($(".check-volum span").text()+1);
 
                         } else {
-                            //TODO ajax goes here
                             $.ajax({
                                 type: 'POST',
                                 url: 'book-addBookNew',
