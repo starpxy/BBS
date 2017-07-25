@@ -62,16 +62,17 @@
 							domDown : {//上拉
 								domClass : 'dropload-down',
 								domRefresh : '<div class="dropload-refresh f15 "><i class="icon icon-20"></i>上拉加载更多</div>',
-								domLoad : '<div class="dropload-load f15"><span class="weui-loading"></span>正在加载中...</div>',
-								domNoData : '<div class="dropload-noData">没有更多数据了</div>'
+								domLoad : '<div class="dropload-load f15"><span class="weui-loading"></span>玩儿命加载中...</div>',
+								domNoData : '<div class="dropload-noData">矮油，到头啦！</div>'
 							},
 							domUp : {//下拉
 								domClass : 'dropload-up',
 								domRefresh : '<div class="dropload-refresh"><i class="icon icon-114"></i>上拉加载更多</div>',
 								domUpdate : '<div class="dropload-load f15"><i class="icon icon-20"></i>释放更新...</div>',
-								domLoad : '<div class="dropload-load f15"><span class="weui-loading"></span>正在加载中...</div>'
+								domLoad : '<div class="dropload-load f15"><span class="weui-loading"></span>玩儿命加载中...</div>'
 							},
 							loadUpFn : function(me) {//刷新
+								me.resetload();
 								var ajurl = '';
 								if (status == 1){
 									ajurl = 'book-listBooks?type=${request.type}';
@@ -102,8 +103,8 @@
 																+ '<span style="display: none">&nbsp;&nbsp;&nbsp;&nbsp;'
 																+ data.books[i].bookId
 																+ '</span></h4>'
-																+ '<p class="weui_media_desc"><br><span style="color:red">一个月:2元&nbsp;&nbsp;&nbsp;&nbsp;</span>评价: 15</p>'
-																+ '<p class="weui_media_desc"><br>总借量:40&nbsp;&nbsp;&nbsp;&nbsp;总存储量: '
+																+ '<p class="weui_media_desc"><br><span style="color:red">一个月:0.01元&nbsp;&nbsp;&nbsp;&nbsp;</span>评价: 15</p>'
+																+ '<p class="weui_media_desc"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;总存储量: '
 																+ data.books[i].bookVolume
 																+ '本&nbsp;&nbsp;&nbsp;&nbsp;已借:3/'
 																+ data.books[i].bookVolume
@@ -146,7 +147,7 @@
 															// 解锁
 															me.unlock();
 															me.noData(false);
-														}, 1000);
+														}, 10);
 											},
 											error : function(xhr, type) {
 												// 即使加载出错，也得重置
@@ -162,10 +163,10 @@
 								var status = '${request.status}'
 								var ajurl = '';
 									if (status == 1){
-										ajurl = 'book-listBooks?type=${request.type}';
+										ajurl = 'book-listBooks?type=${request.type}&page='+page;
 									}
 									else if (status == 2){
-										ajurl = 'searchHistory-bookSearch?keyword=${request.keyword}';
+										ajurl = 'searchHistory-bookSearch?keyword=${request.keyword}&page='+page;
 									}
 				
 								$
@@ -188,10 +189,10 @@
 																+ '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
 																+ data.books[i].author
 																+ '</h4>'
-																+ '<p class="weui_media_desc"><br><span style="color:red">一个月:2元&nbsp;&nbsp;&nbsp;&nbsp;</span>评价: 15</p>'
-																+ '<p class="weui_media_desc"><br>总借量:20&nbsp;&nbsp;&nbsp;&nbsp;总存储量: '
+																+ '<p class="weui_media_desc"><br><span style="color:red">一个月:0.01元&nbsp;&nbsp;&nbsp;&nbsp;</span>评价: 15</p>'
+																+ '<p class="weui_media_desc"><br>&nbsp;&nbsp;&nbsp;&nbsp;总存储量: '
 																+ data.books[i].bookVolume
-																+ '本&nbsp;&nbsp;&nbsp;&nbsp;已借:3/'
+																+ '本&nbsp;&nbsp;&nbsp;&nbsp;已借:1/'
 																+ data.books[i].bookVolume
 																+ '本</p>'
 																+ '</div>'
@@ -229,7 +230,7 @@
 															//
 															// 每次数据加载完，必须重置
 															me.resetload();
-														}, 1000);
+														}, 10);
 											},
 											error : function(xhr, type) {
 												// 即使加载出错，也得重置

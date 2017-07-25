@@ -60,20 +60,22 @@ public class BookDao extends BaseDao {
 			return 2;
 		}
 	}
-	public List<Book> bookList(Book book) {
+	public List<Book> bookList(Book book,int page) {
 		String type = book.getType();
 		String hql = "FROM Book WHERE type='" + type + "'";
-		List<Book> result = getSession().createQuery(hql).list();
-		Iterator<Book> iterator = result.iterator();
-		List<String> isbnTemp = new LinkedList<>();
+		List<Book> books = getSession().createQuery(hql).list();
+		if (page==-1||(page==1&&books.size()<=7)) {
+			return books;
+		}
+		List<Book> result = new LinkedList<>();
+		Iterator<Book> iterator = books.iterator();
+		int count = 1;
 		while(iterator.hasNext()){
 			Book temp = iterator.next();
-			if (isbnTemp.contains(temp.getIsbn())) {
-				iterator.remove();
+			if (count/7==(page-1)) {
+				result.add(temp);
 			}
-			else{
-				isbnTemp.add(temp.getIsbn());
-			}
+			count++;
 		}
 		return result;
 	}

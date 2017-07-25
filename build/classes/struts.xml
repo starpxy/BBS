@@ -173,6 +173,7 @@
 			method="{1}">
 			<result name="bookDetails">book.jsp</result>
 			<result name="bookList">booklist.jsp</result>
+			<result name="refused">login.jsp</result>
 			<result
 				type="json"
 				name="listBooks">

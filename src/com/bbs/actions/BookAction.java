@@ -13,6 +13,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.bbs.entities.Book;
 import com.bbs.entities.Comment;
+import com.bbs.entities.User;
 import com.bbs.recommend.RankAlgorithm;
 import com.bbs.services.BookService;
 import com.bbs.services.UserService;
@@ -67,6 +68,10 @@ public class BookAction extends BaseAction implements ModelDriven<Book>, Servlet
 	}
 
 	public String bookDetails() {
+		User user = (User) session.get("user");
+		if (user==null) {
+			return "refused";
+		}
 		Book newBook = BookService.bookDetails(book);
 		request.put("book", newBook);
 		session.put("book", newBook);
@@ -88,7 +93,12 @@ public class BookAction extends BaseAction implements ModelDriven<Book>, Servlet
 
 	public String listBooks() {
 		request.put("type", book.getType());
-		List<Book> bookList = BookService.bookList(book);
+		String p = httpServletRequest.getParameter("page");
+		int page = 1;
+		if (p!=null) {
+			page = Integer.valueOf(p);
+		}
+		List<Book> bookList = BookService.bookList(book,page);
 		books = new HashMap<String, Object>();
 		books.put("books", JSONArray.fromObject(bookList));
 		return "listBooks";
@@ -109,7 +119,7 @@ public class BookAction extends BaseAction implements ModelDriven<Book>, Servlet
 
 	public String recommendBook() throws IOException {
 		Book book = (Book) session.get("book");
-		List<Book> list = BookService.bookList(book);
+		List<Book> list = BookService.bookList(book,-1);
 		List<Map.Entry<Book, Double>> temp = RankAlgorithm.getRecomBookList(book, list, book.getType());
 		List<Book> result = new LinkedList<>();
 		for (Entry<Book, Double> entry : temp) {

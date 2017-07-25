@@ -1,3 +1,6 @@
+<%@page import="com.bbs.converters.TimeUtils"%>
+<%@page import="com.bbs.entities.rules.LogRules"%>
+<%@page import="com.bbs.entities.AccessLog"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -286,8 +289,11 @@ button {
 	</script>
 	<script type="text/javascript">
 		$(function() {
-			$.toptips("欢迎回来，xxx，本次登陆时间，上次登录时间之类的", 'ok');
-
+			<% if(request.getAttribute("logInfo")!=null) {
+				AccessLog accessLog = (AccessLog)request.getAttribute("logInfo");
+			%>
+			$.toptips("欢迎回来,<%=accessLog.getUser().getName()%><br>登陆时间: <%=TimeUtils.getChineseTime(accessLog.getLogAt())%><br>登录地点: ${request.logInfo.area}<br>登录位置: ${request.logInfo.location}<br>登录方式: <%=LogRules.getStatus(accessLog.getMethod())%>", 'ok');
+			<%}%>
 			$(".search-span").hide();
 			var itemslist = '';
 			var books;

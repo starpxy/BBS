@@ -8,6 +8,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.interceptor.ServletRequestAware;
+
 import com.bbs.entities.Book;
 import com.bbs.entities.SearchHistory;
 import com.bbs.entities.User;
@@ -17,11 +21,12 @@ import com.opensymphony.xwork2.ModelDriven;
 
 import net.sf.json.JSONArray;
 
-public class SearchHistoryAction extends BaseAction implements ModelDriven<SearchHistory> {
+public class SearchHistoryAction extends BaseAction implements ModelDriven<SearchHistory> ,ServletRequestAware{
 	private static final long serialVersionUID = 1L;
 	private SearchHistory searchHistory;
 	private SearchHistoryService searchHistoryService;
 	private Map<String, Object> books;
+	private HttpServletRequest httpServletRequest;
 	public void setBooks(Map<String, Object> books) {
 		this.books = books;
 	}
@@ -63,14 +68,28 @@ public class SearchHistoryAction extends BaseAction implements ModelDriven<Searc
 		if (tempUser != null && searchHistory != null) {
 			searchHistory.setUser(tempUser);
 		}
+		String p = httpServletRequest.getParameter("page");
+		int page = 1;
+		if (p!=null) {
+			page = Integer.valueOf(p);
+		}
 		request.put("status", 2);
 		request.put("keyword", searchHistory.getKeyword());
-		request.put("bookList", searchHistoryService.searchBooks(searchHistory));
+		request.put("bookList", searchHistoryService.searchBooks(searchHistory,page));
 		return "search";
 	}
 	public String bookSearch(){
+		User tempUser = (User) session.get("user");
+		if (tempUser != null && searchHistory != null) {
+			searchHistory.setUser(tempUser);
+		}
+		String p = httpServletRequest.getParameter("page");
+		int page = 1;
+		if (p!=null) {
+			page = Integer.valueOf(p);
+		}
 		books = new HashMap<String,Object>();
-		books.put("books", searchHistoryService.bookSearch(searchHistory));
+		books.put("books", searchHistoryService.bookSearch(searchHistory,page));
 		return "bookSearch";
 	}
 	public String checkSearchHistory(){
@@ -89,8 +108,11 @@ public class SearchHistoryAction extends BaseAction implements ModelDriven<Searc
 
 	@Override
 	public SearchHistory getModel() {
-		// TODO Auto-generated method stub
 		return searchHistory;
+	}
+	@Override
+	public void setServletRequest(HttpServletRequest request) {
+		httpServletRequest = request;
 	}
 
 }

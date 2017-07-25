@@ -7,12 +7,14 @@
 <meta name="viewport"
 	content="width=device-width,initial-scale=1,user-scalable=0">
 <title>无微不至的借阅伴侣</title>
-
-
+<body>
+<form id="form" action="user-login" method="post">
+	<input name="meth" value="wechat" type="hidden">
+</form>
+</body>
+<script src="asserts/jquery.min.js"></script>
 <script type="text/javascript">
-		window.location.href="user-login";
+		$('#form').submit();
 </script>
 </head>
-<body ontouchstart style="background-color: #f8f8f8;">
-</body>
 </html>

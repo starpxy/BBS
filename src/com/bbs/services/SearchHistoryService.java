@@ -15,12 +15,12 @@ public class SearchHistoryService {
 		this.searchHistoryDao = searchHistoryDao;
 	}
 
-	public List<Book> searchBooks(SearchHistory searchHistory) {
-		return searchHistoryDao.searchBooks(searchHistory);
+	public List<Book> searchBooks(SearchHistory searchHistory,int page) {
+		return searchHistoryDao.searchBooks(searchHistory,page);
 	}
 
-	public List<Book> bookSearch(SearchHistory searchHistory) {
-		return searchHistoryDao.bookSearch(searchHistory);
+	public List<Book> bookSearch(SearchHistory searchHistory,int page) {
+		return searchHistoryDao.bookSearch(searchHistory,page);
 	}
 
 	public List<String> checkSearchHistory(User user) {

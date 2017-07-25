@@ -307,6 +307,17 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 
 	public String login() {
 		if (session.get("user") != null) {
+			if(httpServletRequest.getParameter("meth")!=null&&httpServletRequest.getParameter("meth").equals("wechat")){
+				AccessLog accessLog = new AccessLog();
+				accessLog.setUser((User) session.get("user"));
+				accessLog.setLogAt(new Date());
+				accessLog.setIp(IPUtil.getIp(httpServletRequest));
+				Map<String, Object> map = LogUtil.getInfo(accessLog.getIp());
+				accessLog.setArea((String) map.get("area"));
+				accessLog.setLocation((String) map.get("location"));
+				accessLog.setMethod(0);
+				request.put("logInfo", accessLog);
+			}
 			return "granted";
 		} else if (userService.login(user)) {
 			session.put("user", userService.getInfo(user));
@@ -318,6 +329,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 			accessLog.setArea((String) map.get("area"));
 			accessLog.setLocation((String) map.get("location"));
 			accessLog.setMethod(0);
+			request.put("logInfo", accessLog);
 			userService.writeLog(accessLog);
 			return "granted";
 		} else {

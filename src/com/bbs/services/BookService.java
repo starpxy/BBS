@@ -17,8 +17,8 @@ public class BookService {
 		return bookDao.bookDetails(book);
 	}
 
-	public List<Book> bookList(Book book) {
-		return bookDao.bookList(book);
+	public List<Book> bookList(Book book,int page) {
+		return bookDao.bookList(book,page);
 	}
 
 	public int addBookOld(String isbn) {

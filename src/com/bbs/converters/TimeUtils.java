@@ -25,5 +25,8 @@ public class TimeUtils {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日");
 		return dateFormat.format(date);
 	}
-
+	public static String getChineseTime(Date date){
+		DateFormat dateFormat = new SimpleDateFormat("yyyy年MM月dd日 hh时mm分ss秒");
+		return dateFormat.format(date);
+	}
 }

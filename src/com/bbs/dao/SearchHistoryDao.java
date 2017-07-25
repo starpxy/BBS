@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,10 +16,11 @@ import com.bbs.entities.User;
 import com.bbs.search.Search;
 
 public class SearchHistoryDao extends BaseDao {
-	public List<Book> searchBooks(SearchHistory searchHistory) {
+	public List<Book> searchBooks(SearchHistory searchHistory,int page) {
 		Search search = new Search();
 		String hql = "FROM Book";
 		List<Book> list = getSession().createQuery(hql).list();
+		List<Book> result = new LinkedList<>();
 		List<Book> rankedBook = null;
 		try {
 			rankedBook = search.doSearch(list, searchHistory.getKeyword());
@@ -26,18 +28,31 @@ public class SearchHistoryDao extends BaseDao {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+		if ((rankedBook.size()<=7&&page==1)) {
+			return rankedBook;
+		}
+		int count = 1;
+		Iterator<Book> iterator = rankedBook.iterator();
+		while(iterator.hasNext()){
+			Book temp = iterator.next();
+			if (count/7==(page-1)) {
+				result.add(temp);
+			}
+			count++;
 		}
 		String hql2 = "FROM User WHERE userId=" + searchHistory.getUser().getUserId();
 		searchHistory.setUser((User) (getSession().createQuery(hql2).list().get(0)));
 		searchHistory.setUpdateAt(new Date());
 		getSession().save(searchHistory);
-		return rankedBook;
+		return result;
 	}
 
-	public List<Book> bookSearch(SearchHistory searchHistory) {
+	public List<Book> bookSearch(SearchHistory searchHistory,int page) {
 		Search search = new Search();
 		String hql = "FROM Book";
 		List<Book> list = getSession().createQuery(hql).list();
+		List<Book> result = new LinkedList<>();
 		List<Book> rankedBook = null;
 		try {
 			rankedBook = search.doSearch(list, searchHistory.getKeyword());
@@ -46,7 +61,19 @@ public class SearchHistoryDao extends BaseDao {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return rankedBook;
+		if ((rankedBook.size()<=7&&page==1)) {
+			return rankedBook;
+		}
+		int count = 1;
+		Iterator<Book> iterator = rankedBook.iterator();
+		while(iterator.hasNext()){
+			Book temp = iterator.next();
+			if (count/7==(page-1)) {
+				result.add(temp);
+			}
+			count++;
+		}
+		return result;
 	}
 
 	public List<String> checkSearchHistory(User user) {
