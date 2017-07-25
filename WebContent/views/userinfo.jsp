@@ -35,16 +35,15 @@
 	<div class="page-hd">
 
 		<div class="tcenter">
-			<a href="javascript:;"  id="alter-face"><img style="border-radius: 100px; width: 100px; height: 100px;"
+			<a href="javascript:;"  id="alter-face"><img style="border-radius: 100%; width: 20%; height: 20%;"
 				src="asserts/images/faces/wechat.gif"></a>
 				<br><br>
-			<p style="font-size: 20px">
+			<p style="font-size: 15px">
 				<b>${session.user.name}</b>
 			</p>
 		</div>
 	</div>
-	 <input style="display: none" class="upload_face" type="file">
-
+	 <input style="display: none" class="upload_face" type="image">
 
 	<div class="weui_panel weui_panel_access">
 		<div class="weui_panel_hd">账号信息</div>
