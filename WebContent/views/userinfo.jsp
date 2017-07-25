@@ -51,6 +51,18 @@
 		<div class="weui_panel_bd">
 
 			<div class="weui_media_box weui_media_text">
+			
+		
+				<a id="user-name">
+					<h4 class="weui_media_desc" style="float: right">${session.user.name}</h4>
+					<h4 class="weui_media_desc f-black">用户名:</h4>
+				</a>
+			</div>
+			<div class="weui_media_box weui_media_text">
+			
+		
+			
+			
 				<a id="phone-number">
 					<h4 class="weui_media_desc" style="float: right">${session.user.phoneNumber }</h4>
 					<h4 class="weui_media_desc f-black">手机号/账号:</h4>
@@ -261,6 +273,22 @@
 		$("select[name='select2']").change(function() {
 			//TODO
 			$.toast("fre is changed=>>>>" + $(this).val());
+		});
+
+		$("#user-name").click(function() {
+			
+			$.prompt("更改昵称", "请输入昵称", function(text) {
+
+				if(text.trim()!=""){
+					//TODO--ajax goes here
+						//After SUCCESS ajax
+					$("#user-name").children('h4:first').html(text);
+					$.toptips("更改成功" ,"ok");
+
+				}else{
+					$.toptips("请输入昵称" ,"info");
+					}
+			});
 		});
 
 		$("#phone-number").click(function() {

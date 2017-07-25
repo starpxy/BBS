@@ -53,15 +53,18 @@
 				<div class="weui_media_box weui_media_text f-black">
 					<h4 class="weui_media_desc" style="float: right">库存${request.book.bookVolume }本</h4>
 					<h4 class="weui_media_title f-red">1元/月</h4>
-
 					<h4 class="weui_media_desc" style="float: right">上书时间
 						${request.book.updateAt }</h4>
 					<h4 class="weui_media_desc">种类:${request.book.type }</h4>
-
 				</div>
 
 			</div>
+
+
 			<a class="weui_panel_ft" id="check-qrcode">查看二维码</a>
+
+
+
 		</div>
 
 
@@ -80,7 +83,7 @@
 
 				<div class="weui_media_box weui_media_text">
 
-					<h4 class="weui_media_desc" style="float: right">${request.book.isbn }</h4>
+					<h4 class="weui_media_desc" style="float: right" id="isbn">${request.book.isbn }</h4>
 					<h4 class="weui_media_desc f-black">ISBN码</h4>
 
 				</div>
@@ -109,8 +112,14 @@
 				id="check-preface">前言</a> <a href="javascript:void(0);"
 				class="weui_panel_ft f-black" id="check-catelog">目录</a> <a
 				href="javascript:void(0);" class="weui_panel_ft f-black"
-				id="check-introduction">介绍</a> <a href="javascript:void(0);"
-				class="weui_panel_ft">更多</a>
+				id="check-introduction">介绍</a>
+
+			<div class="weui_media_box weui_media_text f-black">
+
+				<div class="weui-label-list"></div>
+			</div>
+
+
 
 		</div>
 
@@ -259,6 +268,18 @@
 
 	<script type="text/javascript">
 		$(function() {
+
+			var isbn = $("#isbn").html();
+			$.getJSON("https://api.douban.com/v2/book/search?q=" + isbn
+					+ "&count=1&callback=?", function(data) {
+				var tags = data.books[0].tags;
+				var labels = "";
+				for (var i = 0; i < tags.length; i += 1) {
+					labels += '<label class="weui-label">'+tags[i].title+'</label>';
+				}
+				$(".weui-label-list").html(labels);
+			});
+
 			var itemslist = '';
 			var books;
 			var i = 0;
@@ -498,7 +519,6 @@
 								$('#addcomment')
 										.click(
 												function() {
-
 													layer
 															.open({
 																type : 1,
