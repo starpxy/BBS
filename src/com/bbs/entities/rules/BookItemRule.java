@@ -1,18 +1,18 @@
 package com.bbs.entities.rules;
 
 /**
- * ¸ÃÀàÖÆ¶¨ÁËÊı×ÖºÍ×´Ì¬µÄ¶ÔÓ¦ÀàĞÍ£º
- * 0Îª¿É½èÔÄ
- * 1ÎªÒÑ±»Ô¤¶¨
- * 2ÎªÒÑÌí¼Ó½èÊéµ¥
- * 3ÎªÒÑ½è³ö
- * -1Îª´íÎó×´Ì¬
+ * è¯¥ç±»åˆ¶å®šäº†æ•°å­—å’ŒçŠ¶æ€çš„å¯¹åº”ç±»å‹ï¼š
+ * 0ä¸ºå¯å€Ÿé˜…
+ * 1ä¸ºå·²è¢«é¢„å®š
+ * 2ä¸ºå·²æ·»åŠ å€Ÿä¹¦å•
+ * 3ä¸ºå·²å€Ÿå‡º
+ * -1ä¸ºé”™è¯¯çŠ¶æ€
  */
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class BookItemRule {
-	public static final ArrayList<String> status = new ArrayList<String>(Arrays.asList("¿É½èÔÄ", "ÒÑ±»Ô¤¶¨", "ÒÑÌí¼Ó½èÊéµ¥", "ÒÑ½è³ö"));
+	public static final ArrayList<String> status = new ArrayList<String>(Arrays.asList("å¯å€Ÿé˜…", "å·²è¢«é¢„å®š", "å·²æ·»åŠ å€Ÿä¹¦å•", "å·²å€Ÿå‡º"));
 
 	public static String getStatus(int i) {
 		if (i >= 0 && i < 4) {

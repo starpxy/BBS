@@ -103,8 +103,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		}
 		return "adminUsersAjax";
 	}
-
-	public String adminLogin() {
+	public String adminBooks(){
 		User user = (User) session.get("user");
 		if (user != null && user.getRole().equals("admin")) {
 			String p = httpServletRequest.getParameter("page");
@@ -115,22 +114,22 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 			request.put("books", userService.adminInitial(page));
 			request.put("pages", userService.getPages());
 			request.put("page", page);
+			return "adminBooks";
+		}
+		else{
+			return "adminLoginFail";
+		}
+	}
+	public String adminLogin() {
+		User user = (User) session.get("user");
+		if (user != null && user.getRole().equals("admin")) {
 			return "adminLoginSuccess";
 		} else if (user != null) {
 			return "adminLoginFail";
 		}
-
 		boolean check = userService.adminLogin(this.user);
 		if (check) {
 			session.put("user", userService.getInfo(this.user));
-			String p = httpServletRequest.getParameter("page");
-			int page = 1;
-			if (p != null) {
-				page = Integer.valueOf(p);
-			}
-			request.put("books", userService.adminInitial(page));
-			request.put("pages", userService.getPages());
-			request.put("page", page);
 			return "adminLoginSuccess";
 		} else {
 			return "adminLoginFail";

@@ -39,6 +39,7 @@
 				<param name="root">status</param>
 			</result>
 			<result name="adminLoginSuccess">admin.jsp</result>
+			<result name="adminBooks">admin-book.jsp</result>
 			<result name="userChart">user-chart.jsp</result>
 			<result name="bookChart">book-chart.jsp</result>
 			<result name="commentChart">comment-chart.jsp</result>

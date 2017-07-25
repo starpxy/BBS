@@ -132,7 +132,7 @@
 				</span>
 			</a>
 				<ul class="treeview-menu">
-					<li><a href="admin-book.jsp"><i class="fa fa-circle-o"></i>录入与查看</a></li>
+					<li><a href="user-adminBooks"><i class="fa fa-circle-o"></i>录入与查看</a></li>
 					<li><a href="borrow-details.html"><i
 							class="fa fa-circle-o"></i>借阅详情</a></li>
 					<li><a href="user-adminListRecords"><i
