@@ -26,7 +26,7 @@ public class LogUtil {
 			httpsURLConnection = (HttpURLConnection) url.openConnection();
 			httpsURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 			httpsURLConnection.connect();
-			inputStreamReader = new InputStreamReader(httpsURLConnection.getInputStream());
+			inputStreamReader = new InputStreamReader(httpsURLConnection.getInputStream(),"UTF-8");
 			int i = inputStreamReader.read();
 			String temp = "";
 			while(i!=-1){
