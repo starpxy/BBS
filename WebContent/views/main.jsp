@@ -292,7 +292,7 @@ button {
 			<% if(request.getAttribute("logInfo")!=null) {
 				AccessLog accessLog = (AccessLog)request.getAttribute("logInfo");
 			%>
-			$.toptips("欢迎回来,<%=accessLog.getUser().getName()%><br>登陆时间: <%=TimeUtils.getChineseTime(accessLog.getLogAt())%><br>登录地点: ${request.logInfo.area}<br>登录位置: ${request.logInfo.location}<br>登录方式: <%=LogRules.getStatus(accessLog.getMethod())%>", 'ok');
+			$.toptips("<div style='text-align:left;padding:3%;padding-left:10%'>欢迎回来,<%=accessLog.getUser().getName()%><br>登陆时间: <%=TimeUtils.getChineseTime(accessLog.getLogAt())%><br>登录地点: ${request.logInfo.area}<br>登录位置: ${request.logInfo.location}<br>登录方式: <%=LogRules.getStatus(accessLog.getMethod())%></div>", 'ok');
 			<%}%>
 			$(".search-span").hide();
 			var itemslist = '';

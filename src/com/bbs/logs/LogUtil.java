@@ -24,6 +24,8 @@ public class LogUtil {
 			urlAddr = "http://apis.juhe.cn/ip/ip2addr?ip="+ip+"&key="+key;
 			url = new URL(urlAddr);
 			httpsURLConnection = (HttpURLConnection) url.openConnection();
+			httpsURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+			httpsURLConnection.connect();
 			inputStreamReader = new InputStreamReader(httpsURLConnection.getInputStream());
 			int i = inputStreamReader.read();
 			String temp = "";

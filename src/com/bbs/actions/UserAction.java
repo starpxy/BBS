@@ -103,7 +103,8 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		}
 		return "adminUsersAjax";
 	}
-	public String adminBooks(){
+
+	public String adminBooks() {
 		User user = (User) session.get("user");
 		if (user != null && user.getRole().equals("admin")) {
 			String p = httpServletRequest.getParameter("page");
@@ -115,11 +116,11 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 			request.put("pages", userService.getPages());
 			request.put("page", page);
 			return "adminBooks";
-		}
-		else{
+		} else {
 			return "adminLoginFail";
 		}
 	}
+
 	public String adminLogin() {
 		User user = (User) session.get("user");
 		if (user != null && user.getRole().equals("admin")) {
@@ -269,7 +270,8 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		String ip = IPUtil.getIp(httpServletRequest);
 		if (payState != null && !payState.isEmpty()) {
 			UnifiedOrder unifiedOrder = new UnifiedOrder();
-			JSONObject jsonObject = JSONObject.fromObject(unifiedOrder.createOrder(user.getWeChat(), ip, 1 * payState.size()));
+			JSONObject jsonObject = JSONObject
+					.fromObject(unifiedOrder.createOrder(user.getWeChat(), ip, 1 * payState.size()));
 			status.put("params", jsonObject.toString());
 			status.put("pay", 1);
 			status.put("ip", ip);
@@ -305,9 +307,14 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		return "changeSucceed";
 	}
 
+	public String settings() {
+		return "settings";
+	}
+
 	public String login() {
 		if (session.get("user") != null) {
-			if(httpServletRequest.getParameter("meth")!=null&&httpServletRequest.getParameter("meth").equals("wechat")){
+			if (httpServletRequest.getParameter("meth") != null
+					&& httpServletRequest.getParameter("meth").equals("wechat")) {
 				AccessLog accessLog = new AccessLog();
 				accessLog.setUser((User) session.get("user"));
 				accessLog.setLogAt(new Date());
@@ -315,7 +322,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 				Map<String, Object> map = LogUtil.getInfo(accessLog.getIp());
 				accessLog.setArea((String) map.get("area"));
 				accessLog.setLocation((String) map.get("location"));
-				accessLog.setMethod(0);
+				accessLog.setMethod(1);
 				request.put("logInfo", accessLog);
 			}
 			return "granted";

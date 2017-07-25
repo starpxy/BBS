@@ -61,7 +61,10 @@
 			</div>
 
 
-			<a class="weui_panel_ft" id="check-qrcode">查看二维码</a>
+			<div class="weui_media_box weui_media_text f-black">
+
+				<div class="weui-label-list"></div>
+			</div>
 
 
 
@@ -114,12 +117,6 @@
 				href="javascript:void(0);" class="weui_panel_ft f-black"
 				id="check-introduction">介绍</a>
 
-			<div class="weui_media_box weui_media_text f-black">
-
-				<div class="weui-label-list"></div>
-			</div>
-
-
 
 		</div>
 
@@ -156,7 +153,7 @@
 
 			<div class="weui_cell">
 				<div class="weui_cell_hd">
-					<label for="" class="weui_label">选择预定时间:</label>
+					<label for="" class="weui_label">选择预订时间:</label>
 				</div>
 				<div class="weui_cell_bd weui_cell_primary">
 					<input class="weui_input" type="text" value="" id='time' />
@@ -512,9 +509,9 @@
 															});
 												});
 
-								$('#back').click(function() {
-									history.back();
-								});
+					$('#back').click(function() {
+						history.back();
+					});
 
 								$('#addcomment')
 										.click(
