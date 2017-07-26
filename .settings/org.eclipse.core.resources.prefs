@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//WebContent/views/borrowhistory.jsp=UTF-8
+encoding//src/com/bbs/api=UTF-8
 encoding//src/com/bbs/converters=UTF-8
 encoding//src/com/bbs/entities/rules=UTF-8
 encoding//src/com/bbs/logs=UTF-8
