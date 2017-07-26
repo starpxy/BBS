@@ -29,6 +29,10 @@ public class UserService {
 		return userDao.login(user);
 	}
 
+	public void changeSomething(User user) {
+		userDao.changeSomething(user);
+	}
+
 	public void register(User user) {
 		userDao.register(user);
 	}

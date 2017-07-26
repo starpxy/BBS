@@ -86,8 +86,12 @@ button {
 
 	<div class="search-box">
 		<div class="search bar1">
+<<<<<<< Updated upstream
 
 			<form action="searchHistory-searchBooks" method="post"
+=======
+			<form action="searchHistory-searchBooks" method="get"
+>>>>>>> Stashed changes
 				onsubmit="return check()">
 				<input id="keyword" type="text" name="keyword"
 					placeholder="搜索书名／作者／ISBN...">
@@ -204,7 +208,7 @@ button {
 					<img src="asserts/icons/icon_nav_article.png" alt="">
 				</div>
 				<p class="weui_grid_label">交互设计</p>
-			</a> <a href="book-bookList?type= 生活旅行" class="weui_grid js_grid">
+			</a> <a href="book-bookList?type=生活旅行" class="weui_grid js_grid">
 				<div class="weui_grid_icon">
 					<img src="asserts/icons/icon_nav_button.png" alt="">
 				</div>

@@ -20,7 +20,7 @@
 
 	<div class="weui-header bg-green">
 		<div class="weui-header-left">
-			<a class="icon icon-109 f-white" href="javascript:;" id="back">返回</a>
+			<a class="icon icon-109 f-white" href="userinfo.jsp">返回</a>
 		</div>
 		<h1 class="weui-header-title">个人设置</h1>
 		<div class="weui-header-right">
@@ -71,6 +71,7 @@
 					<option value="1">一天</option>
 					<option value="7">一星期</option>
 					<option value="14">半个月</option>
+					<option value="0">从不</option>
 				</select>
 			</div>
 		</div>
@@ -86,9 +87,6 @@
 <script>
 	$(function() {
 		layui.use('layer', function() {
-			$('#back').click(function() {
-				history.back();
-			});
 			var layer = layui.layer;
 		$("#alter-password")
 				.click(
@@ -157,10 +155,25 @@
 
 				if(text.trim()!=""){
 					//TODO--ajax goes here
-						//After SUCCESS ajax
-					$("#user-name").children('h4:first').html(text);
-					$.toptips("更改成功" ,"ok");
-
+					//After SUCCESS ajax
+					$.ajax({
+					type : 'POST',
+					url : 'user-changeName',
+					data:{'name':text},
+					dataType : 'json',
+					success : function(data) {
+						if(data.state==1){
+							$.toptips("修改成功",'ok');
+							$("#user-name").children('h4:first').html(text);
+						}
+						else{
+							$.toptips("修改失败");
+						}
+					},
+					error : function() {
+						alert('服务器错误');
+					}
+				});
 				}else{
 					$.toptips("请输入昵称" ,"info");
 				}
@@ -171,10 +184,24 @@
 			$.prompt("更新手机号", "请输入更新手机号", function(text) {
 				var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
 				if (reg.test(text)) {
-					//TODO--ajax goes here
-					$.toast("success=>>>>>>" + text);
-					//After SUCCESS ajax
-					$("#phone-number .weui_media_desc").html(text);
+					$.ajax({
+						type : 'POST',
+						url : 'user-changePhoneNumber',
+						data:{'phoneNumber':text},
+						dataType : 'json',
+						success : function(data) {
+							if(data.state==1){
+								$("#phone-number .weui_media_desc").html(text);
+								$.toptips("修改成功",'ok');
+							}
+							else{
+								$.toptips("修改失败");
+							}
+						},
+						error : function() {
+							alert('服务器错误');
+						}
+					});
 				} else {
 					$.toptips("请输入正确的手机号码");
 				}

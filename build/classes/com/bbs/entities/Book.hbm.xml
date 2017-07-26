@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-4-26 16:43:06 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-7-26 15:35:50 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bbs.entities.Book" table="BOOKS">
         <id name="bookId" type="java.lang.Integer">
@@ -27,13 +27,13 @@
             <column name="VERSION_NUMBER" />
         </property>
         <property name="preface" type="java.lang.String">
-            <column name="PREFACE" sql-type="LONGTEXT"/>
+            <column name="PREFACE" />
         </property>
         <property name="directory" type="java.lang.String">
-            <column name="DIRECTORY" sql-type="LONGTEXT"/>
+            <column name="DIRECTORY" />
         </property>
         <property name="introduction" type="java.lang.String">
-            <column name="INTRODUCTION" sql-type="LONGTEXT"/>
+            <column name="INTRODUCTION" />
         </property>
         <property name="type" type="java.lang.String">
             <column name="TYPE" />
@@ -44,12 +44,14 @@
         <property name="starClass" type="java.lang.Float">
             <column name="STAR_CLASS" />
         </property>
+        <property name="price" type="java.lang.Integer">
+            <column name="PRICE" default="1"/>
+        </property>
+        <property name="borrowedNum" type="java.lang.Integer">
+            <column name="BORROWED_NUM" default="0"/>
+        </property>
         <property name="updateAt" type="java.util.Date">
             <column name="UPDATE_AT" />
         </property>
-       <!--  <set name="comments" table="COMMENTS" inverse="true" lazy="false">
-        	<key column="COMMENT_ID"></key>
-        	<one-to-many class="com.bbs.entities.Comment"/>
-        </set> -->
     </class>
 </hibernate-mapping>

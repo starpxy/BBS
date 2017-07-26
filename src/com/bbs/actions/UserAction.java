@@ -78,7 +78,44 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 			return "adminLoginFail";
 		}
 	}
-
+	public String changeName(){
+		User user = (User) session.get("user");
+		if (user==null) {
+			return "refused";
+		}
+		String newName = httpServletRequest.getParameter("name");
+		if (newName != null && !newName.equals("")) {
+			user.setName(newName);
+			userService.changeSomething(user);
+			status = new HashMap<>();
+			status.put("state", 1);
+			session.put("user", user);
+		}
+		else{
+			status.put("state", 2);
+		}
+		return "adminUsersAjax";
+	}
+	
+	public String changePhoneNumber(){
+		User user = (User) session.get("user");
+		if (user==null) {
+			return "refused";
+		}
+		String phoneNumber = httpServletRequest.getParameter("phoneNumber");
+		if (phoneNumber != null && !phoneNumber.equals("")) {
+			user.setPhoneNumber(phoneNumber);
+			userService.changeSomething(user);
+			status = new HashMap<>();
+			status.put("state", 1);
+			session.put("user", user);
+		}
+		else{
+			status.put("state", 2);
+		}
+		return "adminUsersAjax";
+	}
+	
 	public String commentChart() {
 		User user = (User) session.get("user");
 		if (user != null && user.getRole().equals("admin")) {

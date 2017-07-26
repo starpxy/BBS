@@ -164,6 +164,9 @@ public class UserDao extends BaseDao {
 			List<BorrowedRecord> borrowedRecords = getSession().createQuery(hql).list();
 			if (!borrowedRecords.isEmpty()) {
 				BorrowedRecord borrowedRecord = borrowedRecords.get(0);
+				Book book = borrowedRecord.getBookItem().getBook();
+				book.setBorrowedNum(book.getBorrowedNum() + 1);
+				getSession().update(book);
 				borrowedRecord.setStatus(2);
 				borrowedRecord.setOutTradeNo(outTradeNumber);
 				borrowedRecord.setUpdateAt(new Date());
@@ -219,6 +222,12 @@ public class UserDao extends BaseDao {
 				borrowedRecord.setUpdateAt(new Date());
 				getSession().update(borrowedRecord);
 			}
+		}
+	}
+
+	public void changeSomething(User user) {
+		if (user != null) {
+			getSession().update(user);
 		}
 	}
 
