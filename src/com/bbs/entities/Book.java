@@ -1,8 +1,6 @@
 package com.bbs.entities;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Book {
 	private Integer bookId;

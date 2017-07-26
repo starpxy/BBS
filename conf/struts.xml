@@ -224,6 +224,7 @@
 				name="remained">
 				<param name="root">borrowedMap</param>
 			</result>
+			<result name="refused">login.jsp</result>
 			<result name="borrowHistory">borrowhistory.jsp</result>
 		</action>
 	</package>

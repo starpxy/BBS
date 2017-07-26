@@ -30,6 +30,10 @@ public class SearchHistoryDao extends BaseDao {
 			e.printStackTrace();
 		}
 		if ((rankedBook.size()<=7&&page==1)) {
+			String hql2 = "FROM User WHERE userId=" + searchHistory.getUser().getUserId();
+			searchHistory.setUser((User) (getSession().createQuery(hql2).list().get(0)));
+			searchHistory.setUpdateAt(new Date());
+			getSession().save(searchHistory);
 			return rankedBook;
 		}
 		int count = 1;

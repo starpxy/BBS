@@ -28,11 +28,12 @@ public class BorrowedRecordService {
 	public boolean returnRemaining(String userId, String borrowedId) {
 		return borrowedRecordDao.returnRemaining(userId, borrowedId);
 	}
-	
-	public int cancel(User user,String recordId){
+
+	public int cancel(User user, String recordId) {
 		return borrowedRecordDao.cancel(user, recordId);
 	}
-	public List<BorrowedRecord> borrowHistory(User user){
+
+	public List<BorrowedRecord> borrowHistory(User user) {
 		return borrowedRecordDao.borrowHistory(user);
 	}
 }

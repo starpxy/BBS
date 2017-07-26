@@ -61,6 +61,11 @@ public class BorrowedRecordAction extends BaseAction implements ModelDriven<Borr
 	}
 
 	public String borrowHistory() {
+		User user = (User) session.get("user");
+		if (user==null) {
+			return "refused";
+		}
+		request.put("records", borrowedRecordService.borrowHistory(user));
 		return "borrowHistory";
 	}
 
