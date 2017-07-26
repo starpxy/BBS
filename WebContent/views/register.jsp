@@ -161,8 +161,6 @@
     var $form = $("#form");
     $form.form();
     $("#registersubmit").on("click", function () {
-
-
         if (!$("#weuiAgree").get(0).checked){
             $.toptips("你需要赞同相关协议");
             return false;

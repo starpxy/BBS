@@ -54,7 +54,6 @@
     <div class="below-links">
         <a id="forgot" class="left" href="javascript:;">忘记密码?</a>
         <a class="right" href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx95311e6c3749af30&redirect_uri=http%3a%2f%2fpxyzmy.com.cn%2fBBS%2fviews%2fau-register&response_type=code&scope=snsapi_userinfo&state=STATE">注册账号</a>
-
     </div>
 
 

@@ -23,12 +23,216 @@
 <link rel="stylesheet" href="asserts/css/_all-skins.min.css">
 <link rel="stylesheet" href="asserts/plugins/layui/css/layui.css">
 <link rel="stylesheet" href="asserts/css/index.css">
+<style>
+
+@keyframes style1 {
+  from, 20%, 53%, 80%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    transform: translate3d(0,0.5,0.1);
+  }
+  40%, 43% {
+    animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    transform: translate3d(0px, -5px, 0);
+  }
+}
+.is-animate.style1{
+margin:50px auto;
+}
+.is-animate.style1 > div {
+ animation-name: style1;
+ display: inline-block;
+ padding: 2px;
+  border-radius: 4px;
+ font-size: 20px;
+ color:#fff;
+ background-color: #0D9E4C;
+box-shadow: 1px 1px 9px -3px #000;
+  }
+
+.is-animate > div {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+}
+
+.is-animate > div:nth-child(1) { animation-delay: 0.0s }
+.is-animate > div:nth-child(2) { animation-delay: 0.1s }
+.is-animate > div:nth-child(3) { animation-delay: 0.2s }
+.is-animate > div:nth-child(4) { animation-delay: 0.3s }
+.is-animate > div:nth-child(5) { animation-delay: 0.4s }
+.is-animate > div:nth-child(6) { animation-delay: 0.5s }
+.is-animate > div:nth-child(7) { animation-delay: 0.6s }
+.is-animate > div:nth-child(8) { animation-delay: 0.7s }
+.is-animate > div:nth-child(9) { animation-delay: 0.8s }
+.is-animate > div:nth-child(10) { animation-delay: 0.9s }
+.is-animate > div:nth-child(11) { animation-delay: 1.0s }
+
+
+.navbar2 {
+	width: 150px;
+	height: 150px;
+	line-height: 150px;
+	border-radius: 50%;
+	background: #0D9E4C;
+	margin: 70px auto;
+	position: relative;
+	cursor: pointer;
+	text-align: center;
+	font-size: 1.75em;
+	font-weight: bold;
+	color: #fff;
+	transition: 0.24s 0.2s;
+}
+
+.navbar2:hover {
+	background: #0D8440;
+}
+
+.navbar2 .menu {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	top: -75px;
+	left: -75px;
+	border: 150px solid transparent;
+	cursor: default;
+	border-radius: 50%;
+	transform: scale(0);
+	transition: transform 1.4s 0.07s;
+	z-index: -1;
+}
+
+.navbar2:hover .menu {
+	transition: transform 0.4s 0.08s, z-index 0s 0.5s;
+	transform: scale(1);
+	z-index: 1;
+}
+
+.navbar2 .menu li {
+	position: absolute;
+	top: -100px;
+	left: -100px;
+	transform-origin: 100px 100px;
+	transition: all 0.5s 0.1s;
+}
+
+.navbar2:hover .menu li {
+	transition: all 0.6s;
+}
+
+.navbar2 .menu li a {
+	width: 45px;
+	height: 45px;
+	line-height: 45px;
+	border-radius: 50%;
+	background: #0D9E4C;
+	position: absolute;
+	font-size: 60%;
+	color: #fff;
+	transition: 0.6s;
+}
+
+.navbar2 .menu li a:hover {
+	background: #0D8440;
+}
+
+.navbar2:hover .menu li:nth-child(1) {
+	transition-delay: 0.02s;
+	transform: rotate(85deg);
+}
+
+.navbar2:hover .menu li:nth-child(1) a {
+	transition-delay: 0.04s;
+	transform: rotate(635deg);
+}
+
+.navbar2:hover .menu li:nth-child(2) {
+	transition-delay: 0.04s;
+	transform: rotate(125deg);
+}
+
+.navbar2:hover .menu li:nth-child(2) a {
+	transition-delay: 0.08s;
+	transform: rotate(595deg);
+}
+
+.navbar2:hover .menu li:nth-child(3) {
+	transition-delay: 0.06s;
+	transform: rotate(165deg);
+}
+
+.navbar2:hover .menu li:nth-child(3) a {
+	transition-delay: 0.12s;
+	transform: rotate(555deg);
+}
+
+.navbar2:hover .menu li:nth-child(4) {
+	transition-delay: 0.08s;
+	transform: rotate(205deg);
+}
+
+.navbar2:hover .menu li:nth-child(4) a {
+	transition-delay: 0.16s;
+	transform: rotate(515deg);
+}
+
+.navbar2:hover .menu li:nth-child(5) {
+	transition-delay: 0.1s;
+	transform: rotate(245deg);
+}
+
+.navbar2:hover .menu li:nth-child(5) a {
+	transition-delay: 0.2s;
+	transform: rotate(475deg);
+}
+
+.navbar2:hover .menu li:nth-child(6) {
+	transition-delay: 0.12s;
+	transform: rotate(285deg);
+}
+
+.navbar2:hover .menu li:nth-child(6) a {
+	transition-delay: 0.24s;
+	transform: rotate(435deg);
+}
+
+.navbar2:hover .menu li:nth-child(7) {
+	transition-delay: 0.14s;
+	transform: rotate(325deg);
+}
+
+.navbar2:hover .menu li:nth-child(7) a {
+	transition-delay: 0.28s;
+	transform: rotate(395deg);
+}
+
+.navbar2:hover .menu li:nth-child(8) {
+	transition-delay: 0.16s;
+	transform: rotate(365deg);
+}
+
+.navbar2:hover .menu li:nth-child(8) a {
+	transition-delay: 0.32s;
+	transform: rotate(355deg);
+}
+
+.navbar2:hover .menu li:nth-child(9) {
+	transition-delay: 0.18s;
+	transform: rotate(405deg);
+}
+
+.navbar2:hover .menu li:nth-child(9) a {
+	transition-delay: 0.36s;
+	transform: rotate(315deg);
+}
+</style>
 </head>
+
 
 <body class="hold-transition skin-green sidebar-mini">
 
 	<div class="wrapper">
-
 		<!--头部 header-->
 		<header class="main-header"> <a href="user-adminLogin"
 			class="logo"> <!-- mini logo for sidebar mini 50x50 pixels --> <span
@@ -123,27 +327,26 @@
 			<li class="header">管理导航</li>
 
 
-			<li class="active"><a href="user-adminLogin"> <i class="fa fa-gear"></i> <span>管理员主页</span>
+			<li class="active"><a href="user-adminLogin"> <i
+					class="fa fa-gear"></i> <span>管理员主页</span>
 			</a></li>
 
 
-			<li class="treeview"><a href="#"> <i
-					class="fa fa-book"></i> <span>图书管理</span> <span
-					class="pull-right-container"> <i
+			<li class="treeview"><a href="#"> <i class="fa fa-book"></i>
+					<span>图书管理</span> <span class="pull-right-container"> <i
 						class="fa fa-angle-left pull-right"></i>
 				</span>
 			</a>
 				<ul class="treeview-menu">
-				
-<!-- 				TODO -->
-					<li><a href="user-adminBooks"><i
-							class="fa fa-circle-o"></i>录入与查看</a></li>
+
+					<!-- 				TODO -->
+					<li><a href="user-adminBooks"><i class="fa fa-circle-o"></i>录入与查看</a></li>
 					<li><a href="user-adminListRecords"><i
 							class="fa fa-circle-o"></i>借阅详情</a></li>
 					<li><a href="user-adminListReservations"><i
 							class="fa fa-circle-o"></i>预定详情</a></li>
 				</ul></li>
-				
+
 			<li><a href="user-adminUsers"> <i class="fa fa-user"></i> <span>用户管理</span>
 					<span class="pull-right-container"> <small
 						class="label pull-right bg-green">users</small>
@@ -189,13 +392,54 @@
 
 
 		<!--主内容-->
-		<div class="content-wrapper" style="min-height: 100px;">
-			<!-- Content Header (Page header) -->
+		<!-- 		<div class="content-wrapper" style="min-height: 100px;">
+ -->
+		<!-- Content Header (Page header) -->
+		<div class="content-wrapper" style="min-height: 20px;">
 
 
-			<!-- Main content -->
+			<div class="container">
 
+				<div class="row">
+					<div class='is-animate style1' style="text-align:center">
+						<div>欢</div>
+						<div>迎</div>
+						<div>来</div>
+						<div>到</div>
+						<div>图</div>
+						<div>书</div>
+						<div>管</div>
+						<div>理</div>
+						<div>员</div>
+						<div>系</div>
+						<div>统</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="navbar2">
+							主菜单
+							<ul class="menu">
+								<li><a href="#" class="fa fa-facebook"
+									data-toggle="tooltip" data-placement="right" title="扫一扫录入书籍"></a></li>
+								<li><a href="#" class="fa fa-google-plus"></a></li>
+								<li><a href="#" class="fa fa-twitter"></a></li>
+								<li><a href="#" class="fa fa-linkedin"></a></li>
+								<li><a href="#" class="fa fa-pinterest"></a></li>
+								<li><a href="#" class="fa fa-rss"></a></li>
+								<li><a href="#" class="fa fa-instagram"></a></li>
+								<li><a href="#" class="fa fa-skype"></a></li>
+								<li><a href="#" class="fa fa-github"></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
+		<!-- Main content -->
+
+		<!-- 		</div> -->
 
 
 		<!--footer-->
@@ -386,254 +630,462 @@
 				.use(
 						'layer',
 						function() {
-							$.ajax({
-					    		type:'POST',
-					            url:'user-initialAPI',
-					            dataType : 'json',
-					            data: {"url":"http://pxyzmy.com.cn/BBS/views/admin/user-adminLogin"},
-					            success: function (data){
-					                wx.config({
-					                    debug: false,
-					                    appId: data.appId,
-					                    timestamp: data.timeStamp,
-					                    nonceStr: data.nonceStr,
-					                    signature: data.signature,
-					                    jsApiList: [
-					                        'checkJsApi',
-					                        'onMenuShareTimeline',
-					                        'onMenuShareAppMessage',
-					                        'onMenuShareQQ',
-					                        'onMenuShareWeibo',
-					                        'hideMenuItems',
-					                        'showMenuItems',
-					                        'hideAllNonBaseMenuItem',
-					                        'showAllNonBaseMenuItem',
-					                        'translateVoice',
-					                        'startRecord',
-					                        'stopRecord',
-					                        'onRecordEnd',
-					                        'playVoice',
-					                        'pauseVoice',
-					                        'stopVoice',
-					                        'uploadVoice',
-					                        'downloadVoice',
-					                        'chooseImage',
-					                        'previewImage',
-					                        'uploadImage',
-					                        'downloadImage',
-					                        'getNetworkType',
-					                        'openLocation',
-					                        'getLocation',
-					                        'hideOptionMenu',
-					                        'showOptionMenu',
-					                        'closeWindow',
-					                        'scanQRCode',
-					                        'chooseWXPay',
-					                        'openProductSpecificView',
-					                        'addCard',
-					                        'chooseCard',
-					                        'openCard'
-					                    ]
-					                });
-					                
-					                wx.error(function (res) {
-					                    alert(res.errMsg);
-					                });
-					    },
-					    error: function(){
-					        layer.msg('初始化微信JS接口失败',{icon:2,anim:2,time:1000});
-					    }
-					});
-					         document.querySelector('#scan').onclick = function () {
-					             wx.scanQRCode({
-					                needResult: 1,
-					                desc: 'scanQRCode desc',
-					                success: function (res) { 
 
-					                	var dat = res.resultStr;
-					            	
-					                	$.ajax({
-					                        type:'POST',
-					                        url:'user-adminScanUser',
-					                        data:{"userInfo":dat},
-					                        dataType : 'json',
-					                        success: function (data){
-					                            if(data.state==1){
-													var userinfo = data.user;
-					                            	layer.open({
-					                                    title: "选择操作",
-					                                    btnAlign: 'c',
-					                                    content: "已扫描" + userinfo.name + "的二维码，请选择操作",
-					                                    btn: ['借书', '还书', '取消'],
-					                                    yes: function () {
-					                                        
-					                                        //借书
-					                                        //TODO,当点击借书按钮时,这里需要向后台发一个ajax请求,获取该用户的借书列表,再在前段按以下方式呈现,ajax由star处理,前端这里由静态值作展示
-					                                        //replacement START
-					                                        $.ajax({
-					                                                   type: 'POST',
-					                                                   url: 'user-adminBorrow',
-					                                                   data: {'userId': userinfo.userId},
-					                                                   dataType: 'json',
-					                                                   success: function (data) {
-																	   if(data.state==1){
-																			var itemslist = "";
-																			var records = data.records;
-									                                        for (var i = 0; i < records.length; i += 1) {
-									                                            itemslist += '<a class="list-group-item item-div"><h4 class="list-group-item-heading">'+records[i].bookItem.book.isbn+'<span class="pull-right">' + records[i].borrowedId + '</span></h4>';
-									                                            itemslist += '<p class="list-group-item-text">'+records[i].bookItem.book.bookTitle+'<input type="checkbox" class="pull-right"></p></a> ';
-									                                        }
+							$
+									.ajax({
+										type : 'POST',
+										url : 'user-initialAPI',
+										dataType : 'json',
+										data : {
+											"url" : "http://pxyzmy.com.cn/BBS/views/admin/user-adminLogin"
+										},
+										success : function(data) {
+											wx
+													.config({
+														debug : false,
+														appId : data.appId,
+														timestamp : data.timeStamp,
+														nonceStr : data.nonceStr,
+														signature : data.signature,
+														jsApiList : [
+																'checkJsApi',
+																'onMenuShareTimeline',
+																'onMenuShareAppMessage',
+																'onMenuShareQQ',
+																'onMenuShareWeibo',
+																'hideMenuItems',
+																'showMenuItems',
+																'hideAllNonBaseMenuItem',
+																'showAllNonBaseMenuItem',
+																'translateVoice',
+																'startRecord',
+																'stopRecord',
+																'onRecordEnd',
+																'playVoice',
+																'pauseVoice',
+																'stopVoice',
+																'uploadVoice',
+																'downloadVoice',
+																'chooseImage',
+																'previewImage',
+																'uploadImage',
+																'downloadImage',
+																'getNetworkType',
+																'openLocation',
+																'getLocation',
+																'hideOptionMenu',
+																'showOptionMenu',
+																'closeWindow',
+																'scanQRCode',
+																'chooseWXPay',
+																'openProductSpecificView',
+																'addCard',
+																'chooseCard',
+																'openCard' ]
+													});
 
-									                                        $("#blist-box").html(itemslist);
-									                                        //END
+											wx.error(function(res) {
+												alert(res.errMsg);
+											});
+										},
+										error : function() {
+											layer.msg('初始化微信JS接口失败', {
+												icon : 2,
+												anim : 2,
+												time : 1000
+											});
+										}
+									});
+							document.querySelector('#scan').onclick = function() {
+								wx
+										.scanQRCode({
+											needResult : 1,
+											desc : 'scanQRCode desc',
+											success : function(res) {
 
-									                                        $(".list-group-item").click(function () {
-									                                            if ($(this).children("p").children('input').is(":checked")) {
-									                                                $(this).children("p").children('input').removeAttr("checked");
-									                                            } else {
-									                                                $(this).children("p").children('input').attr("checked", "true");
-									                                            }
-									                                        });
+												var dat = res.resultStr;
 
+												$
+														.ajax({
+															type : 'POST',
+															url : 'user-adminScanUser',
+															data : {
+																"userInfo" : dat
+															},
+															dataType : 'json',
+															success : function(
+																	data) {
+																if (data.state == 1) {
+																	var userinfo = data.user;
+																	layer
+																			.open({
+																				title : "选择操作",
+																				btnAlign : 'c',
+																				content : "已扫描"
+																						+ userinfo.name
+																						+ "的二维码，请选择操作",
+																				btn : [
+																						'借书',
+																						'还书',
+																						'取消' ],
+																				yes : function() {
 
-									                                        layer.open({
-									                                            type: 1,
-									                                            title: "借书列表",
-									                                            content: $("#blist-box"),
-									                                            btn: ['确认借书'],
-									                                            area: ['300px', '400px'],
-									                                            yes: function (index) {
+																					//借书
+																					//TODO,当点击借书按钮时,这里需要向后台发一个ajax请求,获取该用户的借书列表,再在前段按以下方式呈现,ajax由star处理,前端这里由静态值作展示
+																					//replacement START
+																					$
+																							.ajax({
+																								type : 'POST',
+																								url : 'user-adminBorrow',
+																								data : {
+																									'userId' : userinfo.userId
+																								},
+																								dataType : 'json',
+																								success : function(
+																										data) {
+																									if (data.state == 1) {
+																										var itemslist = "";
+																										var records = data.records;
+																										for (var i = 0; i < records.length; i += 1) {
+																											itemslist += '<a class="list-group-item item-div"><h4 class="list-group-item-heading">'
+																													+ records[i].bookItem.book.isbn
+																													+ '<span class="pull-right">'
+																													+ records[i].borrowedId
+																													+ '</span></h4>';
+																											itemslist += '<p class="list-group-item-text">'
+																													+ records[i].bookItem.book.bookTitle
+																													+ '<input type="checkbox" class="pull-right"></p></a> ';
+																										}
 
-									                                                var selecteditems = new Array();
-									                                                $("#blist-box .list-group-item input").each(function () {
-									                                                    if ($(this).is(':checked')) {
-									                                                        selecteditems.push($(this).parent().siblings("h4").children('span').text());
-									                                                    }
+																										$(
+																												"#blist-box")
+																												.html(
+																														itemslist);
+																										//END
 
-									                                                });
-									                                                //TEST
-									                                                //TODO结束操作: 下面将selecteditems,即选中的book items数组传递到服务起
-									                                                //下面的ajax由star处理
-									                                                $.ajax({
-									                                                    type: 'POST',
-									                                                    url: 'user-adminConfirmBorrow',
-									                                                    data: {'selecteditems': JSON.stringify(selecteditems)},
-									                                                    dataType: 'json',
-									                                                    success: function (data) {
-									                                                        //TODO 2
-									                                                        layer.msg("图书确认成功！",{anim:1,icon:1,time:1000});
-									                                                    },
-									                                                    error: function (xhr, type) {
-									                                                        layer.msg("确认失败",{anim:6,icon:2,time:1000});
-									                                                    }
-									                                                });
-									                                                layer.close(index);
-									                                            }
-									                                        });
-																		}
-																		else{
-																			layer.msg("该用户没有待确认书籍！",{anim:6,icon:2,time:2000});
-																		}
-					                                                   },
-					                                                   error: function (xhr, type) {
-					                                                       layer.msg("error",{anim:6,icon:2,time:1000});
-					                                                   }
-					                                        });
-					                                        
-					                                    },
-					                                    btn2: function () {
-					                                        
-					                                        //还书
+																										$(
+																												".list-group-item")
+																												.click(
+																														function() {
+																															if ($(
+																																	this)
+																																	.children(
+																																			"p")
+																																	.children(
+																																			'input')
+																																	.is(
+																																			":checked")) {
+																																$(
+																																		this)
+																																		.children(
+																																				"p")
+																																		.children(
+																																				'input')
+																																		.removeAttr(
+																																				"checked");
+																															} else {
+																																$(
+																																		this)
+																																		.children(
+																																				"p")
+																																		.children(
+																																				'input')
+																																		.attr(
+																																				"checked",
+																																				"true");
+																															}
+																														});
 
-					                                        //TODO,当点击还书按钮时,这里需要向后台发一个ajax请求,获取该用户的还书列表,再在前端按以下方式呈现,ajax由star处理,前端这里由静态值作展示
-					                                        //replacement START
-					                                        $.ajax({
-										                        type: 'POST',
-										                        url: 'user-adminReturn',
-										                        dataType: 'json',
-										                        data: {'userId': userinfo.userId},
-										                        success: function (data) {
-																	if(data.state==1){
-																		var itemslist = "";
-																		var records = data.records;
-								                                        for (var i = 0; i < records.length; i += 1) {
-								                                            itemslist += '<a class="list-group-item item-div"><h4 class="list-group-item-heading">'+records[i].bookItem.book.isbn+' <span class="pull-right">' + records[i].borrowedId + '</span></h4>';
-								                                            itemslist += '<p class="list-group-item-text">'+records[i].bookItem.book.bookTitle+'<input type="checkbox" class="pull-right"></p></a> ';
-								                                        }
+																										layer
+																												.open({
+																													type : 1,
+																													title : "借书列表",
+																													content : $("#blist-box"),
+																													btn : [ '确认借书' ],
+																													area : [
+																															'300px',
+																															'400px' ],
+																													yes : function(
+																															index) {
 
-								                                        $("#rlist-box").html(itemslist);
-								                                        //END
+																														var selecteditems = new Array();
+																														$(
+																																"#blist-box .list-group-item input")
+																																.each(
+																																		function() {
+																																			if ($(
+																																					this)
+																																					.is(
+																																							':checked')) {
+																																				selecteditems
+																																						.push($(
+																																								this)
+																																								.parent()
+																																								.siblings(
+																																										"h4")
+																																								.children(
+																																										'span')
+																																								.text());
+																																			}
 
-								                                        $(".list-group-item").click(function () {
-								                                            if ($(this).children("p").children('input').is(":checked")) {
-								                                                $(this).children("p").children('input').removeAttr("checked");
-								                                            } else {
-								                                                $(this).children("p").children('input').attr("checked", "true");
-								                                            }
-								                                        });
+																																		});
+																														//TEST
+																														//TODO结束操作: 下面将selecteditems,即选中的book items数组传递到服务起
+																														//下面的ajax由star处理
+																														$
+																																.ajax({
+																																	type : 'POST',
+																																	url : 'user-adminConfirmBorrow',
+																																	data : {
+																																		'selecteditems' : JSON
+																																				.stringify(selecteditems)
+																																	},
+																																	dataType : 'json',
+																																	success : function(
+																																			data) {
+																																		//TODO 2
+																																		layer
+																																				.msg(
+																																						"图书确认成功！",
+																																						{
+																																							anim : 1,
+																																							icon : 1,
+																																							time : 1000
+																																						});
+																																	},
+																																	error : function(
+																																			xhr,
+																																			type) {
+																																		layer
+																																				.msg(
+																																						"确认失败",
+																																						{
+																																							anim : 6,
+																																							icon : 2,
+																																							time : 1000
+																																						});
+																																	}
+																																});
+																														layer
+																																.close(index);
+																													}
+																												});
+																									} else {
+																										layer
+																												.msg(
+																														"该用户没有待确认书籍！",
+																														{
+																															anim : 6,
+																															icon : 2,
+																															time : 2000
+																														});
+																									}
+																								},
+																								error : function(
+																										xhr,
+																										type) {
+																									layer
+																											.msg(
+																													"error",
+																													{
+																														anim : 6,
+																														icon : 2,
+																														time : 1000
+																													});
+																								}
+																							});
 
+																				},
+																				btn2 : function() {
 
-								                                        layer.open({
-								                                            type: 1,
-								                                            title: "还书列表",
-								                                            content: $("#rlist-box"),
-								                                            btn: ['确认'],
-								                                            area: ['300px', '400px'],
-								                                            yes: function (index) {
+																					//还书
 
-								                                                var selecteditems = new Array();
-								                                                $("#rlist-box .list-group-item input").each(function () {
-								                                                    if ($(this).is(':checked')) {
-								                                                        selecteditems.push($(this).parent().siblings("h4").children('span').text());
-								                                                    }
+																					//TODO,当点击还书按钮时,这里需要向后台发一个ajax请求,获取该用户的还书列表,再在前端按以下方式呈现,ajax由star处理,前端这里由静态值作展示
+																					//replacement START
+																					$
+																							.ajax({
+																								type : 'POST',
+																								url : 'user-adminReturn',
+																								dataType : 'json',
+																								data : {
+																									'userId' : userinfo.userId
+																								},
+																								success : function(
+																										data) {
+																									if (data.state == 1) {
+																										var itemslist = "";
+																										var records = data.records;
+																										for (var i = 0; i < records.length; i += 1) {
+																											itemslist += '<a class="list-group-item item-div"><h4 class="list-group-item-heading">'
+																													+ records[i].bookItem.book.isbn
+																													+ ' <span class="pull-right">'
+																													+ records[i].borrowedId
+																													+ '</span></h4>';
+																											itemslist += '<p class="list-group-item-text">'
+																													+ records[i].bookItem.book.bookTitle
+																													+ '<input type="checkbox" class="pull-right"></p></a> ';
+																										}
 
-								                                                });
-								                                                //TEST
-								                                                //TODO结束操作: 下面将selecteditems,即选中的book items数组传递到服务起
-								                                                //下面的ajax由star处理
-								                                                $.ajax({
-								                                                    type: 'POST',
-								                                                    url: 'user-adminConfirmReturn',
-								                                                    data: {'selecteditems': JSON.stringify(selecteditems)},
-								                                                    dataType: 'json',
-								                                                    success: function (data) {
-								                                                        //TODO 2
-								                                                        layer.msg("图书确认成功！",{anim:1,icon:1,time:2000});
-								                                                    },
-								                                                    error: function (xhr, type) {
-								                                                        layer.msg("还书失败！",{anim:6,icon:2,time:1000});
-								                                                    }
-								                                                });
+																										$(
+																												"#rlist-box")
+																												.html(
+																														itemslist);
+																										//END
 
-								                                                layer.close(index);
-								                                            }
-								                                        });
-								                                    }
-																	else{
-																		layer.msg("该用户没有未还书籍！",{anim:6,icon:2,time:2000});
-																	}
-										                        },
-										                        error: function (xhr, type) {
-										                        }
-										                    });
-					                                        return false;
-					                                    }
-					                            	});
-					                            }
-					                            else if(data.state==2){
-					                            	layer.msg("查无此用户！",{anim:6,icon:2,time:2000});
-					                            }
-					                            else if(data.state==3){
-					                            	layer.msg("二维码解析错误：时间戳异常或伪造的二维码",{anim:6,icon:2,time:2000});
-					                            }
-					                        },
-					                        error: function(){
-					                            alert('服务器错误');
-					                        }
-					                    });
-								 	}
-					            }); 
-					   }; 
+																										$(
+																												".list-group-item")
+																												.click(
+																														function() {
+																															if ($(
+																																	this)
+																																	.children(
+																																			"p")
+																																	.children(
+																																			'input')
+																																	.is(
+																																			":checked")) {
+																																$(
+																																		this)
+																																		.children(
+																																				"p")
+																																		.children(
+																																				'input')
+																																		.removeAttr(
+																																				"checked");
+																															} else {
+																																$(
+																																		this)
+																																		.children(
+																																				"p")
+																																		.children(
+																																				'input')
+																																		.attr(
+																																				"checked",
+																																				"true");
+																															}
+																														});
+
+																										layer
+																												.open({
+																													type : 1,
+																													title : "还书列表",
+																													content : $("#rlist-box"),
+																													btn : [ '确认' ],
+																													area : [
+																															'300px',
+																															'400px' ],
+																													yes : function(
+																															index) {
+
+																														var selecteditems = new Array();
+																														$(
+																																"#rlist-box .list-group-item input")
+																																.each(
+																																		function() {
+																																			if ($(
+																																					this)
+																																					.is(
+																																							':checked')) {
+																																				selecteditems
+																																						.push($(
+																																								this)
+																																								.parent()
+																																								.siblings(
+																																										"h4")
+																																								.children(
+																																										'span')
+																																								.text());
+																																			}
+
+																																		});
+																														//TEST
+																														//TODO结束操作: 下面将selecteditems,即选中的book items数组传递到服务起
+																														//下面的ajax由star处理
+																														$
+																																.ajax({
+																																	type : 'POST',
+																																	url : 'user-adminConfirmReturn',
+																																	data : {
+																																		'selecteditems' : JSON
+																																				.stringify(selecteditems)
+																																	},
+																																	dataType : 'json',
+																																	success : function(
+																																			data) {
+																																		//TODO 2
+																																		layer
+																																				.msg(
+																																						"图书确认成功！",
+																																						{
+																																							anim : 1,
+																																							icon : 1,
+																																							time : 2000
+																																						});
+																																	},
+																																	error : function(
+																																			xhr,
+																																			type) {
+																																		layer
+																																				.msg(
+																																						"还书失败！",
+																																						{
+																																							anim : 6,
+																																							icon : 2,
+																																							time : 1000
+																																						});
+																																	}
+																																});
+
+																														layer
+																																.close(index);
+																													}
+																												});
+																									} else {
+																										layer
+																												.msg(
+																														"该用户没有未还书籍！",
+																														{
+																															anim : 6,
+																															icon : 2,
+																															time : 2000
+																														});
+																									}
+																								},
+																								error : function(
+																										xhr,
+																										type) {
+																								}
+																							});
+																					return false;
+																				}
+																			});
+																} else if (data.state == 2) {
+																	layer
+																			.msg(
+																					"查无此用户！",
+																					{
+																						anim : 6,
+																						icon : 2,
+																						time : 2000
+																					});
+																} else if (data.state == 3) {
+																	layer
+																			.msg(
+																					"二维码解析错误：时间戳异常或伪造的二维码",
+																					{
+																						anim : 6,
+																						icon : 2,
+																						time : 2000
+																					});
+																}
+															},
+															error : function() {
+																alert('服务器错误');
+															}
+														});
+											}
+										});
+							};
 							var layer = layui.layer;
 							var isbns = new Array();
 							$(".book-isbn").each(function(value) {
@@ -684,10 +1136,8 @@
 														});
 											});
 
-							
 						});
 	</script>
-
 </body>
 
 </html>

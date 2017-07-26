@@ -34,10 +34,14 @@ input, button {
 	outline: none;
 }
 
+.weui-flex-item a:hover {
+	background: #d1d1d1;
+}
+
 input {
 	width: 100%;
 	height: 42px;
-	padding-left: 13px;
+	padding-left: 5px;
 }
 
 button {
@@ -51,9 +55,6 @@ button {
 	background: #5e835d;
 }
 
-.weui-flex-item a:hover {
-	background: #d1d1d1;
-}
 /*搜索框1*/
 .bar1 input {
 	height: 30px;
@@ -66,7 +67,7 @@ button {
 .bar1 button {
 	height: 30px;
 	top: 2px;
-	right: -17px;
+	right: -10px;
 	background: #7aab7a;
 	border-radius: 0 5px 5px 0;
 }
@@ -84,8 +85,8 @@ button {
 <body ontouchstart style="background-color: #f8f8f8;">
 
 	<div class="search-box">
-
 		<div class="search bar1">
+
 			<form action="searchHistory-searchBooks" method="post"
 				onsubmit="return check()">
 				<input id="keyword" type="text" name="keyword"
@@ -289,12 +290,13 @@ button {
 	</script>
 	<script type="text/javascript">
 		$(function() {
-			<% if(request.getAttribute("logInfo")!=null) {
-				AccessLog accessLog = (AccessLog)request.getAttribute("logInfo");
-			%>
-			$.toptips("<div style='text-align:left;padding:3%;padding-left:10%'>欢迎回来,<%=accessLog.getUser().getName()%><br>登陆时间: <%=TimeUtils.getChineseTime(accessLog.getLogAt())%><br>登录地点: ${request.logInfo.area}<br>登录位置: ${request.logInfo.location}<br>登录方式: <%=LogRules.getStatus(accessLog.getMethod())%></div>", 'ok');
-			<%}%>
-			$(".search-span").hide();
+			<%if (request.getAttribute("logInfo") != null) {
+				AccessLog accessLog = (AccessLog) request.getAttribute("logInfo");%>
+			$.toptips("<div style='text-align:left;padding:3%;padding-left:10%'>欢迎回来,<%=accessLog.getUser().getName()%><br>登陆时间: <%=TimeUtils.getChineseTime(accessLog.getLogAt())%><br>登录地点: ${request.logInfo.area}<br>登录位置: ${request.logInfo.location}<br>登录方式: <%=LogRules.getStatus(accessLog.getMethod())%>
+		</div>",
+							'ok');
+	<%}%>
+		$(".search-span").hide();
 			var itemslist = '';
 			var books;
 			var i = 0;
@@ -389,31 +391,37 @@ button {
 							success : function(res) {
 
 								var data = res.resultStr;
-								var ids = $.parseJSON(data);
-								$
-										.ajax({
-											type : 'POST',
-											url : 'item-ava?itemId='
-													+ ids.itemId,
-											dataType : 'json',
-											success : function(data) {
-												if (data.state == 1) {
-													window.location.href = "book-bookSubmit?bookId="
-															+ ids.bookId
-															+ "&itemId="
-															+ ids.itemId;
-												} else if (data.state == 2) {
-													alert('对不起，此书已被其他人预定！');
-												} else if (data.state == 3) {
-													alert('啊哦！你预定的书不是我哦！');
-												} else {
-													alert('此书处于被借出状态！有疑问请联系管理员');
+								if (data.indexOf("EAN_13")>-1) {
+									//扫除的结果是isbn，直接跳转到book页面
+									var isbn=data.split(',')[1];
+									window.location.href='/book-bookDetails?bookId='+isbn;
+								} else {
+									var ids = $.parseJSON(data);
+									$
+											.ajax({
+												type : 'POST',
+												url : 'item-ava?itemId='
+														+ ids.itemId,
+												dataType : 'json',
+												success : function(data) {
+													if (data.state == 1) {
+														window.location.href = "book-bookSubmit?bookId="
+																+ ids.bookId
+																+ "&itemId="
+																+ ids.itemId;
+													} else if (data.state == 2) {
+														alert('对不起，此书已被其他人预定！');
+													} else if (data.state == 3) {
+														alert('啊哦！你预定的书不是我哦！');
+													} else {
+														alert('此书处于被借出状态！有疑问请联系管理员');
+													}
+												},
+												error : function() {
+													alert('服务器错误');
 												}
-											},
-											error : function() {
-												alert('服务器错误');
-											}
-										});
+											});
+								}
 							}
 						});
 			};
