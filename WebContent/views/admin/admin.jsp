@@ -35,17 +35,22 @@
     transform: translate3d(0px, -5px, 0);
   }
 }
+
+
+.option-item:hover div .info-box{
+background:#eee;
+}
 .is-animate.style1{
 margin:50px auto;
 }
 .is-animate.style1 > div {
  animation-name: style1;
  display: inline-block;
- padding: 2px;
-  border-radius: 4px;
+ padding: 12px;
+  border-radius: 26px;
  font-size: 20px;
- color:#fff;
- background-color: #0D9E4C;
+ color:#178342;
+ background-color:#eee;
 box-shadow: 1px 1px 9px -3px #000;
   }
 
@@ -68,164 +73,7 @@ box-shadow: 1px 1px 9px -3px #000;
 .is-animate > div:nth-child(11) { animation-delay: 1.0s }
 
 
-.navbar2 {
-	width: 150px;
-	height: 150px;
-	line-height: 150px;
-	border-radius: 50%;
-	background: #0D9E4C;
-	margin: 70px auto;
-	position: relative;
-	cursor: pointer;
-	text-align: center;
-	font-size: 1.75em;
-	font-weight: bold;
-	color: #fff;
-	transition: 0.24s 0.2s;
-}
 
-.navbar2:hover {
-	background: #0D8440;
-}
-
-.navbar2 .menu {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-	position: absolute;
-	top: -75px;
-	left: -75px;
-	border: 150px solid transparent;
-	cursor: default;
-	border-radius: 50%;
-	transform: scale(0);
-	transition: transform 1.4s 0.07s;
-	z-index: -1;
-}
-
-.navbar2:hover .menu {
-	transition: transform 0.4s 0.08s, z-index 0s 0.5s;
-	transform: scale(1);
-	z-index: 1;
-}
-
-.navbar2 .menu li {
-	position: absolute;
-	top: -100px;
-	left: -100px;
-	transform-origin: 100px 100px;
-	transition: all 0.5s 0.1s;
-}
-
-.navbar2:hover .menu li {
-	transition: all 0.6s;
-}
-
-.navbar2 .menu li a {
-	width: 45px;
-	height: 45px;
-	line-height: 45px;
-	border-radius: 50%;
-	background: #0D9E4C;
-	position: absolute;
-	font-size: 60%;
-	color: #fff;
-	transition: 0.6s;
-}
-
-.navbar2 .menu li a:hover {
-	background: #0D8440;
-}
-
-.navbar2:hover .menu li:nth-child(1) {
-	transition-delay: 0.02s;
-	transform: rotate(85deg);
-}
-
-.navbar2:hover .menu li:nth-child(1) a {
-	transition-delay: 0.04s;
-	transform: rotate(635deg);
-}
-
-.navbar2:hover .menu li:nth-child(2) {
-	transition-delay: 0.04s;
-	transform: rotate(125deg);
-}
-
-.navbar2:hover .menu li:nth-child(2) a {
-	transition-delay: 0.08s;
-	transform: rotate(595deg);
-}
-
-.navbar2:hover .menu li:nth-child(3) {
-	transition-delay: 0.06s;
-	transform: rotate(165deg);
-}
-
-.navbar2:hover .menu li:nth-child(3) a {
-	transition-delay: 0.12s;
-	transform: rotate(555deg);
-}
-
-.navbar2:hover .menu li:nth-child(4) {
-	transition-delay: 0.08s;
-	transform: rotate(205deg);
-}
-
-.navbar2:hover .menu li:nth-child(4) a {
-	transition-delay: 0.16s;
-	transform: rotate(515deg);
-}
-
-.navbar2:hover .menu li:nth-child(5) {
-	transition-delay: 0.1s;
-	transform: rotate(245deg);
-}
-
-.navbar2:hover .menu li:nth-child(5) a {
-	transition-delay: 0.2s;
-	transform: rotate(475deg);
-}
-
-.navbar2:hover .menu li:nth-child(6) {
-	transition-delay: 0.12s;
-	transform: rotate(285deg);
-}
-
-.navbar2:hover .menu li:nth-child(6) a {
-	transition-delay: 0.24s;
-	transform: rotate(435deg);
-}
-
-.navbar2:hover .menu li:nth-child(7) {
-	transition-delay: 0.14s;
-	transform: rotate(325deg);
-}
-
-.navbar2:hover .menu li:nth-child(7) a {
-	transition-delay: 0.28s;
-	transform: rotate(395deg);
-}
-
-.navbar2:hover .menu li:nth-child(8) {
-	transition-delay: 0.16s;
-	transform: rotate(365deg);
-}
-
-.navbar2:hover .menu li:nth-child(8) a {
-	transition-delay: 0.32s;
-	transform: rotate(355deg);
-}
-
-.navbar2:hover .menu li:nth-child(9) {
-	transition-delay: 0.18s;
-	transform: rotate(405deg);
-}
-
-.navbar2:hover .menu li:nth-child(9) a {
-	transition-delay: 0.36s;
-	transform: rotate(315deg);
-}
 </style>
 </head>
 
@@ -388,19 +236,21 @@ box-shadow: 1px 1px 9px -3px #000;
 			<li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>操作三</span></a></li>
 		</ul>
 
-		</section> <!-- /.sidebar --> </aside>
+		</section> <!-- /.sidebar --> 
+		</aside>
 
 
 		<!--主内容-->
 		<!-- 		<div class="content-wrapper" style="min-height: 100px;">
  -->
 		<!-- Content Header (Page header) -->
-		<div class="content-wrapper" style="min-height: 20px;">
-
-
-			<div class="container">
-
-				<div class="row">
+		
+		
+    <!--主内容-->
+    <div class="content-wrapper" style="min-height: 916px;">
+        <!-- Content Header (Page header) -->
+        <section class="content-header"  style="background: url('dist/img/intro-bg.jpeg') no-repeat center center;padding:20px">
+				<h1>
 					<div class='is-animate style1' style="text-align:center">
 						<div>欢</div>
 						<div>迎</div>
@@ -414,29 +264,240 @@ box-shadow: 1px 1px 9px -3px #000;
 						<div>系</div>
 						<div>统</div>
 					</div>
-				</div>
+				</h1>
+        </section>
 
-				<div class="row">
-					<div class="col-md-12">
-						<div class="navbar2">
-							主菜单
-							<ul class="menu">
-								<li><a href="#" class="fa fa-facebook"
-									data-toggle="tooltip" data-placement="right" title="扫一扫录入书籍"></a></li>
-								<li><a href="#" class="fa fa-google-plus"></a></li>
-								<li><a href="#" class="fa fa-twitter"></a></li>
-								<li><a href="#" class="fa fa-linkedin"></a></li>
-								<li><a href="#" class="fa fa-pinterest"></a></li>
-								<li><a href="#" class="fa fa-rss"></a></li>
-								<li><a href="#" class="fa fa-instagram"></a></li>
-								<li><a href="#" class="fa fa-skype"></a></li>
-								<li><a href="#" class="fa fa-github"></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+        <!-- Main content -->
+        
+        
+        <section class="content">
+<!--        style="background:#888;padding:20px"
+ --><div class="row">
+
+		<div class="box box-solid" style="margin: 10px">
+            <div class="box-header with-border">
+              <i class="fa fa-text-width"></i>
+              <h3 class="box-title">Text Emphasis</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+         
+         
+         <a href="#" class="option-item">
+        <div class="col-md-12">
+
+          <div class="info-box">
+            <span class="info-box-icon bg-aqua" style="align:center"><i class="fa fa-envelope-o"  style="margin-top:10px"></i></span>
+            
+            <div class="info-box-content">
+              <span class="info-box-text">Messages</span>
+              <span class="info-box-number">1,410</span>
+            </div>
+            
+            <!-- /.info-box-content -->
+          </div>
+          
+          <!-- /.info-box -->
+        </div>
+</a>
+
+        <!-- /.col -->
+        <a href="#" class="option-item">
+        <div class="col-md-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-flag-o"></i></span>
+            <div class="info-box-content">
+              <span class="info-box-text">Bookmarks</span>
+              <span class="info-box-number">410</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        </a>
+        <!-- /.col -->
+          <a href="#" class="option-item">
+        <div class="col-md-12">
+          <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-files-o"></i></span>
+            <div class="info-box-content">
+              <span class="info-box-text">Uploads</span>
+              <span class="info-box-number">13,648</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        </a>
+        <!-- /.col -->
+        <!-- /.col -->
+          </div>
+            <!-- /.box-body -->
+          </div>
+       
+      </div>
+<div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box bg-aqua">
+            <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Bookmarks</span>
+              <span class="info-box-number">41,410</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 70%"></div>
+              </div>
+                  <span class="progress-description">
+                    70% Increase in 30 Days
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box bg-green">
+            <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Likes</span>
+              <span class="info-box-number">41,410</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 70%"></div>
+              </div>
+                  <span class="progress-description">
+                    70% Increase in 30 Days
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box bg-yellow">
+            <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Events</span>
+              <span class="info-box-number">41,410</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 70%"></div>
+              </div>
+                  <span class="progress-description">
+                    70% Increase in 30 Days
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="info-box bg-red">
+            <span class="info-box-icon"><i class="fa fa-comments-o"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Comments</span>
+              <span class="info-box-number">41,410</span>
+
+              <div class="progress">
+                <div class="progress-bar" style="width: 70%"></div>
+              </div>
+                  <span class="progress-description">
+                    70% Increase in 30 Days
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+      </div>
+        
+ <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>150</h3>
+
+              <p>New Orders</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-shopping-cart"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+              More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+              <p>Bounce Rate</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+              More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>44</h3>
+
+              <p>User Registrations</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+              More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>65</h3>
+
+              <p>Unique Visitors</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+              More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+        
+        
+        </section>
+        <!-- /.content -->
+    </div>
+
+						
+	</div>
+					
 		<!-- Main content -->
 
 		<!-- 		</div> -->
@@ -1087,7 +1148,10 @@ box-shadow: 1px 1px 9px -3px #000;
 										});
 							};
 							var layer = layui.layer;
+
 							var isbns = new Array();
+
+							
 							$(".book-isbn").each(function(value) {
 								isbns.push('"' + $(this).text() + '"');
 							});

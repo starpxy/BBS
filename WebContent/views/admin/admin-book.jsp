@@ -434,11 +434,11 @@
                                         <td class="book-type"><%=bookItem.getBook().getType() %></td>
                                         <td class="options">
                                             <a data-toggle="tooltip" data-placement="left"
-                                               title="查看书籍详情" class="view-book"><span
+                                               title="查看并编辑书籍详情" class="view-book"><span
                                                     class="glyphicon glyphicon-eye-open"></span></a>
-                                            <a data-toggle="tooltip" data-placement="left"
+                                        <%--     <a data-toggle="tooltip" data-placement="left"
                                                title="编辑图书详情" class="edit-book"><span
-                                                    class="glyphicon glyphicon-pencil"></span></a>
+                                                    class="glyphicon glyphicon-pencil"></span></a> --%>
                                             <a data-toggle="tooltip" data-placement="left"
                                                title="删除这本书及其库存" class="delete-book"><span
                                                     class="glyphicon glyphicon-remove"></span></a>
@@ -649,6 +649,33 @@
     layui.use('layer', function () {
     	
         var layer = layui.layer;
+
+
+        $(".view-book").click(function () {
+            var bookid=$(this).parent().siblings('.book-id').html();
+            var explorer = navigator.userAgent;
+            var size=['400px','400px'];
+            if (explorer.indexOf("Mobile") >= 0) {
+                size=['300px','400px'];
+            }else{
+                size=['500px','600px'];
+            }
+            layer.open({
+                type: 2,
+                content: "admin-bookinfo.jsp?page="+bookid,
+                btn: ['取消'],
+                resize: true,
+                anim: 2,
+                closeBtn: 2,
+                shadeClose:true,
+                area: size,
+                yes: function (index) {
+                    layer.close(index);
+                }
+            });
+
+        });
+        
         var isbns = new Array();
         $(".book-isbn").each(function (value) {
             isbns.push('"' + $(this).text() + '"');
@@ -893,6 +920,7 @@
             window.location.href = "user-adminLogin";
 
         });
+        
 
 
         $(".delete-item").click(function () {
