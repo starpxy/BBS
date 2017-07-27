@@ -45,7 +45,7 @@ public class UserDao extends BaseDao {
 	}
 
 	public List<AccessLog> checkLogs(User user) {
-		String hql = "FROM AccessLog b LEFT JOIN FETCH b.user WHERE b.user.userId=" + user.getUserId();
+		String hql = "FROM AccessLog b LEFT OUTER JOIN FETCH b.user WHERE b.user.userId=" + user.getUserId();
 		return getSession().createQuery(hql).list();
 	}
 
@@ -242,7 +242,7 @@ public class UserDao extends BaseDao {
 	}
 
 	public int addToFavorite(User user, String bookId) {
-		String hql = "FROM Favorite b LEFT JOIN FETCH b.user LEFT JOIN FETCH b.book WHERE b.user.userId="
+		String hql = "FROM Favorite b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.book WHERE b.user.userId="
 				+ user.getUserId() + " AND b.book.bookId=" + bookId;
 		if (!getSession().createQuery(hql).list().isEmpty()) {
 			return 2;
@@ -263,14 +263,14 @@ public class UserDao extends BaseDao {
 	}
 
 	public List<Favorite> myFavorites(User user) {
-		String hql = "FROM Favorite f LEFT JOIN FETCH f.user LEFT JOIN FETCH f.book WHERE f.user.userId="
+		String hql = "FROM Favorite f LEFT OUTER JOIN FETCH f.user LEFT OUTER JOIN FETCH f.book WHERE f.user.userId="
 				+ user.getUserId();
 		List<Favorite> favorites = getSession().createQuery(hql).list();
 		return favorites;
 	}
 
 	public int deleteFavorite(User user, String bookId) {
-		String hql = "FROM Favorite b LEFT JOIN FETCH b.user LEFT JOIN FETCH b.book WHERE b.user.userId="
+		String hql = "FROM Favorite b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.book WHERE b.user.userId="
 				+ user.getUserId() + " AND b.book.bookId=" + bookId;
 		List<Favorite> favorites = getSession().createQuery(hql).list();
 		if (favorites.isEmpty()) {
@@ -282,7 +282,7 @@ public class UserDao extends BaseDao {
 	}
 	
 	public int deleteAllFavorites(User user){
-		String hql = "FROM Favorite b LEFT JOIN FETCH b.user LEFT JOIN FETCH b.book WHERE b.user.userId="
+		String hql = "FROM Favorite b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.book WHERE b.user.userId="
 				+ user.getUserId();
 		List<Favorite> favorites = getSession().createQuery(hql).list();
 		if (favorites.isEmpty()) {

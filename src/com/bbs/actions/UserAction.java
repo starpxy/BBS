@@ -413,7 +413,9 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		User user = (User) session.get("user");
 		status = new HashMap<>();
 		String bookId = httpServletRequest.getParameter("bookId");
+		System.out.println("ininini");
 		if (user != null && bookId != null) {
+			System.out.println("iiiii");
 			status.put("state", userService.addToFavorite(user, bookId));
 		} else {
 			status.put("state", -1);

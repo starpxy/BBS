@@ -40,8 +40,17 @@
 
 					<h4 class="weui_media_title" style="float: right">
 						<div class="weui-border-l">
-							&nbsp;&nbsp;<a class="addtowishlist f-black"><span
-								class="icon icon-49"></span>收藏</a>
+							&nbsp;&nbsp;
+							<%
+								int isFavorited = (int)request.getAttribute("isFavorited");
+								if(isFavorited==1){
+							%>
+								<a class="addtowishlist f-black"><input id="fv" type="hidden" value="1"><span
+								class="icon icon-48"></span>已收藏</a>
+							<%}else{ %>
+								<a class="addtowishlist f-black"><input id="fv" type="hidden" value="2"><span
+									class="icon icon-49"></span>收藏</a>
+							<%} %>
 						</div>
 					</h4>
 
@@ -401,7 +410,60 @@
 							'layer',
 							function() {
 								$(".addtowishlist").click(function() {
-									$.toast("clicked add to wish list");
+									if($("#fv").val()==2){
+										$.ajax({
+											type : 'POST',
+											url : 'user-addToFavoriate',
+											data:{'bookId':'${request.book.bookId}'},
+											dataType : 'json',
+											success : function(data){
+												if(data.state==1){
+													$.toast("添加成功，请在“个人中心”－“我的收藏”中查看");
+													$(".addtowishlist").html('<input id="fv" type="hidden" value="1"><span class="icon icon-48"></span>已收藏');
+												}
+												else{
+													layer.msg('状态有误: '+data.state,
+															{
+														icon : 2,
+														anim : 2,
+														time : 2000
+													});
+												}
+											},
+											error:function(){
+												layer.msg('服务器错误',
+														{
+													icon : 2,
+													anim : 2,
+													time : 2000
+												});
+											}
+										});
+									}else{
+										$.ajax({
+											type : 'POST',
+											url : 'user-deleteFavorite',
+											data:{'bookId':'${request.book.bookId}'},
+											dataType : 'json',
+											success : function(data){
+												if(data.state==1){
+													$.toast("已移出收藏");
+													$(".addtowishlist").html('<input id="fv" type="hidden" value="2"><span class="icon icon-49"></span>收藏');
+												}
+												else{
+													layer.msg('状态有误: '+data.state,
+															{
+														icon : 2,
+														anim : 2,
+														time : 2000
+													});
+												}
+											},
+											error:function(){
+											}
+										});
+									}
+													
 								});
 
 								$("#time").datetimePicker({
