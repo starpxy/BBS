@@ -78,7 +78,7 @@
 		<a href="user-qrCode" class="weui_panel_ft f-black">我的个人二维码</a>
 		<a href="javascript:void(0);" class="weui_panel_ft f-black"
 			id="check-login-history">我的登录历史</a>
-					<a href="javascript:void(0);" class="weui_panel_ft f-black"
+					<a href="favorite.jsp" class="weui_panel_ft f-black"
 			id="check-favorite">我的收藏</a> 
 	</div>
 

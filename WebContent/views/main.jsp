@@ -133,6 +133,7 @@ button {
 		</div>
 	</div>
 
+
 	<div class="page-hd-desc" style="margin-top: 20px">
 		<h3>&nbsp;图书分类</h3>
 		<div class="weui_grids">
@@ -265,7 +266,7 @@ button {
 						</a>
 					</div>
 					<div class="weui-flex-item">
-						<a href="userinfo.jsp" class="weui_tabbar_item weui_bar_item_on" >
+						<a href="userinfo.jsp" class="weui_tabbar_item weui_bar_item_on">
 							<div class="weui_tabbar_icon">
 								<img src="asserts/icons/icon_nav_actionSheet.png" alt="">
 							</div>
@@ -289,7 +290,9 @@ button {
 		$(function() {
 			<%if (request.getAttribute("logInfo") != null) {
 				AccessLog accessLog = (AccessLog) request.getAttribute("logInfo");%>
-				$.scojs_message("<div style='text-align:left;padding:3%;padding-left:10%'>欢迎回来,<%=accessLog.getUser().getName()%><br>登陆时间: <%=TimeUtils.getChineseTime(accessLog.getLogAt())%><br>登录地点: ${request.logInfo.area}<br>登录位置: ${request.logInfo.location}<br>登录方式: <%=LogRules.getStatus(accessLog.getMethod())%></div>", $.scojs_message.TYPE_OK);
+				$.scojs_message("<div style='text-align:left;padding:3%;padding-left:10%'>欢迎回来,<%=accessLog.getUser().getName()%><br>登陆时间: <%=TimeUtils.getChineseTime(accessLog.getLogAt())%><br>登录地点: ${request.logInfo.area}<br>登录位置: ${request.logInfo.location}<br>登录方式: <%=LogRules.getStatus(accessLog.getMethod())%>
+		</div>",
+							$.scojs_message.TYPE_OK);
 	<%}%>
 		$(".search-span").hide();
 			var itemslist = '';
@@ -386,10 +389,11 @@ button {
 							success : function(res) {
 
 								var data = res.resultStr;
-								if (data.indexOf("EAN_13")>-1) {
+								if (data.indexOf("EAN_13") > -1) {
 									//扫除的结果是isbn，直接跳转到book页面
-									var isbn=data.split(',')[1];
-									window.location.href='/book-bookDetails?bookId='+isbn;
+									var isbn = data.split(',')[1];
+									window.location.href = '/book-bookDetails?bookId='
+											+ isbn;
 								} else {
 									var ids = $.parseJSON(data);
 									$
