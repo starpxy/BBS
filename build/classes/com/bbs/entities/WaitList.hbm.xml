@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-27 21:50:21 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.bbs.entities.WaitList" table="WAIT_LIST">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <many-to-one name="user" class="com.bbs.entities.User">
+            <column name="USER" />
+        </many-to-one>
+        <many-to-one name="book" class="com.bbs.entities.Book">
+            <column name="BOOK" />
+        </many-to-one>
+        <property name="status" type="int">
+            <column name="STATUS" />
+        </property>
+        <property name="updateAt" type="java.util.Date">
+            <column name="UPDATEAT" />
+        </property>
+    </class>
+</hibernate-mapping>
