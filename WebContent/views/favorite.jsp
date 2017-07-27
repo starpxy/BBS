@@ -107,7 +107,7 @@
             <p class="book-author">[美] Marty Cagan</p>
         </a>
     </div>
-<    <div class="weui-flex-item">
+    <div class="weui-flex-item">
 
 
     </div>
@@ -116,7 +116,7 @@
 
 
     </div>
-/div>
+</div>
 
 
 
