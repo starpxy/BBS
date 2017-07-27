@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="asserts/weui/css/weui2.css" />
 <link rel="stylesheet" href="asserts/weui/css/weui3.css" />
 <link rel="stylesheet" href="asserts/layui/css/layui.css" />
+<link rel="stylesheet" href="asserts/mycss/sco.message.css">
 <body>
 <body ontouchstart style="background-color: #f8f8f8;">
 
@@ -67,7 +68,7 @@
 			</div>
 
 			<div class="weui_cell_bd weui_cell_primary">
-				<select class="weui_select select2 f13" name="select2">
+				<select class="weui_select select2 f13" name="select2" value="">
 					<option value="1">一天</option>
 					<option value="7">一星期</option>
 					<option value="14">半个月</option>
@@ -81,7 +82,8 @@
 
 
 
-
+<script src="asserts/jquery.min.js"></script>
+<script src="asserts/sco.message.js"></script>
 <script src="asserts/weui/js/zepto.min.js"></script>
 <script src="asserts/layui/layui.js"></script>
 <script>
@@ -143,10 +145,26 @@
 											});
 						});
 
-
+		$("select[name='select2']").val('${session.user.recommendFre }');
 		$("select[name='select2']").change(function() {
 			//TODO
-			$.toast("fre is changed=>>>>" + $(this).val());
+			$.ajax({
+				type : 'POST',
+				url : 'user-changeRecommendFre',
+				data:{'fre':$(this).val()},
+				dataType : 'json',
+				success : function(data) {
+					if(data.state==1){
+						layer.msg('修改成功',{icon : 1,anim : 1,time : 2000});
+					}
+					else{
+						$.scojs_message("修改失败", $.scojs_message.TYPE_ERROR);
+					}
+				},
+				error : function() {
+					$.scojs_message("服务器异常", $.scojs_message.TYPE_ERROR);
+				}
+			});
 		});
 
 		$("#user-name").click(function() {
@@ -163,19 +181,19 @@
 					dataType : 'json',
 					success : function(data) {
 						if(data.state==1){
-							$.toptips("修改成功",'ok');
+							layer.msg('修改成功',{icon : 1,anim : 1,time : 2000});
 							$("#user-name").children('h4:first').html(text);
 						}
 						else{
-							$.toptips("修改失败");
+							$.scojs_message("修改失败", $.scojs_message.TYPE_ERROR);
 						}
 					},
 					error : function() {
-						alert('服务器错误');
+						$.scojs_message('服务器错误', $.scojs_message.TYPE_ERROR);
 					}
 				});
 				}else{
-					$.toptips("请输入昵称" ,"info");
+					$.scojs_message("请输入昵称" , $.scojs_message.TYPE_ERROR);
 				}
 			});
 		});
@@ -192,18 +210,18 @@
 						success : function(data) {
 							if(data.state==1){
 								$("#phone-number .weui_media_desc").html(text);
-								$.toptips("修改成功",'ok');
+								layer.msg('修改成功',{icon : 1,anim : 1,time : 2000});
 							}
 							else{
-								$.toptips("修改失败");
+								$.scojs_message("修改失败", $.scojs_message.TYPE_ERROR);
 							}
 						},
 						error : function() {
-							alert('服务器错误');
+							$.scojs_message('服务器错误', $.scojs_message.TYPE_ERROR);
 						}
 					});
 				} else {
-					$.toptips("请输入正确的手机号码");
+					$.scojs_message("请输入正确的手机号码", $.scojs_message.TYPE_ERROR);
 				}
 			});
 

@@ -12,7 +12,11 @@ import com.bbs.entities.User;
 
 public class UserService {
 	private UserDao userDao;
-
+	
+	public List<AccessLog> checkLogs(User user){
+		return userDao.checkLogs(user);
+	}
+	
 	public List<BorrowedRecord> payState(User user) {
 		return userDao.payState(user);
 	}

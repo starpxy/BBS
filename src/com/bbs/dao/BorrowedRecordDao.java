@@ -107,7 +107,7 @@ public class BorrowedRecordDao extends BaseDao {
 		}
 	}
 	public List<BorrowedRecord> borrowHistory(User user){
-		String hql = "FROM BorrowedRecord b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.bookItem c LEFT OUTER JOIN FETCH c.book WHERE b.userId="+user.getUserId();
+		String hql = "FROM BorrowedRecord b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.bookItem c LEFT OUTER JOIN FETCH c.book WHERE b.user.userId="+user.getUserId();
 		return getSession().createQuery(hql).list();
 	}
 }

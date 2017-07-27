@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="asserts/weui/css/weui2.css" />
 <link rel="stylesheet" href="asserts/weui/css/weui3.css" />
 <link rel="stylesheet" href="asserts/mycss/index.css">
+<link rel="stylesheet" href="asserts/mycss/sco.message.css">
 <link
 	href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet">
@@ -128,7 +129,6 @@ button {
 			<li><img src="asserts/images/faces/star.jpg">
 				<div class="slide-desc">接口调用：潘星宇</div></li>
 		</ul>
-
 
 		<div class="dot">
 			<span></span> <span></span> <span></span>
@@ -284,14 +284,14 @@ button {
 	<script src="asserts/weui/js/zepto.min.js"></script>
 	<script src="asserts/weui/js/swipe.js"></script>
 	<script src="layui/layui.js"></script>
-	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js">
-		
-	</script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script src="asserts/jquery.min.js"></script>
+	<script src="asserts/sco.message.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			<%if (request.getAttribute("logInfo") != null) {
 				AccessLog accessLog = (AccessLog) request.getAttribute("logInfo");%>
-			$.toptips("<div style='text-align:left;padding:3%;padding-left:10%'>欢迎回来,<%=accessLog.getUser().getName()%><br>登陆时间: <%=TimeUtils.getChineseTime(accessLog.getLogAt())%><br>登录地点: ${request.logInfo.area}<br>登录位置: ${request.logInfo.location}<br>登录方式: <%=LogRules.getStatus(accessLog.getMethod())%></div>",'ok');
+				$.scojs_message("<div style='text-align:left;padding:3%;padding-left:10%'>欢迎回来,<%=accessLog.getUser().getName()%><br>登陆时间: <%=TimeUtils.getChineseTime(accessLog.getLogAt())%><br>登录地点: ${request.logInfo.area}<br>登录位置: ${request.logInfo.location}<br>登录方式: <%=LogRules.getStatus(accessLog.getMethod())%></div>", $.scojs_message.TYPE_OK);
 	<%}%>
 		$(".search-span").hide();
 			var itemslist = '';

@@ -42,7 +42,12 @@ public class UserDao extends BaseDao {
 			getSession().save(user);
 		}
 	}
-
+	
+	public List<AccessLog> checkLogs(User user){
+		String hql = "FROM AccessLog b LEFT JOIN FETCH b.user WHERE b.user.userId="+user.getUserId();
+		return getSession().createQuery(hql).list();
+	}
+	
 	public User getInfo(User user) {
 		String hql = "FROM User WHERE phoneNumber='" + user.getPhoneNumber() + "' and password='" + user.getPassword()
 				+ "'";

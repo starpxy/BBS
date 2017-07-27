@@ -116,6 +116,36 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		return "adminUsersAjax";
 	}
 	
+	public String changeRecommendFre(){
+		User user = (User) session.get("user");
+		if (user==null) {
+			return "refused";
+		}
+		String recommendFre = httpServletRequest.getParameter("fre");
+		if (recommendFre != null && !recommendFre.equals("")) {
+			user.setRecommendFre(Integer.valueOf(recommendFre));
+			userService.changeSomething(user);
+			status = new HashMap<>();
+			status.put("state", 1);
+			session.put("user", user);
+		}
+		else{
+			status.put("state", 2);
+		}
+		return "adminUsersAjax";
+	}
+	
+	public String checkLogs(){
+		User user = (User) session.get("user");
+		if (user==null) {
+			return "refused";
+		}
+		List<AccessLog> accessLogs = userService.checkLogs(user);
+		status = new HashMap<>();
+		status.put("logs", JSONArray.fromObject(accessLogs).toString());
+		return "adminUsersAjax";
+	}
+	
 	public String commentChart() {
 		User user = (User) session.get("user");
 		if (user != null && user.getRole().equals("admin")) {

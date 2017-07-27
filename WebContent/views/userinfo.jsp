@@ -148,16 +148,32 @@
 			var layer = layui.layer;
 			$("#check-login-history").click(function() {
 				//TODO AJAX goes here
-				//ajax 请求成功后，返回按时间由最近到过去排序的历史登录数据list，第一条的动态变量填入下面的string的［］中，动态化
-				var timeline_list='	<li class="timeline-item"> <div class="timeline-item-head-first"> <i class="weui_icon weui_icon_success_no_circle timeline-item-checked"></i> </div> <div class="timeline-item-tail"></div> <div class="timeline-item-content"> <h4 class="recent">［congcong］ 您最近一次登录地点是 ［北京市］ </h4> <p class="recent">［2017-07-23 18:23:08］</p> </div> </li>';
-				//第二条至倒数第二条后面的填入下面的string的［］中，动态化
-				for(var i=1;i<3;i++){
-					timeline_list+='   <li class="timeline-item"> <div  class="timeline-item-head"> <i class="weui_icon weui_icon_success_no_circle timeline-item-checked hide" ></i> </div> <div class="timeline-item-tail" ></div> <div class="timeline-item-content"> <h4>［congcong］ 您在 ［北京市］ 登录了一次 </h4><p>［2017-07-21 18:23:08］</p></div> </li>';
+				var timeline_list = '';
+				$.ajax({
+				type : 'POST',
+				url : 'user-checkLogs',
+				data:{'fre':$(this).val()},
+				dataType : 'json',
+				success : function(data) {
+					var logs = JSON.parse(data.logs);
+					//ajax 请求成功后，返回按时间由最近到过去排序的历史登录数据list，第一条的动态变量填入下面的string的［］中，动态化
+					var len = logs.length;
+					
+					timeline_list ='	<li class="timeline-item"> <div class="timeline-item-head-first"> <i class="weui_icon weui_icon_success_no_circle timeline-item-checked"></i> </div> <div class="timeline-item-tail"></div> <div class="timeline-item-content"> <h4 class="recent">['+logs[len-1].user.name+'] 您最近一次登录地点是 ［'+logs[len-1].area+'］ </h4> <p class="recent">［'+getDate(logs[len-1].logAt.time)+'］</p> </div> </li>';
+					//第二条至倒数第二条后面的填入下面的string的［］中，动态化
+					if(len>=3){
+						for(var i=len-2;i>0;i--){
+							timeline_list+='   <li class="timeline-item"> <div  class="timeline-item-head"> <i class="weui_icon weui_icon_success_no_circle timeline-item-checked hide" ></i> </div> <div class="timeline-item-tail" ></div> <div class="timeline-item-content"> <h4>［'+logs[i].user.name+'］ 您在 ［'+logs[i].area+'］ 登录了一次 </h4><p>［'+getDate(logs[i].logAt.time)+'］</p></div> </li>';
+						}
+					}
+					//最后一条的填入下面的string的［］中，动态化
+					timeline_list+='   <li class="timeline-item"> <div  class="timeline-item-head"> <i class="weui_icon weui_icon_success_no_circle timeline-item-checked hide" ></i> </div> <div class="timeline-item-tail hide" ></div> <div class="timeline-item-content"> <h4>［'+logs[0].user.name+'］ 您在 ［'+logs[0].area+'］ 登录了一次 </h4><p>［'+getDate(logs[0].logAt.time)+'］</p></div> </li>';
+					$(".timeline ul").html(timeline_list);
+				},
+				error : function() {
+					alert("服务器错误");
 				}
-				//最后一条的填入下面的string的［］中，动态化
-				timeline_list+='   <li class="timeline-item"> <div  class="timeline-item-head"> <i class="weui_icon weui_icon_success_no_circle timeline-item-checked hide" ></i> </div> <div class="timeline-item-tail hide" ></div> <div class="timeline-item-content"> <h4>［congcong］ 您在 ［北京市］ 登录了一次 </h4><p>［2017-07-21 18:23:08］</p></div> </li>';
-
-				$(".timeline ul").html(timeline_list);
+			});
 				
 				layer.open({
 					type : 1,
@@ -198,6 +214,11 @@
 			});
 		});
 	});
+	function getDate(time) {
+        var d = new Date(time);
+        var str = d.getUTCFullYear()+'年'+(d.getUTCMonth()+1)+'月'+d.getUTCDate()+'日'+d.getHours()+'时'+d.getUTCMinutes()+'分'+d.getUTCSeconds()+'秒';
+        return str;
+    }
 </script>
 
 
