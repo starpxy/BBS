@@ -398,6 +398,17 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		return "adminUsersAjax";
 	}
 
+	public String deleteAllFavorites() {
+		User user = (User) session.get("user");
+		status = new HashMap<>();
+		if (user != null) {
+			status.put("state", userService.deleteAllFavorites(user));
+		} else {
+			status.put("state", -1);
+		}
+		return "adminUsersAjax";
+	}
+
 	public String addToFavoriate() {
 		User user = (User) session.get("user");
 		status = new HashMap<>();

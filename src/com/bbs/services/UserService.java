@@ -121,4 +121,8 @@ public class UserService {
 	public int deleteFavorite(User user, String bookId) {
 		return userDao.deleteFavorite(user, bookId);
 	}
+
+	public int deleteAllFavorites(User user) {
+		return userDao.deleteAllFavorites(user);
+	}
 }

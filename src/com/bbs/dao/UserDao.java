@@ -280,4 +280,20 @@ public class UserDao extends BaseDao {
 			return 1;
 		}
 	}
+	
+	public int deleteAllFavorites(User user){
+		String hql = "FROM Favorite b LEFT JOIN FETCH b.user LEFT JOIN FETCH b.book WHERE b.user.userId="
+				+ user.getUserId();
+		List<Favorite> favorites = getSession().createQuery(hql).list();
+		if (favorites.isEmpty()) {
+			return 2;
+		}
+		else{
+			Iterator<Favorite> iterator = favorites.iterator();
+			while(iterator.hasNext()){
+				getSession().delete(iterator.next());
+			}
+			return 1;
+		}
+	}
 }
