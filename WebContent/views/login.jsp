@@ -74,7 +74,7 @@
 
 <div class="weui_cells_title" style="height:60px;">&nbsp;</div>
 
-<div class="weui-footer weui-footer-fixed-bottom">
+<!-- <div class="weui-footer weui-footer-fixed-bottom">
 
 
 
@@ -93,7 +93,7 @@
     </p>
     <p class="weui-footer__text">Copyright &copy; 2017-Book Lending System </p>
 
-</div>
+</div> -->
 
 <!--<script src="asserts/jquery.min.js"></script>-->
 

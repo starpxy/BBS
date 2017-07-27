@@ -35,8 +35,7 @@
 			<div class="weui_panel_hd">图书概述</div>
 
 			<div class="weui_panel_bd">
-				<img src="${request.book.simpleChart }" width="100%" height="400px">
-
+				<img src="${request.book.simpleChart }" width="100%" height="350px">
 				<div class="weui_media_box weui_media_text">
 
 					<h4 class="weui_media_title" style="float: right">
@@ -148,9 +147,8 @@
 
 	</div>
 
-	<div class="page-hd-desc">
+	<div class="page-hd-desc" style="border: 1px solid green" id="time-div">
 		<div class="weui_panel weui_panel_access">
-
 			<div class="weui_cell">
 				<div class="weui_cell_hd">
 					<label for="" class="weui_label">选择预订时间:</label>
@@ -272,7 +270,8 @@
 				var tags = data.books[0].tags;
 				var labels = "";
 				for (var i = 0; i < tags.length; i += 1) {
-					labels += '<label class="weui-label">'+tags[i].title+'</label>';
+					labels += '<label class="weui-label">' + tags[i].title
+							+ '</label>';
 				}
 				$(".weui-label-list").html(labels);
 			});
@@ -320,7 +319,12 @@
 				var datepicked = $("#time").val();
 
 				if (datepicked === "") {
-					$.toptips('请选择预定日期');
+					layer.msg('请选择预定日期',{time:1000,icon:2,anim:6});
+					$("#time-div").css("border", "1px solid red");
+					$("#time").trigger('click');
+					var target_top = $("#time-div").offset().top;
+					 $("html,body").scrollTop(target_top); 
+
 					return;
 				}
 
@@ -331,7 +335,11 @@
 				var idays = parseInt(times / (1000 * 60 * 60 * 24));
 
 				if (idays > 20 || idays < 0) {
-					$.toptips('请选择距现在相差天数少于20天的未来某日期');
+					layer.msg('请选择距现在相差天数少于20天的未来某日期',{time:1000,icon:2,anim:6});
+					$("#time-div").css("border", "1px solid red");
+					$("#time").trigger('click');
+					var target_top = $("#time-div").offset().top;
+					 $("html,body").scrollTop(target_top); 
 					return;
 				}
 
@@ -452,7 +460,7 @@
 																type : 1,
 																title : '查看评论',
 																content : $('#commentcheck'),
-																btn : [ 'yes' ],
+																btn : [ '关闭' ],
 																area : [
 																		'300px',
 																		'400px' ]
@@ -509,9 +517,9 @@
 															});
 												});
 
-					$('#back').click(function() {
-						history.back();
-					});
+								$('#back').click(function() {
+									history.back();
+								});
 
 								$('#addcomment')
 										.click(
