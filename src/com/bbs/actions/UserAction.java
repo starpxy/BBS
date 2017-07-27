@@ -78,9 +78,10 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 			return "adminLoginFail";
 		}
 	}
-	public String changeName(){
+
+	public String changeName() {
 		User user = (User) session.get("user");
-		if (user==null) {
+		if (user == null) {
 			return "refused";
 		}
 		String newName = httpServletRequest.getParameter("name");
@@ -90,16 +91,15 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 			status = new HashMap<>();
 			status.put("state", 1);
 			session.put("user", user);
-		}
-		else{
+		} else {
 			status.put("state", 2);
 		}
 		return "adminUsersAjax";
 	}
-	
-	public String changePhoneNumber(){
+
+	public String changePhoneNumber() {
 		User user = (User) session.get("user");
-		if (user==null) {
+		if (user == null) {
 			return "refused";
 		}
 		String phoneNumber = httpServletRequest.getParameter("phoneNumber");
@@ -109,16 +109,15 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 			status = new HashMap<>();
 			status.put("state", 1);
 			session.put("user", user);
-		}
-		else{
+		} else {
 			status.put("state", 2);
 		}
 		return "adminUsersAjax";
 	}
-	
-	public String changeRecommendFre(){
+
+	public String changeRecommendFre() {
 		User user = (User) session.get("user");
-		if (user==null) {
+		if (user == null) {
 			return "refused";
 		}
 		String recommendFre = httpServletRequest.getParameter("fre");
@@ -128,16 +127,15 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 			status = new HashMap<>();
 			status.put("state", 1);
 			session.put("user", user);
-		}
-		else{
+		} else {
 			status.put("state", 2);
 		}
 		return "adminUsersAjax";
 	}
-	
-	public String checkLogs(){
+
+	public String checkLogs() {
 		User user = (User) session.get("user");
-		if (user==null) {
+		if (user == null) {
 			return "refused";
 		}
 		List<AccessLog> accessLogs = userService.checkLogs(user);
@@ -145,7 +143,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		status.put("logs", JSONArray.fromObject(accessLogs).toString());
 		return "adminUsersAjax";
 	}
-	
+
 	public String commentChart() {
 		User user = (User) session.get("user");
 		if (user != null && user.getRole().equals("admin")) {
@@ -378,6 +376,40 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		return "settings";
 	}
 
+	public String myFavorites() {
+		User user = (User) session.get("user");
+		if (user == null) {
+			return "refused";
+		} else {
+			request.put("favorites", userService.myFavorites(user));
+			return "favorite";
+		}
+	}
+
+	public String deleteFavorite() {
+		User user = (User) session.get("user");
+		status = new HashMap<>();
+		String bookId = httpServletRequest.getParameter("bookId");
+		if (user != null && bookId != null) {
+			status.put("state", userService.deleteFavorite(user, bookId));
+		} else {
+			status.put("state", -1);
+		}
+		return "adminUsersAjax";
+	}
+
+	public String addToFavoriate() {
+		User user = (User) session.get("user");
+		status = new HashMap<>();
+		String bookId = httpServletRequest.getParameter("bookId");
+		if (user != null && bookId != null) {
+			status.put("state", userService.addToFavorite(user, bookId));
+		} else {
+			status.put("state", -1);
+		}
+		return "adminUsersAjax";
+	}
+
 	public String login() {
 		if (session.get("user") != null) {
 			if (httpServletRequest.getParameter("meth") != null
@@ -430,8 +462,8 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 
 	public String setRecomFreq() {
 		User user = (User) session.get("user");
-		user.setRecommendFre(this.user.getRecommendFre());
 		if (user != null) {
+			user.setRecommendFre(this.user.getRecommendFre());
 			userService.setRecomFreq(user);
 		}
 		return "setRecomFreq";

@@ -75,6 +75,7 @@ public class BookAction extends BaseAction implements ModelDriven<Book>, Servlet
 		Book newBook = BookService.bookDetails(book);
 		request.put("book", newBook);
 		session.put("book", newBook);
+		request.put("isFavorited", BookService.isFavorited(user, book.getBookId()+""));
 		return "bookDetails";
 	}
 

@@ -103,7 +103,13 @@
 </script>
 <script src="asserts/weui/js/zepto.min.js"></script>
 <script type="text/javascript">
-
+	<%
+		if(request.getParameter("state")!=null){
+	%>
+		$.toptips("账号或密码错误");
+	<%}
+	%>
+	
     $("#qqlogin").click(function () {
         $.toast("功能暂未开放");
     });

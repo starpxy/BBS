@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-4-26 16:43:06 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-7-27 21:58:09 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bbs.entities.User" table="USERS">
         <id name="userId" type="java.lang.Integer">
@@ -21,7 +21,7 @@
             <column name="PASSWORD" />
         </property>
         <property name="identityId" type="java.lang.String">
-            <column name="IDENTITYID" />
+            <column name="IDENTITY_ID" />
         </property>
         <property name="gender" type="java.lang.String">
             <column name="GENDER" />
@@ -35,20 +35,11 @@
         <property name="avatar" type="java.lang.String">
             <column name="AVATAR" />
         </property>
-        <property name="lastRecommend" type="java.util.Date">
-            <column name="LAST_RECOMMEND" />
-        </property>
         <property name="updateAt" type="java.util.Date">
             <column name="UPDATE_AT" />
         </property>
-        <!-- 做的时候要先插入1的一端：即User端，再插入reservation和borrowedRecords（为了减少维护） -->
-        <!-- <set name="reservations" table="RESERVATIONS" inverse="true" lazy="false">
-        	<key column="RESERVATION_ID"></key>
-        	<one-to-many class="com.bbs.entities.Reservation"/>
-        </set>
-        <set name="borrowedRecords" table="BORROWED_RECORDS" inverse="true" lazy="false">
-        	<key column="BORROWED_ID"></key>
-        	<one-to-many class="com.bbs.entities.BorrowedRecord"/>
-        </set>
- -->    </class>
+        <property name="lastRecommend" type="java.util.Date">
+            <column name="LAST_RECOMMEND" />
+        </property>
+    </class>
 </hibernate-mapping>

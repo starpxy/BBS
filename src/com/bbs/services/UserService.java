@@ -7,16 +7,17 @@ import com.bbs.entities.AccessLog;
 import com.bbs.entities.BookItem;
 import com.bbs.entities.BorrowedRecord;
 import com.bbs.entities.Comment;
+import com.bbs.entities.Favorite;
 import com.bbs.entities.Reservation;
 import com.bbs.entities.User;
 
 public class UserService {
 	private UserDao userDao;
-	
-	public List<AccessLog> checkLogs(User user){
+
+	public List<AccessLog> checkLogs(User user) {
 		return userDao.checkLogs(user);
 	}
-	
+
 	public List<BorrowedRecord> payState(User user) {
 		return userDao.payState(user);
 	}
@@ -107,5 +108,17 @@ public class UserService {
 
 	public void writeLog(AccessLog accessLog) {
 		userDao.writeLog(accessLog);
+	}
+
+	public int addToFavorite(User user, String bookId) {
+		return userDao.addToFavorite(user, bookId);
+	}
+
+	public List<Favorite> myFavorites(User user) {
+		return userDao.myFavorites(user);
+	}
+
+	public int deleteFavorite(User user, String bookId) {
+		return userDao.deleteFavorite(user, bookId);
 	}
 }

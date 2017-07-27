@@ -8,6 +8,8 @@ import java.util.List;
 import com.bbs.entities.Book;
 import com.bbs.entities.BookItem;
 import com.bbs.entities.Comment;
+import com.bbs.entities.Favorite;
+import com.bbs.entities.User;
 
 public class BookDao extends BaseDao {
 	public Book bookDetails(Book book) {
@@ -20,6 +22,17 @@ public class BookDao extends BaseDao {
 		}
 		return newBook;
 
+	}
+
+	public int isBookFavorited(User user, String bookId) {
+		String hql = "FROM Favorite b LEFT JOIN FETCH b.user LEFT JOIN FETCH b.book WHERE b.user.userId="
+				+ user.getUserId() + " AND b.book.bookId=" + bookId;
+		List<Favorite> favorites = getSession().createQuery(hql).list();
+		if (favorites.isEmpty()) {
+			return 2;
+		} else {
+			return 1;
+		}
 	}
 
 	public int addBookOld(String isbn) {
@@ -37,10 +50,11 @@ public class BookDao extends BaseDao {
 			return 1;
 		}
 	}
-	public int addBookNew(Book book){
-		String hql = "FROM Book WHERE isbn='"+book.getIsbn()+"'";
+
+	public int addBookNew(Book book) {
+		String hql = "FROM Book WHERE isbn='" + book.getIsbn() + "'";
 		Book newBook = null;
-		if (book!=null&&!book.getIsbn().equals("")) {
+		if (book != null && !book.getIsbn().equals("")) {
 			book.setBookVolume(1);
 			book.setUpdateAt(new Date());
 			getSession().save(book);
@@ -49,30 +63,30 @@ public class BookDao extends BaseDao {
 				newBook = books.get(0);
 			}
 		}
-		if (newBook!=null) {
+		if (newBook != null) {
 			BookItem bookItem = new BookItem();
 			bookItem.setBook(newBook);
 			bookItem.setStatus(0);
 			getSession().save(bookItem);
 			return 1;
-		}
-		else{
+		} else {
 			return 2;
 		}
 	}
-	public List<Book> bookList(Book book,int page) {
+
+	public List<Book> bookList(Book book, int page) {
 		String type = book.getType();
 		String hql = "FROM Book WHERE type='" + type + "'";
 		List<Book> books = getSession().createQuery(hql).list();
-		if (page==-1||(page==1&&books.size()<=7)) {
+		if (page == -1 || (page == 1 && books.size() <= 7)) {
 			return books;
 		}
 		List<Book> result = new LinkedList<>();
 		Iterator<Book> iterator = books.iterator();
 		int count = 1;
-		while(iterator.hasNext()){
+		while (iterator.hasNext()) {
 			Book temp = iterator.next();
-			if (count/7==(page-1)) {
+			if (count / 7 == (page - 1)) {
 				result.add(temp);
 			}
 			count++;

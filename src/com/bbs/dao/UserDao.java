@@ -11,6 +11,7 @@ import com.bbs.entities.Book;
 import com.bbs.entities.BookItem;
 import com.bbs.entities.BorrowedRecord;
 import com.bbs.entities.Comment;
+import com.bbs.entities.Favorite;
 import com.bbs.entities.Reservation;
 import com.bbs.entities.User;
 
@@ -42,12 +43,12 @@ public class UserDao extends BaseDao {
 			getSession().save(user);
 		}
 	}
-	
-	public List<AccessLog> checkLogs(User user){
-		String hql = "FROM AccessLog b LEFT JOIN FETCH b.user WHERE b.user.userId="+user.getUserId();
+
+	public List<AccessLog> checkLogs(User user) {
+		String hql = "FROM AccessLog b LEFT JOIN FETCH b.user WHERE b.user.userId=" + user.getUserId();
 		return getSession().createQuery(hql).list();
 	}
-	
+
 	public User getInfo(User user) {
 		String hql = "FROM User WHERE phoneNumber='" + user.getPhoneNumber() + "' and password='" + user.getPassword()
 				+ "'";
@@ -238,5 +239,45 @@ public class UserDao extends BaseDao {
 
 	public void writeLog(AccessLog accessLog) {
 		getSession().save(accessLog);
+	}
+
+	public int addToFavorite(User user, String bookId) {
+		String hql = "FROM Favorite b LEFT JOIN FETCH b.user LEFT JOIN FETCH b.book WHERE b.user.userId="
+				+ user.getUserId() + " AND b.book.bookId=" + bookId;
+		if (!getSession().createQuery(hql).list().isEmpty()) {
+			return 2;
+		} else {
+			Favorite favorite = new Favorite();
+			favorite.setUser(user);
+			hql = "FROM Book WHERE bookId=" + bookId;
+			List<Book> books = getSession().createQuery(hql).list();
+			if (books.isEmpty()) {
+				return 3;
+			}
+			Book book = books.get(0);
+			favorite.setBook(book);
+			favorite.setUpdateAt(new Date());
+			getSession().save(favorite);
+			return 1;
+		}
+	}
+
+	public List<Favorite> myFavorites(User user) {
+		String hql = "FROM Favorite f LEFT JOIN FETCH f.user LEFT JOIN FETCH f.book WHERE f.user.userId="
+				+ user.getUserId();
+		List<Favorite> favorites = getSession().createQuery(hql).list();
+		return favorites;
+	}
+
+	public int deleteFavorite(User user, String bookId) {
+		String hql = "FROM Favorite b LEFT JOIN FETCH b.user LEFT JOIN FETCH b.book WHERE b.user.userId="
+				+ user.getUserId() + " AND b.book.bookId=" + bookId;
+		List<Favorite> favorites = getSession().createQuery(hql).list();
+		if (favorites.isEmpty()) {
+			return 2;
+		} else {
+			getSession().delete(favorites.get(0));
+			return 1;
+		}
 	}
 }

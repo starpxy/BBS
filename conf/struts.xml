@@ -30,7 +30,7 @@
 			class="userAction"
 			method="{1}">
 			<result name="granted">main.jsp</result>
-			<result name="refused">login.jsp</result>
+			<result name="refused">login.jsp?state=1</result>
 			<result name="register">login.jsp</result>
 			<result name="setRecomFreq">setRecomTest.jsp</result>
 			<result
@@ -51,6 +51,7 @@
 			<result name="qrCodeSucceed">qrCode.jsp</result>
 			<result name="qrCodeFail">user-login</result>
 			<result name="settings">settings.jsp</result>
+			<result name="favorite">favorite.jsp</result>
 			<result
 				name="paySucceed"
 				type="json">
