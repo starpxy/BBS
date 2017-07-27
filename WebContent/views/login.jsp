@@ -13,7 +13,7 @@
 
 </head>
 <body ontouchstart style="background-color: #f8f8f8;">
-
+<br>
 <div class="page-hd">
 
     <div class="login-icon tcenter"><img src="asserts/images/faces/wechat.gif"></div>
@@ -50,7 +50,6 @@
             <a id="formSubmitBtn" href="javascript:;" class="weui_btn weui_btn_primary bg-green">登录</a>
         </div>
     </form>
-
     <div class="below-links">
         <a id="forgot" class="left" href="javascript:;">忘记密码?</a>
         <a class="right" href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx95311e6c3749af30&redirect_uri=http%3a%2f%2fpxyzmy.com.cn%2fBBS%2fviews%2fau-register&response_type=code&scope=snsapi_userinfo&state=STATE">注册账号</a>
@@ -75,7 +74,7 @@
 <div class="weui_cells_title" style="height:60px;">&nbsp;</div>
 
 <!-- <div class="weui-footer weui-footer-fixed-bottom">
-
+<footer class="weui-footer weui-footer-fixed-bottom">
 
 
     <label for="weuiAgree" class="weui-agree">
@@ -93,6 +92,7 @@
     </p>
     <p class="weui-footer__text">Copyright &copy; 2017-Book Lending System </p>
 
+<<<<<<< Updated upstream
 </div> -->
 
 <!--<script src="asserts/jquery.min.js"></script>-->

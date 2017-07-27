@@ -15,10 +15,8 @@
 <link rel="stylesheet" href="asserts/weui/css/weui2.css" />
 <link rel="stylesheet" href="asserts/weui/css/weui3.css" />
 <link rel="stylesheet" href="asserts/mycss/index.css">
+<link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="asserts/mycss/sco.message.css">
-<link
-	href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"
-	rel="stylesheet">
 <style>
 div.search {
 	padding: 10px 0;

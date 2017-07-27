@@ -66,7 +66,7 @@ pageEncoding="UTF-8"%>
             <p>
                 <a href="book.html" style="color:orange">
                     <label class="weui-form-preview-label">书名</label>
-                    <span class="weui-form-preview-value"><%=borrowedRecord.getBookItem().getBook() %></span>
+                    <span class="weui-form-preview-value"><%=borrowedRecord.getBookItem().getBook().getBookTitle() %></span>
                 </a>
             </p>
             <p>
