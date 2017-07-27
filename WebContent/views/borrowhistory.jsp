@@ -1,3 +1,5 @@
+<%@page import="com.bbs.entities.rules.BorrowedRecordRule"%>
+<%@page import="com.bbs.converters.TimeUtils"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="com.bbs.entities.BorrowedRecord"%>
 <%@page import="java.util.List"%>
@@ -64,29 +66,24 @@ pageEncoding="UTF-8"%>
             <p>
                 <a href="book.html" style="color:orange">
                     <label class="weui-form-preview-label">书名</label>
-                    <span class="weui-form-preview-value">月亮和六便士</span>
+                    <span class="weui-form-preview-value"><%=borrowedRecord.getBookItem().getBook() %></span>
                 </a>
             </p>
             <p>
                 <label class="weui-form-preview-label">借书日期</label>
-                <span class="weui-form-preview-value">2017-05-16</span>
+                <span class="weui-form-preview-value"><%=TimeUtils.getFormatedTime(borrowedRecord.getBorrowedAt()) %></span>
             </p>
-            <p>
-                <label class="weui-form-preview-label">应还日期</label>
-                <span class="weui-form-preview-value">2017-06-16</span>
-            </p>
-
 
             <p>
                 <label class="weui-form-preview-label">借书时间</label>
-                <span class="weui-form-preview-value">2017-06-16 12:00:10</span>
+                <span class="weui-form-preview-value"><%=TimeUtils.getChineseTime(borrowedRecord.getBorrowedAt()) %></span>
             </p>
 
 
         </div>
 
         <div class="weui-form-preview-ft">
-            <a class="weui-form-preview-btn weui-form-preview-btn-primary borrow-status">已借未还</a>
+            <a class="weui-form-preview-btn weui-form-preview-btn-primary borrow-status"><%=BorrowedRecordRule.getStatus(borrowedRecord.getStatus()) %></a>
         </div>
 
     </div>
