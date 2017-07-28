@@ -156,18 +156,7 @@
 
 	</div>
 
-	<div class="page-hd-desc" style="border: 1px solid green" id="time-div">
-		<div class="weui_panel weui_panel_access">
-			<div class="weui_cell">
-				<div class="weui_cell_hd">
-					<label for="" class="weui_label">选择预订时间:</label>
-				</div>
-				<div class="weui_cell_bd weui_cell_primary">
-					<input class="weui_input" type="text" value="" id='time' />
-				</div>
-			</div>
-		</div>
-	</div>
+	
 
 	<div class="weui_panel weui_panel_access search-div">
 
@@ -193,6 +182,16 @@
 		<div class="weui_panel weui_panel_access">
 			<!--<div class="weui_panel_hd">文字组合列表</div>-->
 			<div class="weui_panel_bd">
+			<div class="page-hd-desc" style="font-size:16px;font-color:black" id="time-div">
+			<div class="weui_cell">
+				<div class="weui_cell_hd">
+					<label for="" class="weui_label">选择预订时间:</label>
+				</div>
+				<div class="weui_cell_bd weui_cell_primary">
+					<input class="weui_input" type="text" value="" id='time' />
+				</div>
+			</div>
+		</div>
 				<div class="weui_media_box weui_media_text">
 					<!--<h4 class="weui_media_title">标题一</h4>-->
 					<p class="weui_media_desc">
@@ -272,7 +271,10 @@
 
 	<script type="text/javascript">
 		$(function() {
-
+			layui
+			.use(
+					'layer',
+					function() {
 			var isbn = $("#isbn").html();
 			$.getJSON("https://api.douban.com/v2/book/search?q=" + isbn
 					+ "&count=1&callback=?", function(data) {
@@ -405,10 +407,7 @@
 					}
 				});
 			});
-			layui
-					.use(
-							'layer',
-							function() {
+			
 								$(".addtowishlist").click(function() {
 									if($("#fv").val()==2){
 										$.ajax({

@@ -282,15 +282,30 @@ button {
 
 	<script src="asserts/weui/js/zepto.min.js"></script>
 	<script src="asserts/weui/js/swipe.js"></script>
-	<script src="layui/layui.js"></script>
-	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+	<script type="text/javascript">
+	$('#slide1').swipeSlide({
+        autoSwipe: true,//自动切换默认是
+        speed: 3000,//速度默认4000
+        continuousScroll: true,//默认否
+        transitionType: 'cubic-bezier(0.22, 0.69, 0.72, 0.88)',//过渡动画linear/ease/ease-in/ease-out/ease-in-out/cubic-bezier
+        lazyLoad: true,//懒加载默认否
+        firstCallback: function (i, sum, me) {
+            me.find('.dot').children().first().addClass('cur');
+        },
+        callback: function (i, sum, me) {
+            me.find('.dot').children().eq(i).addClass('cur').siblings().removeClass('cur');
+        }
+    });
+	</script>
 	<script src="asserts/jquery.min.js"></script>
+	<script src="asserts/layui/layui.js"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 	<script src="asserts/sco.message.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			<%if (request.getAttribute("logInfo") != null) {
 				AccessLog accessLog = (AccessLog) request.getAttribute("logInfo");%>
-				$.scojs_message("<div style='text-align:left;padding:3%;padding-left:10%'>欢迎回来,<%=accessLog.getUser().getName()%><br>登陆时间: <%=TimeUtils.getChineseTime(accessLog.getLogAt())%><br>登录地点: ${request.logInfo.area}<br>登录位置: ${request.logInfo.location}<br>登录方式: <%=LogRules.getStatus(accessLog.getMethod())%></div>",$.scojs_message.TYPE_OK);
+				$.scojs_message("<div style='text-align:left;padding:6%;'>欢迎回来,<%=accessLog.getUser().getName()%><br>登陆时间: <%=TimeUtils.getChineseTime(accessLog.getLogAt())%><br>登录地点: ${request.logInfo.area}<br>登录位置: ${request.logInfo.location}<br>登录方式: <%=LogRules.getStatus(accessLog.getMethod())%></div>",$.scojs_message.TYPE_OK);
 	<%}%>
 		$(".search-span").hide();
 			var itemslist = '';
@@ -468,25 +483,7 @@ button {
 				//$(".search-div .weui_panel_bd").html(itemslist);
 
 			});
-			$('#slide1')
-					.swipeSlide(
-							{
-								autoSwipe : true,//自动切换默认是
-								speed : 3000,//速度默认4000
-								continuousScroll : true,//默认否
-								transitionType : 'cubic-bezier(0.22, 0.69, 0.72, 0.88)',//过渡动画linear/ease/ease-in/ease-out/ease-in-out/cubic-bezier
-								lazyLoad : true,//懒加载默认否
-								firstCallback : function(i, sum, me) {
-									me.find('.dot').children().first()
-											.addClass('cur');
-								},
-								callback : function(i, sum, me) {
-									me.find('.dot').children().eq(i).addClass(
-											'cur').siblings()
-											.removeClass('cur');
-								}
-							});
-
+			 
 		});
 		function check() {
 			var keyword = $('#keyword').val();

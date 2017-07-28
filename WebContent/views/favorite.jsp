@@ -1,3 +1,6 @@
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="com.bbs.entities.Favorite"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -6,9 +9,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <title>我的收藏</title>
+    <title></title>
 
-
+	<link rel="stylesheet" href="asserts/layui/css/layui.css" />
     <link rel="stylesheet" href="asserts/weui/css/weui.css"/>
     <link rel="stylesheet" href="asserts/weui/css/weui2.css"/>
     <link rel="stylesheet" href="asserts/weui/css/weui3.css"/>
@@ -44,84 +47,46 @@
 <body ontouchstart style="background-color: #f8f8f8;">
 
 <div class="weui-header bg-green">
-    <div class="weui-header-left"><a class="icon icon-109 f-white">返回</a></div>
+    <div class="weui-header-left"><a href="userinfo.jsp" class="icon icon-109 f-white">返回</a></div>
     <h1 class="weui-header-title">我的收藏</h1>
-    <div class="weui-header-right"><a href="main_.html" class="icon icon-27 f-white"></a></div>
+    <div class="weui-header-right"><a href="user-login" class="icon icon-27 f-white"></a></div>
 </div>
 
-
-<div class="weui-flex">
-
+<%
+	if(request.getAttribute("favorites")!=null){
+		List<Favorite> favorites = (List<Favorite>)request.getAttribute("favorites");
+		Iterator<Favorite> iterator = favorites.iterator();
+		for(int i = favorites.size();i>0;i-=3){
+			int count = 0;
+%>
+	<div class="weui-flex">
+	<%while(iterator.hasNext()&&count<3){ 
+		Favorite favorite = iterator.next();
+		count++;%>
     <div class="weui-flex-item">
-
-        <a>
-            <div class="book-link" hidden>http://localhost:8080/BBS/views/book-bookDetails?bookId=935</div>
+	
+        <a class="toDelete">
+            <div class="book-link" hidden>book-bookDetails?bookId=<%=favorite.getBook().getBookId() %></div>
             <div class="book-image">
-                <img class="act" src="https://img3.doubanio.com/mpic/s6474670.jpg" alt="not found">
+                <img class="act" src="<%=favorite.getBook().getSimpleChart() %>" alt="not found">
             </div>
-            <p class="book-title">启示录</p>
-            <p class="book-author">[美] Marty Cagan</p>
+            <p class="book-title"><%=favorite.getBook().getBookTitle() %></p>
+            <p class="book-author"><%=favorite.getBook().getAuthor() %></p>
         </a>
 
     </div>
-
-
-    <div class="weui-flex-item">
-        <a>
-            <div class="book-link" hidden>http://localhost:8080/BBS/views/book-bookDetails?bookId=921215</div>
-            <div class="book-image">
-                <img class="act" src="https://img3.doubanio.com/mpic/s27264181.jpg" alt="not found">
-            </div>
-            <p class="book-title">解忧杂货店</p>
-            <p class="book-author">东野圭吾</p>
-        </a>
-
-
-    </div>
-
-    <div class="weui-flex-item">
-
-        <a>
-            <div class="book-link" hidden>http://localhost:8080/BBS/views/book-bookDetails?bookId=11925</div>
-            <div class="book-image">
-                <img class="act" src="https://img3.doubanio.com/mpic/s1915036.jpg" alt="not found">
-            </div>
-            <p class="book-title">启示录</p>
-            <p class="book-author">[美] Marty Cagan</p>
-        </a>
-
-    </div>
+	<%} 
+		while(count<3){
+	%>
+		<div class="weui-flex-item">
+    	</div>
+	<%count++;
+	} %>
 </div>
+<%	}
+}%>
 
-
-<!--the second line-->
-
-<div class="weui-flex">
-    <div class="weui-flex-item">
-        <a>
-            <div class="book-link" hidden>http://localhost:8080/BBS/views/book-bookDetails?bookId=932225</div>
-            <div class="book-image">
-                <img class="act" src="https://img1.doubanio.com/mpic/s4592217.jpg" alt="not found">
-            </div>
-            <p class="book-title">启示录</p>
-            <p class="book-author">[美] Marty Cagan</p>
-        </a>
-    </div>
-    <div class="weui-flex-item">
-
-
-    </div>
-
-    <div class="weui-flex-item">
-
-
-    </div>
-</div>
-
-
-
-
-
+<div style="height:50px"> &nbsp;</div>
 <div style="position:fixed;bottom: 0px;width: 100%">
 
     <div class="weui_panel weui_panel_access">
@@ -135,16 +100,19 @@
 </div>
 
 
-
+<script src="asserts/layui/layui.js"></script>
 <script src="asserts/weui/js/zepto.min.js"></script>
 
 <script>
     $(function () {
 
-
+    	layui
+		.use(
+				'layer',
+				function() {
         $(document).on("click", ".act", function() {
-
             var booklink=$(this).parent().siblings('.book-link').html();
+			var thisel = $(this).parent().parent();
 
             $.actions({
                 title: "选择操作",
@@ -165,7 +133,34 @@
                         className: 'color-danger',
                         onClick: function() {
                             var bookid=booklink.split('=')[1];
-                            $.alert("你选择了“删除”"+bookid);
+                            $.ajax({
+								type : 'POST',
+								url : 'user-deleteFavorite',
+								data:{'bookId':bookid},
+								dataType : 'json',
+								success : function(data){
+									if(data.state==1){
+										layer.msg('移出收藏成功',
+												{
+											icon : 1,
+											anim : 2,
+											time : 2000
+										});
+										thisel.hide(1000);
+									}
+									else if(data.state==2){
+										layer.msg('书籍状态有误',
+												{
+											icon : 2,
+											anim : 2,
+											time : 2000
+										});
+									}
+								},
+								error:function(){
+									alert('err');
+								}
+							});
                         }
                     }
                 ]
@@ -182,14 +177,39 @@
                 booklinks.each(function () {
                     arr_bookids.push($(this).html().split('=')[1]);
                 });
-
-                $.alert("你选择了“确认清空”"+arr_bookids);
+                $.ajax({
+					type : 'POST',
+					url : 'user-deleteAllFavorites',
+					dataType : 'json',
+					success : function(data){
+						if(data.state==1){
+							layer.msg('清空成功',
+									{
+								icon : 1,
+								anim : 2,
+								time : 2000
+							});
+							$('.toDelete').hide(1000);
+						}
+						else if(data.state==2){
+							layer.msg('列表中没有书籍！',
+									{
+								icon : 2,
+								anim : 2,
+								time : 2000
+							});
+						}
+					},
+					error:function(){
+					}
+				});
+               
             }, function () {
 
             });
         });
-
-    });
+	});
+  });
 </script>
 
 </body>
