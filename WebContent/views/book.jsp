@@ -466,7 +466,7 @@
 								});
 
 								$("#time").datetimePicker({
-									title : "选择日期时间"
+									title : "选择取书时间"
 								});
 
 								var count = 1;

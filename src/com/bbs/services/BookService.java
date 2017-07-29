@@ -37,5 +37,8 @@ public class BookService {
 	public int isFavorited(User user, String bookId) {
 		return bookDao.isBookFavorited(user, bookId);
 	}
-
+	
+	public int update(Book book){
+		return bookDao.update(book);
+	}
 }

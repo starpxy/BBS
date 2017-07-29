@@ -78,7 +78,14 @@ public class BookAction extends BaseAction implements ModelDriven<Book>, Servlet
 		request.put("isFavorited", BookService.isFavorited(user, book.getBookId()+""));
 		return "bookDetails";
 	}
-
+	
+	public String adminBookDetail(){
+		Book newBook = BookService.bookDetails(book);
+		request.put("book", newBook);
+		session.put("book", newBook);
+		return "adminBookDetail";
+	}
+	
 	public String bookSubmit() {
 		Book newBook = BookService.bookDetails(book);
 		request.put("book", newBook);
@@ -117,7 +124,18 @@ public class BookAction extends BaseAction implements ModelDriven<Book>, Servlet
 		books.put("state", BookService.addBookNew(book));
 		return "addBook";
 	}
-
+	
+	public String update(){
+		books = new HashMap<>();
+		User user = (User) session.get("user");
+		if (user == null) {
+			books.put("state", 3);
+			return "bookAjax";
+		}
+		books.put("state", BookService.update(book));
+		return "bookAjax";
+	}
+	
 	public String recommendBook() throws IOException {
 		Book book = (Book) session.get("book");
 		List<Book> list = BookService.bookList(book,-1);
@@ -130,7 +148,15 @@ public class BookAction extends BaseAction implements ModelDriven<Book>, Servlet
 		books.put("books", JSONArray.fromObject(result));
 		return "addBook";
 	}
-
+	
+	public void prepareAdminBookDetail(){
+		book = new Book();
+	}
+	
+	public void prepareUpdate() {
+		book = new Book();
+	}
+	
 	public void prepareAddBookNew() {
 		book = new Book();
 	}
@@ -159,7 +185,7 @@ public class BookAction extends BaseAction implements ModelDriven<Book>, Servlet
 	public Book getModel() {
 		return book;
 	}
-
+	
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
 		httpServletRequest = request;

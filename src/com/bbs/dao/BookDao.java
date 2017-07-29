@@ -99,4 +99,27 @@ public class BookDao extends BaseDao {
 		List<Comment> list = getSession().createQuery(hql).list();
 		return list;
 	}
+	
+	public int update(Book book){
+		String hql = "FROM Book WHERE bookId="+book.getBookId();
+		List<Book> books = getSession().createQuery(hql).list();
+		if (books.isEmpty()) {
+			return 2;
+		}
+		else{
+			Book book2 = books.get(0);
+			book2.setBookTitle(book.getBookTitle());
+			book2.setBookTitle(book.getBookTitle());
+			book2.setAuthor(book.getAuthor());
+			book2.setDirectory(book.getDirectory());
+			book2.setIntroduction(book.getIntroduction());
+			book2.setSimpleChart(book.getSimpleChart());
+			book2.setPreface(book.getPreface());
+			book2.setPrice(book.getPrice());
+			book2.setPublisher(book.getPublisher());
+			book2.setVersionNumber(book.getVersionNumber());
+			getSession().update(book2);
+			return 1;
+		}
+	}
 }

@@ -170,6 +170,9 @@ public class UserDao extends BaseDao {
 			List<BorrowedRecord> borrowedRecords = getSession().createQuery(hql).list();
 			if (!borrowedRecords.isEmpty()) {
 				BorrowedRecord borrowedRecord = borrowedRecords.get(0);
+				BookItem bookItem = borrowedRecord.getBookItem();
+				bookItem.setStatus(3);
+				getSession().update(bookItem);
 				Book book = borrowedRecord.getBookItem().getBook();
 				book.setBorrowedNum(book.getBorrowedNum() + 1);
 				getSession().update(book);

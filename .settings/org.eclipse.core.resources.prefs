@@ -6,6 +6,7 @@ encoding//src/com/bbs/api/AuthorizationManager.java=UTF-8
 encoding//src/com/bbs/api/BasicAccountParam.java=UTF-8
 encoding//src/com/bbs/api/JSAPIInitial.java=UTF-8
 encoding//src/com/bbs/api/NoneCodeException.java=UTF-8
+encoding//src/com/bbs/api/Signature.java=UTF-8
 encoding//src/com/bbs/api/TemplateMessagePushing.java=UTF-8
 encoding//src/com/bbs/api/TopScanManager.java=UTF-8
 encoding//src/com/bbs/api/UnifiedOrder.java=UTF-8

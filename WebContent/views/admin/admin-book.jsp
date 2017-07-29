@@ -643,7 +643,6 @@
 <script src="asserts/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="asserts/plugins/datatables/dataTables.bootstrap.min.js"></script>
 <script src="asserts/plugins/layui/layui.js"></script>
-<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 
 <script>
     layui.use('layer', function () {
@@ -662,7 +661,7 @@
             }
             layer.open({
                 type: 2,
-                content: "admin-bookinfo.jsp?page="+bookid,
+                content: "book-adminBookDetail?bookId="+bookid,
                 btn: ['取消'],
                 resize: true,
                 anim: 2,
@@ -878,8 +877,8 @@
 
             //TODO delete book
             layer.open({
-                title: "确认删除",
-                content: "你确认删除该书吗?",
+                title: "危险操作：删除书籍",
+                content: "<center><i class='layui-icon' style='font-size: 40px; color: #EA0000;'>&#xe607;</i><br><br>你确认删除该书吗?</center>",
                 yes: function () {
                     thisele.parent().parent().hide(1000);
                     layer.msg("成功删除", {anim: 1, icon: 1, time: 1000});

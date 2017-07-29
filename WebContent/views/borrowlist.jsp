@@ -15,7 +15,7 @@
 
 <body ontouchstart class="page-bg">
     <div class="weui-header bg-green">
-	    <div class="weui-header-left"><a class="icon icon-109 f-white" id="back" href="javascript:;">返回</a></div>
+	    <div class="weui-header-left"><a class="icon icon-109 f-white" id="user-login" href="javascript:;">返回</a></div>
 	    <h1 class="weui-header-title">我的待确认书单</h1>
 	    <div class="weui-header-right"><a href="user-login" class="icon icon-27 f-white"></a></div>
 	</div>
