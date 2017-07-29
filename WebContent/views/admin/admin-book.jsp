@@ -166,7 +166,6 @@
                     </a>
                 </li>
 
-
                 <li>
                    <a href="javascript:;">
                         <i class="fa fa-info"></i> <span>消息管理</span>
@@ -508,39 +507,7 @@
                     </label>
                 </div>
                 <!--<div style="overflow-x: auto; overflow-y: auto; height: 1000px; width: 100%; padding: 20px">-->
-                <div>
-
-                    <div class="form-group"><label class="control-sidebar-subheading"><input data-layout="fixed"
-                                                                                             class="pull-right"
-                                                                                             type="checkbox">借书通知-共支付4元</label>
-                        <p>用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;</p></div>
-                    <div class="form-group"><label class="control-sidebar-subheading"><input data-layout="fixed"
-                                                                                             class="pull-right"
-                                                                                             type="checkbox">借书通知-共支付4元</label>
-                        <p>用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;</p></div>
-
-                    <div class="form-group"><label class="control-sidebar-subheading"><input data-layout="fixed"
-                                                                                             class="pull-right"
-                                                                                             type="checkbox">借书通知-共支付4元</label>
-                        <p>用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;</p></div>
-                    <div class="form-group"><label class="control-sidebar-subheading"><input data-layout="fixed"
-                                                                                             class="pull-right"
-                                                                                             type="checkbox">借书通知-共支付4元</label>
-                        <p>用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;</p></div>
-                    <div class="form-group"><label class="control-sidebar-subheading"><input data-layout="fixed"
-                                                                                             class="pull-right"
-                                                                                             type="checkbox">借书通知-共支付4元</label>
-                        <p>用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;</p></div>
-                    <div class="form-group"><label class="control-sidebar-subheading"><input data-layout="fixed"
-                                                                                             class="pull-right"
-                                                                                             type="checkbox">借书通知-共支付4元</label>
-                        <p>用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;</p></div>
-                    <div class="form-group"><label class="control-sidebar-subheading"><input data-layout="fixed"
-                                                                                             class="pull-right"
-                                                                                             type="checkbox">借书通知-共支付4元</label>
-                        <p>用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;</p></div>
-
-                </div>
+                
 
             </div>
             <!-- Settings tab content -->

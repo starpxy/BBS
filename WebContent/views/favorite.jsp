@@ -30,8 +30,9 @@
         }
 
         .book-title {
-        	    margin-top:4px;
             color: #0C0C0C;
+            margin: 4px auto;
+            width: 80px;
             white-space: nowrap;
             text-overflow: ellipsis;
             overflow: hidden;
@@ -86,7 +87,7 @@
 <%	}
 }%>
 
-<div style="height:50px"> &nbsp;</div>
+<div style="height:60px"> &nbsp;</div>
 <div style="position:fixed;bottom: 0px;width: 100%">
 
     <div class="weui_panel weui_panel_access">

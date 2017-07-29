@@ -54,7 +54,7 @@
 						</div>
 					</h4>
 
-					<h1 class="weui_media_title f-black">${request.book.bookTitle }</h1>
+					<h1 class="weui_media_title f-black">${request.book.bookTitle } <span class="rating-avg" style="font-size:10px"></span></h1>
 
 				</div>
 
@@ -247,15 +247,15 @@
 
 
 	<div class="page-bd-15" style="display: none" id="preface">
-		<div>${request.book.preface }</div>
+		<div><pre>${request.book.preface }</pre></div>
 	</div>
 
 	<div class="page-bd-15" style="display: none" id="catelog">
-		<div>${request.book.directory }</div>
+		<div><pre>${request.book.directory }</pre></div>
 	</div>
 
 	<div class="page-bd-15" style="display: none" id="introduction">
-		<div>${request.book.introduction }</div>
+		<div><pre>${request.book.introduction }</pre></div>
 	</div>
 
 
@@ -285,6 +285,11 @@
 							+ '</label>';
 				}
 				$(".weui-label-list").html(labels);
+				
+				var rating_avg = data.books[0].rating.average;
+				$(".rating-avg").html(rating_avg);
+
+				
 			});
 
 			var itemslist = '';

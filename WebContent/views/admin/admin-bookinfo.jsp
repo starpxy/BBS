@@ -61,31 +61,27 @@
                                             class="fa fa-plus"></i></span></a>
 
                                     <div class="box-body" style="border: 1px solid #f9fae9;display: none" id="preface">
-										${request.book.preface }
+										<pre>${request.book.preface }</pre>
                                     </div>
 
                                 </li>
 
                                 <li>
-
                                     <a class="collapse-toggle">目录<span class="pull-right"><i
                                             class="fa fa-plus"></i></span></a>
 
                                     <div class="box-body" style="border: 1px solid #f9fae9;display: none" id="directory">
-                                       ${request.book.directory }
+                                    <pre>   ${request.book.directory }</pre>
                                     </div>
-
                                 </li>
 
 
                                 <li>
-
                                     <a class="collapse-toggle">介绍<span class="pull-right"><i
                                             class="fa fa-plus"></i></span></a>
-
                                     <div class="box-body" style="border: 1px solid #f9fae9;display: none"
                                          id="introduction">
-										${request.book.introduction }
+									<pre>${request.book.introduction }</pre>
                                     </div>
 
                                 </li>
@@ -234,9 +230,9 @@
             $("input[name='author']").val($("#author").html());
             $("input[name='price']").val($("#price").html());
             $("select[name='type']").val($("#type").html());
-            $("textarea[name='preface']").html($("#preface").html());
-            $("textarea[name='directory']").html($("#directory").html());
-            $("textarea[name='introduction']").html($("#introduction").html());
+            $("textarea[name='preface']").html($("#preface").text());
+            $("textarea[name='directory']").html($("#directory").text());
+            $("textarea[name='introduction']").html($("#introduction").text());
 
         });
 

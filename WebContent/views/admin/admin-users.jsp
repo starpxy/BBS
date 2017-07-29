@@ -218,6 +218,7 @@
 
 										<tr>
 											<th>借阅详情</th>
+											<th>用户ID</th>
 											<th>姓名</th>
 											<th>电话</th>
 											<th>微信</th>
@@ -285,6 +286,7 @@
 																	</div>
 																</div>
 														</span></a></td>
+													<td class="id">${userId }</td>
 													<td class="user-name">${name }</td>
 													<td class="user-phone">${phoneNumber }</td>
 													<td class="user-wechat">${weChat }</td>

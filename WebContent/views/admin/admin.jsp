@@ -25,52 +25,144 @@
 <link rel="stylesheet" href="asserts/css/index.css">
 <style>
 
+.option-item:hover div .info-box {
+	background: #eee;
+}
+
+.is-animate.style1 {
+	margin: 50px auto;
+}
+
+.is-animate.style1>div {
+	animation-name: style1;
+	display: inline-block;
+	padding: 12px;
+	border-radius: 26px;
+	font-size: 20px;
+	color: #178342;
+	background-color: #eee;
+	box-shadow: 1px 1px 9px -3px #000;
+}
+
+
+
+.is-animate>div {
+	animation-duration: 1s;
+	animation-fill-mode: both;
+	animation-iteration-count: infinite;
+}
+
+.is-animate>div:nth-child(1) {
+	animation-delay: 0.0s
+}
+
+.is-animate>div:nth-child(2) {
+	animation-delay: 0.1s
+}
+
+.is-animate>div:nth-child(3) {
+	animation-delay: 0.2s
+}
+
+.is-animate>div:nth-child(4) {
+	animation-delay: 0.3s
+}
+
+.is-animate>div:nth-child(5) {
+	animation-delay: 0.4s
+}
+
+.is-animate>div:nth-child(6) {
+	animation-delay: 0.5s
+}
+
+.is-animate>div:nth-child(7) {
+	animation-delay: 0.6s
+}
+
+.is-animate>div:nth-child(8) {
+	animation-delay: 0.7s
+}
+
+.is-animate>div:nth-child(9) {
+	animation-delay: 0.8s
+}
+
+.is-animate>div:nth-child(10) {
+	animation-delay: 0.9s
+}
+
+.is-animate>div:nth-child(11) {
+	animation-delay: 1.0s
+}
+
+.info-box-icon {
+	text-align: center;
+}
+
+.info-box-icon>i {
+	margin-top: 20px;
+}
+
+.info-box-content {
+	padding-top: 20px;
+}
+.box-solid{
+margin:10px;
+}
+.inner>h3{
+font-size:20px;
+}
+
+.inner>p{
+font-size:10px;
+}
+
+.icon{
+padding:10px;
+}
+input[type="range"] {
+  display: block;
+  -webkit-appearance: none;
+  background-color: #bdc3c7;
+  width: 300px;
+  height: 5px;
+  border-radius: 5px;
+  margin: 0 auto;
+  outline: 0;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background-color: #0D9E4C;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+
+
+ input[type="range"]::-webkit-slider-thumb:hover {
+  background-color: white;
+  border: 2px solid #e74c3c;
+}
+input[type="range"]::-webkit-slider-thumb:active {
+  transform: scale(1.6);
+}
+
+
 @keyframes style1 {
-  from, 20%, 53%, 80%, to {
-    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-    transform: translate3d(0,0.5,0.1);
-  }
-  40%, 43% {
-    animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
-    transform: translate3d(0px, -5px, 0);
-  }
+    from, 20%, 53%, 80%, to {
+        animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+        transform: translate3d(0,0.5,0.1);
+    }
+    40%, 43% {
+        animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+        transform: translate3d(0px, -15px, 0);
+    }
 }
-
-
-.option-item:hover div .info-box{
-background:#eee;
-}
-.is-animate.style1{
-margin:50px auto;
-}
-.is-animate.style1 > div {
- animation-name: style1;
- display: inline-block;
- padding: 12px;
-  border-radius: 26px;
- font-size: 20px;
- color:#178342;
- background-color:#eee;
-box-shadow: 1px 1px 9px -3px #000;
-  }
-
-.is-animate > div {
-  animation-duration: 1s;
-  animation-fill-mode: both;
-  animation-iteration-count: infinite;
-}
-
-.is-animate > div:nth-child(1) { animation-delay: 0.0s }
-.is-animate > div:nth-child(2) { animation-delay: 0.1s }
-.is-animate > div:nth-child(3) { animation-delay: 0.2s }
-.is-animate > div:nth-child(4) { animation-delay: 0.3s }
-.is-animate > div:nth-child(5) { animation-delay: 0.4s }
-.is-animate > div:nth-child(6) { animation-delay: 0.5s }
-.is-animate > div:nth-child(7) { animation-delay: 0.6s }
-.is-animate > div:nth-child(8) { animation-delay: 0.7s }
-.is-animate > div:nth-child(9) { animation-delay: 0.8s }
-.is-animate > div:nth-child(10) { animation-delay: 0.9s }
-.is-animate > div:nth-child(11) { animation-delay: 1.0s }
 
 
 
@@ -79,7 +171,6 @@ box-shadow: 1px 1px 9px -3px #000;
 
 
 <body class="hold-transition skin-green sidebar-mini">
-
 	<div class="wrapper">
 		<!--头部 header-->
 		<header class="main-header"> <a href="user-adminLogin"
@@ -208,8 +299,7 @@ box-shadow: 1px 1px 9px -3px #000;
 				</span>
 			</a></li>
 
-
-			<li><a href="javascript:;"> <i class="fa fa-info"></i> <span>消息管理</span>
+			<li><a href="admin-news.jsp"> <i class="fa fa-info"></i> <span>消息管理</span>
 
 					<span class="pull-right-container"> <small
 						class="label pull-right bg-green">news</small>
@@ -227,213 +317,138 @@ box-shadow: 1px 1px 9px -3px #000;
 					<li><a href="user-userChart"><i class="fa fa-circle-o"></i>用户统计</a></li>
 					<li><a href="user-bookChart"><i class="fa fa-circle-o"></i>图书统计</a></li>
 					<li><a href="user-commentChart"><i class="fa fa-circle-o"></i>评论统计</a></li>
-				</ul></li>
+				</ul>
+			</li>
 
 
-			<li class="header">其他操作(预留)</li>
-			<li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>操作一</span></a></li>
-			<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>操作二</span></a></li>
-			<li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>操作三</span></a></li>
+			<li class="header">其他操作</li>
+			<li><a href="admin-settings.jsp"><i class="fa fa-gear"></i> <span>基本设置</span></a></li>
+			<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>操作二(预留)</span></a></li>
+			<li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>操作三(预留)</span></a></li>
 		</ul>
 
-		</section> <!-- /.sidebar --> 
-		</aside>
+		</section> <!-- /.sidebar --> </aside>
 
 
 		<!--主内容-->
 		<!-- 		<div class="content-wrapper" style="min-height: 100px;">
  -->
 		<!-- Content Header (Page header) -->
-		
-		
-    <!--主内容-->
-    <div class="content-wrapper" style="min-height: 916px;">
-        <!-- Content Header (Page header) -->
-        <section class="content-header"  style="background: url('dist/img/intro-bg.jpeg') no-repeat center center;padding:20px">
-				<h1>
-					<div class='is-animate style1' style="text-align:center">
-						<div>欢</div>
-						<div>迎</div>
-						<div>来</div>
-						<div>到</div>
-						<div>图</div>
-						<div>书</div>
-						<div>管</div>
-						<div>理</div>
-						<div>员</div>
-						<div>系</div>
-						<div>统</div>
+
+
+		<!--主内容-->
+		<div class="content-wrapper" style="min-height: 916px;">
+			<!-- Content Header (Page header) -->
+			<section class="content-header"
+				style="background: url('dist/img/intro-bg.jpeg') no-repeat center center;padding:20px">
+			<h1>
+				<div class='is-animate style1' style="text-align: center">
+					<div>欢</div>
+					<div>迎</div>
+					<div>来</div>
+					<div>到</div>
+					<div>图</div>
+					<div>书</div>
+					<div>管</div>
+					<div>理</div>
+					<div>员</div>
+					<div>系</div>
+					<div>统</div>
+				</div>
+			</h1>
+				<div class="value" style="display:none">0</div>
+				<input type="range" min="0" max="10" step="0.5" value="5">
+			</section>
+
+			<!-- Main content -->
+
+
+			<section class="content"> <!--        style="background:#888;padding:20px"
+ -->
+			<div class="row">
+
+				<div class="box box-solid">
+					<div class="box-header with-border">
+						<i class="fa fa-book"></i>
+						<h3 class="box-title">图书管理</h3>
 					</div>
-				</h1>
-        </section>
+					<!-- /.box-header -->
+					<div class="box-body">
 
-        <!-- Main content -->
-        
-        
-        <section class="content">
-<!--        style="background:#888;padding:20px"
- --><div class="row">
 
-		<div class="box box-solid" style="margin: 10px">
-            <div class="box-header with-border">
-              <i class="fa fa-text-width"></i>
-              <h3 class="box-title">Text Emphasis</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-         
-         
-         <a href="#" class="option-item">
-        <div class="col-md-12">
+						<a href="user-adminBooks" class="option-item">
+							<div class="col-md-12">
+								<div class="info-box">
+									<span class="info-box-icon bg-aqua"><i
+										class="fa fa-edit"></i></span>
+									<div class="info-box-content">
+										<span class="info-box-text">可进行智能录入书籍，删除书籍，查看及更改书籍详情等操作</span>
+											<span class="info-box-number">录入与查看</span>
+									</div>
+									<!-- /.info-box-content -->
+								</div>
+								<!-- /.info-box -->
+							</div>
+						</a>
 
-          <div class="info-box">
-            <span class="info-box-icon bg-aqua" style="align:center"><i class="fa fa-envelope-o"  style="margin-top:10px"></i></span>
-            
-            <div class="info-box-content">
-              <span class="info-box-text">Messages</span>
-              <span class="info-box-number">1,410</span>
-            </div>
-            
-            <!-- /.info-box-content -->
-          </div>
-          
-          <!-- /.info-box -->
-        </div>
-</a>
-
-        <!-- /.col -->
-        <a href="#" class="option-item">
-        <div class="col-md-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-green"><i class="fa fa-flag-o"></i></span>
-            <div class="info-box-content">
-              <span class="info-box-text">Bookmarks</span>
-              <span class="info-box-number">410</span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        </a>
-        <!-- /.col -->
-          <a href="#" class="option-item">
-        <div class="col-md-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-yellow"><i class="fa fa-files-o"></i></span>
-            <div class="info-box-content">
-              <span class="info-box-text">Uploads</span>
-              <span class="info-box-number">13,648</span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        </a>
-        <!-- /.col -->
-        <!-- /.col -->
-          </div>
-            <!-- /.box-body -->
-          </div>
-       
-      </div>
-<div class="row">
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box bg-aqua">
-            <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Bookmarks</span>
-              <span class="info-box-number">41,410</span>
-
-              <div class="progress">
-                <div class="progress-bar" style="width: 70%"></div>
-              </div>
-                  <span class="progress-description">
-                    70% Increase in 30 Days
-                  </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box bg-green">
-            <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Likes</span>
-              <span class="info-box-number">41,410</span>
-
-              <div class="progress">
-                <div class="progress-bar" style="width: 70%"></div>
-              </div>
-                  <span class="progress-description">
-                    70% Increase in 30 Days
-                  </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box bg-yellow">
-            <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Events</span>
-              <span class="info-box-number">41,410</span>
-
-              <div class="progress">
-                <div class="progress-bar" style="width: 70%"></div>
-              </div>
-                  <span class="progress-description">
-                    70% Increase in 30 Days
-                  </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box bg-red">
-            <span class="info-box-icon"><i class="fa fa-comments-o"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Comments</span>
-              <span class="info-box-number">41,410</span>
-
-              <div class="progress">
-                <div class="progress-bar" style="width: 70%"></div>
-              </div>
-                  <span class="progress-description">
-                    70% Increase in 30 Days
-                  </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-      </div>
-        
- <div class="row">
+						<!-- /.col -->
+						<a href="user-adminListRecords" class="option-item">
+							<div class="col-md-12">
+								<div class="info-box">
+									<span class="info-box-icon bg-green"><i
+										class="fa fa-search"></i></span>
+									<div class="info-box-content">
+										<span class="info-box-text">查看用户借书详情，可进行查看和发送提醒还书，过滤用户借书信息等操作</span> 
+										<span class="info-box-number">借阅详情</span>
+									</div>
+									<!-- /.info-box-content -->
+								</div>
+								<!-- /.info-box -->
+							</div>
+						</a>
+						
+						<!-- /.col -->
+						<a href="user-adminListReservations" class="option-item">
+							<div class="col-md-12">
+								<div class="info-box">
+									<span class="info-box-icon bg-yellow"><i
+										class="fa  fa-bookmark-o"></i></span>
+									<div class="info-box-content">
+										<span class="info-box-text">查看用户预订书籍详情，可进行查看和取消用户预订，过滤预订信息等操作</span> <span
+											class="info-box-number">预定详情</span>
+									</div>
+									<!-- /.info-box-content -->
+								</div>
+								<!-- /.info-box -->
+							</div>
+						</a>
+						<!-- /.col -->
+						<!-- /.col -->
+					</div>
+					<!-- /.box-body -->
+				</div>
+			</div>
+			
+			<div class="row">
+			<div class="box box-solid">
+					<div class="box-header with-border">
+						<i class="fa fa-gears"></i>
+						<h3 class="box-title">其他管理</h3>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+				
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>150</h3>
-
-              <p>New Orders</p>
+              <h3>用户管理</h3>
+              <p>改删查用户基本信息，指派用户身份，查看用户借阅详情等操作</p>
             </div>
             <div class="icon">
-              <i class="fa fa-shopping-cart"></i>
+              <i class="fa fa-user"></i>
             </div>
-            <a href="#" class="small-box-footer">
-              More info <i class="fa fa-arrow-circle-right"></i>
-            </a>
+            <a href="user-adminUsers" class="small-box-footer">进入用户管理 <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -441,16 +456,13 @@ box-shadow: 1px 1px 9px -3px #000;
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-              <p>Bounce Rate</p>
+              <h3>评论管理</h3>
+              <p>查看用户评论详情，过滤用户详情，设置评论是否加入精选</p>
             </div>
             <div class="icon">
-              <i class="ion ion-stats-bars"></i>
+              <i class="fa  fa-comments"></i>
             </div>
-            <a href="#" class="small-box-footer">
-              More info <i class="fa fa-arrow-circle-right"></i>
-            </a>
+            <a href="admin-comments.jsp" class="small-box-footer">进入评论管理 <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -458,16 +470,13 @@ box-shadow: 1px 1px 9px -3px #000;
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>44</h3>
-
-              <p>User Registrations</p>
+              <h3>消息管理</h3>
+              <p>查看用户登录历史详情，包括用户IP，登录方式等信息</p>
             </div>
             <div class="icon">
-              <i class="ion ion-person-add"></i>
+              <i class="fa fa-info"></i>
             </div>
-            <a href="#" class="small-box-footer">
-              More info <i class="fa fa-arrow-circle-right"></i>
-            </a>
+            <a href="admin-news.jsp" class="small-box-footer">进入消息管理 <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -475,188 +484,177 @@ box-shadow: 1px 1px 9px -3px #000;
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>65</h3>
-
-              <p>Unique Visitors</p>
+              <h3>基本设置</h3>
+              <p>还书提醒，是否开启推荐书籍功能，是否开启评论星级计算等设置</p>
             </div>
             <div class="icon">
-              <i class="ion ion-pie-graph"></i>
+              <i class="fa fa-gear"></i>
             </div>
-            <a href="#" class="small-box-footer">
-              More info <i class="fa fa-arrow-circle-right"></i>
-            </a>
+            <a href="admin-settings.jsp" class="small-box-footer">进入基本设置 <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
-      </div>
-        
-        
-        </section>
-        <!-- /.content -->
-    </div>
-
-						
+        	</div>
 	</div>
-					
-		<!-- Main content -->
-
-		<!-- 		</div> -->
+   </div>
 
 
-		<!--footer-->
-		<footer class="main-footer">
-		<p class="copyright text-muted small">
-			权限声明 © SHC 2017. 所有权限保留 <img src="dist/img/icon.png"> <a
-				href="http://www.beianbaba.com/icp/pxyzmy.com">京ICP备17020278号-1</a>
-		</p>
-		</footer>
+			<div class="row">
+				<div class="box box-solid">
+					<div class="box-header with-border">
+						<i class="fa fa-area-chart"></i>
+						<h3 class="box-title">统计</h3>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
 
-		<!--右边边菜单栏-->
-		<aside
-			class="control-sidebar control-sidebar-dark control-sidebar-dark">
-		<!-- Create the tabs -->
-		<ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-
-			<li><a href="#control-sidebar-news-tab" data-toggle="tab"><i
-					class="fa fa-newspaper-o"></i></a></li>
-			<li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i
-					class="fa fa-gears"></i></a></li>
-		</ul>
-		<!-- Tab panes -->
-		<div class="tab-content">
-			<!-- Home tab content -->
-			<div class="tab-pane active" id="control-sidebar-news-tab">
-				<h4 class="control-sidebar-heading">消息通知</h4>
-				<div class="form-group">
-					<label class="control-sidebar-subheading"> 删除选中消息 <a
-						href="javascript:void(0)" class="text-red pull-right"><i
-							class="fa fa-trash-o"></i></a>
-					</label>
+						<a href="user-userChart" class="option-item">
+							<div class="col-md-12">
+								<div class="info-box">
+									<span class="info-box-icon  bg-aqua"><i class="fa fa-bar-chart"></i></span>
+									<div class="info-box-content">
+										<span class="info-box-text">查看用户数量增长情况，用户性别比例，以及地域分析</span> 
+										<span class="info-box-number">用户统计</span>
+									</div>
+									<!-- /.info-box-content -->
+								</div>
+							</div>
+						</a> <a href="user-bookChart" class="option-item">
+							<div class="col-md-12">
+								<div class="info-box ">
+									<span class="info-box-icon bg-green"><i class="fa fa-line-chart"></i></span>
+									<div class="info-box-content">
+										<span class="info-box-text">查看图书录入数量增长情况，图书类型分布，书籍状态分析等</span> <span
+											class="info-box-number">图书统计</span>
+									</div>
+									<!-- /.info-box-content -->
+								</div>
+							</div>
+						</a> <a href="user-commentChart" class="option-item">
+							<div class="col-md-12">
+								<div class="info-box">
+									<span class="info-box-icon bg-yellow"><i class="fa fa-pie-chart"></i></span>
+									<div class="info-box-content">
+										<span class="info-box-text">查看评论数量增长情况，评论状态分析等</span> <span
+											class="info-box-number">评论统计</span>
+									</div>
+									<!-- /.info-box-content -->
+								</div>
+							</div>
+						</a>
+					</div>
 				</div>
-				<div class="form-group">
-					<label class="control-sidebar-subheading"> 清空 <a
-						href="javascript:void(0)" class="text-danger pull-right"><i
-							class="fa fa-trash-o"></i></a>
-					</label>
-				</div>
-				<!--<div style="overflow-x: auto; overflow-y: auto; height: 1000px; width: 100%; padding: 20px">-->
-				<div>
-
-					<div class="form-group">
-						<label class="control-sidebar-subheading"><input
-							data-layout="fixed" class="pull-right" type="checkbox">借书通知-共支付4元</label>
-						<p>
-							用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;
-						</p>
-					</div>
-					<div class="form-group">
-						<label class="control-sidebar-subheading"><input
-							data-layout="fixed" class="pull-right" type="checkbox">借书通知-共支付4元</label>
-						<p>
-							用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;
-						</p>
-					</div>
-
-					<div class="form-group">
-						<label class="control-sidebar-subheading"><input
-							data-layout="fixed" class="pull-right" type="checkbox">借书通知-共支付4元</label>
-						<p>
-							用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;
-						</p>
-					</div>
-					<div class="form-group">
-						<label class="control-sidebar-subheading"><input
-							data-layout="fixed" class="pull-right" type="checkbox">借书通知-共支付4元</label>
-						<p>
-							用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;
-						</p>
-					</div>
-					<div class="form-group">
-						<label class="control-sidebar-subheading"><input
-							data-layout="fixed" class="pull-right" type="checkbox">借书通知-共支付4元</label>
-						<p>
-							用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;
-						</p>
-					</div>
-					<div class="form-group">
-						<label class="control-sidebar-subheading"><input
-							data-layout="fixed" class="pull-right" type="checkbox">借书通知-共支付4元</label>
-						<p>
-							用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;
-						</p>
-					</div>
-					<div class="form-group">
-						<label class="control-sidebar-subheading"><input
-							data-layout="fixed" class="pull-right" type="checkbox">借书通知-共支付4元</label>
-						<p>
-							用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;
-						</p>
-					</div>
-
-				</div>
-
+				<!-- /.col -->
 			</div>
-			<!-- Settings tab content -->
-			<div class="tab-pane" id="control-sidebar-settings-tab">
-				<form method="post">
-					<h3 class="control-sidebar-heading">一般设置</h3>
-
-					<div class="form-group">
-						<label class="control-sidebar-subheading"> Report panel
-							usage <input class="pull-right" checked="" type="checkbox">
-						</label>
-
-						<p>Some information about this general settings option</p>
-					</div>
-					<!-- /.form-group -->
-
-					<div class="form-group">
-						<label class="control-sidebar-subheading"> Allow mail
-							redirect <input class="pull-right" checked="" type="checkbox">
-						</label>
-
-						<p>Other sets of options are available</p>
-					</div>
-					<!-- /.form-group -->
-
-					<div class="form-group">
-						<label class="control-sidebar-subheading"> Expose author
-							name in posts <input class="pull-right" checked=""
-							type="checkbox">
-						</label>
-
-						<p>Allow the user to show his name in blog posts</p>
-					</div>
-					<!-- /.form-group -->
-
-					<h3 class="control-sidebar-heading">Chat Settings</h3>
-
-					<div class="form-group">
-						<label class="control-sidebar-subheading"> Show me as
-							online <input class="pull-right" checked="" type="checkbox">
-						</label>
-					</div>
-					<!-- /.form-group -->
-
-					<div class="form-group">
-						<label class="control-sidebar-subheading"> Turn off
-							notifications <input class="pull-right" type="checkbox">
-						</label>
-					</div>
-					<!-- /.form-group -->
-
-					<div class="form-group">
-						<label class="control-sidebar-subheading"> Delete chat
-							history <a href="javascript:void(0)" class="text-red pull-right"><i
-								class="fa fa-trash-o"></i></a>
-						</label>
-					</div>
-				</form>
-			</div>
-			<!-- /.tab-pane -->
+			</section>
+			<!-- /.content -->
 		</div>
-		</aside>
-		<div class="control-sidebar-bg" style="position: fixed; height: auto;"></div>
+
+
+	</div>
+
+	<!-- Main content -->
+
+	<!-- 		</div> -->
+
+
+	<!--footer-->
+	<footer class="main-footer">
+	<p class="copyright text-muted small">
+		权限声明 © SHC 2017. 所有权限保留 <img src="dist/img/icon.png"> <a
+			href="http://www.beianbaba.com/icp/pxyzmy.com">京ICP备17020278号-1</a>
+	</p>
+	</footer>
+
+	<!--右边边菜单栏-->
+	<aside
+		class="control-sidebar control-sidebar-dark control-sidebar-dark">
+	<!-- Create the tabs -->
+	<ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+
+		<li><a href="#control-sidebar-news-tab" data-toggle="tab"><i
+				class="fa fa-newspaper-o"></i></a></li>
+		<li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i
+				class="fa fa-gears"></i></a></li>
+	</ul>
+	<!-- Tab panes -->
+	<div class="tab-content">
+		<!-- Home tab content -->
+		<div class="tab-pane active" id="control-sidebar-news-tab">
+			<h4 class="control-sidebar-heading">消息通知</h4>
+			<div class="form-group">
+				<label class="control-sidebar-subheading"> 删除选中消息 <a
+					href="javascript:void(0)" class="text-red pull-right"><i
+						class="fa fa-trash-o"></i></a>
+				</label>
+			</div>
+			<div class="form-group">
+				<label class="control-sidebar-subheading"> 清空 <a
+					href="javascript:void(0)" class="text-danger pull-right"><i
+						class="fa fa-trash-o"></i></a>
+				</label>
+			</div>
+			<!--<div style="overflow-x: auto; overflow-y: auto; height: 1000px; width: 100%; padding: 20px">-->
+		</div>
+		<!-- Settings tab content -->
+		<div class="tab-pane" id="control-sidebar-settings-tab">
+			<form method="post">
+				<h3 class="control-sidebar-heading">一般设置</h3>
+				<div class="form-group">
+					<label class="control-sidebar-subheading"> Report panel
+						usage <input class="pull-right" checked="" type="checkbox">
+					</label>
+
+					<p>Some information about this general settings option</p>
+				</div>
+				<!-- /.form-group -->
+
+				<div class="form-group">
+					<label class="control-sidebar-subheading"> Allow mail
+						redirect <input class="pull-right" checked="" type="checkbox">
+					</label>
+
+					<p>Other sets of options are available</p>
+				</div>
+				<!-- /.form-group -->
+
+				<div class="form-group">
+					<label class="control-sidebar-subheading"> Expose author
+						name in posts <input class="pull-right" checked="" type="checkbox">
+					</label>
+
+					<p>Allow the user to show his name in blog posts</p>
+				</div>
+				<!-- /.form-group -->
+
+				<h3 class="control-sidebar-heading">Chat Settings</h3>
+
+				<div class="form-group">
+					<label class="control-sidebar-subheading"> Show me as
+						online <input class="pull-right" checked="" type="checkbox">
+					</label>
+				</div>
+				<!-- /.form-group -->
+
+				<div class="form-group">
+					<label class="control-sidebar-subheading"> Turn off
+						notifications <input class="pull-right" type="checkbox">
+					</label>
+				</div>
+				<!-- /.form-group -->
+
+				<div class="form-group">
+					<label class="control-sidebar-subheading"> Delete chat
+						history <a href="javascript:void(0)" class="text-red pull-right"><i
+							class="fa fa-trash-o"></i></a>
+					</label>
+				</div>
+			</form>
+		</div>
+		<!-- /.tab-pane -->
+	</div>
+	</aside>
+	<div class="control-sidebar-bg" style="position: fixed; height: auto;"></div>
 
 
 	</div>
@@ -692,6 +690,13 @@ box-shadow: 1px 1px 9px -3px #000;
 						'layer',
 						function() {
 
+							 $("input[type='range']").on('input propertychange',function(){
+								 var value=$(this).val()*3;
+									var style='@keyframes style1 {from, 20%, 53%, 80%, to {animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);transform: translate3d(0,0.5,0.1); }40%, 43% {animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060); transform: translate3d(0px, -'+value+'px, 0);}}';
+									$('style').html($('style').html()+style);
+					            });
+
+					
 							$
 									.ajax({
 										type : 'POST',
@@ -1151,7 +1156,6 @@ box-shadow: 1px 1px 9px -3px #000;
 
 							var isbns = new Array();
 
-							
 							$(".book-isbn").each(function(value) {
 								isbns.push('"' + $(this).text() + '"');
 							});
