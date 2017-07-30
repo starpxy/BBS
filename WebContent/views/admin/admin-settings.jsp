@@ -645,14 +645,32 @@
             }
         }
 
+        function sendAjax(setting, status, runInterval, checkInterval){
+     	   $
+			.ajax({
+				type : 'POST',
+				url : 'setting-turnOnRecommend',
+				dataType : 'json',
+				data:{settingNo:''+setting+'',status:''+status+'',runInterval:''+runInterval+'',checkInterval:''+checkInterval+''},
+				success : function(data) {
+					if(data.state==1){
+						layer.msg("success",{icon:1,anim:2,time:1000});
+					}else{
+						layer.msg("wrong",{icon:2,anim:6,time:1000});
+					}
+				},
+				error : function(xhr,type) {
+					layer.msg("error",{icon:2,anim:6,time:1000});
+				}
+			});
+          }
+
         $('#confirm1').click(function (e) {
             var rating= {isOn: true, runInterval: 0, checkInterval: 0};
 
             if(isNumber($('input[name="runInterval1"]').val())&&isNumber($('input[name="checkInterval1"]').val())){
-
                 rating.runInterval=$('input[name="runInterval1"]').val();
                 rating.checkInterval=$('input[name="checkInterval1"]').val();
-
             }else{
                 layer.msg("要输入数字才行",{icon:2,anim:6,time:1000});
                 return false;
@@ -662,9 +680,8 @@
                 rating.isOn=false;
             }
 
-            //AJAX goes here
-            alert(JSON.stringify(rating));
-            layer.msg("success",{icon:1,anim:2,time:1000});
+            sendAjax(1,rating.isOn,rating.runInterval,rating.checkInterval);
+    
 
         });
 
@@ -695,7 +712,6 @@
             var bookAlarm= {isOn: true, runInterval: 0, checkInterval: 0};
 
             if(isNumber($('input[name="runInterval3"]').val())&&isNumber($('input[name="checkInterval3"]').val())){
-
                 bookAlarm.runInterval=$('input[name="runInterval3"]').val();
                 bookAlarm.checkInterval=$('input[name="checkInterval3"]').val();
 
@@ -746,21 +762,33 @@
             e.preventDefault();
 
             $(toggle).parent().parent().siblings('.box-body').toggle(1000);
-            $
-			.ajax({
-				type : 'POST',
-				url : 'setting-turnOnRecommend',
-				dataType : 'json',
-				success : function(data) {
-				
-				},
-				error : function(xhr,type) {
-					alert('fail');
-				}
-			});
+         
             $(toggle).toggleClass('toggle--on')
                     .toggleClass('toggle--off')
                     .addClass('toggle--moving');
+            if($(toggle).hasClass("toggle--on")){
+/* 				alert("close"+$(toggle).attr('id')); */
+         	var settings={"toggle1":1,"toggle2":2,"toggle3":3,"toggle4":4}
+         	 var settingNo=settings[$(toggle).attr('id')];
+         	   $
+   			.ajax({
+   				type : 'POST',
+   				url : 'setting-turnOffRecommend',
+   				dataType : 'json',
+   				data:{settingNo:''+settingNo+''},
+   				success : function(data) {
+   					if(data.state==1){
+   						layer.msg("success",{icon:1,anim:2,time:1000});
+   					}else{
+   						layer.msg("wrong",{icon:2,anim:6,time:1000});
+   					}
+   				},
+   				error : function(xhr,type) {
+   					layer.msg("error",{icon:2,anim:6,time:1000});
+   				}
+   			});
+             }
+ 
             
             setTimeout(function () {
                 $(toggle).removeClass('toggle--moving');

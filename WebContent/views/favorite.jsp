@@ -111,7 +111,7 @@
 		.use(
 				'layer',
 				function() {
-        $(document).on("click", ".act", function() {
+	$('.act').click(function() {
             var booklink=$(this).parent().siblings('.book-link').html();
 			var thisel = $(this).parent().parent();
 

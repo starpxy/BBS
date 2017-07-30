@@ -50,12 +50,14 @@ public class SettingAction extends BaseAction implements ModelDriven<Settings>, 
 		}
 		Timer timer = new Timer();
 		timer.scheduleAtFixedRate(RecommendTask.getInstance(), 0, 1000);
+		System.err.println(httpServletRequest.getParameter("settingNo"));
 		settingStatus = new HashMap<>();
 		settingStatus.put("state", 1);
 		return "settingAjax";
 	}
 
 	public String turnOffRecommend() {
+		System.err.println(httpServletRequest.getParameter("settingNo"));
 		User user = (User) session.get("user");
 		settingStatus = new HashMap<>();
 		if (user == null || !user.getRole().equals("admin")) {
