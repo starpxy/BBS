@@ -1,6 +1,5 @@
 package com.bbs.test.cases;
 
-import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -11,8 +10,8 @@ public class JSAPIInitialTest {
 
 	@Test
 	public void test() {
-		jsapiInitial.initialAPI("www.baidu.com");
-		fail("Not yet implemented");
+		jsapiInitial.initialAPI("https://www.baidu.com");
+		jsapiInitial.initialAPI("https://gre.etest.net.cn/myStatus.do?neeaID=71409257");
 	}
 
 }
