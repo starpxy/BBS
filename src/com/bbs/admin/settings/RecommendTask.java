@@ -2,6 +2,7 @@ package com.bbs.admin.settings;
 
 import java.util.TimerTask;
 
+import com.bbs.entities.Settings;
 import com.bbs.services.SettingService;
 
 public class RecommendTask extends TimerTask {
@@ -22,7 +23,16 @@ public class RecommendTask extends TimerTask {
 			return recommendTask;
 		}
 	}
-
+	
+	public static RecommendTask getInstance(SettingService settingService,long interval) {
+		if (recommendTask == null || !recommendTask.cancel()) {
+			recommendTask = new RecommendTask(settingService,interval);
+			return recommendTask;
+		} else {
+			return recommendTask;
+		}
+	}
+	
 	public void setSettingService(SettingService settingService) {
 		this.settingService = settingService;
 	}
@@ -35,6 +45,13 @@ public class RecommendTask extends TimerTask {
 		super();
 		this.interval = interval;
 		this.settingService = settingService;
+	}
+
+	public void cancelTask() {
+		recommendTask.cancel();
+		Settings settings = settingService.showSettings();
+		settings.setRecommend(0);
+		settingService.update(settings);
 	}
 
 	@Override

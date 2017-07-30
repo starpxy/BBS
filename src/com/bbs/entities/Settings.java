@@ -2,15 +2,42 @@ package com.bbs.entities;
 
 public class Settings {
 	private int id;
-	private int recommend;
-	private int star;
-	private int waitList;
-	private long recInterval;
-	private long starInterval;
-	private long waitInterval;
-	private long recPeriod;
-	private long starPeriod;
-	private long waitPeriod;
+	private int recommend = 0;
+	private int remind = 0;
+	private int waitList = 0;
+	private int reserveOverdue = 0;
+	private long reserveInterval = 0;
+	private long recInterval = 0;
+	private long remindInterval = 0;
+	private long waitInterval = 0;
+	private long reservePeriod = 0;
+	private long recPeriod = 0;
+	private long remindPeriod = 0;
+	private long waitPeriod = 0;
+
+	public void setReservePeriod(long reservePeriod) {
+		this.reservePeriod = reservePeriod;
+	}
+
+	public long getReserveInterval() {
+		return reserveInterval;
+	}
+
+	public long getReservePeriod() {
+		return reservePeriod;
+	}
+
+	public int getReserveOverdue() {
+		return reserveOverdue;
+	}
+
+	public void setReserveInterval(long reserveInterval) {
+		this.reserveInterval = reserveInterval;
+	}
+
+	public void setReserveOverdue(int reserveOverdue) {
+		this.reserveOverdue = reserveOverdue;
+	}
 
 	public void setId(int id) {
 		this.id = id;
@@ -26,14 +53,6 @@ public class Settings {
 
 	public void setRecommend(int recommend) {
 		this.recommend = recommend;
-	}
-
-	public int getStar() {
-		return star;
-	}
-
-	public void setStar(int star) {
-		this.star = star;
 	}
 
 	public int getWaitList() {
@@ -52,12 +71,28 @@ public class Settings {
 		this.recInterval = recInterval;
 	}
 
-	public long getStarInterval() {
-		return starInterval;
+	public int getRemind() {
+		return remind;
 	}
 
-	public void setStarInterval(long starInterval) {
-		this.starInterval = starInterval;
+	public void setRemind(int remind) {
+		this.remind = remind;
+	}
+
+	public long getRemindPeriod() {
+		return remindPeriod;
+	}
+
+	public void setRemindInterval(long remindInterval) {
+		this.remindInterval = remindInterval;
+	}
+
+	public void setRemindPeriod(long remindPeriod) {
+		this.remindPeriod = remindPeriod;
+	}
+
+	public long getRemindInterval() {
+		return remindInterval;
 	}
 
 	public long getWaitInterval() {
@@ -74,14 +109,6 @@ public class Settings {
 
 	public void setRecPeriod(long recPeriod) {
 		this.recPeriod = recPeriod;
-	}
-
-	public long getStarPeriod() {
-		return starPeriod;
-	}
-
-	public void setStarPeriod(long starPeriod) {
-		this.starPeriod = starPeriod;
 	}
 
 	public long getWaitPeriod() {

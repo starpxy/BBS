@@ -887,7 +887,35 @@
 
         });
         
+        $("#sign-out")
+		.click(
+				function() {
+					layer
+							.open({
+								title : "注销",
+								content : "你确认退出?",
+								yes : function() {
+									$
+											.ajax({
+												type : 'POST',
+												url : 'user-adminLogout',
+												dataType : 'json',
+												success : function(
+														data) {
+													if (data.state == 1) {
+														window.location.href = 'user-adminLogin';
+													} else {
 
+													}
+												},
+												error : function(
+														xhr,
+														type) {
+												}
+											});
+								}
+							});
+				});
 
         $(".delete-item").click(function () {
 

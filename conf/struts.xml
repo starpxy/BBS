@@ -240,6 +240,8 @@
 				name="settingAjax">
 				<param name="root">settingStatus</param>
 			</result>
+			<result name="loginFail">admin-login.jsp</result>
+			<result name="settings">admin-settings.jsp</result>
 		</action>
 	</package>
 
