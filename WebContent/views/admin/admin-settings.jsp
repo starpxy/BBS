@@ -292,10 +292,9 @@
 
             <div class="row">
                 <div class="col-md-12">
-
                     <div class="box box-success">
                         <div class="box-header with-border">
-                            <h2 class="box-title" style="margin-top: 15px">评论星级计算设置</h2>
+                            <h2 class="box-title" style="margin-top: 15px">预约过时计算设置</h2>
                             <!--提醒还书设置,推荐系统设置-->
                             <div class="pull-right">
                                 <a href="#"  id="toggle1" class="toggle toggle--on"></a>
@@ -337,7 +336,7 @@
 
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h2 class="box-title" style="margin-top: 15px">推荐系统设置</h2>
+                            <h2 class="box-title" style="margin-top: 15px">推荐书籍计算设置</h2>
                             <!--提醒还书设置,-->
                             <div class="pull-right">
                                 <a href="#" id="toggle2" class="toggle toggle--on"></a>
@@ -379,7 +378,7 @@
 
                     <div class="box box-info">
                         <div class="box-header with-border">
-                            <h2 class="box-title" style="margin-top: 15px">评论星级计算设置</h2>
+                            <h2 class="box-title" style="margin-top: 15px">提醒还书设置</h2>
                             <!--提醒还书设置,推荐系统设置-->
                             <div class="pull-right">
                                 <a href="#"  id="toggle3" class="toggle toggle--on"></a>
@@ -412,7 +411,6 @@
                             </div>
                         </div>
                         <!-- /.box-body -->
-
                     </div>
 
                 </div>
@@ -594,7 +592,7 @@
         //TODO
         //the following vlaues will be gained vai ajax request
         var initialValues = {
-            rating: {isOn: true, runInterval: 60, checkInterval: 300},
+            resevExpiry: {isOn: true, runInterval: 60, checkInterval: 300},
             recom: {isOn: true, runInterval: 120, checkInterval: 240},
             bookAlram: {isOn: false, runInterval: 60, checkInterval: 240},
             avaiforReserv: {isOn: true, runInterval: 100, checkInterval: 140}
@@ -602,9 +600,9 @@
 
 
         //initialzie the first setting
-        $('input[name="runInterval1"]').val(initialValues.rating.runInterval);
-        $('input[name="checkInterval1"]').val(initialValues.rating.checkInterval);
-        if (initialValues.rating.isOn){
+        $('input[name="runInterval1"]').val(initialValues.resevExpiry.runInterval);
+        $('input[name="checkInterval1"]').val(initialValues.resevExpiry.checkInterval);
+        if (initialValues.resevExpiry.isOn){
             $('#toggle1').removeClass('toggle--on').addClass('toggle--off');
             $('#toggle1').parent().parent().siblings('.box-body').show();
         }
@@ -645,18 +643,20 @@
             }
         }
 
-        function sendAjax(setting, status, runInterval, checkInterval){
+        function sendAjax(setting, runInterval, checkInterval){
      	   $
 			.ajax({
 				type : 'POST',
-				url : 'setting-turnOnRecommend',
+				url : 'setting-turnOn',
 				dataType : 'json',
-				data:{settingNo:''+setting+'',status:''+status+'',runInterval:''+runInterval+'',checkInterval:''+checkInterval+''},
+				data:{settingNo:''+setting+'',runInterval:''+runInterval+'',checkInterval:''+checkInterval+''},
 				success : function(data) {
 					if(data.state==1){
-						layer.msg("success",{icon:1,anim:2,time:1000});
+						layer.msg("开启成功",{icon:1,anim:2,time:1000});
+					}else if(data.state==2){
+   						window.location.href="/admin/user-adminLogin";
 					}else{
-						layer.msg("wrong",{icon:2,anim:6,time:1000});
+						layer.msg("参数错误",{icon:2,anim:6,time:1000});
 					}
 				},
 				error : function(xhr,type) {
@@ -666,22 +666,21 @@
           }
 
         $('#confirm1').click(function (e) {
-            var rating= {isOn: true, runInterval: 0, checkInterval: 0};
+            var resevExpiry= {isOn: true, runInterval: 0, checkInterval: 0};
 
             if(isNumber($('input[name="runInterval1"]').val())&&isNumber($('input[name="checkInterval1"]').val())){
-                rating.runInterval=$('input[name="runInterval1"]').val();
-                rating.checkInterval=$('input[name="checkInterval1"]').val();
+                resevExpiry.runInterval=$('input[name="runInterval1"]').val();
+                resevExpiry.checkInterval=$('input[name="checkInterval1"]').val();
             }else{
                 layer.msg("要输入数字才行",{icon:2,anim:6,time:1000});
                 return false;
             }
 //            //有toggle--on 其实开关是关着的
             if( $('#toggle1').hasClass('toggle--on')){
-                rating.isOn=false;
+                resevExpiry.isOn=false;
             }
 
-            sendAjax(1,rating.isOn,rating.runInterval,rating.checkInterval);
-    
+            sendAjax(1,resevExpiry.runInterval,resevExpiry.checkInterval);
 
         });
 
@@ -703,9 +702,8 @@
                 recom.isOn=false;
             }
 
-            //AJAX goes here
-            alert(JSON.stringify(recom));
-            layer.msg("success",{icon:1,anim:2,time:1000});
+
+            sendAjax(2,recom.runInterval,recom.checkInterval);
         });
 
         $('#confirm3').click(function (e) {
@@ -723,10 +721,7 @@
             if( $('#toggle3').hasClass('toggle--on')){
                 bookAlarm.isOn=false;
             }
-
-            //AJAX goes here
-            alert(JSON.stringify(bookAlarm));
-            layer.msg("success",{icon:1,anim:2,time:1000});
+            sendAjax(3,bookAlarm.runInterval,bookAlarm.checkInterval);
 
         });
 
@@ -734,7 +729,6 @@
             var avaiforReserv= {isOn: true, runInterval: 0, checkInterval: 0};
 
             if(isNumber($('input[name="runInterval4"]').val())&&isNumber($('input[name="checkInterval4"]').val())){
-
                 avaiforReserv.runInterval=$('input[name="runInterval4"]').val();
                 avaiforReserv.checkInterval=$('input[name="checkInterval4"]').val();
 
@@ -747,10 +741,7 @@
                 avaiforReserv.isOn=false;
             }
 
-            //AJAX goes here
-            alert(JSON.stringify(avaiforReserv));
-            layer.msg("success",{icon:1,anim:2,time:1000});
-
+            sendAjax(4,avaiforReserv.runInterval,avaiforReserv.checkInterval);
         });
 
 
@@ -773,15 +764,17 @@
          	   $
    			.ajax({
    				type : 'POST',
-   				url : 'setting-turnOffRecommend',
+   				url : 'setting-turnOff',
    				dataType : 'json',
    				data:{settingNo:''+settingNo+''},
    				success : function(data) {
    					if(data.state==1){
-   						layer.msg("success",{icon:1,anim:2,time:1000});
+   						layer.msg("关闭成功",{icon:1,anim:2,time:1000});
+   					}else if(data.state==2){
+   						window.location.href="/admin/user-adminLogin";
    					}else{
-   						layer.msg("wrong",{icon:2,anim:6,time:1000});
-   					}
+   						layer.msg("参数错误",{icon:2,anim:6,time:1000});
+   	   				}
    				},
    				error : function(xhr,type) {
    					layer.msg("error",{icon:2,anim:6,time:1000});
