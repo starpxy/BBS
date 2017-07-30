@@ -18,7 +18,11 @@
     <style>
         .weui-flex-item {
             text-align: center;
-            margin: 10px;
+            margin-top: 10px;
+            float: left;     
+        }
+         .flex-container{
+            margin-left: 10px;
         }
 
         img {
@@ -31,7 +35,7 @@
 
         .book-title {
             color: #0C0C0C;
-            margin: 4px auto;
+            margin: 2px auto;
             width: 80px;
             white-space: nowrap;
             text-overflow: ellipsis;
@@ -40,6 +44,11 @@
 
         .book-author {
             color: #666;
+            margin: 0 auto;
+            width: 120px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
     </style>
@@ -60,7 +69,7 @@
 		for(int i = favorites.size();i>0;i-=3){
 			int count = 0;
 %>
-	<div class="weui-flex">
+<div class="flex-container">
 	<%while(iterator.hasNext()&&count<3){ 
 		Favorite favorite = iterator.next();
 		count++;%>
@@ -87,7 +96,8 @@
 <%	}
 }%>
 
-<div style="height:60px"> &nbsp;</div>
+<div style="clear: both;height: 80px">&nbsp;</div>
+
 <div style="position:fixed;bottom: 0px;width: 100%">
 
     <div class="weui_panel weui_panel_access">
@@ -111,7 +121,7 @@
 		.use(
 				'layer',
 				function() {
-	$('.act').click(function() {
+			$('.flex-container').on('click','.act',function() {
             var booklink=$(this).parent().siblings('.book-link').html();
 			var thisel = $(this).parent().parent();
 
