@@ -74,6 +74,10 @@ public class UserService {
 		return userDao.adminListRecords();
 	}
 
+	public int changeRole(String userId, String role) {
+		return userDao.changeRole(userId, role);
+	}
+
 	public List<Reservation> adminListReservations() {
 		return userDao.adminListReservations();
 	}

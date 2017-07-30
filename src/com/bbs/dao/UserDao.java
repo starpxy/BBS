@@ -213,7 +213,21 @@ public class UserDao extends BaseDao {
 			}
 		}
 	}
-
+	
+	public int changeRole(String userId,String role){
+		String hql = "FROM User WHERE userId="+userId;
+		List<User> users = getSession().createQuery(hql).list();
+		if (users.isEmpty()) {
+			return 3;
+		}
+		else{
+			User user = users.get(0);
+			user.setRole(role);
+			getSession().update(user);
+			return 1;
+		}
+	}
+	
 	public List<BorrowedRecord> adminReturn(String userId) {
 		String hql = "FROM BorrowedRecord b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.bookItem c LEFT OUTER JOIN FETCH c.book WHERE b.user.userId="
 				+ userId + " AND b.status=2";

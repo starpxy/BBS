@@ -57,6 +57,19 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		}
 	}
 
+	public String changeRole() {
+		User user = (User) session.get("user");
+		status = new HashMap<>();
+		if (user != null && user.getRole().equals("admin")) {
+			String userId = httpServletRequest.getParameter("userId");
+			String role = httpServletRequest.getParameter("role");
+			status.put("state", userService.changeRole(userId, role));
+		} else {
+			status.put("state", 2);
+		}
+		return "adminUsersAjax";
+	}
+
 	public String userChart() {
 		User user = (User) session.get("user");
 		if (user != null && user.getRole().equals("admin")) {

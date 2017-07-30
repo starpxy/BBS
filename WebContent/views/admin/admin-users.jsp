@@ -217,7 +217,6 @@
 									<thead>
 
 										<tr>
-											<th>借阅详情</th>
 											<th>用户ID</th>
 											<th>姓名</th>
 											<th>电话</th>
@@ -238,54 +237,6 @@
 										<s:if test="#request.users!=null||request.users.size()!=0">
 											<s:iterator value="#request.users">
 												<tr>
-													<td class="user-books"><a class="check-user-books"><i
-															class="glyphicon glyphicon-search"></i><span>
-																<div class="box box-success">
-
-																	<div class="box-body no-padding"
-																		style="border: 1px solid green; width: 400px">
-
-																		<table class="table table-striped">
-
-																			<thead>
-																				<tr>
-
-																					<th>ISBN</th>
-																					<th>书名</th>
-																					<th>作者</th>
-																					<th>条目ID</th>
-																					<th>状态</th>
-
-																				</tr>
-
-																			</thead>
-
-																			<tbody>
-
-																				<tr>
-																					<td class="user-book-isbn"></td>
-																					<td class="user-book-tilte">心灵的焦灼</td>
-																					<td class="user-book-tilte">茨威格</td>
-																					<td class="user-book-tilte">2</td>
-																					<td class="user-book-status">预约中</td>
-																				</tr>
-
-
-																				<tr>
-																					<td class="user-book-isbn">123456765432</td>
-																					<td class="user-book-tilte">一个陌生女人的来信</td>
-																					<td class="user-book-tilte">茨威格</td>
-																					<td class="user-book-tilte">1</td>
-																					<td class="user-book-status">借书中</td>
-																				</tr>
-
-
-																			</tbody>
-																		</table>
-																		<!-- /.box-body -->
-																	</div>
-																</div>
-														</span></a></td>
 													<td class="id">${userId }</td>
 													<td class="user-name">${name }</td>
 													<td class="user-phone">${phoneNumber }</td>
