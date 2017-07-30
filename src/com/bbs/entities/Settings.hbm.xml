@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-29 23:07:16 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.bbs.entities.Settings" table="SETTINGS">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="recommend" type="int">
+            <column name="RECOMMEND" />
+        </property>
+        <property name="star" type="int">
+            <column name="STAR" />
+        </property>
+        <property name="waitList" type="int">
+            <column name="WAIT_LIST" />
+        </property>
+        <property name="recInterval" type="long">
+            <column name="REC_INTERVAL" />
+        </property>
+        <property name="starInterval" type="long">
+            <column name="STAR_INTERVAL" />
+        </property>
+        <property name="waitInterval" type="long">
+            <column name="WAIT_INTERVAL" />
+        </property>
+        <property name="recPeriod" type="long">
+            <column name="REC_PERIOD" />
+        </property>
+        <property name="starPeriod" type="long">
+            <column name="STAR_PERIOD" />
+        </property>
+        <property name="waitPeriod" type="long">
+            <column name="WAIT_PERIOD" />
+        </property>
+    </class>
+</hibernate-mapping>

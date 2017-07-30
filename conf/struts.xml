@@ -234,6 +234,13 @@
 			<result name="refused">login.jsp</result>
 			<result name="borrowHistory">borrowhistory.jsp</result>
 		</action>
+		<action name="setting-*" class="settingAction" method="{1}">
+			<result
+				type="json"
+				name="settingAjax">
+				<param name="root">settingStatus</param>
+			</result>
+		</action>
 	</package>
 
 </struts>

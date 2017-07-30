@@ -746,11 +746,22 @@
             e.preventDefault();
 
             $(toggle).parent().parent().siblings('.box-body').toggle(1000);
-
+            $
+			.ajax({
+				type : 'POST',
+				url : 'setting-turnOnRecommend',
+				dataType : 'json',
+				success : function(data) {
+				
+				},
+				error : function(xhr,type) {
+					alert('fail');
+				}
+			});
             $(toggle).toggleClass('toggle--on')
                     .toggleClass('toggle--off')
                     .addClass('toggle--moving');
-
+            
             setTimeout(function () {
                 $(toggle).removeClass('toggle--moving');
             }, 200);
