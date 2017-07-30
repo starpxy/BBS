@@ -63,7 +63,7 @@ public class SettingAction extends BaseAction implements ModelDriven<Settings>, 
 			return "settingAjax";
 		}
 		RecommendTask recommendTask = RecommendTask.getInstance();
-		recommendTask.setInterval(2000);
+		recommendTask.cancel();
 		settingStatus.put("state", 1);
 		return "settingAjax";
 	}
