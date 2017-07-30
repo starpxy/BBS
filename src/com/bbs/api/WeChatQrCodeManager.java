@@ -18,6 +18,11 @@ import com.bbs.api.entities.QrCode;
 import net.sf.json.JSONObject;
 
 public class WeChatQrCodeManager {
+	/*
+	 * 
+	 * 此类废弃。无需测试。
+	 * 
+	 */
 	public String generateTempQrCodeTicket(int sceneId,int expireTime){
 		String ticket = null;
 		IdScene idScene = new IdScene(sceneId);

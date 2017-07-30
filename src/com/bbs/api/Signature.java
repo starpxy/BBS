@@ -6,6 +6,12 @@ import java.util.Iterator;
 import java.util.TreeMap;
 
 public class Signature {
+	/*
+	 * 此方法为静态方法，通过类名.方法名调用。
+	 * 需要参数为TreeMap类型，存放需要签名的字段及其值。
+	 * 验证签名的方式可在 https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=jsapisign 查询到。
+	 * 测试时随意传入参数即可。
+	 */
 	public static String signMD5(TreeMap<String, String> map){
 		String originalText = "";
 		Iterator<String> iterator = map.keySet().iterator();

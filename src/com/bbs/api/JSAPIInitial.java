@@ -48,6 +48,13 @@ public class JSAPIInitial {
 		}
 		return ticket;
 	}
+	/*
+	 * 此方法为初始化微信API。
+	 * 需要参数为调用微信前端JS接口的网址URL，填写全域名。
+	 * 包括get参数。
+	 * 返回值为前端微信接口签名所需的几个参数。
+	 * 测试时随便传入URL即可。
+	 */
 	public Map<String, Object> initialAPI(String url){
 		Date date = new Date();
 		String timeStamp = date.getTime()/1000+"";
@@ -82,13 +89,4 @@ public class JSAPIInitial {
 			return generateCharacter(random);
 		}
 	}
-//	public static void main(String[] args) {
-//		JSAPIInitial jsapiInitial = new JSAPIInitial();
-//		Map<String , Object> map = jsapiInitial.initialAPI("http://pxyzmy.com.cn/jssdk.html");
-//		Iterator<String> iterator = map.keySet().iterator();
-//		while(iterator.hasNext()){
-//			String temp = iterator.next();
-//			System.out.println(temp+" : "+ map.get(temp));
-//		}
-//	}
 }

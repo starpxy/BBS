@@ -26,16 +26,15 @@ public class AccessTokenManager {
 	private static String accessToken = "";
 	private static int expiresTime = 0;
 	private static Date startTime = null;
+	/**
+	 * 
+	 * 此方法为静态方法，直接透过类名.方法名调用。返回值为微信提供的accessToken。
+	 * 
+	 */
 	public static String getAccessToken(){
 		URL url;
 		HttpsURLConnection httpsURLConnection;
 		InputStreamReader inputStreamReader;
-//		if (startTime!=null) {
-//			if ((new Date().getTime()-startTime.getTime())<(expiresTime*1000-10000L)&&!accessToken.equals("")) {
-//				System.out.println("reuse");
-//				return accessToken;
-//			}
-//		}
 		try {
 			url = new URL("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+BasicAccountParam.getAppId()+"&secret="+BasicAccountParam.getAppSecrete());
 			httpsURLConnection = (HttpsURLConnection) url.openConnection();

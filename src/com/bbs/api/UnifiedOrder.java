@@ -45,6 +45,14 @@ public class UnifiedOrder {
 	public Map<String, Object> getLastOrder(){
 		return resultMap;
 	}
+	/*
+	 * 统一下单接口。
+	 * 实例化类后，可调用创建订单方法，后续可进行微信支付
+	 * openId示例：oQe5IuBxLw5PKLiQDyfKuCnpDxg0
+	 * spbillCreateIp为调用微信支付的ip地址
+	 * totalFee为微信支付的金额，分为单位。
+	 * 返回值为调用微信支付所需的一系列签名值，测试时可忽略。
+	 */
 	public Map<String, Object> createOrder(String openId,String spbillCreateIp, int totalFee){
 		Map<String,Object> result = new HashMap<String,Object>();
 		Map<String,Object> tempResult = new HashMap<String,Object>();

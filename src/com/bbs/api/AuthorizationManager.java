@@ -18,7 +18,9 @@ public class AuthorizationManager {
 	public void setCode(String argv) {
 		code = argv;
 	}
-
+	/*
+	 * 此方法不能本地调用，是微信登录的一个接口。
+	 */
 	public String getOpenID() throws NoneCodeException {
 		if (openId!=null) {
 			return openId;
@@ -55,7 +57,4 @@ public class AuthorizationManager {
 		}
 		return openId;
 	}
-//	public String getAvatar() throws NoneCodeException {
-//		
-//	}
 }

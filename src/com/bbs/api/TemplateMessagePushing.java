@@ -34,7 +34,11 @@ import com.bbs.encrypt.IdentifyCode;
 import net.sf.json.JSONObject;
 
 public class TemplateMessagePushing {
-
+	/*
+	 * 此方法为提醒还书方法，实例化此类后即可调用。
+	 * openid参数为用户对于公众号的openid，示例openid（此ID为萌萌小朋友的）：oQe5IuBxLw5PKLiQDyfKuCnpDxg0
+	 * bookTitle是借的书的书名。 days是几天后过期。
+	 */
 	public void pushReturningBooks(String openid, String bookTitle, int days) {
 		try {
 			URL url = new URL("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="
@@ -55,7 +59,8 @@ public class TemplateMessagePushing {
 			Template template = new Template(openid, "DqUQWPy9BQcvBfiYWVy4k1DkJ3ZTHp3YB8kQuAJgRDw", data);
 			template.setTopcolor("#000000");
 			JSONObject jsonObject = JSONObject.fromObject(template);
-			PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(httpsURLConnection.getOutputStream(),"UTF-8"));
+			PrintWriter printWriter = new PrintWriter(
+					new OutputStreamWriter(httpsURLConnection.getOutputStream(), "UTF-8"));
 			printWriter.print(jsonObject.toString());
 			printWriter.flush();
 			printWriter.close();
@@ -78,6 +83,9 @@ public class TemplateMessagePushing {
 		}
 	}
 
+	/*
+	 * 押金验证通知。 openid不做解释。bookNum为所借图书数量。
+	 */
 	public void pushDepositConfirming(String openid, int bookNum) {
 		try {
 			URL url = new URL("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="
@@ -95,14 +103,13 @@ public class TemplateMessagePushing {
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
 			KeyWord keynote2 = new KeyWord(simpleDateFormat.format(date), "#000000");
 			Data data = new NewData(first, keynote1, new KeyWord(bookNum + "", "#000000"),
-					new KeyWord(20 * bookNum + "元", "#000000"), keynote2,
-					new KeyWord("由于证书无法下载，暂时不能进行退款。", "#000079"));
+					new KeyWord(20 * bookNum + "元", "#000000"), keynote2, new KeyWord("由于证书无法下载，暂时不能进行退款。", "#000079"));
 			Template template = new Template(openid, "-mDlmXytJHmD5c7w58PA6jkloX12O934b0Em8wiY7xU",
-					"http://qr.liantu.com/api.php?text=测试数据",
-					data);
+					"http://qr.liantu.com/api.php?text=测试数据", data);
 			template.setTopcolor("#000000");
 			JSONObject jsonObject = JSONObject.fromObject(template);
-			PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(httpsURLConnection.getOutputStream(),"UTF-8"));
+			PrintWriter printWriter = new PrintWriter(
+					new OutputStreamWriter(httpsURLConnection.getOutputStream(), "UTF-8"));
 			printWriter.print(jsonObject.toString());
 			printWriter.flush();
 			printWriter.close();
@@ -125,6 +132,9 @@ public class TemplateMessagePushing {
 		}
 	}
 
+	/*
+	 * 退款推送。 identifiCode已废弃。 此方法无需测试。
+	 */
 	public void pushDepositRefund(String openid, int bookNum, String identifiCode) {
 		try {
 			URL url = new URL("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="
@@ -146,7 +156,8 @@ public class TemplateMessagePushing {
 			Template template = new Template(openid, "Exm4J9gALXY_RUNezo3ligodLpaW2lWDNQ5ikN7uoiw", data);
 			template.setTopcolor("#000000");
 			JSONObject jsonObject = JSONObject.fromObject(template);
-			PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(httpsURLConnection.getOutputStream(),"UTF-8"));
+			PrintWriter printWriter = new PrintWriter(
+					new OutputStreamWriter(httpsURLConnection.getOutputStream(), "UTF-8"));
 			printWriter.print(jsonObject.toString());
 			printWriter.flush();
 			printWriter.close();
@@ -168,8 +179,12 @@ public class TemplateMessagePushing {
 			e.printStackTrace();
 		}
 	}
-	public void pushReservation(String openid, String bookTitle){
-		//id:rTDou8851rtrLfcfGJIkRemb2FYh2LpQ-7Ji5itSoLA
+
+	/*
+	 * 预定成功推送。
+	 */
+	public void pushReservation(String openid, String bookTitle) {
+		// id:rTDou8851rtrLfcfGJIkRemb2FYh2LpQ-7Ji5itSoLA
 		try {
 			URL url = new URL("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="
 					+ AccessTokenManager.getAccessToken());
@@ -193,7 +208,8 @@ public class TemplateMessagePushing {
 			Template template = new Template(openid, "rTDou8851rtrLfcfGJIkRemb2FYh2LpQ-7Ji5itSoLA", reserveData);
 			template.setTopcolor("#000000");
 			JSONObject jsonObject = JSONObject.fromObject(template);
-			PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(httpsURLConnection.getOutputStream(),"UTF-8"));
+			PrintWriter printWriter = new PrintWriter(
+					new OutputStreamWriter(httpsURLConnection.getOutputStream(), "UTF-8"));
 			printWriter.print(jsonObject.toString());
 			printWriter.flush();
 			printWriter.close();
@@ -215,11 +231,13 @@ public class TemplateMessagePushing {
 			e.printStackTrace();
 		}
 	}
-//	 public static void main(String[] args) {
-//	 new
-//	 TemplateMessagePushing().pushDepositConfirming("oQe5IuOG4oLF1N57aEQjmGEg5peU",2, new IdentifyCode(1, 29).getCipherCode());
-//	 new
-//	 TemplateMessagePushing().pushReturningBooks("oQe5IuNgiocNx9qMzWjbeUMgJEkc",
-//	 "聪聪智障", 1);
-//	 }
+	// 下面就是调用的示例。
+	// public static void main(String[] args) {
+	// new
+	// TemplateMessagePushing().pushDepositConfirming("oQe5IuOG4oLF1N57aEQjmGEg5peU",2,
+	// new IdentifyCode(1, 29).getCipherCode());
+	// new
+	// TemplateMessagePushing().pushReturningBooks("oQe5IuNgiocNx9qMzWjbeUMgJEkc",
+	// "聪聪智障", 1);
+	// }
 }
