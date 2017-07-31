@@ -67,25 +67,41 @@ public class BookAction extends BaseAction implements ModelDriven<Book>, Servlet
 		return "showComments";
 	}
 
+	public String adminBooksAjax() {
+
+		User user = (User) session.get("admin");
+		books = new HashMap<>();
+		if (user != null && user.getRole().equals("admin")) {
+			books.put("books", JSONArray.fromObject(BookService.getBookList()));
+			books.put("state", 1);
+		} else if (user != null) {
+			books.put("state", 2);
+		} else {
+			books.put("state", 2);
+		}
+
+		return "adminBooksAjax";
+	}
+
 	public String bookDetails() {
 		User user = (User) session.get("user");
-		if (user==null) {
+		if (user == null) {
 			return "refused";
 		}
 		Book newBook = BookService.bookDetails(book);
 		request.put("book", newBook);
 		session.put("book", newBook);
-		request.put("isFavorited", BookService.isFavorited(user, book.getBookId()+""));
+		request.put("isFavorited", BookService.isFavorited(user, book.getBookId() + ""));
 		return "bookDetails";
 	}
-	
-	public String adminBookDetail(){
+
+	public String adminBookDetail() {
 		Book newBook = BookService.bookDetails(book);
 		request.put("book", newBook);
 		session.put("book", newBook);
 		return "adminBookDetail";
 	}
-	
+
 	public String bookSubmit() {
 		Book newBook = BookService.bookDetails(book);
 		request.put("book", newBook);
@@ -103,10 +119,10 @@ public class BookAction extends BaseAction implements ModelDriven<Book>, Servlet
 		request.put("type", book.getType());
 		String p = httpServletRequest.getParameter("page");
 		int page = 1;
-		if (p!=null) {
+		if (p != null) {
 			page = Integer.valueOf(p);
 		}
-		List<Book> bookList = BookService.bookList(book,page);
+		List<Book> bookList = BookService.bookList(book, page);
 		books = new HashMap<String, Object>();
 		books.put("books", JSONArray.fromObject(bookList));
 		return "listBooks";
@@ -124,8 +140,8 @@ public class BookAction extends BaseAction implements ModelDriven<Book>, Servlet
 		books.put("state", BookService.addBookNew(book));
 		return "addBook";
 	}
-	
-	public String update(){
+
+	public String update() {
 		books = new HashMap<>();
 		User user = (User) session.get("user");
 		if (user == null) {
@@ -135,10 +151,10 @@ public class BookAction extends BaseAction implements ModelDriven<Book>, Servlet
 		books.put("state", BookService.update(book));
 		return "bookAjax";
 	}
-	
+
 	public String recommendBook() throws IOException {
 		Book book = (Book) session.get("book");
-		List<Book> list = BookService.bookList(book,-1);
+		List<Book> list = BookService.bookList(book, -1);
 		List<Map.Entry<Book, Double>> temp = RankAlgorithm.getRecomBookList(book, list, book.getType());
 		List<Book> result = new LinkedList<>();
 		for (Entry<Book, Double> entry : temp) {
@@ -148,15 +164,15 @@ public class BookAction extends BaseAction implements ModelDriven<Book>, Servlet
 		books.put("books", JSONArray.fromObject(result));
 		return "addBook";
 	}
-	
-	public void prepareAdminBookDetail(){
+
+	public void prepareAdminBookDetail() {
 		book = new Book();
 	}
-	
+
 	public void prepareUpdate() {
 		book = new Book();
 	}
-	
+
 	public void prepareAddBookNew() {
 		book = new Book();
 	}
@@ -185,7 +201,7 @@ public class BookAction extends BaseAction implements ModelDriven<Book>, Servlet
 	public Book getModel() {
 		return book;
 	}
-	
+
 	@Override
 	public void setServletRequest(HttpServletRequest request) {
 		httpServletRequest = request;

@@ -105,6 +105,7 @@
 				type="json">
 				<param name="root">status</param>
 			</result>
+		
 			<result
 				name="adminLogout"
 				type="json">
@@ -169,6 +170,11 @@
 				<param name="root">commentStatus</param>
 			</result>
 			<result
+				name="adminCommentsAjax"
+				type="json">
+				<param name="root">commentStatus</param>
+			</result>
+			<result
 				name="comment"
 				type="json">
 				<param name="root">commentStatus</param>
@@ -182,6 +188,11 @@
 			<result name="adminBookDetail">admin-bookinfo.jsp</result>
 			<result name="bookList">booklist.jsp</result>
 			<result name="refused">login.jsp</result>
+			<result
+				name="adminBooksAjax"
+				type="json">
+				<param name="root">books</param>
+			</result>
 			<result
 				type="json"
 				name="listBooks">

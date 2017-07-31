@@ -25,8 +25,8 @@ public class BookDao extends BaseDao {
 	}
 
 	public int isBookFavorited(User user, String bookId) {
-		String hql = "FROM Favorite b LEFT JOIN FETCH b.user LEFT JOIN FETCH b.book WHERE b.user.userId="
-				+ user.getUserId() + " AND b.book.bookId=" + bookId;
+		String hql = "FROM Favorite b LEFT JOIN FETCH b.user LEFT JOIN FETCH b.book WHERE b.user.userId=" + user.getUserId() + " AND b.book.bookId="
+				+ bookId;
 		List<Favorite> favorites = getSession().createQuery(hql).list();
 		if (favorites.isEmpty()) {
 			return 2;
@@ -99,14 +99,13 @@ public class BookDao extends BaseDao {
 		List<Comment> list = getSession().createQuery(hql).list();
 		return list;
 	}
-	
-	public int update(Book book){
-		String hql = "FROM Book WHERE bookId="+book.getBookId();
+
+	public int update(Book book) {
+		String hql = "FROM Book WHERE bookId=" + book.getBookId();
 		List<Book> books = getSession().createQuery(hql).list();
 		if (books.isEmpty()) {
 			return 2;
-		}
-		else{
+		} else {
 			Book book2 = books.get(0);
 			book2.setBookTitle(book.getBookTitle());
 			book2.setBookTitle(book.getBookTitle());
@@ -121,5 +120,11 @@ public class BookDao extends BaseDao {
 			getSession().update(book2);
 			return 1;
 		}
+	}
+
+	public List<Book> getBookList() {
+		String hql = "FROM Book";
+		List<Book> books = getSession().createQuery(hql).list();
+		return books;
 	}
 }

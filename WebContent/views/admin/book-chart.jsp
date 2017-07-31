@@ -9,6 +9,8 @@
 
 <title>管理员系统</title>
 <link rel="stylesheet" href="asserts/bootstrap.min.css">
+<link rel="stylesheet"
+	href="asserts/plugins/daterangepicker/daterangepicker.css">
 <link rel="stylesheet" href="asserts/css/AdminLTE.min.css">
 <link rel="stylesheet" href="asserts/plugins/morris/morris.css">
 <link rel="stylesheet"
@@ -177,8 +179,9 @@
 				</ul></li>
 
 
-			<li class="header">其他操作(预留)</li>
-			<li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>操作一</span></a></li>
+			
+			<li class="header">其他操作</li>
+			<li><a href="setting-settings"><i class="fa fa-gear"></i> <span>基本设置</span></a></li>
 			<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>操作二</span></a></li>
 			<li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>操作三</span></a></li>
 		</ul>
@@ -210,15 +213,24 @@
 
 					<div class="box box-primary">
 						<div class="box-header with-border">
-							<h3 class="box-title">图书增长</h3>
+							<div class="row">
+								<div class="col-md-2">
+									<h3 class="box-title">图书增长</h3>
+								</div>
+								<div class="col-md-3">
+									<input id="daterange" type="text" class="form-control"
+										style="height: 30px; width: 200px; margin-top: 10px">
+								</div>
+							</div>
 
 							<div class="box-tools pull-right">
 
 								<button type="button" class="btn btn-box-tool"
-									id="daterange-btn">
+									id="daterange-btn" data-toggle="tooltip" data-placement="left"
+									title="选择时间范围">
 									<i class="fa fa-calendar"></i>
 								</button>
-
+								
 								<button type="button" class="btn btn-box-tool"
 									data-widget="collapse">
 									<i class="fa fa-minus"></i>
@@ -246,7 +258,7 @@
 			<div class="row">
 
 
-				<div class="col-md-6">
+				<div class="col-md-12">
 					<!-- DONUT CHART -->
 					<div class="box box-info">
 						<div class="box-header with-border">
@@ -273,31 +285,6 @@
 
 
 
-
-				<div class="col-md-6">
-					<!-- DONUT CHART -->
-					<div class="box box-success">
-						<div class="box-header with-border">
-							<h3 class="box-title">书籍状态</h3>
-							<div class="box-tools pull-right">
-								<button type="button" class="btn btn-box-tool"
-									data-widget="collapse">
-									<i class="fa fa-minus"></i>
-								</button>
-								<button type="button" class="btn btn-box-tool"
-									data-widget="remove">
-									<i class="fa fa-times"></i>
-								</button>
-							</div>
-						</div>
-						<div class="box-body chart-responsive">
-							<div class="chart" id="status-chart"
-								style="height: 300px; position: relative;"></div>
-						</div>
-						<!-- /.box-body -->
-					</div>
-
-				</div>
 
 			</div>
 
@@ -343,61 +330,6 @@
 					</label>
 				</div>
 				<!--<div style="overflow-x: auto; overflow-y: auto; height: 1000px; width: 100%; padding: 20px">-->
-				<div>
-
-					<div class="form-group">
-						<label class="control-sidebar-subheading"><input
-							data-layout="fixed" class="pull-right" type="checkbox">借书通知-共支付4元</label>
-						<p>
-							用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;
-						</p>
-					</div>
-					<div class="form-group">
-						<label class="control-sidebar-subheading"><input
-							data-layout="fixed" class="pull-right" type="checkbox">借书通知-共支付4元</label>
-						<p>
-							用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;
-						</p>
-					</div>
-
-					<div class="form-group">
-						<label class="control-sidebar-subheading"><input
-							data-layout="fixed" class="pull-right" type="checkbox">借书通知-共支付4元</label>
-						<p>
-							用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;
-						</p>
-					</div>
-					<div class="form-group">
-						<label class="control-sidebar-subheading"><input
-							data-layout="fixed" class="pull-right" type="checkbox">借书通知-共支付4元</label>
-						<p>
-							用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;
-						</p>
-					</div>
-					<div class="form-group">
-						<label class="control-sidebar-subheading"><input
-							data-layout="fixed" class="pull-right" type="checkbox">借书通知-共支付4元</label>
-						<p>
-							用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;
-						</p>
-					</div>
-					<div class="form-group">
-						<label class="control-sidebar-subheading"><input
-							data-layout="fixed" class="pull-right" type="checkbox">借书通知-共支付4元</label>
-						<p>
-							用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;
-						</p>
-					</div>
-					<div class="form-group">
-						<label class="control-sidebar-subheading"><input
-							data-layout="fixed" class="pull-right" type="checkbox">借书通知-共支付4元</label>
-						<p>
-							用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;
-						</p>
-					</div>
-
-				</div>
-
 			</div>
 			<!-- Settings tab content -->
 			<div class="tab-pane" id="control-sidebar-settings-tab">
@@ -471,141 +403,149 @@
 	<script src="asserts/bootstrap.min.js"></script>
 	<script src="asserts/plugins/bootstrap-typeahead.js"></script>
 	<script src="asserts/app.min.js"></script>
-
 	<script src="asserts/plugins/morris/morris.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+			<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 	<script src="asserts/plugins/datatables/jquery.dataTables.min.js"></script>
 	<script src="asserts/plugins/datatables/dataTables.bootstrap.min.js"></script>
+		<script src="asserts/plugins/daterangepicker/daterangepicker.js"></script>
 	<script src="asserts/plugins/layui/layui.js"></script>
-
+	
+	<script type="text/javascript"
+		src="asserts/plugins/cmap/lib/raphael-min.js"></script>
+	<script type="text/javascript"
+		src="asserts/plugins/cmap/res/chinaMapConfigHigh.js"></script>
+	<script type="text/javascript" src="asserts/plugins/cmap/map.js"></script>
 
 	<script>
 		layui.use('layer', function() {
 			var layer = layui.layer;
+			var index1=layer.load(2);
+	
 
-			// LINE CHART
-			var line = new Morris.Line({
-				element : 'book-increase',
-				resize : true,
-				data : [ {
-					y : '2017-06-16',
-					item1 : 12
-				}, {
-					y : '2017-06-17',
-					item1 : 2
-				}, {
-					y : '2017-06-18',
-					item1 : 3
-				}, {
-					y : '2017-06-19',
-					item1 : 1
-				}, {
-					y : '2017-06-20',
-					item1 : 0
-				}, {
-					y : '2017-06-21',
-					item1 : 3
-				}, {
-					y : '2017-06-22',
-					item1 : 2
-				}, {
-					y : '2017-06-23',
-					item1 : 6
-				}, {
-					y : '2017-06-24',
-					item1 : 15
-				}, {
-					y : '2017-06-25',
-					item1 : 2
-				} ],
-				xkey : 'y',
-				ykeys : [ 'item1' ],
-				labels : [ '书的数量' ],
-				lineColors : [ '#00a65a' ],
-				hideHover : 'auto'
+			$('#daterange-btn').click(function() {
+				$('#daterange').trigger('focus');
 			});
 
-			//DONUT CHART
-			var donut = new Morris.Donut({
-				element : 'status-chart',
-				resize : true,
-				colors : [ "#3c8dbc", "#f56954", "#00a65a" ],
-				data : [ {
-					label : "被预约",
-					value : 100
-				}, {
-					label : "被借出",
-					value : 300
-				}, {
-					label : "可借书",
-					value : 200
-				} ],
-				hideHover : 'auto'
+			$('#daterange')
+					.daterangepicker(
+							{
+								dateLimit : {
+									days : 9
+								},
+								startDate : moment().subtract(9, 'days'),
+								endDate : moment(),
+								maxDate : moment()
+							},
+							function(start, end) {
+								var index2=layer.load(2);
+								var days = (new Date(end.format('YYYY-MM-DD'))
+										.getTime() - new Date(start
+										.format('YYYY-MM-DD')).getTime())
+										/ (3600 * 24 * 1000) + 1;
+								refreshLineChart(days, new Date(end
+										.format('YYYY-MM-DD')).getTime());
+								layer.close(index2);
+							});
+
+			function getNowFormatDate(ns) {
+				var date = new Date(parseInt(ns));
+				var seperator1 = "-";
+				var seperator2 = ":";
+				var month = date.getMonth() + 1;
+				var strDate = date.getDate();
+
+				if (month >= 1 && month <= 9) {
+					month = "0" + month;
+				}
+				if (strDate >= 0 && strDate <= 9) {
+					strDate = "0" + strDate;
+				}
+				var currentdate = date.getFullYear() + seperator1 + month
+						+ seperator1 + strDate;
+				return currentdate;
+			}
+			function countIncrease(data, date) {
+				var count = 0;
+				for (j = 0; j < data.books.length; j += 1) {
+					if (date === getNowFormatDate(data.books[j].updateAt.time)) {
+						count += 1;
+					}
+				}
+				return count;
+			}
+			
+function refreshLineChart(days, endTime){
+	var linedata = new Array();
+	for (i = 0; i < days; i += 1) {
+		temp = {};
+		temp.y = getNowFormatDate(endTime - (days - 1 - i) * 1000
+				* 3600 * 24);
+		temp.item1 = countIncrease(lineDataFromBack, temp.y);
+		linedata.push(temp);
+	}
+	$("#book-increase").empty();
+	var line = new Morris.Line({
+		element : 'book-increase',
+		resize : true,
+		data : linedata,
+		xkey : 'y',
+		ykeys : [ 'item1' ],
+		labels : [ '书的数量' ],
+		lineColors : [ '#00a65a' ],
+		hideHover : 'auto'
+	});
+
+}
+			var lineDataFromBack;	
+			$.ajax({
+				type : 'POST',
+				url : 'book-adminBooksAjax',
+				dataType : 'json',
+				success : function(data) {
+					if (data.state == 1) {
+						lineDataFromBack = data;
+						refreshLineChart(10, new Date().getTime());
+						initializeBarChart();
+						layer.close(index1);
+					} else {
+						console.log(data);
+					}
+				},
+				error : function(xhr, type) {
+					console.log(xhr);
+				}
 			});
 
-			//BAR CHART
-			var bar = new Morris.Bar({
-				element : 'class-chart',
-				resize : true,
-				data : [ {
-					y : '经典名著',
-					a : 100
-				}, {
-					y : '人文社科',
-					a : 75
-				}, {
-					y : '计算机科学',
-					a : 50
-				}, {
-					y : '生活保健',
-					a : 75
-				}, {
-					y : '经管理财',
-					a : 50
-				}, {
-					y : '成人教育',
-					a : 75
-				}, {
-					y : '小说传记',
-					a : 100
-				} ],
-				barColors : [ '#00a65a' ],
-				xkey : 'y',
-				ykeys : [ 'a' ],
-				labels : [ 'CPU' ],
-				hideHover : 'auto'
-			});
+			function initializeBarChart() {
+				var books=lineDataFromBack.books;
+				var types=['绘本漫画', '人物传记', '侦探推理', '商业管理', '经典名著', '心理学', '历史哲学', '生活旅行', '更多', '励志成长', '科学科普', '交互设计', '经济理财', '流行青春', '计算机科学']
+				var lineData=[];
+				for (each in types){
+					var count=0;
+					for (j = 0; j < books.length; j += 1) {
+						if (types[each] === books[j].type) {
+							count += 1;
+						}
+					}
+					lineData.push({y:""+types[each] +"",a:""+count+""});
+				}
+				//BAR CHART
+				var bar = new Morris.Bar({
+					element : 'class-chart',
+					resize : true,
+					data :lineData,
+					barColors : [ '#00a65a' ],
+					xkey : 'y',
+					ykeys : [ 'a' ],
+					labels : [ 'CPU' ],
+					hideHover : 'auto'
+				});
+			}
 
-			//        $("xxxx").click(function () {
-			//
-			//        });
-
-			//        layer.open({
-			//            title: "确认删除",
-			//            content: "你确认删除该书吗?",
-			//            yes: function () {
-			//                thisele.parent().parent().hide();
-			//                layer.msg("成功删除", {anim: 1, icon: 1, time: 1000});
-			//
-			//            }
-			//        });
-
-			////TODO ajax goes here
-			//                            $.ajax({
-			//                                type: 'POST',
-			//                                url: 'xxx',
-			//                                data: {'isbn': isbn},
-			//                                dataType: 'json',
-			//                                success: function (data) {
-			//
-			//                                    //TODO 2
-			//刷新页面
-			//
-			//                                },
-			//                                error: function (xhr, type) {
-			//                                }
-			//                            });
+			
 
 		});
 	</script>

@@ -1,5 +1,7 @@
 package com.bbs.services;
 
+import java.util.List;
+
 import com.bbs.dao.CommentDao;
 import com.bbs.entities.Comment;
 
@@ -13,7 +15,13 @@ public class CommentService {
 	public boolean makeComment(Comment comment) {
 		return commentDao.makeComment(comment);
 	}
-	public boolean deleteComment(String commentId){
+
+	public boolean deleteComment(String commentId) {
 		return commentDao.deleteComment(commentId);
 	}
+
+	public List<Comment> getCommentList() {
+		return commentDao.getCommentList();
+	}
+
 }

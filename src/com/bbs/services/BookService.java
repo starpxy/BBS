@@ -22,6 +22,10 @@ public class BookService {
 		return bookDao.bookList(book, page);
 	}
 
+	public List<Book> getBookList() {
+		return bookDao.getBookList();
+	}
+
 	public int addBookOld(String isbn) {
 		return bookDao.addBookOld(isbn);
 	}
@@ -37,8 +41,9 @@ public class BookService {
 	public int isFavorited(User user, String bookId) {
 		return bookDao.isBookFavorited(user, bookId);
 	}
-	
-	public int update(Book book){
+
+	public int update(Book book) {
 		return bookDao.update(book);
 	}
+
 }

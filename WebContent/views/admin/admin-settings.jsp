@@ -585,6 +585,7 @@
         var b = true;
         var c = true;
         var d = true;
+        
         if('${request.setting.reserveOverdue}'==0){
 			a = false;
         }
@@ -604,7 +605,6 @@
             bookAlram: {isOn: c, runInterval: '${request.setting.remindPeriod}', checkInterval: '${request.setting.remindInterval}'},
             avaiforReserv: {isOn: d, runInterval: '${request.setting.waitPeriod}', checkInterval: '${request.setting.waitInterval}'}
         };
-
 
         //initialzie the first setting
         $('input[name="runInterval1"]').val(initialValues.resevExpiry.runInterval);

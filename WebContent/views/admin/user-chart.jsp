@@ -222,8 +222,9 @@
 				</ul></li>
 
 
-			<li class="header">其他操作(预留)</li>
-			<li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>操作一</span></a></li>
+			
+			<li class="header">其他操作</li>
+			<li><a href="setting-settings"><i class="fa fa-gear"></i> <span>基本设置</span></a></li>
 			<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>操作二</span></a></li>
 			<li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>操作三</span></a></li>
 		</ul>
@@ -453,60 +454,7 @@
 					</label>
 				</div>
 				<!--<div style="overflow-x: auto; overflow-y: auto; height: 1000px; width: 100%; padding: 20px">-->
-				<div>
-
-					<div class="form-group">
-						<label class="control-sidebar-subheading"><input
-							data-layout="fixed" class="pull-right" type="checkbox">借书通知-共支付4元</label>
-						<p>
-							用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;
-						</p>
-					</div>
-					<div class="form-group">
-						<label class="control-sidebar-subheading"><input
-							data-layout="fixed" class="pull-right" type="checkbox">借书通知-共支付4元</label>
-						<p>
-							用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;
-						</p>
-					</div>
-
-					<div class="form-group">
-						<label class="control-sidebar-subheading"><input
-							data-layout="fixed" class="pull-right" type="checkbox">借书通知-共支付4元</label>
-						<p>
-							用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;
-						</p>
-					</div>
-					<div class="form-group">
-						<label class="control-sidebar-subheading"><input
-							data-layout="fixed" class="pull-right" type="checkbox">借书通知-共支付4元</label>
-						<p>
-							用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;
-						</p>
-					</div>
-					<div class="form-group">
-						<label class="control-sidebar-subheading"><input
-							data-layout="fixed" class="pull-right" type="checkbox">借书通知-共支付4元</label>
-						<p>
-							用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;
-						</p>
-					</div>
-					<div class="form-group">
-						<label class="control-sidebar-subheading"><input
-							data-layout="fixed" class="pull-right" type="checkbox">借书通知-共支付4元</label>
-						<p>
-							用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;
-						</p>
-					</div>
-					<div class="form-group">
-						<label class="control-sidebar-subheading"><input
-							data-layout="fixed" class="pull-right" type="checkbox">借书通知-共支付4元</label>
-						<p>
-							用户:王聪聪 2017-06-09 12:30:00 <br>&lt;&lt;月亮与六便士&gt;&gt;<br>&lt;&lt;麦田里的守望者&gt;&gt;
-						</p>
-					</div>
-
-				</div>
+				
 
 			</div>
 			<!-- Settings tab content -->
@@ -736,7 +684,6 @@
 				temp.item1 = countIncrease(lineDataFromBack, temp.y);
 				linedata.push(temp);
 			}
-
 			$("#user-increase").empty();
 			var line = new Morris.Line({
 				element : 'user-increase',
@@ -763,7 +710,6 @@
 							cities.push(areas[x][1]);
 						}
 						initializeAreaChart(cities);
-
 					} else {
 						alert('wrong');
 					}
@@ -861,7 +807,6 @@
 			for (each in reminders){
 				recomData.push({label:""+reminders[each][1]+"",value:""+reminders[each][0]+""});
 			}
-			
 			var roleData=[];
 			roleData.push({label:"用户",value:""+uservalue+""});
 			roleData.push({label:"管理员",value:""+adminvalue+""});

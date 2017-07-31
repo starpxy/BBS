@@ -13,6 +13,8 @@ import com.bbs.entities.User;
 import com.bbs.services.CommentService;
 import com.opensymphony.xwork2.ModelDriven;
 
+import net.sf.json.JSONArray;
+
 public class CommentAction extends BaseAction implements ModelDriven<Comment>, ServletRequestAware {
 	private static final long serialVersionUID = 1L;
 	private CommentService commentService;
@@ -37,6 +39,21 @@ public class CommentAction extends BaseAction implements ModelDriven<Comment>, S
 			commentStatus.put("state", 2);
 		}
 		return "deleteComment";
+	}
+
+	public String adminCommentsAjax() {
+		User user = (User) session.get("admin");
+		commentStatus = new HashMap<>();
+		if (user != null && user.getRole().equals("admin")) {
+			commentStatus.put("comments", JSONArray.fromObject(commentService.getCommentList()));
+			commentStatus.put("state", 1);
+		} else if (user != null) {
+			commentStatus.put("state", 2);
+		} else {
+			commentStatus.put("state", 2);
+		}
+
+		return "adminCommentsAjax";
 	}
 
 	public String makeComment() {
