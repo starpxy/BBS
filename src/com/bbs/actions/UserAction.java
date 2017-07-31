@@ -186,14 +186,14 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		User user = (User) session.get("admin");
 		status = new HashMap<>();
 		if (user != null && user.getRole().equals("admin")) {
-			status.put("areas", JSONArray.fromObject(userService.adminUsersArea()).toString());
+			status.put("areas", JSONArray.fromObject(userService.adminUsersArea()));
 			status.put("state", 1);
 		} else if (user != null) {
 			status.put("state", 2);
 		} else {
 			status.put("state", 2);
 		}
-		return "adminUsersAjax";
+		return "adminUsersAjaxArea";
 	}
 
 	public String adminBooks() {

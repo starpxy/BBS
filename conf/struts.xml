@@ -100,7 +100,11 @@
 				type="json">
 				<param name="root">status</param>
 			</result>
-		
+			<result
+				name="adminUsersAjaxArea"
+				type="json">
+				<param name="root">status</param>
+			</result>
 			<result
 				name="adminLogout"
 				type="json">

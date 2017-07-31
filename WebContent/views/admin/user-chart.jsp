@@ -9,7 +9,8 @@
 
 <title>管理员系统</title>
 <link rel="stylesheet" href="asserts/bootstrap.min.css">
-    <link rel="stylesheet" href="asserts/plugins/daterangepicker/daterangepicker.css">
+<link rel="stylesheet"
+	href="asserts/plugins/daterangepicker/daterangepicker.css">
 <link rel="stylesheet" href="asserts/css/AdminLTE.min.css">
 
 <link rel="stylesheet" href="asserts/plugins/morris/morris.css">
@@ -20,55 +21,55 @@
 <link rel="stylesheet" href="asserts/plugins/layui/css/layui.css">
 <link rel="stylesheet" href="asserts/css/index.css">
 <style>
-        .stateTip, #StateTip {
-            display: none;
-            position: absolute;
-            padding: 8px;
-            background: #fff;
-            border: 2px solid #2385B1;
-            -moz-border-radius: 4px;
-            -webkit-border-radius: 4px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-family: Tahoma;
-            color: #333;
-        }
+.stateTip, #StateTip {
+	display: none;
+	position: absolute;
+	padding: 8px;
+	background: #fff;
+	border: 2px solid #2385B1;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	font-size: 12px;
+	font-family: Tahoma;
+	color: #333;
+}
 
-        .mapInfo i {
-            display: inline-block;
-            width: 15px;
-            height: 15px;
-            margin-top: 5px;
-            line-height: 15px;
-            font-style: normal;
-            background: #aeaeae;
-            color: #fff;
-            font-size: 11px;
-            font-family: Tahoma;
-            -webkit-border-radius: 15px;
-            border-radius: 15px;
-            text-align: center
-        }
+.mapInfo i {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	margin-top: 5px;
+	line-height: 15px;
+	font-style: normal;
+	background: #aeaeae;
+	color: #fff;
+	font-size: 11px;
+	font-family: Tahoma;
+	-webkit-border-radius: 15px;
+	border-radius: 15px;
+	text-align: center
+}
 
-        .mapInfo i.active {
-            background: #E27F21;
-        }
+.mapInfo i.active {
+	background: #E27F21;
+}
 
-        .mapInfo span {
-            padding: 0 5px 0 3px;
-        }
+.mapInfo span {
+	padding: 0 5px 0 3px;
+}
 
-        .mapInfo b {
-            font-weight: normal;
-            color: #2770B5
-        }
+.mapInfo b {
+	font-weight: normal;
+	color: #2770B5
+}
 
-        .regionMap {
-            float: left;
-            margin-left: 10px;
-            display: inline;
-        }
-    </style>
+.regionMap {
+	float: left;
+	margin-left: 10px;
+	display: inline;
+}
+</style>
 
 
 </head>
@@ -94,7 +95,7 @@
 			<ul class="nav navbar-nav">
 
 				<!-- Messages: style can be found in dropdown.less-->
-			<!-- 	<li class="dropdown messages-menu"><a href="#"> <i
+				<!-- 	<li class="dropdown messages-menu"><a href="#"> <i
 						class="fa fa-qrcode"></i>
 
 				</a></li> -->
@@ -172,7 +173,7 @@
 		<!-- sidebar menu: : style can be found in sidebar.less -->
 		<ul class="sidebar-menu">
 			<li class="header">管理导航</li>
-       		<li><a href="user-adminLogin"> <i class="fa fa-gear"></i> <span>管理员主页</span>
+			<li><a href="user-adminLogin"> <i class="fa fa-gear"></i> <span>管理员主页</span>
 			</a></li>
 			<li class="treeview"><a href="#"> <i class="fa fa-book"></i>
 					<span>图书管理</span> <span class="pull-right-container"> <i
@@ -191,23 +192,20 @@
 			<li><a href="user-adminUsers"><i class="fa fa-user"></i> <span>用户管理</span>
 					<span class="pull-right-container"> <small
 						class="label pull-right bg-green">users</small>
-				</span>
-			</a></li>
+				</span> </a></li>
 
 
 			<li><a href="user-adminListComments"><i class="fa fa-info"></i>
 					<span>评论管理</span> <span class="pull-right-container"> <small
 						class="label pull-right bg-green">news</small>
-				</span>
-			</a></li>
+				</span> </a></li>
 
 
 			<li><a href="javascript:;"><i class="fa fa-info"></i> <span>消息管理</span>
 
 					<span class="pull-right-container"> <small
 						class="label pull-right bg-green">news</small>
-				</span>
-			</a></li>
+				</span> </a></li>
 
 
 			<li class="active treeview"><a href="#"> <i
@@ -255,15 +253,20 @@
 
 					<div class="box box-primary">
 						<div class="box-header with-border">
-							    <div class="row">
-                                <div class="col-md-2"><h3 class="box-title">用户增长</h3></div>
-                                <div class="col-md-3"><input id="daterange" type="text" class="form-control" style="height: 30px;width: 200px;margin-top: 10px"></div>
-                            </div>
+							<div class="row">
+								<div class="col-md-2">
+									<h3 class="box-title">用户增长</h3>
+								</div>
+								<div class="col-md-3">
+									<input id="daterange" type="text" class="form-control"
+										style="height: 30px; width: 200px; margin-top: 10px">
+								</div>
+							</div>
 
 							<div class="box-tools pull-right">
-
 								<button type="button" class="btn btn-box-tool"
-									id="daterange-btn" data-toggle="tooltip" data-placement="left" title="选择时间范围">
+									id="daterange-btn" data-toggle="tooltip" data-placement="left"
+									title="选择时间范围">
 									<i class="fa fa-calendar"></i>
 								</button>
 
@@ -290,34 +293,36 @@
 				</div>
 			</div>
 
-         <div class="row">
-                <div class="col-md-12">
-                    <div class="box box-primary">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="box box-primary">
 
-                        <div class="box-header with-border">
-                            <h3>地域分析</h3>
-                        </div>
-                        <div class="box-body">
+						<div class="box-header with-border">
+							<h3>
+								地域分析 <small class="label area-label bg-green"></small>
+							</h3>
+						</div>
+						<div class="box-body">
 
-                            <div style="width:100%;">
-                                <div class="col-md-1"></div>
-                                <div class="col-md-11">
-                                    <div class="itemCon">
+							<div style="width: 100%;">
+								<div class="col-md-1"></div>
+								<div class="col-md-11">
+									<div class="itemCon">
 
 
-                                        <div id="Region" style="overflow: hidden;clear:both;">
-                                            <div class="regionMap" id="RegionMap"></div>
-                                            <div id="MapColor"
-                                                 style="width:180px; height:30px; margin:500px 60% 0 40%; background:url(asserts/plugins/cmap/map_color.gif) center 0;"></div>
-                                        </div>
+										<div id="Region" style="overflow: hidden; clear: both;">
+											<div class="regionMap" id="RegionMap"></div>
+											<div id="MapColor"
+												style="width: 180px; height: 30px; margin: 500px 60% 0 40%; background: url(asserts/plugins/cmap/map_color.gif) center 0;"></div>
+										</div>
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="row">
 
 
@@ -577,99 +582,160 @@
 	<script src="asserts/plugins/morris/morris.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 	<script src="asserts/plugins/datatables/jquery.dataTables.min.js"></script>
 	<script src="asserts/plugins/datatables/dataTables.bootstrap.min.js"></script>
 	<script src="asserts/plugins/daterangepicker/daterangepicker.js"></script>
 	<script src="asserts/plugins/layui/layui.js"></script>
 
-<script type="text/javascript" src="asserts/plugins/cmap/lib/raphael-min.js"></script>
-<script type="text/javascript" src="asserts/plugins/cmap/res/chinaMapConfigHigh.js"></script>
-<script type="text/javascript" src="asserts/plugins/cmap/map.js"></script>
+	<script type="text/javascript"
+		src="asserts/plugins/cmap/lib/raphael-min.js"></script>
+	<script type="text/javascript"
+		src="asserts/plugins/cmap/res/chinaMapConfigHigh.js"></script>
+	<script type="text/javascript" src="asserts/plugins/cmap/map.js"></script>
 
 	<script>
-	var data = {
-	        "jiangsu": {"value": "30.05%", "index": "1", "stateInitColor": "0"},
-	        "henan": {"value": "19.77%", "index": "2", "stateInitColor": "0"},
-	        "anhui": {"value": "10.85%", "index": "3", "stateInitColor": "0"},
-	        "zhejiang": {"value": "10.02%", "index": "4", "stateInitColor": "0"},
-	        "liaoning": {"value": "8.46%", "index": "5", "stateInitColor": "0"},
-	        "beijing": {"value": "4.04%", "index": "6", "stateInitColor": "1"},
-	        "hubei": {"value": "3.66%", "index": "7", "stateInitColor": "1"},
-	        "jilin": {"value": "2.56%", "index": "8", "stateInitColor": "1"},
-	        "shanghai": {"value": "2.47%", "index": "9", "stateInitColor": "1"},
-	        "guangxi": {"value": "2.3%", "index": "10", "stateInitColor": "1"},
-	        "sichuan": {"value": "1.48%", "index": "11", "stateInitColor": "2"},
-	        "guizhou": {"value": "0.99%", "index": "12", "stateInitColor": "2"},
-	        "hunan": {"value": "0.78%", "index": "13", "stateInitColor": "2"},
-	        "shandong": {"value": "0.7%", "index": "14", "stateInitColor": "2"},
-	        "guangdong": {"value": "0.44%", "index": "15", "stateInitColor": "2"},
-	        "jiangxi": {"value": "0.34%", "index": "16", "stateInitColor": "3"},
-	        "fujian": {"value": "0.27%", "index": "17", "stateInitColor": "3"},
-	        "yunnan": {"value": "0.23%", "index": "18", "stateInitColor": "3"},
-	        "hainan": {"value": "0.21%", "index": "19", "stateInitColor": "3"},
-	        "shanxi": {"value": "0.11%", "index": "20", "stateInitColor": "3"},
-	        "hebei": {"value": "0.11%", "index": "21", "stateInitColor": "4"},
-	        "neimongol": {"value": "0.04%", "index": "22", "stateInitColor": "4"},
-	        "tianjin": {"value": "0.04%", "index": "23", "stateInitColor": "4"},
-	        "gansu": {"value": "0.04%", "index": "24", "stateInitColor": "4"},
-	        "shaanxi": {"value": "0.02%", "index": "25", "stateInitColor": "4"},
-	        "macau": {"value": "0.0%", "index": "26", "stateInitColor": "7"},
-	        "hongkong": {"value": "0.0%", "index": "27", "stateInitColor": "7"},
-	        "taiwan": {"value": "0.0%", "index": "28", "stateInitColor": "7"},
-	        "qinghai": {"value": "0.0%", "index": "29", "stateInitColor": "7"},
-	        "xizang": {"value": "0.0%", "index": "30", "stateInitColor": "7"},
-	        "ningxia": {"value": "0.0%", "index": "31", "stateInitColor": "7"},
-	        "xinjiang": {"value": "0.0%", "index": "32", "stateInitColor": "7"},
-	        "heilongjiang": {"value": "0.0%", "index": "33", "stateInitColor": "7"},
-	        "chongqing": {"value": "0.0%", "index": "34", "stateInitColor": "7"}
-	    };
+		var pinToChar = {
+			heilongjiang : '黑龙江',
+			jilin : '吉林',
+			liaoning : '辽宁',
+			hebei : '河北',
+			shandong : '山东',
+			jiangsu : '江苏',
+			zhejiang : '浙江',
+			anhui : '安徽',
+			henan : '河南',
+			shanxi : '山西',
+			shaanxi : '陕西',
+			gansu : '甘肃',
+			hubei : '湖北',
+			jiangxi : '江西',
+			fujian : '福建',
+			hunan : '湖南',
+			guizhou : '贵州',
+			sichuan : '四川',
+			yunnan : '云南',
+			qinghai : '青海',
+			hainan : '海南',
+			shanghai : '上海',
+			chongqing : '重庆',
+			tianjin : '天津',
+			beijing : '北京',
+			ningxia : '宁夏',
+			neimongol : '内蒙古',
+			guangxi : '广西',
+			xinjiang : '新疆',
+			xizang : '西藏',
+			guangdong : '广东',
+			hongkong : '香港',
+			taiwan : '台湾',
+			macau : '澳门'
+		};
+		function initializeAreaChart(cities) {
+			var areaData = {};
+			/* 		console.log(cities);
+			 */
 
-	    var stateColorList = ['003399', '0058B0', '0071E1', '1C8DFF', '51A8FF', '82C0FF', 'AAD5ee', 'AAD5FF'];
+			var total = cities.length;
+			$('.area-label').html(total);
+			for (each in pinToChar) {
+				var value = 0;
+				var stateInitColor = 7;
+				var index = "";
+				for (city in cities) {
+					if (cities[city].indexOf(pinToChar[each]) > -1) {
+						value += 1;
+					}
+				}
+				var value = parseFloat(value / total).toFixed(4) * 100;
+				if (value >= 50) {
+					stateInitColor = 0;
+					index = "*";
+				} else if (value >= 25) {
+					stateInitColor = 1;
+				} else if (value >= 15) {
+					stateInitColor = 2;
+				} else if (value >= 10) {
+					stateInitColor = 3;
+				} else if (value >= 6) {
+					stateInitColor = 4;
+				} else if (value >= 3) {
+					stateInitColor = 5;
+				} else if (value >= 1) {
+					stateInitColor = 6;
+				} else {
+					stateInitColor = 7;
+				}
+				areaData[each] = {
+					"value" : "" + value + "%",
+					"index" : "" + index + "",
+					"stateInitColor" : "" + stateInitColor + ""
+				};
+			}
+	
 
-	    $('#RegionMap').SVGMap({
-	        mapName: 'china',
-	        mapWidth: 600,
-	        mapHeight: 500,
-	        stateData: data,
-	        stateTipHtml: function (mapData, obj) {
-	            var _value = mapData[obj.id].value;
-	            var _idx = mapData[obj.id].index;
-	            var active = '';
-	            _idx < 4 ? active = 'active' : active = '';
-	            var tipStr = '<div class="mapInfo"><i class="' + active + '">' + _idx + '</i><span>' + obj.name + '</span><b>' + _value + '</b></div>';
-	            return tipStr;
-	        }
-	    });
+			var stateColorList = [ '003399', '0058B0', '0071E1', '1C8DFF',
+					'51A8FF', '82C0FF', 'AAD5ee', 'AAD5FF' ];
+			$('#RegionMap')
+					.SVGMap(
+							{
+								mapName : 'china',
+								mapWidth : 600,
+								mapHeight : 500,
+								stateData : areaData,
+								stateTipHtml : function(mapData, obj) {
+									var _value = mapData[obj.id].value;
+									var _idx = mapData[obj.id].index;
+									var active = '';
+									_idx == "*" ? active = 'active'
+											: active = '';
+									var tipStr = '<div class="mapInfo"><i class="' + active + '">'
+											+ _idx
+											+ '</i><span>'
+											+ obj.name
+											+ '</span><b>'
+											+ _value
+											+ '</b></div>';
+									return tipStr;
+								}
+							});
 
+		}
 
-	    $('#daterange-btn').click(function(){
-				$('#daterange').trigger('focus');
-		   });
-	    
-	    $('#daterange').daterangepicker({
-	        dateLimit: {
-	            days: 9
-	        },
-	        startDate: moment().subtract(9, 'days'),
-	        endDate: moment(),
-	        maxDate:moment()
-	    }, function (start, end) {
-	     	var days=(new Date(end.format('YYYY-MM-DD')).getTime()-new Date(start.format('YYYY-MM-DD')).getTime())/(3600*24*1000)+1;
-	        refreshLineChart(days,new Date(end.format('YYYY-MM-DD')).getTime());  
-	    });
+		$('#daterange-btn').click(function() {
+			$('#daterange').trigger('focus');
+		});
+
+		$('#daterange')
+				.daterangepicker(
+						{
+							dateLimit : {
+								days : 9
+							},
+							startDate : moment().subtract(9, 'days'),
+							endDate : moment(),
+							maxDate : moment()
+						},
+						function(start, end) {
+							var days = (new Date(end.format('YYYY-MM-DD'))
+									.getTime() - new Date(start
+									.format('YYYY-MM-DD')).getTime())
+									/ (3600 * 24 * 1000) + 1;
+							refreshLineChart(days, new Date(end
+									.format('YYYY-MM-DD')).getTime());
+						});
 
 		var lineDataFromBack;
-	    function refreshLineChart(days, endTime){
-	    	var linedata = new Array();
+		function refreshLineChart(days, endTime) {
+			var linedata = new Array();
 			for (i = 0; i < days; i += 1) {
 				temp = {};
-				temp.y = getNowFormatDate(endTime
-						- (days-1 - i) * 1000 * 3600 * 24);
+				temp.y = getNowFormatDate(endTime - (days - 1 - i) * 1000
+						* 3600 * 24);
 				temp.item1 = countIncrease(lineDataFromBack, temp.y);
 				linedata.push(temp);
 			}
-	
 
 			$("#user-increase").empty();
 			var line = new Morris.Line({
@@ -682,42 +748,49 @@
 				lineColors : [ '#3c8dbc' ],
 				hideHover : 'auto'
 			});
-
 		}
-	
+
+		function sendNextAjax() {
+			$.ajax({
+				type : 'POST',
+				url : 'user-adminUsersAreaAjax',
+				dataType : 'json',
+				success : function(data) {
+					if (data.state == 1) {
+						var areas = data.areas;
+						var cities = new Array();
+						for (x in areas) {
+							cities.push(areas[x][1]);
+						}
+						initializeAreaChart(cities);
+
+					} else {
+						alert('wrong');
+					}
+				},
+				error : function(xhr, type) {
+					alert('error');
+				}
+			});
+		}
+
 		$.ajax({
 			type : 'POST',
-			url : 'user-adminUsersAreaAjax',
+			url : 'user-adminUsersAjax',
 			dataType : 'json',
-			success : function(data) {
-				if (data.state == 1) {
-					alert('success');
-					console.log(data);
+			success : function(data1) {
+				if (data1.state == 1) {
+					lineDataFromBack = data1;
+					refreshLineChart(10, new Date().getTime());
+					initializePieChart();
+					sendNextAjax();
 				} else {
-					alert('wrong');
 				}
 			},
 			error : function(xhr, type) {
-				alert('error');
-			}
-		}); 
-		
-		$
-				.ajax({
-					type : 'POST',
-					url : 'user-adminUsersAjax',
-					dataType : 'json',
-					success : function(data) {
-						if (data.state == 1) {
-							lineDataFromBack=data;
-							refreshLineChart(10,new Date().getTime());
-						} else {
-						}
-					},
-					error : function(xhr, type) {
 
-					}
-				});
+			}
+		});
 
 		function countIncrease(data, date) {
 			var count = 0;
@@ -747,57 +820,79 @@
 			return currentdate;
 		}
 
-		//DONUT CHART
-		var donut = new Morris.Donut({
-			element : 'gender-chart',
-			resize : true,
-			colors : [ "#3c8dbc", "#f56954" ],
-			data : [ {
-				label : "男",
-				value : 80
-			}, {
-				label : "女",
-				value : 60
-			} ],
-			hideHover : 'auto'
-		});
+		function initializePieChart() {
+			var users=lineDataFromBack.users
+			var malevalue=0;
+			var femalevalue=0;
 
-		//DONUT CHART
-		var donut = new Morris.Donut({
-			element : 'recomfre-chart',
-			resize : true,
-			colors : [ "#3c8dbc", "#f56954", "#00a65a", "#00ff5a" ],
-			data : [ {
-				label : "不提醒",
-				value : 20
-			}, {
-				label : "一天提醒",
-				value : 50
-			}, {
-				label : "三天提醒",
-				value : 40
-			}, {
-				label : "七天提醒",
-				value : 30
-			} ],
-			hideHover : 'auto'
-		});
+			var reminders={zero:[0,"不提醒"],one:[0,"一天"],three:[0,"三天"],seven:[0,"一周"]};
 
-		//DONUT CHART
-		var donut = new Morris.Donut({
-			element : 'role-chart',
-			resize : true,
-			colors : [ "#3c8dbc", "#f56954" ],
-			data : [ {
-				label : "管理员",
-				value : 10
-			}, {
-				label : "一般用户",
-				value : 130
-			} ],
-			hideHover : 'auto'
-		});
+			var uservalue=0;
+			var adminvalue=0;
+			for (user in users){
+				if(users[user].gender=='male'){
+					malevalue+=1;
+				}else if(users[user].gender=='female'){
+					femalevalue+=1;
+				}
+				
+				if(users[user].recommendFre==0){
+					reminders.zero[0]+=1;
+				}else if(users[user].recommendFre==1){
+					reminders.one[0]+=1;
+				}else if(users[user].recommendFre==3){
+					reminders.three[0]+=1;
+				}else if(users[user].recommendFre==7){
+					reminders.seven[0]+=1;
+				}
 
+				if(users[user].role=='user'){
+					uservalue+=1;
+				}else if(users[user].role=='admin'){
+					adminvalue+=1;
+				}
+				
+			}
+			var genderData=[];
+			genderData.push({label:"男",value:""+malevalue+""});
+			genderData.push({label:"女",value:""+femalevalue+""});
+
+			var recomData=[];
+			for (each in reminders){
+				recomData.push({label:""+reminders[each][1]+"",value:""+reminders[each][0]+""});
+			}
+			
+			var roleData=[];
+			roleData.push({label:"用户",value:""+uservalue+""});
+			roleData.push({label:"管理员",value:""+adminvalue+""});
+			console.log(genderData);
+
+			var donut = new Morris.Donut({
+				element : 'gender-chart',
+				resize : true,
+				colors : [ "#3c8dbc", "#f56954" ],
+				data :genderData,
+				hideHover : 'auto'
+			});
+			
+			//DONUT CHART
+			var donut = new Morris.Donut({
+				element : 'recomfre-chart',
+				resize : true,
+				colors : [ "#3c8dbc", "#f56954", "#00a65a", "#00ff5a" ],
+				data : recomData,
+				hideHover : 'auto'
+			});
+
+			//DONUT CHART
+			var donut = new Morris.Donut({
+				element : 'role-chart',
+				resize : true,
+				colors : [ "#3c8dbc", "#f56954" ],
+				data : roleData,
+				hideHover : 'auto'
+			});
+		}
 	</script>
 
 </body>
