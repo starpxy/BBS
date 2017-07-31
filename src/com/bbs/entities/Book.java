@@ -18,7 +18,16 @@ public class Book {
 	private Float starClass;
 	private Integer price = 1;
 	private Integer borrowedNum = 0;
+	private Integer commentNum = 0;
 	private Date updateAt;
+
+	public void setCommentNum(Integer commentNum) {
+		this.commentNum = commentNum;
+	}
+
+	public Integer getCommentNum() {
+		return commentNum;
+	}
 
 	public void setPrice(Integer price) {
 		this.price = price;

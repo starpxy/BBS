@@ -405,8 +405,23 @@ button {
 								if (data.indexOf("EAN_13") > -1) {
 									//扫除的结果是isbn，直接跳转到book页面
 									var isbn = data.split(',')[1];
-									window.location.href = '/book-bookDetails?bookId='
-											+ isbn;
+									$
+									.ajax({
+										type : 'POST',
+										url : 'book-isExist',
+										data:{'isbn':isbn},
+										dataType : 'json',
+										success : function(data) {
+											if (data.state == 1) {
+												window.location.href = "book-bookDetails?bookId="+data.bookId;
+											} else {
+												alert('对不起！此书不存在书库中！');
+											}
+										},
+										error : function() {
+											alert('服务器错误');
+										}
+									});
 								} else {
 									var ids = $.parseJSON(data);
 									$

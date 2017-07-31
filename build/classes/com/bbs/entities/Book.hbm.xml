@@ -50,6 +50,9 @@
         <property name="borrowedNum" type="java.lang.Integer">
             <column name="BORROWED_NUM" default="0"/>
         </property>
+        <property name="commentNum" type="java.lang.Integer">
+            <column name="COMMENT_NUM" default="0"/>
+        </property>
         <property name="updateAt" type="java.util.Date">
             <column name="UPDATE_AT" />
         </property>

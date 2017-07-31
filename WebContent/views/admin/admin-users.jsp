@@ -638,13 +638,7 @@
 									});
 
 								} else {
-									$(this).parent().siblings('.user-role')
-											.text("管理员");
-									layer.msg("成功指派该用户为管理员", {
-										anim : 1,
-										icon : 1,
-										time : 1000
-									});
+									
 
 								}
 
@@ -653,27 +647,31 @@
 			$(".become-normal").click(function() {
 				//TODO
 				$.ajax({
-												type : 'POST',
-												url : 'user-adminLogout',
-												dataType : 'json',
-												success : function(data) {
-													if (data.state == 1) {
-														window.location.href = 'user-adminLogin';
-													} else {
-															
-													}
-												},
-												error : function(
-														xhr,
-														type) {
-												}
-											});
-				$(this).parent().siblings('.user-role').text("普通用户");
-				layer.msg("成功该用户设为普通用户", {
-					anim : 1,
-					icon : 1,
-					time : 1000
-				});
+						type : 'POST',
+						url : 'user-changeRole'
+						data : {'role':'user'},
+						dataType : 'json',
+						success : function(data) {
+							if (data.state == 1) {
+								$(this).parent().siblings('.user-role').text("普通用户");
+								layer.msg("成功该用户设为普通用户", {
+									anim : 1,
+									icon : 1,
+									time : 1000
+								});
+							} else {
+								layer.msg("身份验证失败！", {
+									anim : 6,
+									icon : 2,
+									time : 1000
+								});
+							}
+						},
+						error : function(
+								xhr,
+								type) {
+								}
+						});
 
 			});
 

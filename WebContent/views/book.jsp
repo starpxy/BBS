@@ -358,7 +358,6 @@
 					 $("html,body").scrollTop(target_top); 
 					return;
 				}
-
 				layer.msg('预订中，请稍候...', {
 					icon : 16,
 					shade : 0.01
@@ -366,7 +365,8 @@
 				$.ajax({
 					type : 'POST',
 					data : {
-						"bookId" : '${request.book.bookId}'
+						"bookId" : '${request.book.bookId}',
+						"fetchDate": s1.getTime()
 					},
 					url : 'reservation-reserve',
 					dataType : 'json',
@@ -390,12 +390,44 @@
 								}
 							});
 						} else if (data.state == 2) {
-							layer.msg('对不起，这本书已经被订光了，晚点来试试吧！', {
+							layer
+							.open({
+								title : "书都被借光啦",
+								content : "是否将此书加入您的愿望单？我们会在有书时通知您",
+								yes :function() {
+									$
+									.ajax({
+										type : 'POST',
+										url : 'reservation-addToWaitList',
+										data:{'bookId':'${request.book.bookId}'},
+										dataType : 'json',
+										success : function(
+												data) {
+											if (data.state == 1) {
+												layer.msg('加入愿望单成功！请等待通知', {
+													icon : 1,
+													anim : 2,
+													time : 2500
+												});
+											} else {
+
+											}
+										},
+										error : function(
+												xhr,
+												type) {
+										}
+									});
+						}
+					});
+						}else if (data.state == 4) {
+							layer.msg('参数有误', {
 								icon : 2,
 								anim : 2,
 								time : 2000
 							});
-						} else {
+						} 
+						 else {
 							layer.msg('您最多可同时预定两本书！', {
 								icon : 2,
 								anim : 2,

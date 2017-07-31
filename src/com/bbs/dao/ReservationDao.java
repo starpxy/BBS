@@ -3,9 +3,11 @@ package com.bbs.dao;
 import java.util.Date;
 import java.util.List;
 
+import com.bbs.entities.Book;
 import com.bbs.entities.BookItem;
 import com.bbs.entities.Reservation;
 import com.bbs.entities.User;
+import com.bbs.entities.WaitList;
 
 public class ReservationDao extends BaseDao {
 	public int createReservation(Reservation reservation, String bookId) {
@@ -27,7 +29,8 @@ public class ReservationDao extends BaseDao {
 			reservation.setFetchDate(new Date());
 			reservation.setStatus(0);
 			reservation.setUpdateAt(new Date());
-			System.out.println(reservation.getBookItem().getStatus()+" "+reservation.getBookItem().getItemId()+" "+reservation.getUser().getUserId());
+			System.out.println(reservation.getBookItem().getStatus() + " " + reservation.getBookItem().getItemId() + " "
+					+ reservation.getUser().getUserId());
 			getSession().save(reservation);
 			return 1;
 		}
@@ -38,6 +41,22 @@ public class ReservationDao extends BaseDao {
 		String hql = "FROM Reservation WHERE user.userId=" + user.getUserId();
 		reservations = getSession().createQuery(hql).list();
 		return reservations;
+	}
+
+	public int addToWaitList(String bookId, User user) {
+		String hql = "FROM Book WHERE bookId=" + bookId;
+		List<Book> books = getSession().createQuery(hql).list();
+		if (books.isEmpty() || user == null) {
+			return 2;
+		}
+		Book book = books.get(0);
+		WaitList waitList = new WaitList();
+		waitList.setBook(book);
+		waitList.setUser(user);
+		waitList.setUpdateAt(new Date());
+		waitList.setStatus(0);
+		getSession().save(waitList);
+		return 1;
 	}
 
 	public List<Reservation> reservelist(User user) {

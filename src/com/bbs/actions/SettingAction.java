@@ -45,7 +45,7 @@ public class SettingAction extends BaseAction implements ModelDriven<Settings>, 
 	}
 
 	public String turnOn() {
-		User user = (User) session.get("user");
+		User user = (User) session.get("admin");
 		settingStatus = new HashMap<>();
 		if (user == null || !user.getRole().equals("admin")) {
 			settingStatus.put("state", 2);
@@ -70,6 +70,7 @@ public class SettingAction extends BaseAction implements ModelDriven<Settings>, 
 			settingService.update(settings);
 			timer.scheduleAtFixedRate(reserveTask, 0, settings.getReservePeriod());
 			settingStatus.put("state", 1);
+			break;
 		case 2:
 			RecommendTask recommendTask = RecommendTask.getInstance(settingService,Long.valueOf(checkInterval));
 			settings.setRecInterval(Long.valueOf(checkInterval));
@@ -78,6 +79,7 @@ public class SettingAction extends BaseAction implements ModelDriven<Settings>, 
 			settingService.update(settings);
 			timer.scheduleAtFixedRate(recommendTask, 0, settings.getRecPeriod());
 			settingStatus.put("state", 1);
+			break;
 		case 3:
 			RemindTask remindTask = RemindTask.getInstance(settingService,Long.valueOf(checkInterval));
 			settings.setRemindInterval(Long.valueOf(checkInterval));
@@ -86,6 +88,7 @@ public class SettingAction extends BaseAction implements ModelDriven<Settings>, 
 			settingService.update(settings);
 			timer.scheduleAtFixedRate(remindTask, 0, settings.getRemindPeriod());
 			settingStatus.put("state", 1);
+			break;
 		case 4:
 			WaitTask waitTask = WaitTask.getInstance(settingService,Long.valueOf(checkInterval));
 			settings.setWaitInterval(Long.valueOf(checkInterval));
@@ -94,15 +97,17 @@ public class SettingAction extends BaseAction implements ModelDriven<Settings>, 
 			settingService.update(settings);
 			timer.scheduleAtFixedRate(waitTask, 0, settings.getWaitPeriod());
 			settingStatus.put("state", 1);
+			break;
 		default:
 			settingStatus.put("state", 3);
+			break;
 		}
 		settingStatus.put("state", 1);
 		return "settingAjax";
 	}
 
 	public String turnOff() {
-		User user = (User) session.get("user");
+		User user = (User) session.get("admin");
 		settingStatus = new HashMap<>();
 		if (user == null || !user.getRole().equals("admin")) {
 			settingStatus.put("state", 2);
@@ -116,29 +121,34 @@ public class SettingAction extends BaseAction implements ModelDriven<Settings>, 
 			reserveTask.setSettingService(settingService);
 			reserveTask.cancelTask();
 			settingStatus.put("state", 1);
+			break;
 		case 2:
 			RecommendTask recommendTask = RecommendTask.getInstance();
 			recommendTask.setSettingService(settingService);
 			recommendTask.cancelTask();
 			settingStatus.put("state", 1);
+			break;
 		case 3:
 			RemindTask remindTask = RemindTask.getInstance();
 			remindTask.setSettingService(settingService);
 			remindTask.cancelTask();
 			settingStatus.put("state", 1);
+			break;
 		case 4:
 			WaitTask waitTask = WaitTask.getInstance();
 			waitTask.setSettingService(settingService);
 			waitTask.cancelTask();
 			settingStatus.put("state", 1);
+			break;
 		default:
 			settingStatus.put("state", 3);
+			break;
 		}
 		return "settingAjax";
 	}
 
 	public String settings() {
-		User user = (User) session.get("user");
+		User user = (User) session.get("admin");
 		if (user == null || !user.getRole().equals("admin")) {
 			return "loginFail";
 		} else {

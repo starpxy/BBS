@@ -140,7 +140,7 @@ public class UserDao extends BaseDao {
 	}
 
 	public List<AccessLog> adminUsersArea() {
-		String hql = "FROM Access_log";
+		String hql = "SELECT DISTINCT a.user, a.area FROM AccessLog a LEFT OUTER JOIN a.user";
 		return getSession().createQuery(hql).list();
 	}
 

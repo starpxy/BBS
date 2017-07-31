@@ -46,7 +46,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 	}
 
 	public String adminUsers() {
-		User user = (User) session.get("user");
+		User user = (User) session.get("admin");
 		if (user != null && user.getRole().equals("admin")) {
 			request.put("users", userService.adminUsers());
 			return "adminUsers";
@@ -58,7 +58,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 	}
 
 	public String changeRole() {
-		User user = (User) session.get("user");
+		User user = (User) session.get("admin");
 		status = new HashMap<>();
 		if (user != null && user.getRole().equals("admin")) {
 			String userId = httpServletRequest.getParameter("userId");
@@ -71,7 +71,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 	}
 
 	public String userChart() {
-		User user = (User) session.get("user");
+		User user = (User) session.get("admin");
 		if (user != null && user.getRole().equals("admin")) {
 			return "userChart";
 		} else if (user != null) {
@@ -82,7 +82,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 	}
 
 	public String bookChart() {
-		User user = (User) session.get("user");
+		User user = (User) session.get("admin");
 		if (user != null && user.getRole().equals("admin")) {
 			return "bookChart";
 		} else if (user != null) {
@@ -158,7 +158,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 	}
 
 	public String commentChart() {
-		User user = (User) session.get("user");
+		User user = (User) session.get("admin");
 		if (user != null && user.getRole().equals("admin")) {
 			return "commentChart";
 		} else if (user != null) {
@@ -169,7 +169,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 	}
 
 	public String adminUsersAjax() {
-		User user = (User) session.get("user");
+		User user = (User) session.get("admin");
 		status = new HashMap<>();
 		if (user != null && user.getRole().equals("admin")) {
 			status.put("users", JSONArray.fromObject(userService.adminUsers()));
@@ -183,11 +183,10 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 	}
 
 	public String adminUsersAreaAjax() {
-		User user = (User) session.get("user");
-		System.out.println("hello world");
+		User user = (User) session.get("admin");
 		status = new HashMap<>();
 		if (user != null && user.getRole().equals("admin")) {
-			status.put("areas", JSONArray.fromObject(userService.adminUsersArea()));
+			status.put("areas", JSONArray.fromObject(userService.adminUsersArea()).toString());
 			status.put("state", 1);
 		} else if (user != null) {
 			status.put("state", 2);
@@ -198,7 +197,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 	}
 
 	public String adminBooks() {
-		User user = (User) session.get("user");
+		User user = (User) session.get("admin");
 		if (user != null && user.getRole().equals("admin")) {
 			String p = httpServletRequest.getParameter("page");
 			int page = 1;
@@ -215,7 +214,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 	}
 
 	public String adminLogin() {
-		User user = (User) session.get("user");
+		User user = (User) session.get("admin");
 		if (user != null && user.getRole().equals("admin")) {
 			return "adminLoginSuccess";
 		} else if (user != null) {
@@ -223,7 +222,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		}
 		boolean check = userService.adminLogin(this.user);
 		if (check) {
-			session.put("user", userService.getInfo(this.user));
+			session.put("admin", userService.getInfo(this.user));
 			return "adminLoginSuccess";
 		} else {
 			return "adminLoginFail";
@@ -231,8 +230,8 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 	}
 
 	public String adminLogout() {
-		if (session.containsKey("user")) {
-			session.remove("user");
+		if (session.containsKey("admin")) {
+			session.remove("admin");
 		}
 		status = new HashMap<>();
 		status.put("state", 1);
@@ -240,7 +239,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 	}
 
 	public String adminListRecords() {
-		User user = (User) session.get("user");
+		User user = (User) session.get("admin");
 		if (user != null && user.getRole().equals("admin")) {
 			request.put("records", userService.adminListRecords());
 			return "adminListRecords";
@@ -252,7 +251,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 	}
 
 	public String adminListReservations() {
-		User user = (User) session.get("user");
+		User user = (User) session.get("admin");
 		if (user != null && user.getRole().equals("admin")) {
 			request.put("reservations", userService.adminListReservations());
 			return "adminListReservations";
@@ -264,7 +263,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 	}
 
 	public String adminListComments() {
-		User user = (User) session.get("user");
+		User user = (User) session.get("admin");
 		if (user != null && user.getRole().equals("admin")) {
 			request.put("comments", userService.adminListComments());
 			return "adminListComments";

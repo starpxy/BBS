@@ -106,7 +106,7 @@
 	<%
 		if(request.getParameter("state")!=null){
 	%>
-		$.toptips("账号或密码错误");
+		$.toptips("登录状态有误，请重新登录");
 	<%}
 	%>
 	

@@ -11,6 +11,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import com.bbs.api.TemplateMessagePushing;
 import com.bbs.entities.Reservation;
 import com.bbs.entities.User;
+import com.bbs.entities.WaitList;
 import com.bbs.services.ReservationServices;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -34,15 +35,29 @@ public class ReservationAction extends BaseAction implements ModelDriven<Reserva
 	}
 
 	public String reserve() {
+		reserveMap = new HashMap<>();
 		Reservation reservation = new Reservation();
 		reservation.setCreateAt(new Date());
 		reservation.setUser((User) session.get("user"));
+		String dString = httpServletRequest.getParameter("fetchDate");
+		if (dString == null) {
+			reserveMap.put("state", 4);
+			return "reserve";
+		}
+		long time = Long.valueOf(dString);
+		reservation.setFetchDate(new Date(time));
 		int state = reservationService.createReservation(reservation, httpServletRequest.getParameter("bookId"));
-		reserveMap = new HashMap<>();
 		reserveMap.put("state", state);
 		return "reserve";
 	}
-
+	
+	public String addToWaitList(){
+		User user = (User) session.get("user");
+		reserveMap = new HashMap<>();
+		reserveMap.put("state", reservationService.addToWaitList(httpServletRequest.getParameter("bookId"), user));
+		return "reserve";
+	}
+	
 	public String templatePushing() {
 		User user = (User) session.get("user");
 		String bookTitle = httpServletRequest.getParameter("bookTitle");

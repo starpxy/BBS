@@ -17,14 +17,19 @@ public class ReservationServices {
 		return reservationDao.createReservation(reservation, bookId);
 	}
 
+	public int addToWaitList(String bookId, User user) {
+		return reservationDao.addToWaitList(bookId, user);
+	}
+
 	public List<Reservation> checkReservationList(User user) {
 		return reservationDao.checkReservationList(user);
 	}
 
-	public List<Reservation> reservelist(User user){
+	public List<Reservation> reservelist(User user) {
 		return reservationDao.reservelist(user);
 	}
-	public int cancel(User user,String reservationId){
+
+	public int cancel(User user, String reservationId) {
 		return reservationDao.cancel(user, reservationId);
 	}
 }
