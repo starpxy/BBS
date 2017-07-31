@@ -2,10 +2,12 @@ package com.bbs.admin.settings;
 
 import java.util.TimerTask;
 
+import com.bbs.entities.Settings;
 import com.bbs.services.SettingService;
 
 public class RemindTask extends TimerTask {
 	private long interval;
+	private static int count = 0;
 	private SettingService settingService;
 	private static RemindTask remindTask;
 
@@ -20,6 +22,13 @@ public class RemindTask extends TimerTask {
 		} else {
 			return remindTask;
 		}
+	}
+
+	public void cancelTask() {
+		remindTask.cancel();
+		Settings settings = settingService.showSettings();
+		settings.setRemind(0);
+		settingService.update(settings);
 	}
 
 	public static RemindTask getInstance(SettingService settingService, long interval) {
@@ -47,6 +56,7 @@ public class RemindTask extends TimerTask {
 
 	@Override
 	public void run() {
-
+		System.out.println("remind"+count);
+		count++;
 	}
 }

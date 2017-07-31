@@ -117,13 +117,6 @@
 
                 <ul class="nav navbar-nav">
 
-                    <!-- Messages: style can be found in dropdown.less-->
-                    <li class="dropdown messages-menu">
-                        <a href="#">
-                            <i class="fa fa-qrcode"></i>
-
-                        </a>
-                    </li>
 
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
@@ -152,9 +145,6 @@
 
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat"><i class="fa fa-qrcode"></i></a>
-                                </div>
                                 <div class="pull-right">
                                     <a id="sign-out" class="btn btn-default btn-flat"><i
                                             class="fa fa-sign-out"></i></a>
@@ -260,10 +250,10 @@
                         <li><a href="user-commentChart"><i class="fa fa-circle-o"></i>评论统计</a></li>
                     </ul>
                 </li>
-                <li class="header">其他操作</li>
-                <li class="active"><a href="admin-settings.jsp"><i class="fa fa-gear"></i> <span>基本设置</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>操作二(预留)</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>操作三(预留)</span></a></li>
+                <li class="header">其他操作(预留)</li>
+                <li class="active"><a href="setting-settings"><i class="fa fa-gear"></i> <span>基本设置</span></a></li>
+                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>操作二</span></a></li>
+                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>操作三</span></a></li>
             </ul>
 
         </section>
@@ -591,11 +581,35 @@
 
         //TODO
         //the following vlaues will be gained vai ajax request
+        var a = true ;
+        var b = true;
+        var c = true;
+        var d = true;
+        if('${request.setting.reserveOverdue}'==0){
+			a = false;
+        }
+        if('${request.setting.recommend}'==0){
+			b = false;
+        }
+        if('${request.setting.remind}'==0){
+			c = false;
+        }
+        if('${request.setting.waitList}'==0){
+			d = false;
+        }
+      
         var initialValues = {
+<<<<<<< HEAD
             rating: {isOn: true, runInterval: 60, checkInterval: 300},
             recom: {isOn: true, runInterval: 120, checkInterval: 240},
             bookAlram: {isOn: false, runInterval: 60, checkInterval: 240},
             avaiforReserv: {isOn: true, runInterval: 100, checkInterval: 140}
+=======
+            resevExpiry: {isOn: a, runInterval: '${request.setting.reservePeriod}', checkInterval: '${request.setting.reserveInterval}'},
+            recom: {isOn: b, runInterval: '${request.setting.recPeriod}', checkInterval: '${request.setting.recInterval}'},
+            bookAlram: {isOn: c, runInterval: '${request.setting.remindPeriod}', checkInterval: '${request.setting.remindInterval}'},
+            avaiforReserv: {isOn: d, runInterval: '${request.setting.waitPeriod}', checkInterval: '${request.setting.waitInterval}'}
+>>>>>>> origin/master
         };
 
 
@@ -649,12 +663,12 @@
 				type : 'POST',
 				url : 'setting-turnOn',
 				dataType : 'json',
-				data:{settingNo:''+setting+'',runInterval:''+runInterval+'',checkInterval:''+checkInterval+''},
+				data:{'settingNo':setting,'runInterval':runInterval,'checkInterval':checkInterval},
 				success : function(data) {
 					if(data.state==1){
 						layer.msg("开启成功",{icon:1,anim:2,time:1000});
 					}else if(data.state==2){
-   						window.location.href="/admin/user-adminLogin";
+						layer.msg("登录状态有误",{icon:2,anim:6,time:1000});
 					}else{
 						layer.msg("参数错误",{icon:2,anim:6,time:1000});
 					}
@@ -665,6 +679,35 @@
 			});
           }
 
+        $("#sign-out")
+		.click(
+				function() {
+					layer
+							.open({
+								title : "注销",
+								content : "你确认退出?",
+								yes : function() {
+									$
+											.ajax({
+												type : 'POST',
+												url : 'user-adminLogout',
+												dataType : 'json',
+												success : function(
+														data) {
+													if (data.state == 1) {
+														window.location.href = 'user-adminLogin';
+													} else {
+
+													}
+												},
+												error : function(
+														xhr,
+														type) {
+												}
+											});
+								}
+							});
+				});
         $('#confirm1').click(function (e) {
             var rating= {isOn: true, runInterval: 0, checkInterval: 0};
 
@@ -685,7 +728,6 @@
         });
 
         $('#confirm2').click(function (e) {
-
             var recom= {isOn: true, runInterval: 0, checkInterval: 0};
 
             if(isNumber($('input[name="runInterval2"]').val())&&isNumber($('input[name="checkInterval2"]').val())){
@@ -701,7 +743,6 @@
             if( $('#toggle2').hasClass('toggle--on')){
                 recom.isOn=false;
             }
-
 
             sendAjax(2,recom.runInterval,recom.checkInterval);
         });
@@ -740,7 +781,6 @@
             if( $('#toggle4').hasClass('toggle--on')){
                 avaiforReserv.isOn=false;
             }
-
             sendAjax(4,avaiforReserv.runInterval,avaiforReserv.checkInterval);
 
         });
@@ -748,7 +788,6 @@
 
 
         $('.toggle').click(function (e) {
-
             var toggle = this;
 
             e.preventDefault();
@@ -762,17 +801,18 @@
 /* 				alert("close"+$(toggle).attr('id')); */
          	var settings={"toggle1":1,"toggle2":2,"toggle3":3,"toggle4":4}
          	 var settingNo=settings[$(toggle).attr('id')];
+        	 alert(settingNo);
          	   $
    			.ajax({
    				type : 'POST',
    				url : 'setting-turnOff',
    				dataType : 'json',
-   				data:{settingNo:''+settingNo+''},
+   				data:{'settingNo':settingNo},
    				success : function(data) {
    					if(data.state==1){
    						layer.msg("关闭成功",{icon:1,anim:2,time:1000});
    					}else if(data.state==2){
-   						window.location.href="/admin/user-adminLogin";
+   						layer.msg("登录状态错误",{icon:2,anim:6,time:1000});
    					}else{
    						layer.msg("参数错误",{icon:2,anim:6,time:1000});
    	   				}
@@ -789,7 +829,7 @@
             }, 200);
         });
 
-
+		
     });
 </script>
 

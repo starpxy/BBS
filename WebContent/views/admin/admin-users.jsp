@@ -171,7 +171,7 @@
 
 
 			<li class="header">其他操作(预留)</li>
-			<li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>操作一</span></a></li>
+			<li><a href="setting-settings"><i class="fa fa-gear"></i> <span>基本设置</span></a></li>
 			<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>操作二</span></a></li>
 			<li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>操作三</span></a></li>
 		</ul>
@@ -248,7 +248,7 @@
 													<td class="user-recom-fre"><a class="alter-recom-fre">一周</a></td>
 													<td class="user-password"><a class="alter-password"><span>${password }</span><input
 															type="text" size="10" name="user-password"
-															style="display: none" value="1234666"></a></td>
+															style="display: none" value="${password }"></a></td>
 
 
 													<td class="options"><a data-toggle="tooltip"
@@ -498,7 +498,7 @@
 
 						ispassadmin = true;
 						//successful  TODO
-						if (value == "123") {
+						if (value === '${session.user.password}') {
 							layer.close(index);
 							thisele.children("input").show();
 						} else {
@@ -590,14 +590,42 @@
 
 										ispassadmin = true;
 										//successful  TODO
-										if (value == "123") {
-											layer.close(index);
-											thisele.parent().siblings(
-													'.user-role').text("管理员");
-											layer.msg("成功指派该用户为管理员", {
-												anim : 1,
-												icon : 1,
-												time : 1000
+										if (value === '${session.user.password}') {
+											$
+											.ajax({
+												type : 'POST',
+												url : 'user-changeRole',
+												data : {'role':'admin'},
+												dataType : 'json',
+												success : function(
+														data) {
+													if (data.state == 1) {
+														layer.close(index);
+														thisele.parent().siblings('.user-role').text("管理员");
+														layer.msg("成功指派该用户为管理员", {
+															anim : 1,
+															icon : 1,
+															time : 1000
+														});
+													} else if(data.state==2){
+														layer.msg("身份验证失败", {
+															anim : 6,
+															icon : 2,
+															time : 1000
+														});
+													}
+													else{
+														layer.msg("该用户不存在", {
+															anim : 6,
+															icon : 2,
+															time : 1000
+														});
+													}
+												},
+												error : function(
+														xhr,
+														type) {
+												}
 											});
 
 										} else {
@@ -624,8 +652,24 @@
 
 			$(".become-normal").click(function() {
 				//TODO
-				$(this).parent().siblings('.user-role').text("一般用户");
-				layer.msg("成功该用户设为一般用户", {
+				$.ajax({
+												type : 'POST',
+												url : 'user-adminLogout',
+												dataType : 'json',
+												success : function(data) {
+													if (data.state == 1) {
+														window.location.href = 'user-adminLogin';
+													} else {
+															
+													}
+												},
+												error : function(
+														xhr,
+														type) {
+												}
+											});
+				$(this).parent().siblings('.user-role').text("普通用户");
+				layer.msg("成功该用户设为普通用户", {
 					anim : 1,
 					icon : 1,
 					time : 1000

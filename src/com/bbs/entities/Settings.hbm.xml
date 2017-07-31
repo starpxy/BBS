@@ -9,31 +9,40 @@
             <generator class="native" />
         </id>
         <property name="recommend" type="int">
-            <column name="RECOMMEND" />
+            <column name="RECOMMEND" default="0"/>
         </property>
-        <property name="star" type="int">
-            <column name="STAR" />
+        <property name="remind" type="int">
+            <column name="REMIND" default="0"/>
         </property>
         <property name="waitList" type="int">
-            <column name="WAIT_LIST" />
+            <column name="WAIT_LIST" default="0"/>
+        </property>
+         <property name="reserveOverdue" type="int">
+            <column name="RESERVE_OVERDUE" default="0"/>
         </property>
         <property name="recInterval" type="long">
-            <column name="REC_INTERVAL" />
+            <column name="REC_INTERVAL" default="0"/>
         </property>
-        <property name="starInterval" type="long">
-            <column name="STAR_INTERVAL" />
+        <property name="remindInterval" type="long">
+            <column name="REMIND_INTERVAL" default="0"/>
         </property>
         <property name="waitInterval" type="long">
-            <column name="WAIT_INTERVAL" />
+            <column name="WAIT_INTERVAL" default="0"/>
         </property>
         <property name="recPeriod" type="long">
-            <column name="REC_PERIOD" />
+            <column name="REC_PERIOD" default="0"/>
         </property>
-        <property name="starPeriod" type="long">
-            <column name="STAR_PERIOD" />
+        <property name="remindPeriod" type="long">
+            <column name="REMIND_PERIOD" default="0"/>
         </property>
         <property name="waitPeriod" type="long">
-            <column name="WAIT_PERIOD" />
+            <column name="WAIT_PERIOD" default="0"/>
+        </property>
+        <property name="reservePeriod" type="long">
+            <column name="RESERVE_PERIOD" default="0"/>
+        </property>
+        <property name="reserveInterval" type="long">
+            <column name="RESERVE_INTERVAL" default="0"/>
         </property>
     </class>
 </hibernate-mapping>

@@ -604,9 +604,9 @@
 																			.ajax({
 																				type : 'POST',
 																				data : {
-																					"content" : $(
+																					"content" : '<xmp>'+$(
 																							'#textarea')
-																							.val(),
+																							.val()+'</xmp>',
 																					"starClass" : $(
 																							'.rate-book.icon-48')
 																							.size()

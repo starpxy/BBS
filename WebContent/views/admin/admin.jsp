@@ -322,7 +322,7 @@ input[type="range"]::-webkit-slider-thumb:active {
 
 
 			<li class="header">其他操作</li>
-			<li><a href="admin-settings.jsp"><i class="fa fa-gear"></i> <span>基本设置</span></a></li>
+			<li><a href="setting-settings"><i class="fa fa-gear"></i> <span>基本设置</span></a></li>
 			<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>操作二(预留)</span></a></li>
 			<li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>操作三(预留)</span></a></li>
 		</ul>
