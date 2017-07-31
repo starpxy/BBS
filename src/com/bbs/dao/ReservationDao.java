@@ -26,7 +26,6 @@ public class ReservationDao extends BaseDao {
 			getSession().update(bookItem);
 			reservation.setBookItem(bookItem);
 			reservation.setCreateAt(new Date());
-			reservation.setFetchDate(new Date());
 			reservation.setStatus(0);
 			reservation.setUpdateAt(new Date());
 			System.out.println(reservation.getBookItem().getStatus() + " " + reservation.getBookItem().getItemId() + " "
@@ -72,7 +71,7 @@ public class ReservationDao extends BaseDao {
 		List<Reservation> reservations = getSession().createQuery(hql).list();
 		if (!reservations.isEmpty()) {
 			Reservation reservation = reservations.get(0);
-			if (reservation.getUser().getUserId() == user.getUserId()) {
+			if (reservation.getUser().getUserId().equals(user.getUserId())) {
 				if (reservation.getStatus() == 0) {
 					BookItem bookItem = reservation.getBookItem();
 					bookItem.setStatus(0);

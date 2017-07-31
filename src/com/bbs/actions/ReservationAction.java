@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.interceptor.ServletRequestAware;
 
 import com.bbs.api.TemplateMessagePushing;
+import com.bbs.converters.TimeUtils;
 import com.bbs.entities.Reservation;
 import com.bbs.entities.User;
 import com.bbs.entities.WaitList;
@@ -45,7 +46,9 @@ public class ReservationAction extends BaseAction implements ModelDriven<Reserva
 			return "reserve";
 		}
 		long time = Long.valueOf(dString);
-		reservation.setFetchDate(new Date(time));
+		Date fetchDate = new Date();
+		fetchDate.setTime(time);
+		reservation.setFetchDate(fetchDate);
 		int state = reservationService.createReservation(reservation, httpServletRequest.getParameter("bookId"));
 		reserveMap.put("state", state);
 		return "reserve";

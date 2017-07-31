@@ -3,6 +3,7 @@ package com.bbs.admin.settings;
 import java.util.TimerTask;
 
 import com.bbs.entities.Settings;
+import com.bbs.entities.User;
 import com.bbs.services.SettingService;
 
 public class RecommendTask extends TimerTask {
@@ -56,6 +57,8 @@ public class RecommendTask extends TimerTask {
 
 	@Override
 	public void run() {
+		User user = new User();
+		user.setName(count+"");
 		System.out.println("hello: " + count);
 		count++;
 	}

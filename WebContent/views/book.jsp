@@ -362,11 +362,12 @@
 					icon : 16,
 					shade : 0.01
 				});
+				var t = s1.getTime;
 				$.ajax({
 					type : 'POST',
 					data : {
 						"bookId" : '${request.book.bookId}',
-						"fetchDate": s1.getTime()
+						"fetchDate": s1.getTime().toString()
 					},
 					url : 'reservation-reserve',
 					dataType : 'json',
