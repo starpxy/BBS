@@ -592,7 +592,7 @@
         //TODO
         //the following vlaues will be gained vai ajax request
         var initialValues = {
-            resevExpiry: {isOn: true, runInterval: 60, checkInterval: 300},
+            rating: {isOn: true, runInterval: 60, checkInterval: 300},
             recom: {isOn: true, runInterval: 120, checkInterval: 240},
             bookAlram: {isOn: false, runInterval: 60, checkInterval: 240},
             avaiforReserv: {isOn: true, runInterval: 100, checkInterval: 140}
@@ -600,9 +600,9 @@
 
 
         //initialzie the first setting
-        $('input[name="runInterval1"]').val(initialValues.resevExpiry.runInterval);
-        $('input[name="checkInterval1"]').val(initialValues.resevExpiry.checkInterval);
-        if (initialValues.resevExpiry.isOn){
+        $('input[name="runInterval1"]').val(initialValues.rating.runInterval);
+        $('input[name="checkInterval1"]').val(initialValues.rating.checkInterval);
+        if (initialValues.rating.isOn){
             $('#toggle1').removeClass('toggle--on').addClass('toggle--off');
             $('#toggle1').parent().parent().siblings('.box-body').show();
         }
@@ -666,21 +666,21 @@
           }
 
         $('#confirm1').click(function (e) {
-            var resevExpiry= {isOn: true, runInterval: 0, checkInterval: 0};
+            var rating= {isOn: true, runInterval: 0, checkInterval: 0};
 
             if(isNumber($('input[name="runInterval1"]').val())&&isNumber($('input[name="checkInterval1"]').val())){
-                resevExpiry.runInterval=$('input[name="runInterval1"]').val();
-                resevExpiry.checkInterval=$('input[name="checkInterval1"]').val();
+                rating.runInterval=$('input[name="runInterval1"]').val();
+                rating.checkInterval=$('input[name="checkInterval1"]').val();
             }else{
                 layer.msg("要输入数字才行",{icon:2,anim:6,time:1000});
                 return false;
             }
 //            //有toggle--on 其实开关是关着的
             if( $('#toggle1').hasClass('toggle--on')){
-                resevExpiry.isOn=false;
+                rating.isOn=false;
             }
 
-            sendAjax(1,resevExpiry.runInterval,resevExpiry.checkInterval);
+            sendAjax(1,rating.runInterval,rating.checkInterval);
 
         });
 
@@ -742,6 +742,7 @@
             }
 
             sendAjax(4,avaiforReserv.runInterval,avaiforReserv.checkInterval);
+
         });
 
 

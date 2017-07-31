@@ -471,7 +471,7 @@ input[type="range"]::-webkit-slider-thumb:active {
           <div class="small-box bg-yellow">
             <div class="inner">
               <h3>消息管理</h3>
-              <p>查看用户登录历史详情，包括用户IP，登录方式等信息</p>
+              <p>查看用户登录历史详情，包括用户IP，登录方式，登录地点等信息</p>
             </div>
             <div class="icon">
               <i class="fa fa-info"></i>

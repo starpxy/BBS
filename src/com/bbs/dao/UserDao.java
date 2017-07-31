@@ -27,8 +27,7 @@ public class UserDao extends BaseDao {
 				return true;
 			}
 		}
-		String hql = "FROM User WHERE phoneNumber='" + user.getPhoneNumber() + "' and password='" + user.getPassword()
-				+ "'";
+		String hql = "FROM User WHERE phoneNumber='" + user.getPhoneNumber() + "' and password='" + user.getPassword() + "'";
 		List<Object> list = getSession().createQuery(hql).list();
 		if (list.size() != 0) {
 			return true;
@@ -50,8 +49,7 @@ public class UserDao extends BaseDao {
 	}
 
 	public User getInfo(User user) {
-		String hql = "FROM User WHERE phoneNumber='" + user.getPhoneNumber() + "' and password='" + user.getPassword()
-				+ "'";
+		String hql = "FROM User WHERE phoneNumber='" + user.getPhoneNumber() + "' and password='" + user.getPassword() + "'";
 		List<User> list = getSession().createQuery(hql).list();
 		if (list.size() != 0) {
 			return list.get(0);
@@ -97,8 +95,7 @@ public class UserDao extends BaseDao {
 	}
 
 	public boolean adminLogin(User user) {
-		String hql = "FROM User WHERE phoneNumber='" + user.getPhoneNumber() + "' AND password='" + user.getPassword()
-				+ "' AND role='admin'";
+		String hql = "FROM User WHERE phoneNumber='" + user.getPhoneNumber() + "' AND password='" + user.getPassword() + "' AND role='admin'";
 		if (getSession().createQuery(hql).list().isEmpty()) {
 			return false;
 		} else {
@@ -139,6 +136,11 @@ public class UserDao extends BaseDao {
 
 	public List<User> adminUsers() {
 		String hql = "FROM User";
+		return getSession().createQuery(hql).list();
+	}
+
+	public List<AccessLog> adminUsersArea() {
+		String hql = "FROM Access_log";
 		return getSession().createQuery(hql).list();
 	}
 
@@ -213,21 +215,20 @@ public class UserDao extends BaseDao {
 			}
 		}
 	}
-	
-	public int changeRole(String userId,String role){
-		String hql = "FROM User WHERE userId="+userId;
+
+	public int changeRole(String userId, String role) {
+		String hql = "FROM User WHERE userId=" + userId;
 		List<User> users = getSession().createQuery(hql).list();
 		if (users.isEmpty()) {
 			return 3;
-		}
-		else{
+		} else {
 			User user = users.get(0);
 			user.setRole(role);
 			getSession().update(user);
 			return 1;
 		}
 	}
-	
+
 	public List<BorrowedRecord> adminReturn(String userId) {
 		String hql = "FROM BorrowedRecord b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.bookItem c LEFT OUTER JOIN FETCH c.book WHERE b.user.userId="
 				+ userId + " AND b.status=2";
@@ -259,8 +260,8 @@ public class UserDao extends BaseDao {
 	}
 
 	public int addToFavorite(User user, String bookId) {
-		String hql = "FROM Favorite b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.book WHERE b.user.userId="
-				+ user.getUserId() + " AND b.book.bookId=" + bookId;
+		String hql = "FROM Favorite b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.book WHERE b.user.userId=" + user.getUserId()
+				+ " AND b.book.bookId=" + bookId;
 		if (!getSession().createQuery(hql).list().isEmpty()) {
 			return 2;
 		} else {
@@ -280,15 +281,14 @@ public class UserDao extends BaseDao {
 	}
 
 	public List<Favorite> myFavorites(User user) {
-		String hql = "FROM Favorite f LEFT OUTER JOIN FETCH f.user LEFT OUTER JOIN FETCH f.book WHERE f.user.userId="
-				+ user.getUserId();
+		String hql = "FROM Favorite f LEFT OUTER JOIN FETCH f.user LEFT OUTER JOIN FETCH f.book WHERE f.user.userId=" + user.getUserId();
 		List<Favorite> favorites = getSession().createQuery(hql).list();
 		return favorites;
 	}
 
 	public int deleteFavorite(User user, String bookId) {
-		String hql = "FROM Favorite b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.book WHERE b.user.userId="
-				+ user.getUserId() + " AND b.book.bookId=" + bookId;
+		String hql = "FROM Favorite b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.book WHERE b.user.userId=" + user.getUserId()
+				+ " AND b.book.bookId=" + bookId;
 		List<Favorite> favorites = getSession().createQuery(hql).list();
 		if (favorites.isEmpty()) {
 			return 2;
@@ -297,20 +297,19 @@ public class UserDao extends BaseDao {
 			return 1;
 		}
 	}
-	
-	public int deleteAllFavorites(User user){
-		String hql = "FROM Favorite b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.book WHERE b.user.userId="
-				+ user.getUserId();
+
+	public int deleteAllFavorites(User user) {
+		String hql = "FROM Favorite b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.book WHERE b.user.userId=" + user.getUserId();
 		List<Favorite> favorites = getSession().createQuery(hql).list();
 		if (favorites.isEmpty()) {
 			return 2;
-		}
-		else{
+		} else {
 			Iterator<Favorite> iterator = favorites.iterator();
-			while(iterator.hasNext()){
+			while (iterator.hasNext()) {
 				getSession().delete(iterator.next());
 			}
 			return 1;
 		}
 	}
+
 }

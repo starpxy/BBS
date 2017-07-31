@@ -9,16 +9,66 @@
 
 <title>管理员系统</title>
 <link rel="stylesheet" href="asserts/bootstrap.min.css">
+    <link rel="stylesheet" href="asserts/plugins/daterangepicker/daterangepicker.css">
 <link rel="stylesheet" href="asserts/css/AdminLTE.min.css">
+
 <link rel="stylesheet" href="asserts/plugins/morris/morris.css">
 <link rel="stylesheet"
 	href="asserts/plugins/datatables/dataTables.bootstrap.css">
 <link rel="stylesheet" href="asserts/fbicons/css/font-awesome.min.css">
 <link rel="stylesheet" href="asserts/css/_all-skins.min.css">
 <link rel="stylesheet" href="asserts/plugins/layui/css/layui.css">
-
-
 <link rel="stylesheet" href="asserts/css/index.css">
+<style>
+        .stateTip, #StateTip {
+            display: none;
+            position: absolute;
+            padding: 8px;
+            background: #fff;
+            border: 2px solid #2385B1;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: Tahoma;
+            color: #333;
+        }
+
+        .mapInfo i {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            margin-top: 5px;
+            line-height: 15px;
+            font-style: normal;
+            background: #aeaeae;
+            color: #fff;
+            font-size: 11px;
+            font-family: Tahoma;
+            -webkit-border-radius: 15px;
+            border-radius: 15px;
+            text-align: center
+        }
+
+        .mapInfo i.active {
+            background: #E27F21;
+        }
+
+        .mapInfo span {
+            padding: 0 5px 0 3px;
+        }
+
+        .mapInfo b {
+            font-weight: normal;
+            color: #2770B5
+        }
+
+        .regionMap {
+            float: left;
+            margin-left: 10px;
+            display: inline;
+        }
+    </style>
 
 
 </head>
@@ -205,12 +255,15 @@
 
 					<div class="box box-primary">
 						<div class="box-header with-border">
-							<h3 class="box-title">用户增长</h3>
+							    <div class="row">
+                                <div class="col-md-2"><h3 class="box-title">用户增长</h3></div>
+                                <div class="col-md-3"><input id="daterange" type="text" class="form-control" style="height: 30px;width: 200px;margin-top: 10px"></div>
+                            </div>
 
 							<div class="box-tools pull-right">
 
 								<button type="button" class="btn btn-box-tool"
-									id="daterange-btn">
+									id="daterange-btn" data-toggle="tooltip" data-placement="left" title="选择时间范围">
 									<i class="fa fa-calendar"></i>
 								</button>
 
@@ -237,7 +290,34 @@
 				</div>
 			</div>
 
+         <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-primary">
 
+                        <div class="box-header with-border">
+                            <h3>地域分析</h3>
+                        </div>
+                        <div class="box-body">
+
+                            <div style="width:100%;">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-11">
+                                    <div class="itemCon">
+
+
+                                        <div id="Region" style="overflow: hidden;clear:both;">
+                                            <div class="regionMap" id="RegionMap"></div>
+                                            <div id="MapColor"
+                                                 style="width:180px; height:30px; margin:500px 60% 0 40%; background:url(asserts/plugins/cmap/map_color.gif) center 0;"></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 			<div class="row">
 
 
@@ -497,12 +577,131 @@
 	<script src="asserts/plugins/morris/morris.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 	<script src="asserts/plugins/datatables/jquery.dataTables.min.js"></script>
 	<script src="asserts/plugins/datatables/dataTables.bootstrap.min.js"></script>
+	<script src="asserts/plugins/daterangepicker/daterangepicker.js"></script>
 	<script src="asserts/plugins/layui/layui.js"></script>
 
+<script type="text/javascript" src="asserts/plugins/cmap/lib/raphael-min.js"></script>
+<script type="text/javascript" src="asserts/plugins/cmap/res/chinaMapConfigHigh.js"></script>
+<script type="text/javascript" src="asserts/plugins/cmap/map.js"></script>
 
 	<script>
+	var data = {
+	        "jiangsu": {"value": "30.05%", "index": "1", "stateInitColor": "0"},
+	        "henan": {"value": "19.77%", "index": "2", "stateInitColor": "0"},
+	        "anhui": {"value": "10.85%", "index": "3", "stateInitColor": "0"},
+	        "zhejiang": {"value": "10.02%", "index": "4", "stateInitColor": "0"},
+	        "liaoning": {"value": "8.46%", "index": "5", "stateInitColor": "0"},
+	        "beijing": {"value": "4.04%", "index": "6", "stateInitColor": "1"},
+	        "hubei": {"value": "3.66%", "index": "7", "stateInitColor": "1"},
+	        "jilin": {"value": "2.56%", "index": "8", "stateInitColor": "1"},
+	        "shanghai": {"value": "2.47%", "index": "9", "stateInitColor": "1"},
+	        "guangxi": {"value": "2.3%", "index": "10", "stateInitColor": "1"},
+	        "sichuan": {"value": "1.48%", "index": "11", "stateInitColor": "2"},
+	        "guizhou": {"value": "0.99%", "index": "12", "stateInitColor": "2"},
+	        "hunan": {"value": "0.78%", "index": "13", "stateInitColor": "2"},
+	        "shandong": {"value": "0.7%", "index": "14", "stateInitColor": "2"},
+	        "guangdong": {"value": "0.44%", "index": "15", "stateInitColor": "2"},
+	        "jiangxi": {"value": "0.34%", "index": "16", "stateInitColor": "3"},
+	        "fujian": {"value": "0.27%", "index": "17", "stateInitColor": "3"},
+	        "yunnan": {"value": "0.23%", "index": "18", "stateInitColor": "3"},
+	        "hainan": {"value": "0.21%", "index": "19", "stateInitColor": "3"},
+	        "shanxi": {"value": "0.11%", "index": "20", "stateInitColor": "3"},
+	        "hebei": {"value": "0.11%", "index": "21", "stateInitColor": "4"},
+	        "neimongol": {"value": "0.04%", "index": "22", "stateInitColor": "4"},
+	        "tianjin": {"value": "0.04%", "index": "23", "stateInitColor": "4"},
+	        "gansu": {"value": "0.04%", "index": "24", "stateInitColor": "4"},
+	        "shaanxi": {"value": "0.02%", "index": "25", "stateInitColor": "4"},
+	        "macau": {"value": "0.0%", "index": "26", "stateInitColor": "7"},
+	        "hongkong": {"value": "0.0%", "index": "27", "stateInitColor": "7"},
+	        "taiwan": {"value": "0.0%", "index": "28", "stateInitColor": "7"},
+	        "qinghai": {"value": "0.0%", "index": "29", "stateInitColor": "7"},
+	        "xizang": {"value": "0.0%", "index": "30", "stateInitColor": "7"},
+	        "ningxia": {"value": "0.0%", "index": "31", "stateInitColor": "7"},
+	        "xinjiang": {"value": "0.0%", "index": "32", "stateInitColor": "7"},
+	        "heilongjiang": {"value": "0.0%", "index": "33", "stateInitColor": "7"},
+	        "chongqing": {"value": "0.0%", "index": "34", "stateInitColor": "7"}
+	    };
+
+	    var stateColorList = ['003399', '0058B0', '0071E1', '1C8DFF', '51A8FF', '82C0FF', 'AAD5ee', 'AAD5FF'];
+
+	    $('#RegionMap').SVGMap({
+	        mapName: 'china',
+	        mapWidth: 600,
+	        mapHeight: 500,
+	        stateData: data,
+	        stateTipHtml: function (mapData, obj) {
+	            var _value = mapData[obj.id].value;
+	            var _idx = mapData[obj.id].index;
+	            var active = '';
+	            _idx < 4 ? active = 'active' : active = '';
+	            var tipStr = '<div class="mapInfo"><i class="' + active + '">' + _idx + '</i><span>' + obj.name + '</span><b>' + _value + '</b></div>';
+	            return tipStr;
+	        }
+	    });
+
+
+	    $('#daterange-btn').click(function(){
+				$('#daterange').trigger('focus');
+		   });
+	    
+	    $('#daterange').daterangepicker({
+	        dateLimit: {
+	            days: 9
+	        },
+	        startDate: moment().subtract(9, 'days'),
+	        endDate: moment(),
+	        maxDate:moment()
+	    }, function (start, end) {
+	     	var days=(new Date(end.format('YYYY-MM-DD')).getTime()-new Date(start.format('YYYY-MM-DD')).getTime())/(3600*24*1000)+1;
+	        refreshLineChart(days,new Date(end.format('YYYY-MM-DD')).getTime());  
+	    });
+
+		var lineDataFromBack;
+	    function refreshLineChart(days, endTime){
+	    	var linedata = new Array();
+			for (i = 0; i < days; i += 1) {
+				temp = {};
+				temp.y = getNowFormatDate(endTime
+						- (days-1 - i) * 1000 * 3600 * 24);
+				temp.item1 = countIncrease(lineDataFromBack, temp.y);
+				linedata.push(temp);
+			}
+	
+
+			$("#user-increase").empty();
+			var line = new Morris.Line({
+				element : 'user-increase',
+				resize : true,
+				data : linedata,
+				xkey : 'y',
+				ykeys : [ 'item1' ],
+				labels : [ '人数' ],
+				lineColors : [ '#3c8dbc' ],
+				hideHover : 'auto'
+			});
+
+		}
+	
+		$.ajax({
+			type : 'POST',
+			url : 'user-adminUsersAreaAjax',
+			dataType : 'json',
+			success : function(data) {
+				if (data.state == 1) {
+					alert('success');
+					console.log(data);
+				} else {
+					alert('wrong');
+				}
+			},
+			error : function(xhr, type) {
+				alert('error');
+			}
+		}); 
+		
 		$
 				.ajax({
 					type : 'POST',
@@ -510,37 +709,15 @@
 					dataType : 'json',
 					success : function(data) {
 						if (data.state == 1) {
-
-							var linedata = new Array();
-							for (i = 0; i < 10; i += 1) {
-								temp = {};
-								temp.y = getNowFormatDate(new Date().getTime()
-										- (9 - i) * 1000 * 3600 * 24);
-								temp.item1 = countIncrease(data, temp.y);
-								linedata.push(temp);
-							}
-							var line = new Morris.Line({
-								element : 'user-increase',
-								resize : true,
-								data : linedata,
-								xkey : 'y',
-								ykeys : [ 'item1' ],
-								labels : [ '人数' ],
-								lineColors : [ '#3c8dbc' ],
-								hideHover : 'auto'
-							});
-
+							lineDataFromBack=data;
+							refreshLineChart(10,new Date().getTime());
 						} else {
-
 						}
 					},
 					error : function(xhr, type) {
 
 					}
 				});
-
-		/* 		alert(getNowFormatDate(new Date().getTime() - 1000 * 3600 * 24));
-		 */
 
 		function countIncrease(data, date) {
 			var count = 0;
@@ -556,7 +733,6 @@
 			var date = new Date(parseInt(ns));
 			var seperator1 = "-";
 			var seperator2 = ":";
-
 			var month = date.getMonth() + 1;
 			var strDate = date.getDate();
 
@@ -622,44 +798,6 @@
 			hideHover : 'auto'
 		});
 
-		//
-		//    layui.use('layer', function () {
-		//        var layer = layui.layer;
-		//
-		//
-		//
-
-		//        $("xxxx").click(function () {
-		//
-		//        });
-
-		//        layer.open({
-		//            title: "确认删除",
-		//            content: "你确认删除该书吗?",
-		//            yes: function () {
-		//                thisele.parent().parent().hide();
-		//                layer.msg("成功删除", {anim: 1, icon: 1, time: 1000});
-		//
-		//            }
-		//        });
-
-		////TODO ajax goes here
-		//                            $.ajax({
-		//                                type: 'POST',
-		//                                url: 'xxx',
-		//                                data: {'isbn': isbn},
-		//                                dataType: 'json',
-		//                                success: function (data) {
-		//
-		//                                    //TODO 2
-		//刷新页面
-		//
-		//                                },
-		//                                error: function (xhr, type) {
-		//                                }
-		//                            });
-
-		//    });
 	</script>
 
 </body>

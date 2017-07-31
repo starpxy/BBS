@@ -70,6 +70,10 @@ public class UserService {
 		return userDao.adminUsers();
 	}
 
+	public List<AccessLog> adminUsersArea() {
+		return userDao.adminUsersArea();
+	}
+
 	public List<BorrowedRecord> adminListRecords() {
 		return userDao.adminListRecords();
 	}

@@ -110,7 +110,7 @@
                                     </div>
 
                                     <div>
-                                        <a href="#" class="user-signup-link">
+                                        <a href="../user-login" class="user-signup-link">
                                             <i class="ace-icon fa fa-arrow-right"></i>
                                         </a>
                                     </div>
