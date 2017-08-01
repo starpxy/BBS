@@ -20,8 +20,8 @@ public class CommentService {
 		return commentDao.deleteComment(commentId);
 	}
 
-	public List<Comment> getCommentList() {
-		return commentDao.getCommentList();
+	public List<Comment> commentList() {
+		return commentDao.commentList();
 	}
 
 }

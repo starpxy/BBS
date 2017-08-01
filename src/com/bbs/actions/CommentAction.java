@@ -45,7 +45,7 @@ public class CommentAction extends BaseAction implements ModelDriven<Comment>, S
 		User user = (User) session.get("admin");
 		commentStatus = new HashMap<>();
 		if (user != null && user.getRole().equals("admin")) {
-			commentStatus.put("comments", JSONArray.fromObject(commentService.getCommentList()));
+			commentStatus.put("comments", JSONArray.fromObject(commentService.commentList()));
 			commentStatus.put("state", 1);
 		} else if (user != null) {
 			commentStatus.put("state", 2);

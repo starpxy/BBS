@@ -776,9 +776,9 @@
 			var uservalue=0;
 			var adminvalue=0;
 			for (user in users){
-				if(users[user].gender=='male'){
+				if(users[user].gender=='男'){
 					malevalue+=1;
-				}else if(users[user].gender=='female'){
+				}else if(users[user].gender=='女'){
 					femalevalue+=1;
 				}
 				

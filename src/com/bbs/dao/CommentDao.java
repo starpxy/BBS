@@ -1,5 +1,6 @@
 package com.bbs.dao;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -29,9 +30,10 @@ public class CommentDao extends BaseDao {
 		return true;
 	}
 
-	public List<Comment> getCommentList() {
-		String hql = "FROM Comment";
+	public List<Comment> commentList() {
+		String hql = "FROM Comment b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.book";
 		List<Comment> comments = getSession().createQuery(hql).list();
+		Collections.reverse(comments);
 		return comments;
 	}
 }
