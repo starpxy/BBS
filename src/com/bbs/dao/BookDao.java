@@ -124,16 +124,13 @@ public class BookDao extends BaseDao {
 		}
 	}
 
-	public List<Map<String, Date>> getBookList() {
+	public List<Long> getBookList() {
 		String hql = "FROM Book";
 		List<Book> books = getSession().createQuery(hql).list();
 		Iterator<Book> iterator = books.iterator();
-		List<Map<String, Date>> result = new LinkedList<>();
+		List<Long> result = new LinkedList<>();
 		while(iterator.hasNext()){
-			Map<String, Date> map = new HashMap<>();
-			Book book = iterator.next();
-			map.put("book", book.getUpdateAt());
-			result.add(map);
+			result.add(iterator.next().getUpdateAt().getTime());
 		}
 		return result;
 	}

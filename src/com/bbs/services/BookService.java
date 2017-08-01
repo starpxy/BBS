@@ -24,7 +24,7 @@ public class BookService {
 		return bookDao.bookList(book, page);
 	}
 
-	public List<Map<String, Date>> getBookList() {
+	public List<Long> getBookList() {
 		return bookDao.getBookList();
 	}
 
