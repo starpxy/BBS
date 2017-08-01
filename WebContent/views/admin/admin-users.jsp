@@ -242,6 +242,7 @@
 											Iterator<User> iterator = users.iterator();
 											while(iterator.hasNext()){
 												User user = iterator.next();
+												if(user.getRole()!=null&&user.getRecommendFre()!=null){
 										%>
 												<tr>
 													<td class="id"><%=user.getUserId() %></td>
@@ -268,7 +269,8 @@
 														data-placement="left" title="删除该用户" class="delete-user"><i
 															class="fa fa-trash"></i></a></td><input type="hidden" value="<%=user.getUserId() %>"/>
 												</tr>
-												<%}
+												<%		}
+													}
 												}%>
 									</tbody>
 

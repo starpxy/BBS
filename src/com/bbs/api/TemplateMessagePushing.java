@@ -231,13 +231,13 @@ public class TemplateMessagePushing {
 			e.printStackTrace();
 		}
 	}
-	// 下面就是调用的示例。
-	// public static void main(String[] args) {
-	// new
-	// TemplateMessagePushing().pushDepositConfirming("oQe5IuOG4oLF1N57aEQjmGEg5peU",2,
-	// new IdentifyCode(1, 29).getCipherCode());
-	// new
-	// TemplateMessagePushing().pushReturningBooks("oQe5IuNgiocNx9qMzWjbeUMgJEkc",
-	// "聪聪智障", 1);
-	// }
+//	 下面就是调用的示例。
+	 public static void main(String[] args) {
+//	 new
+//	 TemplateMessagePushing().pushDepositConfirming("oQe5IuOG4oLF1N57aEQjmGEg5peU",2,
+//	 new IdentifyCode(1, 29).getCipherCode());
+	 new
+	 TemplateMessagePushing().pushReturningBooks("oQe5IuB9KNLkOTLY_fZKfnfRxXGA",
+	 "你好哟，欢迎关注我们的微信公众号", 1);
+	 }
 }

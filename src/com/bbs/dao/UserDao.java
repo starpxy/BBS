@@ -334,7 +334,7 @@ public class UserDao extends BaseDao {
 	}
 
 	public List<AccessLog> adminShowInfo() {
-		String hql = "FROM AccessLog a LEFT OUTER JOIN FETCH a.user";
+		String hql = "FROM AccessLog a LEFT OUTER JOIN FETCH a.user ORDER BY a.id DESC";
 		Query query = getSession().createQuery(hql);
 		query.setMaxResults(15);
 		List<AccessLog> accessLogs = query.list();
