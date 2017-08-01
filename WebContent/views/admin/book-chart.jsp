@@ -470,7 +470,7 @@
 			function countIncrease(data, date) {
 				var count = 0;
 				for (j = 0; j < data.books.length; j += 1) {
-					if (date === getNowFormatDate(data.books[j].updateAt.time)) {
+					if (date === getNowFormatDate(data.books[j][0])) {
 						count += 1;
 					}
 				}
@@ -507,9 +507,11 @@ function refreshLineChart(days, endTime){
 				success : function(data) {
 					if (data.state == 1) {
 						lineDataFromBack = data;
-						refreshLineChart(10, new Date().getTime());
+						console.log(data);
+			/* 			console.log(data.books[0].book.time); */
+			 			refreshLineChart(10, new Date().getTime()); 
 						initializeBarChart();
-						layer.close(index1);
+						layer.close(index1); 
 					} else {
 						console.log(data);
 					}
@@ -526,7 +528,7 @@ function refreshLineChart(days, endTime){
 				for (each in types){
 					var count=0;
 					for (j = 0; j < books.length; j += 1) {
-						if (types[each] === books[j].type) {
+						if (types[each] === books[j][1]) {
 							count += 1;
 						}
 					}
