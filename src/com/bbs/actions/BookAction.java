@@ -73,7 +73,7 @@ public class BookAction extends BaseAction implements ModelDriven<Book>, Servlet
 		User user = (User) session.get("admin");
 		books = new HashMap<>();
 		if (user != null && user.getRole().equals("admin")) {
-			books.put("books", BookService.getBookList());
+			books.put("books", JSONArray.fromObject(BookService.getBookList()));
 			books.put("state", 1);
 		} else if (user != null) {
 			books.put("state", 2);

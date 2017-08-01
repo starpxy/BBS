@@ -643,7 +643,42 @@
 									});
 
 								} else {
-									
+									$
+									.ajax({
+										type : 'POST',
+										url : 'user-changeRole',
+										data : {'role':'admin','userId':thisele.parent().next().val()},
+										dataType : 'json',
+										success : function(
+												data) {
+											if (data.state == 1) {
+												thisele.parent().siblings('.user-role').text("管理员");
+												layer.msg("成功指派该用户为管理员", {
+													anim : 1,
+													icon : 1,
+													time : 1000
+												});
+											} else if(data.state==2){
+												layer.msg("身份验证失败", {
+													anim : 6,
+													icon : 2,
+													time : 1000
+												});
+											}
+											else{
+												layer.msg("该用户不存在", {
+													anim : 6,
+													icon : 2,
+													time : 1000
+												});
+											}
+										},
+										error : function(
+												xhr,
+												type) {
+											alert('err');
+										}
+									});
 
 								}
 
