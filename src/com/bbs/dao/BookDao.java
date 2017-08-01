@@ -1,9 +1,11 @@
 package com.bbs.dao;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import com.bbs.entities.Book;
 import com.bbs.entities.BookItem;
@@ -122,9 +124,15 @@ public class BookDao extends BaseDao {
 		}
 	}
 
-	public List<Book> getBookList() {
+	public Map<Integer, Date> getBookList() {
 		String hql = "FROM Book";
 		List<Book> books = getSession().createQuery(hql).list();
-		return books;
+		Iterator<Book> iterator = books.iterator();
+		Map<Integer, Date> map = new HashMap<>();
+		while(iterator.hasNext()){
+			Book book = iterator.next();
+			map.put(book.getBookId(), book.getUpdateAt());
+		}
+		return map;
 	}
 }

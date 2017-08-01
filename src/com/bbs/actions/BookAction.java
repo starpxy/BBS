@@ -20,6 +20,7 @@ import com.bbs.services.UserService;
 import com.opensymphony.xwork2.ModelDriven;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 public class BookAction extends BaseAction implements ModelDriven<Book>, ServletRequestAware {
 	private HttpServletRequest httpServletRequest;
@@ -72,7 +73,7 @@ public class BookAction extends BaseAction implements ModelDriven<Book>, Servlet
 		User user = (User) session.get("admin");
 		books = new HashMap<>();
 		if (user != null && user.getRole().equals("admin")) {
-			books.put("books", JSONArray.fromObject(BookService.getBookList()));
+			books.put("books", BookService.getBookList());
 			books.put("state", 1);
 		} else if (user != null) {
 			books.put("state", 2);

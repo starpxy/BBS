@@ -1,6 +1,8 @@
 package com.bbs.services;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.bbs.dao.BookDao;
 import com.bbs.entities.Book;
@@ -22,7 +24,7 @@ public class BookService {
 		return bookDao.bookList(book, page);
 	}
 
-	public List<Book> getBookList() {
+	public Map<Integer, Date> getBookList() {
 		return bookDao.getBookList();
 	}
 
