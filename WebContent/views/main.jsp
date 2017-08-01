@@ -120,11 +120,11 @@ button {
 	<div class="slide" id="slide1">
 
 		<ul>
-			<li><img src="asserts/images/faces/cc.jpg">
+			<li><img src="asserts/images/swipe/swipe1.jpeg">
 				<div class="slide-desc">前端开发：王聪聪</div></li>
-			<li><img src="asserts/images/faces/mengmeng.jpg">
+			<li><img src="asserts/images/swipe/swipe2.jpeg">
 				<div class="slide-desc">后台开发：郑萌芽</div></li>
-			<li><img src="asserts/images/faces/star.jpg">
+			<li><img src="asserts/images/swipe/swipe3.jpeg">
 				<div class="slide-desc">接口调用：潘星宇</div></li>
 		</ul>
 

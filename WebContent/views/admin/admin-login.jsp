@@ -16,7 +16,7 @@
 </head>
 
 
-<body class="login-layout light-login" style="font-family: '楷体', '微软雅黑'">
+<body class="login-layout light-login" style="font-family: '楷体', '微软雅黑';">
 <div class="main-container">
     <div class="main-content">
         <div class="row">
@@ -137,10 +137,8 @@
 
 <script type="text/javascript">
 
-
     layui.use('layer', function () {
         var layer = layui.layer;
-
         //这段代码可以去除,仅仅用于前端静态测试 TODO
         $("#submit1").click(function () {
 
@@ -153,49 +151,7 @@
                 layer.msg("帐号或密码未填写或帐号包含特殊字符", {icon: 2, anim: 6, time: 1000});
                 return;
             }
-			
 
-//            "account":account,"password"
-//            var isbn = 9787300213194;
-            /* $.ajax({
-                type: 'POST',
-                url: "http://10.19.33.54:8080/BBS/views/user-adminLogin",
-                dataType: 'jsonp',
-                cache:false,
-                jsonp: "callback",
-                jsonpCallback:"success_jsonpCallback",
-                data: {"account":account,"password":password},
-//            crossDomain: true,
-                success: function (response) {
-                    console.log(response);
-
-                    if (response.state=="success"){
-
-                        //TODO
-                        window.location.href = "admin.html";
-
-                    }
-                },
-                error: function (xhr, type) {
-                    layer.msg("wrong", {icon: 2, anim: 6, time: 1000});
-                }
-            });
-
- */
-
-//            http://10.19.33.54:8080/BBS/views/user-adminLogin
-//            http://10.19.33.54:8080/BBS/views/book-listBooks
-
-//            $.getJSON("http://10.19.33.54:8080/BBS/views/book-listBooks?callback=?", function (data) {
-//                console.log(data);
-//            });
-
-
-            //TODO
-//            if (( account == "admin") && (password == "123")) {
-//                window.location.href = "admin.html";
-//                return;
-//            }
 
 
         });

@@ -16,8 +16,7 @@
 
 
 </head>
-<body ontouchstart style="background-color: #f8f8f8;">
-
+<body ontouchstart style="background-color: #f8f8f8">
 	<div class="weui-header bg-green">
 		<div class="weui-header-left">
 			<a class="icon icon-109 f-white" id="back" href="">返回</a>
