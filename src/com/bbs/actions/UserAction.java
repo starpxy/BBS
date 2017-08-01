@@ -70,6 +70,19 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		return "adminUsersAjax";
 	}
 
+	public String adminInfo() {
+		User user = (User) session.get("admin");
+		if (user != null && user.getRole().equals("admin")) {
+			List<AccessLog> accessLogs = userService.adminShowInfo();
+			request.put("logs", accessLogs);
+			return "adminInfo";
+		} else if (user != null) {
+			return "adminLoginFail";
+		} else {
+			return "adminLoginFail";
+		}
+	}
+
 	public String userChart() {
 		User user = (User) session.get("admin");
 		if (user != null && user.getRole().equals("admin")) {
@@ -182,6 +195,24 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		return "adminUsersAjax";
 	}
 
+	public String deleteReservation() {
+		User user = (User) session.get("admin");
+		status = new HashMap<>();
+		if (user != null && user.getRole().equals("admin")) {
+			String reservationId = httpServletRequest.getParameter("reservationId");
+			if (reservationId==null) {
+				status.put("state", 3);
+				return "adminUsersAjax";
+			}
+			status.put("state", userService.deleteReservation(reservationId));
+		} else if (user != null) {
+			status.put("state", 2);
+		} else {
+			status.put("state", 2);
+		}
+		return "adminUsersAjax";
+	}
+
 	public String adminUsersAreaAjax() {
 		User user = (User) session.get("admin");
 		status = new HashMap<>();
@@ -205,7 +236,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 				page = Integer.valueOf(p);
 			}
 			request.put("books", userService.adminInitial(page));
-			request.put("pages", userService.getPages());
+			request.put("pages", userService.getPages()+1);
 			request.put("page", page);
 			return "adminBooks";
 		} else {
@@ -362,7 +393,8 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		String ip = IPUtil.getIp(httpServletRequest);
 		if (payState != null && !payState.isEmpty()) {
 			UnifiedOrder unifiedOrder = new UnifiedOrder();
-			JSONObject jsonObject = JSONObject.fromObject(unifiedOrder.createOrder(user.getWeChat(), ip, 1 * payState.size()));
+			JSONObject jsonObject = JSONObject
+					.fromObject(unifiedOrder.createOrder(user.getWeChat(), ip, 1 * payState.size()));
 			status.put("params", jsonObject.toString());
 			status.put("pay", 1);
 			status.put("ip", ip);
@@ -451,7 +483,8 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 
 	public String login() {
 		if (session.get("user") != null) {
-			if (httpServletRequest.getParameter("meth") != null && httpServletRequest.getParameter("meth").equals("wechat")) {
+			if (httpServletRequest.getParameter("meth") != null
+					&& httpServletRequest.getParameter("meth").equals("wechat")) {
 				AccessLog accessLog = new AccessLog();
 				accessLog.setUser((User) session.get("user"));
 				accessLog.setLogAt(new Date());

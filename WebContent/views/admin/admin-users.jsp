@@ -1,6 +1,9 @@
-<%@page import="com.bbs.entities.BorrowedRecord"%>
+<%@ page import="com.bbs.entities.rules.UserRule"%>
+<%@ page import="java.util.Iterator"%>
+<%@ page import="com.bbs.entities.User"%>
+<%@ page import="com.bbs.entities.BorrowedRecord"%>
+<%@ page import="java.util.List"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -149,7 +152,7 @@
 			</a></li>
 
 
-			<li><a href="javascript:;"> <i class="fa fa-info"></i> <span>消息管理</span>
+			  <li><a href="user-adminInfo"> <i class="fa fa-info"></i> <span>消息管理</span>
 
 					<span class="pull-right-container"> <small
 						class="label pull-right bg-green">news</small>
@@ -223,7 +226,6 @@
 											<th>微信</th>
 											<th>身份证号</th>
 											<th>性别</th>
-
 											<th>身份</th>
 											<th>推荐频率</th>
 											<th>密码</th>
@@ -234,21 +236,26 @@
 
 
 									<tbody id="usersbody">
-										<s:if test="#request.users!=null||request.users.size()!=0">
-											<s:iterator value="#request.users">
+										<%
+										if(request.getAttribute("users")!=null){
+											List<User> users = (List<User>)request.getAttribute("users");
+											Iterator<User> iterator = users.iterator();
+											while(iterator.hasNext()){
+												User user = iterator.next();
+										%>
 												<tr>
-													<td class="id">${userId }</td>
-													<td class="user-name">${name }</td>
-													<td class="user-phone">${phoneNumber }</td>
-													<td class="user-wechat">${weChat }</td>
-													<td class="user-id">${identityId }</td>
-													<td class="user-gender">${gender }</td>
+													<td class="id"><%=user.getUserId() %></td>
+													<td class="user-name"><%=user.getName() %></td>
+													<td class="user-phone"><%=user.getPhoneNumber() %></td>
+													<td class="user-wechat"><%=user.getWeChat() %></td>
+													<td class="user-id"><%=user.getIdentityId() %></td>
+													<td class="user-gender"><%=user.getGender() %></td>
 
-													<td class="user-role">${role }</td>
-													<td class="user-recom-fre"><a class="alter-recom-fre">一周</a></td>
-													<td class="user-password"><a class="alter-password"><span>${password }</span><input
+													<td class="user-role"><%=UserRule.getRole(user.getRole()) %></td>
+													<td class="user-recom-fre"><a class="alter-recom-fre"><%=UserRule.getFre(user.getRecommendFre()) %></a></td>
+													<td class="user-password"><a class="alter-password"><span><%=user.getPassword() %></span><input
 															type="text" size="10" name="user-password"
-															style="display: none" value="${password }"></a></td>
+															style="display: none" value="<%=user.getPassword() %>"></a></td>
 
 
 													<td class="options"><a data-toggle="tooltip"
@@ -256,13 +263,13 @@
 														class="become-admin"><span
 															class="glyphicon glyphicon-user"></span></a> <a
 														data-toggle="tooltip" data-placement="left"
-														title="讲该用户设为一般用户" class="become-normal"><span
+														title="将该用户设置为普通用户" class="become-normal"><span
 															class="fa fa-user"></span></a> <a data-toggle="tooltip"
 														data-placement="left" title="删除该用户" class="delete-user"><i
-															class="fa fa-trash"></i></a></td>
+															class="fa fa-trash"></i></a></td><input type="hidden" value="<%=user.getUserId() %>"/>
 												</tr>
-											</s:iterator>
-										</s:if>
+												<%}
+												}%>
 									</tbody>
 
 								</table>
@@ -444,9 +451,9 @@
 				<label>更改还书提醒</label> <select id="recomfreselect"
 					class="form-control">
 					<option value="1">一天前提醒</option>
-					<option value="3">三周前提醒</option>
+					<option value="7">三周前提醒</option>
 					<option value="7">一周前提醒</option>
-					<option value="0">关闭</option>
+					<option value="0">从不提醒</option>
 				</select>
 			</div>
 
@@ -466,7 +473,6 @@
 
 	<script>
 		layui.use('layer', function() {
-
 			var layer = layui.layer;
 			//
 
@@ -483,7 +489,6 @@
 			var ispassadmin = false;
 
 			$(".alter-password").click(function() {
-
 				if (!ispassadmin) {
 					var thisele = $(".alter-password");
 					layer.prompt({
@@ -498,7 +503,7 @@
 
 						ispassadmin = true;
 						//successful  TODO
-						if (value === '${session.user.password}') {
+						if (value === '${session.admin.password}') {
 							layer.close(index);
 							thisele.children("input").show();
 						} else {
@@ -530,7 +535,6 @@
 			});
 
 			$(".delete-user").click(function() {
-
 				var thisele = $(this);
 
 				layer.open({
@@ -575,9 +579,8 @@
 			$(".become-admin")
 					.click(
 							function() {
-
+								var thisele=$(this);
 								if (!ispassadmin) {
-									var thisele = $(this);
 									layer.prompt({
 										closeBtn : 2,
 										formType : 1,
@@ -590,12 +593,12 @@
 
 										ispassadmin = true;
 										//successful  TODO
-										if (value === '${session.user.password}') {
+										if (value === '${session.admin.password}') {
 											$
 											.ajax({
 												type : 'POST',
 												url : 'user-changeRole',
-												data : {'role':'admin'},
+												data : {'role':'admin','userId':thisele.parent().next().val()},
 												dataType : 'json',
 												success : function(
 														data) {
@@ -646,14 +649,15 @@
 
 			$(".become-normal").click(function() {
 				//TODO
+				var thisele=$(this);
 				$.ajax({
 						type : 'POST',
-						url : 'user-changeRole'
-						data : {'role':'user'},
+						url : 'user-changeRole',
+						data : {'role':'user','userId':thisele.parent().next().val()},
 						dataType : 'json',
 						success : function(data) {
 							if (data.state == 1) {
-								$(this).parent().siblings('.user-role').text("普通用户");
+								thisele.parent().siblings('.user-role').text("普通用户");
 								layer.msg("成功该用户设为普通用户", {
 									anim : 1,
 									icon : 1,

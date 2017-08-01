@@ -169,9 +169,7 @@
                 </li>
 
 
-                <li>
-                    <a href="javascript:;">
-                        <i class="fa fa-info"></i> <span>消息管理</span>
+                 <li><a href="user-adminInfo"> <i class="fa fa-info"></i> <span>消息管理</span>
 
             <span class="pull-right-container">
               <small class="label pull-right bg-green">news</small>
@@ -197,7 +195,7 @@
 
 
                 <li class="header">其他操作(预留)</li>
-                <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>操作一</span></a></li>
+                <li><a href="setting-settings"><i class="fa fa-gear"></i> <span>基本设置</span></a></li>
                 <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>操作二</span></a></li>
                 <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>操作三</span></a></li>
             </ul>
@@ -258,7 +256,7 @@
                             <div class="timeline-item">
                                 <span class="time"><i class="fa fa-clock-o"></i>${updateAt }</span>
 
-                                <h3 class="timeline-header"><a href="#">预定</a>${user.name }</h3>
+                                <h3 class="timeline-header">${user.name } <a href="#">预定</a></h3>
 
                                 <div class="timeline-body">
                                     <br> &lt;&lt;${bookItem.book.bookTitle }&gt;&gt; ISBN:${bookItem.book.isbn } 条目ID:${bookItem.itemId }<br>
@@ -266,6 +264,7 @@
 
                                 <div class="timeline-footer">
                                     <a class="btn btn-danger btn-xs delete-item">删除</a>
+                                    <input type="hidden" value="${reservationId }"/>
                                 </div>
                             </div>
 
@@ -522,8 +521,26 @@
                 title: "确认删除",
                 content: "你确认删除该消息吗?",
                 yes: function () {
-                    thisele.parent().parent().parent().hide(1000);
-                    layer.msg("成功删除", {anim: 1, icon: 1, time: 1000});
+                	$.ajax({
+        				type : 'POST',
+        				url : 'user-deleteReservation',
+        				data:{'reservationId':thisele.next().val()},
+        				dataType : 'json',
+        				success : function(data) {
+        					if (data.state == 1) {
+        						thisele.parent().parent().parent().hide(1000);
+        	                    layer.msg("成功删除", {anim: 1, icon: 1, time: 1000});
+        					} else if(data.state==2){
+        						layer.msg("登录状态有误", {anim: 6, icon: 2, time: 1000});
+        					}
+        					else{
+        						layer.msg("条目不存在", {anim: 6, icon: 2, time: 1000});
+            				}
+        				},
+        				error : function(xhr, type) {
+        					layer.msg("服务器错误", {anim: 6, icon: 2, time: 1000});
+        				}
+        			});
                 }
             });
 

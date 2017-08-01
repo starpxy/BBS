@@ -74,6 +74,10 @@ public class UserService {
 		return userDao.adminUsersArea();
 	}
 
+	public List<AccessLog> adminShowInfo() {
+		return userDao.adminShowInfo();
+	}
+
 	public List<BorrowedRecord> adminListRecords() {
 		return userDao.adminListRecords();
 	}
@@ -124,6 +128,10 @@ public class UserService {
 
 	public List<Favorite> myFavorites(User user) {
 		return userDao.myFavorites(user);
+	}
+
+	public int deleteReservation(String reservationId) {
+		return userDao.deleteReservation(reservationId);
 	}
 
 	public int deleteFavorite(User user, String bookId) {

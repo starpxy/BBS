@@ -127,19 +127,19 @@
 			<li class="header">管理导航</li>
 			<li><a href="user-adminLogin"> <i class="fa fa-gear"></i> <span>管理员主页</span>
 			</a></li>
-			<li class="active treeview"><a href="#"> <i
-					class="fa fa-book"></i> <span>图书管理</span> <span
-					class="pull-right-container"> <i
+			<li class="treeview"><a href="#"> <i class="fa fa-book"></i>
+					<span>图书管理</span> <span class="pull-right-container"> <i
 						class="fa fa-angle-left pull-right"></i>
 				</span>
 			</a>
 				<ul class="treeview-menu">
+
+					<!-- 				TODO -->
 					<li><a href="user-adminBooks"><i class="fa fa-circle-o"></i>录入与查看</a></li>
-					<li><a href="borrow-details.html"><i
-							class="fa fa-circle-o"></i>借阅详情</a></li>
 					<li><a href="user-adminListRecords"><i
+							class="fa fa-circle-o"></i>借阅详情</a></li>
+					<li><a href="user-adminListReservations"><i
 							class="fa fa-circle-o"></i>预定详情</a></li>
-					<li><a href="user-adminListReservations"><i class="fa fa-circle-o"></i>推荐系统</a></li>
 				</ul></li>
 
 
@@ -157,7 +157,7 @@
 			</a></li>
 
 
-			<li><a href="#"> <i class="fa fa-info"></i> <span>消息管理</span>
+			  <li><a href="user-adminInfo"> <i class="fa fa-info"></i> <span>消息管理</span>
 
 					<span class="pull-right-container"> <small
 						class="label pull-right bg-green">news</small>
@@ -493,7 +493,7 @@ function refreshLineChart(days, endTime){
 		data : linedata,
 		xkey : 'y',
 		ykeys : [ 'item1' ],
-		labels : [ '书的数量' ],
+		labels : [ '新增书目' ],
 		lineColors : [ '#00a65a' ],
 		hideHover : 'auto'
 	});

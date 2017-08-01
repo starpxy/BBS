@@ -168,9 +168,7 @@
                 </li>
 
 
-                <li>
-                    <a href="javascript:;">
-                        <i class="fa fa-info"></i> <span>消息管理</span>
+                <li><a href="user-adminInfo"> <i class="fa fa-info"></i> <span>消息管理</span>
 
             <span class="pull-right-container">
               <small class="label pull-right bg-green">news</small>
@@ -196,7 +194,7 @@
 
 
                 <li class="header">其他操作(预留)</li>
-                <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>操作一</span></a></li>
+                <li><a href="setting-settings"><i class="fa fa-gear"></i> <span>基本设置</span></a></li>
                 <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>操作二</span></a></li>
                 <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>操作三</span></a></li>
             </ul>

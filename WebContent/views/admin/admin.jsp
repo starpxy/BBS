@@ -299,7 +299,7 @@ input[type="range"]::-webkit-slider-thumb:active {
 				</span>
 			</a></li>
 
-			<li><a href="admin-news.jsp"> <i class="fa fa-info"></i> <span>消息管理</span>
+			<li><a href="user-adminInfo"> <i class="fa fa-info"></i> <span>消息管理</span>
 
 					<span class="pull-right-container"> <small
 						class="label pull-right bg-green">news</small>
@@ -321,10 +321,10 @@ input[type="range"]::-webkit-slider-thumb:active {
 			</li>
 
 
-			<li class="header">其他操作</li>
+			<li class="header">其他操作(预留)</li>
 			<li><a href="setting-settings"><i class="fa fa-gear"></i> <span>基本设置</span></a></li>
-			<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>操作二(预留)</span></a></li>
-			<li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>操作三(预留)</span></a></li>
+			<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>操作二</span></a></li>
+			<li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>操作三</span></a></li>
 		</ul>
 
 		</section> <!-- /.sidebar --> </aside>
@@ -462,7 +462,7 @@ input[type="range"]::-webkit-slider-thumb:active {
             <div class="icon">
               <i class="fa  fa-comments"></i>
             </div>
-            <a href="admin-comments.jsp" class="small-box-footer">进入评论管理 <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="user-adminListComments" class="small-box-footer">进入评论管理 <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -476,7 +476,7 @@ input[type="range"]::-webkit-slider-thumb:active {
             <div class="icon">
               <i class="fa fa-info"></i>
             </div>
-            <a href="admin-news.jsp" class="small-box-footer">进入消息管理 <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="user-adminInfo" class="small-box-footer">进入消息管理 <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -490,7 +490,7 @@ input[type="range"]::-webkit-slider-thumb:active {
             <div class="icon">
               <i class="fa fa-gear"></i>
             </div>
-            <a href="admin-settings.jsp" class="small-box-footer">进入基本设置 <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="setting-settings" class="small-box-footer">进入基本设置 <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->

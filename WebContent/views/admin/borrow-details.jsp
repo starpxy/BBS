@@ -1,3 +1,7 @@
+<%@page import="com.bbs.entities.rules.BorrowedRecordRule"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="com.bbs.entities.BorrowedRecord"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
@@ -168,9 +172,7 @@
                 </li>
 
 
-                <li>
-                    <a href="javascript:;">
-                        <i class="fa fa-info"></i> <span>消息管理</span>
+                  <li><a href="user-adminInfo"> <i class="fa fa-info"></i> <span>消息管理</span>
 
             <span class="pull-right-container">
               <small class="label pull-right bg-green">news</small>
@@ -196,7 +198,7 @@
 
 
                 <li class="header">其他操作(预留)</li>
-                <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>操作一</span></a></li>
+               <li><a href="setting-settings"><i class="fa fa-gear"></i> <span>基本设置</span></a></li>
                 <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>操作二</span></a></li>
                 <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>操作三</span></a></li>
             </ul>
@@ -250,30 +252,34 @@
                 <div class="col-md-12">
                     <!-- The time line -->
                     <ul class="timeline">
-						<s:if test="#request.records.size()!=0">
-                        <s:iterator value="#request.records">
+						<%
+						if(request.getAttribute("records")!=null){
+							List<BorrowedRecord> borrowedRecords =(List<BorrowedRecord>) request.getAttribute("records");
+							Iterator<BorrowedRecord> iterator = borrowedRecords.iterator();
+							while(iterator.hasNext()){
+								BorrowedRecord borrowedRecord = iterator.next();
+						%>
                         <li class="normal-timeline">
                             <i class="fa fa-reply-all bg-orange"></i>
                             <div class="timeline-item">
-                                <span class="time"><i class="fa fa-clock-o"></i>${updateAt }</span>
-                                <h3 class="timeline-header"><a href="#">${status }&nbsp;&nbsp;</a>${user.name }</h3>
+                                <span class="time"><i class="fa fa-clock-o"></i><%=borrowedRecord.getUpdateAt() %></span>
+                                <h3 class="timeline-header"><a href="#"><%=BorrowedRecordRule.getStatus(borrowedRecord.getStatus()) %>&nbsp;&nbsp;</a><%=borrowedRecord.getUser().getName() %></h3>
 
                                 <div class="timeline-body">
-                                    <br> &lt;&lt;${bookItem.book.bookTitle }&gt;&gt; ISBN:${bookItem.book.isbn } 条目ID:${bookItem.itemId }<br>
+                                    <br> &lt;&lt;<%=borrowedRecord.getBookItem().getBook().getBookTitle() %>&gt;&gt; ISBN:<%=borrowedRecord.getBookItem().getBook().getIsbn() %> 条目ID:<%=borrowedRecord.getBookItem().getBook().getBookId() %><br>
                                 </div>
 
                                 <div class="timeline-footer">
-                                	<input type="hidden" value="${user.userId }"/>
+                                	<input type="hidden" value="<%=borrowedRecord.getUser().getUserId()%>"/>
                                     <a class="btn btn-success btn-xs delete-item">提醒还书</a>
-                                    <input type="hidden" value="${borrowedId }"/>
+                                    <input type="hidden" value="<%=borrowedRecord.getBorrowedId()%>"/>
                                 </div>
 
                             </div>
                         </li>
-						</s:iterator>
-						</s:if>
 
-
+						<%}
+						}%>
                         <li class="timeline-label">
                             <i class="fa fa-clock-o bg-gray"></i>
 

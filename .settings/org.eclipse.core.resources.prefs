@@ -21,4 +21,6 @@ encoding//src/com/bbs/entities/rules/BorrowedRecordRule.java=UTF-8
 encoding//src/com/bbs/entities/rules/CommentRule.java=UTF-8
 encoding//src/com/bbs/entities/rules/LogRules.java=UTF-8
 encoding//src/com/bbs/entities/rules/ReservationRule.java=UTF-8
+encoding//src/com/bbs/entities/rules/UserRule.java=UTF-8
+encoding//src/com/bbs/entities/rules/WaitListRule.java=UTF-8
 encoding//src/com/bbs/logs=UTF-8

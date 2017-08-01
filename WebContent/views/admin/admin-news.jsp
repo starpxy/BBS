@@ -1,3 +1,8 @@
+<%@page import="com.bbs.converters.TimeUtils"%>
+<%@page import="com.bbs.entities.rules.LogRules"%>
+<%@page import="com.bbs.entities.AccessLog"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Iterator"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -171,7 +176,7 @@
 
 
                 <li class="active">
-                    <a href="admin-news.html">
+                    <a href="user-adminInfo">
                         <i class="fa fa-info"></i> <span>消息管理</span>
 
             <span class="pull-right-container">
@@ -250,11 +255,11 @@
                                     <thead>
 
                                     <tr>
-                                        <th>登录ID</th>
-                                        <th>登录IP所属地</th>
-                                        <th>网络类型</th>
-                                        <th>IP地址</th>
                                         <th>用户ID</th>
+                                        <th>登录IP所属地</th>
+                                        <th>网络类型或位置</th>
+                                        <th>IP地址</th>
+                                        <th>用户名</th>
                                         <th>登录方式</th>
                                         <th>登录时间</th>
                                     </tr>
@@ -262,19 +267,27 @@
 
 
                                     <tbody id="logbody">
-
+									<%
+									if(request.getAttribute("logs")!=null){
+										List<AccessLog> accessLogs = (List<AccessLog>)request.getAttribute("logs");
+										Iterator<AccessLog> iterator = accessLogs.iterator();
+										while(iterator.hasNext()){
+											AccessLog accessLog = iterator.next();
+									%>
                                     <tr>
 
-                                        <td class="log-id">938</td>
-                                        <td class="log-area">北京市</td>
-                                        <td class="log-type">13723452890</td>
-                                        <td class="log-ip">124.207.38.22</td>
-                                        <td class="user-id">1</td>
-                                        <td class="log-method">0</td>
-                                        <td class="log-time">2017-07-24 15:42:25</td>
+                                        <td class="log-id"><%=accessLog.getUser().getUserId() %></td>
+                                        <td class="log-area"><%=accessLog.getArea() %></td>
+                                        <td class="log-type"><%=accessLog.getLocation() %></td>
+                                        <td class="log-ip"><%=accessLog.getIp() %></td>
+                                        <td class="user-id"><%=accessLog.getUser().getName() %></td>
+                                        <td class="log-method"><%=LogRules.getStatus(accessLog.getMethod()) %></td>
+                                        <td class="log-time"><%=TimeUtils.getChineseTime(accessLog.getLogAt()) %></td>
 
                                     </tr>
-
+									<%	}
+									}
+									%>
 
                                     </tbody>
 

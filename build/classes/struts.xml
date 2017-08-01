@@ -32,6 +32,7 @@
 			<result name="granted">main.jsp</result>
 			<result name="refused">login.jsp?state=1</result>
 			<result name="register">login.jsp</result>
+			<result name="adminInfo">admin-news.jsp</result>
 			<result name="setRecomFreq">setRecomTest.jsp</result>
 			<result
 				name="changeSucceed"

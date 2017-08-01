@@ -230,7 +230,7 @@
 				</span>
                 </a></li>
 
-                <li><a href="admin-news.jsp"> <i class="fa fa-info"></i> <span>消息管理</span>
+                 <li><a href="user-adminInfo"> <i class="fa fa-info"></i> <span>消息管理</span>
 
 					<span class="pull-right-container"> <small
                             class="label pull-right bg-green">news</small>
