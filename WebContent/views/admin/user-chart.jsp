@@ -581,6 +581,17 @@
 			taiwan : '台湾',
 			macau : '澳门'
 		};
+
+		 function toDecimal(x) { 
+		      var f = parseFloat(x); 
+		      if (isNaN(f)) { 
+		        return; 
+		      } 
+		      f = Math.round(x*100)/100; 
+		      return f; 
+		    }
+
+		
 		function initializeAreaChart(cities) {
 			var areaData = {};
 			/* 		console.log(cities);
@@ -597,7 +608,7 @@
 						value += 1;
 					}
 				}
-				var value = parseFloat(value / total).toFixed(4) * 100;
+				var value = toDecimal((value / total)* 100);
 				if (value >= 50) {
 					stateInitColor = 0;
 					index = "*";

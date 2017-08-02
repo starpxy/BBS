@@ -547,8 +547,6 @@ function refreshLineChart(days, endTime){
 				});
 			}
 
-			
-
 		});
 	</script>
 

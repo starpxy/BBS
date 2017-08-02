@@ -258,8 +258,6 @@ img { max-width: 100%; }
                 return;
             }
 
-
-
         });
 
 
