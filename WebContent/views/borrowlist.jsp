@@ -22,7 +22,7 @@
 	<div class="page-hd">
 
     <span style="float: right;color: grey">共${request.records.size() }本</span>
-    <span style="color: red">总计:${request.records.size()*2 }元</span>
+    <span style="color: red">总计:${request.records.size()*0.01 }元</span>
 
 
 </div>
@@ -33,7 +33,7 @@
     <div>
         <div class="weui-form-preview-hd">
             <label class="weui-form-preview-label">付款金额</label>
-            <em class="weui-form-preview-value">¥2.00</em>
+            <em class="weui-form-preview-value">¥0.01</em>
         </div>
 
         <div class="weui-form-preview-bd">
