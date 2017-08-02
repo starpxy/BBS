@@ -26,9 +26,9 @@ public class SearchHistoryService {
 	public List<String> checkSearchHistory(User user) {
 		return searchHistoryDao.checkSearchHistory(user);
 	}
-
-	public Map<Book, List<Book>> recommendBook(User user) {
-		return searchHistoryDao.recommendBook(user);
+	
+	public List<Book> recommend(List<Integer> ids){
+		return searchHistoryDao.recommend(ids);
 	}
 
 }

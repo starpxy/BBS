@@ -86,42 +86,19 @@ public class SearchHistoryDao extends BaseDao {
 		history = getSession().createQuery(hql).list();
 		return history;
 	}
-
-	public Map<Book, List<Book>> recommendBook(User user) {
-		String hql = "FROM SearchHistory WHERE user.userId="+user.getUserId();
-		List<SearchHistory> searchHistories = getSession().createQuery(hql).list();
-		Map<Book, List<Book>> result = new HashMap<>();
-		if (!searchHistories.isEmpty()) {
-			Iterator<SearchHistory> iterator = searchHistories.iterator();
-			int count = 0;
-			while(iterator.hasNext()&&count<5){
-				SearchHistory searchHistory = iterator.next();
-				hql = "FROM Book";
-				List<Book> list = getSession().createQuery(hql).list();
-				Search search = new Search();
-				Book book = null;
-				try {
-					List<Book> tempBooks =  search.doSearch(list, searchHistory.getKeyword());
-					if (tempBooks.isEmpty()) {
-						continue;
-					}
-					else{
-						book = search.doSearch(list, searchHistory.getKeyword()).get(0);
-					}
-				} catch (ParseException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				hql = "FROM Book WHERE type='"+book.getType()+"'";
-				List<Book> booklist = getSession().createQuery(hql).list();
-				result.put(book, booklist);
-				count++;
+	
+	public List<Book> recommend(List<Integer> ids){
+		List<Book> result = new LinkedList<>();
+		Iterator<Integer> iterator = ids.iterator();
+		while(iterator.hasNext()){
+			int i = iterator.next();
+			String hql = "FROM Book WHERE bookId="+i;
+			List<Book> books = getSession().createQuery(hql).list();
+			if (!books.isEmpty()) {
+				result.add(books.get(0));
 			}
-			return result;
 		}
-		else {
-			return null;
-		}
+		return result;
 	}
+
 }

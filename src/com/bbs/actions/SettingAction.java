@@ -68,7 +68,7 @@ public class SettingAction extends BaseAction implements ModelDriven<Settings>, 
 			settings.setReservePeriod(Long.valueOf(runInterval));
 			settings.setReserveOverdue(1);
 			settingService.update(settings);
-			timer.scheduleAtFixedRate(reserveTask, 0, settings.getReservePeriod());
+			timer.scheduleAtFixedRate(reserveTask, 0, settings.getReservePeriod()*1000);
 			settingStatus.put("state", 1);
 			break;
 		case 2:
@@ -77,7 +77,7 @@ public class SettingAction extends BaseAction implements ModelDriven<Settings>, 
 			settings.setRecPeriod(Long.valueOf(runInterval));
 			settings.setRecommend(1);
 			settingService.update(settings);
-			timer.scheduleAtFixedRate(recommendTask, 0, settings.getRecPeriod());
+			timer.scheduleAtFixedRate(recommendTask, 0, settings.getRecPeriod()*1000);
 			settingStatus.put("state", 1);
 			break;
 		case 3:
@@ -86,7 +86,7 @@ public class SettingAction extends BaseAction implements ModelDriven<Settings>, 
 			settings.setRemindPeriod(Long.valueOf(runInterval));
 			settings.setRemind(1);
 			settingService.update(settings);
-			timer.scheduleAtFixedRate(remindTask, 0, settings.getRemindPeriod());
+			timer.scheduleAtFixedRate(remindTask, 0, settings.getRemindPeriod()*1000);
 			settingStatus.put("state", 1);
 			break;
 		case 4:
@@ -95,7 +95,7 @@ public class SettingAction extends BaseAction implements ModelDriven<Settings>, 
 			settings.setWaitPeriod(Long.valueOf(runInterval));
 			settings.setWaitList(1);
 			settingService.update(settings);
-			timer.scheduleAtFixedRate(waitTask, 0, settings.getWaitPeriod());
+			timer.scheduleAtFixedRate(waitTask, 0, settings.getWaitPeriod()*1000);
 			settingStatus.put("state", 1);
 			break;
 		default:

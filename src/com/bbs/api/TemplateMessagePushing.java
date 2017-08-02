@@ -30,6 +30,8 @@ import com.bbs.api.entities.NewData;
 import com.bbs.api.entities.ReserveData;
 import com.bbs.api.entities.Template;
 import com.bbs.encrypt.IdentifyCode;
+import com.bbs.entities.Book;
+import com.bbs.entities.User;
 
 import net.sf.json.JSONObject;
 
@@ -57,6 +59,197 @@ public class TemplateMessagePushing {
 			KeyWord keynote2 = new KeyWord(simpleDateFormat.format(date), "#000079");
 			Data data = new Data(first, keynote1, keynote2, new KeyWord("若不能按时还书，您的押金将不会被返还。", "#930000"));
 			Template template = new Template(openid, "DqUQWPy9BQcvBfiYWVy4k1DkJ3ZTHp3YB8kQuAJgRDw", data);
+			template.setTopcolor("#000000");
+			JSONObject jsonObject = JSONObject.fromObject(template);
+			PrintWriter printWriter = new PrintWriter(
+					new OutputStreamWriter(httpsURLConnection.getOutputStream(), "UTF-8"));
+			printWriter.print(jsonObject.toString());
+			printWriter.flush();
+			printWriter.close();
+			InputStreamReader inputStreamReader = new InputStreamReader(httpsURLConnection.getInputStream());
+			int i = inputStreamReader.read();
+			String jsonMsg = "";
+			while (i != -1) {
+				jsonMsg += (char) i;
+				i = inputStreamReader.read();
+			}
+			Map<String, Object> map = new HashMap<>();
+			map.put("errcode", Integer.class);
+			JSONObject jsonObject2 = JSONObject.fromObject(jsonMsg);
+			Map<String, Object> resultmap = (Map<String, Object>) JSONObject.toBean(jsonObject2, Map.class, map);
+			System.out.println(resultmap.get("errcode"));
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/*
+	 * 推荐通知。
+	 */
+	public void pushRecommendBook(User user, Book book) {
+		try {
+			URL url = new URL("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="
+					+ AccessTokenManager.getAccessToken());
+			HttpsURLConnection httpsURLConnection = (HttpsURLConnection) url.openConnection();
+			httpsURLConnection.setRequestMethod("POST");
+			httpsURLConnection.setInstanceFollowRedirects(true);
+			httpsURLConnection.setDoOutput(true);
+			httpsURLConnection.setUseCaches(false);
+			httpsURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+			httpsURLConnection.connect();
+			KeyWord first = new KeyWord("嗨，这里有一本你喜欢的书哦！", "#000000");
+			KeyWord keynote1 = new KeyWord("推荐给你这本《" + book.getBookTitle() + "》，希望你能喜欢。", "#000079");
+			Date date = new Date();
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+			KeyWord keynote2 = new KeyWord(simpleDateFormat.format(date), "#000079");
+			Data data = new Data(first, keynote1, keynote2, new KeyWord("登陆后点击此消息查看书籍详情。", "#930000"));
+			Template template = new Template(user.getWeChat(), "DqUQWPy9BQcvBfiYWVy4k1DkJ3ZTHp3YB8kQuAJgRDw",
+					"http://pxyzmy.com.cn/BBS/views/book-bookDetails?bookId=" + book.getBookId(), data);
+			template.setTopcolor("#000000");
+			JSONObject jsonObject = JSONObject.fromObject(template);
+			PrintWriter printWriter = new PrintWriter(
+					new OutputStreamWriter(httpsURLConnection.getOutputStream(), "UTF-8"));
+			printWriter.print(jsonObject.toString());
+			printWriter.flush();
+			printWriter.close();
+			InputStreamReader inputStreamReader = new InputStreamReader(httpsURLConnection.getInputStream());
+			int i = inputStreamReader.read();
+			String jsonMsg = "";
+			while (i != -1) {
+				jsonMsg += (char) i;
+				i = inputStreamReader.read();
+			}
+			Map<String, Object> map = new HashMap<>();
+			map.put("errcode", Integer.class);
+			JSONObject jsonObject2 = JSONObject.fromObject(jsonMsg);
+			Map<String, Object> resultmap = (Map<String, Object>) JSONObject.toBean(jsonObject2, Map.class, map);
+			System.out.println(resultmap.get("errcode"));
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/*
+	 * 愿望单到货通知
+	 */
+	public void pushWishingBook(User user, Book book) {
+		try {
+			URL url = new URL("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="
+					+ AccessTokenManager.getAccessToken());
+			HttpsURLConnection httpsURLConnection = (HttpsURLConnection) url.openConnection();
+			httpsURLConnection.setRequestMethod("POST");
+			httpsURLConnection.setInstanceFollowRedirects(true);
+			httpsURLConnection.setDoOutput(true);
+			httpsURLConnection.setUseCaches(false);
+			httpsURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+			httpsURLConnection.connect();
+			KeyWord first = new KeyWord("您愿望单中的书有库存咯～", "#000000");
+			KeyWord keynote1 = new KeyWord("您曾添加到愿望单中的《" + book.getBookTitle() + "》已到货，记得预订哦！", "#000079");
+			Date date = new Date();
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+			KeyWord keynote2 = new KeyWord(simpleDateFormat.format(date), "#000079");
+			Data data = new Data(first, keynote1, keynote2, new KeyWord("登陆后点击此消息查看书籍详情。", "#930000"));
+			Template template = new Template(user.getWeChat(), "DqUQWPy9BQcvBfiYWVy4k1DkJ3ZTHp3YB8kQuAJgRDw",
+					"http://pxyzmy.com.cn/BBS/views/book-bookDetails?bookId=" + book.getBookId(), data);
+			template.setTopcolor("#000000");
+			JSONObject jsonObject = JSONObject.fromObject(template);
+			PrintWriter printWriter = new PrintWriter(
+					new OutputStreamWriter(httpsURLConnection.getOutputStream(), "UTF-8"));
+			printWriter.print(jsonObject.toString());
+			printWriter.flush();
+			printWriter.close();
+			InputStreamReader inputStreamReader = new InputStreamReader(httpsURLConnection.getInputStream());
+			int i = inputStreamReader.read();
+			String jsonMsg = "";
+			while (i != -1) {
+				jsonMsg += (char) i;
+				i = inputStreamReader.read();
+			}
+			Map<String, Object> map = new HashMap<>();
+			map.put("errcode", Integer.class);
+			JSONObject jsonObject2 = JSONObject.fromObject(jsonMsg);
+			Map<String, Object> resultmap = (Map<String, Object>) JSONObject.toBean(jsonObject2, Map.class, map);
+			System.out.println(resultmap.get("errcode"));
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/*
+	 * 预订过期通知
+	 */
+	public void pushReserveOverdue(User user, Book book) {
+		try {
+			URL url = new URL("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="
+					+ AccessTokenManager.getAccessToken());
+			HttpsURLConnection httpsURLConnection = (HttpsURLConnection) url.openConnection();
+			httpsURLConnection.setRequestMethod("POST");
+			httpsURLConnection.setInstanceFollowRedirects(true);
+			httpsURLConnection.setDoOutput(true);
+			httpsURLConnection.setUseCaches(false);
+			httpsURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+			httpsURLConnection.connect();
+			KeyWord first = new KeyWord("真遗憾！您忘记来取预定的书啦！", "#000000");
+			KeyWord keynote1 = new KeyWord("您曾经预定的《" + book.getBookTitle() + "》现已过期，请您点击此处重新预订。", "#000079");
+			Date date = new Date();
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+			KeyWord keynote2 = new KeyWord(simpleDateFormat.format(date), "#000079");
+			Data data = new Data(first, keynote1, keynote2, new KeyWord("登陆后点击此消息查看书籍详情。", "#930000"));
+			Template template = new Template(user.getWeChat(), "DqUQWPy9BQcvBfiYWVy4k1DkJ3ZTHp3YB8kQuAJgRDw",
+					"http://pxyzmy.com.cn/BBS/views/book-bookDetails?bookId=" + book.getBookId(), data);
+			template.setTopcolor("#000000");
+			JSONObject jsonObject = JSONObject.fromObject(template);
+			PrintWriter printWriter = new PrintWriter(
+					new OutputStreamWriter(httpsURLConnection.getOutputStream(), "UTF-8"));
+			printWriter.print(jsonObject.toString());
+			printWriter.flush();
+			printWriter.close();
+			InputStreamReader inputStreamReader = new InputStreamReader(httpsURLConnection.getInputStream());
+			int i = inputStreamReader.read();
+			String jsonMsg = "";
+			while (i != -1) {
+				jsonMsg += (char) i;
+				i = inputStreamReader.read();
+			}
+			Map<String, Object> map = new HashMap<>();
+			map.put("errcode", Integer.class);
+			JSONObject jsonObject2 = JSONObject.fromObject(jsonMsg);
+			Map<String, Object> resultmap = (Map<String, Object>) JSONObject.toBean(jsonObject2, Map.class, map);
+			System.out.println(resultmap.get("errcode"));
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/*
+	 * 还书过期通知
+	 */
+	public void pushRecordOverdue(User user, Book book) {
+		try {
+			URL url = new URL("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="
+					+ AccessTokenManager.getAccessToken());
+			HttpsURLConnection httpsURLConnection = (HttpsURLConnection) url.openConnection();
+			httpsURLConnection.setRequestMethod("POST");
+			httpsURLConnection.setInstanceFollowRedirects(true);
+			httpsURLConnection.setDoOutput(true);
+			httpsURLConnection.setUseCaches(false);
+			httpsURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+			httpsURLConnection.connect();
+			KeyWord first = new KeyWord("您忘记来还书啦！", "#000000");
+			KeyWord keynote1 = new KeyWord("您曾经借出的《" + book.getBookTitle() + "》现已过期，请来我馆缴纳罚金并归还书籍。", "#000079");
+			Date date = new Date();
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+			KeyWord keynote2 = new KeyWord(simpleDateFormat.format(date), "#000079");
+			Data data = new Data(first, keynote1, keynote2, new KeyWord("逾期不还书馆馆可是要生气的哦！", "#930000"));
+			Template template = new Template(user.getWeChat(), "DqUQWPy9BQcvBfiYWVy4k1DkJ3ZTHp3YB8kQuAJgRDw", data);
 			template.setTopcolor("#000000");
 			JSONObject jsonObject = JSONObject.fromObject(template);
 			PrintWriter printWriter = new PrintWriter(
@@ -231,13 +424,12 @@ public class TemplateMessagePushing {
 			e.printStackTrace();
 		}
 	}
-//	 下面就是调用的示例。
-	 public static void main(String[] args) {
-//	 new
-//	 TemplateMessagePushing().pushDepositConfirming("oQe5IuOG4oLF1N57aEQjmGEg5peU",2,
-//	 new IdentifyCode(1, 29).getCipherCode());
-	 new
-	 TemplateMessagePushing().pushReturningBooks("oQe5IuB9KNLkOTLY_fZKfnfRxXGA",
-	 "你好哟，欢迎关注我们的微信公众号", 1);
-	 }
+
+	// 下面就是调用的示例。
+	public static void main(String[] args) {
+		// new
+		// TemplateMessagePushing().pushDepositConfirming("oQe5IuOG4oLF1N57aEQjmGEg5peU",2,
+		// new IdentifyCode(1, 29).getCipherCode());
+		new TemplateMessagePushing().pushReturningBooks("oQe5IuB9KNLkOTLY_fZKfnfRxXGA", "你好哟，欢迎关注我们的微信公众号", 1);
+	}
 }

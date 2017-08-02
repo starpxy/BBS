@@ -1,13 +1,18 @@
 package com.bbs.admin.settings;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.TimerTask;
 
+import com.bbs.api.TemplateMessagePushing;
+import com.bbs.entities.Book;
 import com.bbs.entities.Settings;
+import com.bbs.entities.User;
+import com.bbs.entities.WaitList;
 import com.bbs.services.SettingService;
 
 public class WaitTask extends TimerTask {
 	private long interval;
-	private static int count = 0;
 	private SettingService settingService;
 	private static WaitTask waitTask;
 
@@ -56,8 +61,18 @@ public class WaitTask extends TimerTask {
 
 	@Override
 	public void run() {
-		System.out.println("wait " + count);
-		count++;
+		List<WaitList> waitLists = settingService.showWaitLists();
+		Iterator<WaitList> iterator = waitLists.iterator();
+		while (iterator.hasNext()) {
+			WaitList waitList = iterator.next();
+			User user = waitList.getUser();
+			Book book = waitList.getBook();
+			if (settingService.isBookAva(book) && waitList.getStatus() == 0) {
+				TemplateMessagePushing templateMessagePushing = new TemplateMessagePushing();
+				templateMessagePushing.pushWishingBook(user, book);
+				waitList.setStatus(1);
+				settingService.changeWaitStatus(waitList);
+			}
+		}
 	}
-
 }

@@ -409,7 +409,7 @@
                 <div class="col-md-12">
                     <div class="box box-warning">
                         <div class="box-header with-border">
-                            <h2 class="box-title" style="margin-top: 15px">预约书到库提醒设置</h2>
+                            <h2 class="box-title" style="margin-top: 15px">预约书到库提醒设置(愿望单系统)</h2>
                             <!--提醒还书设置,推荐系统设置-->
                             <div class="pull-right">
                                 <a href="#"  id="toggle4" class="toggle toggle--on"></a>
