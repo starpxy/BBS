@@ -153,6 +153,19 @@ public class BookAction extends BaseAction implements ModelDriven<Book>, Servlet
 		return "bookAjax";
 	}
 
+	public String isExist() {
+		String isbn = httpServletRequest.getParameter("isbn");
+		books = new HashMap<>();
+		int bookId = BookService.isExist(isbn);
+		if (bookId == -1) {
+			books.put("state", 2);
+		} else {
+			books.put("state", 1);
+			books.put("bookId", bookId);
+		}
+		return "bookAjax";
+	}
+
 	public String recommendBook() throws IOException {
 		Book book = (Book) session.get("book");
 		List<Book> list = BookService.bookList(book, -1);

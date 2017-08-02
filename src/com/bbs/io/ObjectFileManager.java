@@ -19,11 +19,11 @@ public class ObjectFileManager {
 	 * Root should be changed to absolute path when push the project to net.
 	 * Root should end with "/"
 	 */
-	private static String root = "/Users/quanyewu/Desktop/BBS-temp/";
+	private static String root = "C:\\BBS-temp\\";
 
 	public static void writeRecommendToFile(User user, List<Book> books) {
 		try {
-			String path = root + user.getUserId() + "/";
+			String path = root + user.getUserId() + "\\";
 			File file = new File(path);
 			if (!file.exists()) {
 				file.mkdirs();

@@ -47,5 +47,9 @@ public class BookService {
 	public int update(Book book) {
 		return bookDao.update(book);
 	}
+	
+	public int isExist(String isbn){
+		return bookDao.isExist(isbn);
+	}
 
 }

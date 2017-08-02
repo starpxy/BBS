@@ -1,3 +1,4 @@
+<%@page import="com.bbs.entities.Book"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
@@ -19,7 +20,7 @@
 <body ontouchstart style="background-color: #f8f8f8">
 	<div class="weui-header bg-green">
 		<div class="weui-header-left">
-			<a class="icon icon-109 f-white" href="user-login">返回</a>
+			<a class="icon icon-109 f-white" id="back" href="javascript:;">返回</a>
 		</div>
 		<h1 class="weui-header-title">${request.book.bookTitle }</h1>
 		<div class="weui-header-right">
@@ -134,9 +135,19 @@
 					<div class="weui_media_box weui_media_text f-black">
 
 						<h4 class="weui_media_title">
-							图书评价&nbsp;&nbsp;&nbsp;&nbsp;<span class="icon icon-48"></span><span
-								class="icon icon-48"></span><span class="icon icon-48"></span><span
-								class="icon icon-48"></span><span class="icon icon-49"></span>
+							图书评价&nbsp;&nbsp;&nbsp;&nbsp;
+								<%
+									if(request.getAttribute("book")!=null){
+										float starClass = ((Book)request.getAttribute("book")).getStarClass();
+										for(int i = 0;i<5;i++){
+								%>
+									<% if(starClass>=1){ %>
+									<span class="icon icon-48"></span>
+									<%} else{%>
+									<span class="icon icon-49"></span>
+								<%}	starClass--;
+								}
+							} %>
 						</h4>
 
 

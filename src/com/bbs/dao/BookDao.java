@@ -138,4 +138,15 @@ public class BookDao extends BaseDao {
 		}
 		return result;
 	}
+	
+	public int isExist(String isbn){
+		String hql = "FROM Book WHERE isbn='"+isbn+"'";
+		List<Book> books = getSession().createQuery(hql).list();
+		if (books.isEmpty()) {
+			return -1;
+		}
+		else{
+			return books.get(0).getBookId();
+		}
+	}
 }

@@ -103,7 +103,7 @@
 																+ '<span style="display: none">&nbsp;&nbsp;&nbsp;&nbsp;'
 																+ data.books[i].bookId
 																+ '</span></h4>'
-																+ '<p class="weui_media_desc"><br><span style="color:red">一个月:0.01元&nbsp;&nbsp;&nbsp;&nbsp;</span>'+data.books[i].type+'</p>'
+																+ '<p class="weui_media_desc"><br><span style="color:red">月价:0.01元&nbsp;&nbsp;&nbsp;&nbsp;</span>'+data.books[i].type+'</p>'
 																+ '<p class="weui_media_desc"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;总存储量: '
 																+ data.books[i].bookVolume
 																+ '本&nbsp;&nbsp;&nbsp;&nbsp;'
@@ -189,8 +189,8 @@
 																+ '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
 																+ data.books[i].author
 																+ '</h4>'
-																+ '<p class="weui_media_desc"><br><span style="color:red">一个月:0.01元&nbsp;&nbsp;&nbsp;&nbsp;</span>'+data.books[i].type+'</p>'
-																+ '<p class="weui_media_desc"><br>&nbsp;&nbsp;&nbsp;&nbsp;总存储量: '
+																+ '<p class="weui_media_desc"><br><span style="color:red">月价:0.01元&nbsp;&nbsp;&nbsp;&nbsp;</span>'+data.books[i].type+'</p>'
+																+ '<p class="weui_media_desc"><br>&nbsp;&nbsp;&nbsp;总存储量: '
 																+ data.books[i].bookVolume
 																+ '本&nbsp;&nbsp;&nbsp;&nbsp;'
 																+ data.books[i].publisher

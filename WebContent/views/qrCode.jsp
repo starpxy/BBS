@@ -38,11 +38,7 @@
     <!--<p class="f-white" style="margin:0 auto">智能借阅系统</p>-->
 
 
-    <a id="return-book" class="weui_panel_ft f-white" id="check-preface"><i class="icon icon-86"></i> 还书</a>
-    <a id="borrow-detail" class="weui_panel_ft f-white" id="check-catelog"><i class="icon icon-67"> 借书详情</i></a>
-    <a id="return-detail" class="weui_panel_ft f-white" id="check-introduction"><i class="icon icon-67"></i>
-        还书详情
-    </a>
+    <a id="return-book" class="weui_panel_ft f-white" id="check-preface"><i class="icon icon-86"></i>&nbsp;&nbsp;&nbsp;请向管理员出示此二维码进行借书、还书</a>
 </div>
 
 <script src="asserts/weui/js/zepto.min.js"></script>
