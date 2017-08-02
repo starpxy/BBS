@@ -493,7 +493,7 @@ function refreshLineChart(days, endTime){
 		data : linedata,
 		xkey : 'y',
 		ykeys : [ 'item1' ],
-		labels : [ '新增书目' ],
+		labels : [ '新增ISBN数量' ],
 		lineColors : [ '#00a65a' ],
 		hideHover : 'auto'
 	});

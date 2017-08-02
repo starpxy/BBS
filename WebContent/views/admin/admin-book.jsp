@@ -656,7 +656,7 @@
             "ordering": true,
             "info": true,
             "autoWidth": false,
-            "order": [[8, "desc"]]
+            "order": [[2, "asc"]]
         });
 
 

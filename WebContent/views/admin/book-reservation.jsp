@@ -259,7 +259,7 @@
                                 <h3 class="timeline-header">${user.name } <a href="#">预定</a></h3>
 
                                 <div class="timeline-body">
-                                    <br> &lt;&lt;${bookItem.book.bookTitle }&gt;&gt; ISBN:${bookItem.book.isbn } 条目ID:${bookItem.itemId }<br>
+                                    <br> &lt;&lt;${bookItem.book.bookTitle }&gt;&gt; ISBN:${bookItem.book.isbn } 条目ID:${bookItem.itemId }         <br> 预约时间:${fetchDate } <br>
                                 </div>
 
                                 <div class="timeline-footer">

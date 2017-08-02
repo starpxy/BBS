@@ -632,6 +632,17 @@
 																maxmin : true,
 																btn : [ '确定' ],
 																yes : function() {
+																	if( $('.rate-book.icon-48').size()<1||$('#textarea').val().trim()==""||$('#textarea').val().length>120){
+																		layer
+																		.msg(
+																				'评论不符合要求哦～',
+																				{
+																					icon : 2,
+																					anim : 6,
+																					time : 1000
+																				});
+																		return false;
+																		}
 																	$
 																			.ajax({
 																				type : 'POST',
@@ -673,8 +684,8 @@
 																								.msg(
 																										'您已经评论过此书',
 																										{
-																											icon : 3,
-																											anim : 2,
+																											icon : 2,
+																											anim : 6,
 																											time : 1000
 																										});
 																					}
