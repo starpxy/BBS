@@ -20,7 +20,8 @@
 <body ontouchstart style="background-color: #f8f8f8">
 	<div class="weui-header bg-green">
 		<div class="weui-header-left">
-			<a class="icon icon-109 f-white" id="back" href="javascript:;">返回</a>
+			<a class="icon icon-109 f-white" id="back" href="javascript:;">返.
+			回</a>
 		</div>
 		<h1 class="weui-header-title">${request.book.bookTitle }</h1>
 		<div class="weui-header-right">

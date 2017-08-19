@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-7-29 23:07:16 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.bbs.entities.Settings" table="SETTINGS">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="recommend" type="int">
+            <column name="RECOMMEND" default="0"/>
+        </property>
+        <property name="remind" type="int">
+            <column name="REMIND" default="0"/>
+        </property>
+        <property name="waitList" type="int">
+            <column name="WAIT_LIST" default="0"/>
+        </property>
+         <property name="reserveOverdue" type="int">
+            <column name="RESERVE_OVERDUE" default="0"/>
+        </property>
+        <property name="recInterval" type="long">
+            <column name="REC_INTERVAL" default="0"/>
+        </property>
+        <property name="remindInterval" type="long">
+            <column name="REMIND_INTERVAL" default="0"/>
+        </property>
+        <property name="waitInterval" type="long">
+            <column name="WAIT_INTERVAL" default="0"/>
+        </property>
+        <property name="recPeriod" type="long">
+            <column name="REC_PERIOD" default="0"/>
+        </property>
+        <property name="remindPeriod" type="long">
+            <column name="REMIND_PERIOD" default="0"/>
+        </property>
+        <property name="waitPeriod" type="long">
+            <column name="WAIT_PERIOD" default="0"/>
+        </property>
+        <property name="reservePeriod" type="long">
+            <column name="RESERVE_PERIOD" default="0"/>
+        </property>
+        <property name="reserveInterval" type="long">
+            <column name="RESERVE_INTERVAL" default="0"/>
+        </property>
+    </class>
+</hibernate-mapping>

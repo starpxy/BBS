@@ -69,7 +69,7 @@ public class RecommendTask extends TimerTask {
 			List<Book> books = settingService.recommendBook(user);
 			ObjectFileManager.writeRecommendToFile(user, books);
 			Book book = null;
-			if (books != null) {
+			if (books != null && !books.isEmpty()) {
 				book = books.get(0);
 			}
 			Date now = new Date();

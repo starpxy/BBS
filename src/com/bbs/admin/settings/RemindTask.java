@@ -69,7 +69,6 @@ public class RemindTask extends TimerTask {
 		while (iterator.hasNext()) {
 			BorrowedRecord borrowedRecord = iterator.next();
 			Long now = new Date().getTime();
-			
 			if ((borrowedRecord.getBorrowedAt().getTime() + interval * 1000) < now) {
 				Book book = borrowedRecord.getBookItem().getBook();
 				User user = borrowedRecord.getUser();

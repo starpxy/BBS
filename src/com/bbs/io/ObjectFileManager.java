@@ -13,13 +13,14 @@ import java.util.List;
 
 import com.bbs.entities.Book;
 import com.bbs.entities.User;
+import com.bbs.properties.PathProperty;
 
 public class ObjectFileManager {
 	/**
 	 * Root should be changed to absolute path when push the project to net.
 	 * Root should end with "/"
 	 */
-	private static String root = "C:\\BBS-temp\\";
+	private static String root = PathProperty.recommendPath;
 
 	public static void writeRecommendToFile(User user, List<Book> books) {
 		try {
