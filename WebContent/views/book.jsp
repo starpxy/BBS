@@ -340,6 +340,20 @@
 						error : function(xhr, type) {
 						}
 					});
+
+			function add0(m){return m<10?'0'+m:m }
+			function formatDateTime(timestamp)
+			{
+			//shijianchuo是整数，否则要parseInt转换
+			var time = new Date(timestamp);
+			var y = time.getFullYear();
+			var m = time.getMonth()+1;
+			var d = time.getDate();
+			var h = time.getHours();
+			var mm = time.getMinutes();
+			var s = time.getSeconds();
+			return y+'-'+add0(m)+'-'+add0(d)+' '+add0(h)+':'+add0(mm)+':'+add0(s);
+			}
 			$('#book').click(function() {
 
 				var datepicked = $("#time").val();
@@ -368,92 +382,101 @@
 					 $("html,body").scrollTop(target_top); 
 					return;
 				}
-				layer.msg('预订中，请稍候...', {
-					icon : 16,
-					shade : 0.01
-				});
-				var t = s1.getTime;
-				$.ajax({
-					type : 'POST',
-					data : {
-						"bookId" : '${request.book.bookId}',
-						"fetchDate": s1.getTime().toString()
-					},
-					url : 'reservation-reserve',
-					dataType : 'json',
-					success : function(data) {
-						if (data.state == 1) {
-							layer.msg('预定成功！', {
-								icon : 1,
-								anim : 2,
-								time : 2000
-							});
-							$.ajax({
-								type : 'POST',
-								data : {
-									"bookTitle" : '${request.book.bookTitle}'
-								},
-								url : 'reservation-templatePushing',
-								dataType : 'json',
-								success : function(data) {
-								},
-								error : function() {
-								}
-							});
-						} else if (data.state == 2) {
-							layer
-							.open({
-								title : "书都被借光啦",
-								content : "是否将此书加入您的愿望单？我们会在有书时通知您",
-								yes :function() {
-									$
-									.ajax({
-										type : 'POST',
-										url : 'reservation-addToWaitList',
-										data:{'bookId':'${request.book.bookId}'},
-										dataType : 'json',
-										success : function(
-												data) {
-											if (data.state == 1) {
-												layer.msg('加入愿望单成功！请等待通知', {
-													icon : 1,
-													anim : 2,
-													time : 2500
-												});
-											} else {
 
-											}
+
+				   $.confirm("你确认预定该书在时间 "+formatDateTime(s1), "确认退出", function (text) {
+
+					   layer.msg('预订中，请稍候...', {
+							icon : 16,
+							shade : 0.01
+						});
+						var t = s1.getTime;
+						$.ajax({
+							type : 'POST',
+							data : {
+								"bookId" : '${request.book.bookId}',
+								"fetchDate": s1.getTime().toString()
+							},
+							url : 'reservation-reserve',
+							dataType : 'json',
+							success : function(data) {
+								if (data.state == 1) {
+									layer.msg('预定成功！', {
+										icon : 1,
+										anim : 2,
+										time : 2000
+									});
+									$.ajax({
+										type : 'POST',
+										data : {
+											"bookTitle" : '${request.book.bookTitle}'
 										},
-										error : function(
-												xhr,
-												type) {
+										url : 'reservation-templatePushing',
+										dataType : 'json',
+										success : function(data) {
+										},
+										error : function() {
 										}
 									});
-						}
-					});
-						}else if (data.state == 4) {
-							layer.msg('参数有误', {
-								icon : 2,
-								anim : 2,
-								time : 2000
+								} else if (data.state == 2) {
+									layer
+									.open({
+										title : "书都被借光啦",
+										content : "是否将此书加入您的愿望单？我们会在有书时通知您",
+										yes :function() {
+											$
+											.ajax({
+												type : 'POST',
+												url : 'reservation-addToWaitList',
+												data:{'bookId':'${request.book.bookId}'},
+												dataType : 'json',
+												success : function(
+														data) {
+													if (data.state == 1) {
+														layer.msg('加入愿望单成功！请等待通知', {
+															icon : 1,
+															anim : 2,
+															time : 2500
+														});
+													} else {
+
+													}
+												},
+												error : function(
+														xhr,
+														type) {
+												}
+											});
+								}
 							});
-						} 
-						 else {
-							layer.msg('您最多可同时预定两本书！', {
-								icon : 2,
-								anim : 2,
-								time : 2000
-							});
-						}
-					},
-					error : function() {
-						layer.msg('服务器错误', {
-							icon : 2,
-							anim : 6,
-							time : 1000
+								}else if (data.state == 4) {
+									layer.msg('参数有误', {
+										icon : 2,
+										anim : 2,
+										time : 2000
+									});
+								} 
+								 else {
+									layer.msg('您最多可同时预定两本书！', {
+										icon : 2,
+										anim : 2,
+										time : 2000
+									});
+								}
+							},
+							error : function() {
+								layer.msg('服务器错误', {
+									icon : 2,
+									anim : 6,
+									time : 1000
+								});
+							}
 						});
-					}
-				});
+
+	                }, function () {
+
+	                });
+				
 			});
 			
 								$(".addtowishlist").click(function() {

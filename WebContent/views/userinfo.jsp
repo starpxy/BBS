@@ -15,6 +15,8 @@
 <link rel="stylesheet" href="asserts/weui/css/weui3.css" />
 <link rel="stylesheet" href="asserts/layui/css/layui.css" />
 <body>
+
+
 <body ontouchstart style="background-color: #f8f8f8;">
 
 
@@ -35,11 +37,26 @@
 	<div class="page-hd">
 
 		<div class="tcenter">
-			<a href="javascript:;"  id="alter-face"><img style="border-radius: 100%; width: 20%; height: 20%;"
+			<a href="uploadface.jsp" id="alter-face"><img style="border-radius: 100%; width: 20%; height: 20%;"
 				src="asserts/images/faces/wechat.gif"></a>
-				<br><br>
+				
+				
+				 <br>
+          <br>
+        <div class="weui_progress">
+            <div class="weui_progress_bar">
+                <div class="weui_progress_inner_bar js_progress" style="width: 60%;"></div>
+            </div>
+            
+            <a href="memberLevel.jsp" class="weui_progress_opr">
+                 <img src="id.png" width="20px" height="20px">
+            </a>
+            &nbsp; 
+            <b class="level" style="color:#47B33A;">V3</b>
+        </div>
+        
 			<p style="font-size: 15px">
-				<b>${session.user.name}</b>
+				<b>${session.user.name} </b>
 			</p>
 		</div>
 	</div>
@@ -80,8 +97,18 @@
 			id="check-login-history">我的登录历史</a>
 					<a href="user-myFavorites" class="weui_panel_ft f-black"
 			id="check-favorite">我的收藏</a> 
+			
+			
 	</div>
-
+	
+	<div class="weui_panel weui_panel_access">
+		<div class="weui_panel_hd">人脸识别</div>
+		
+		<a href="faceSample.jsp" class="weui_panel_ft f-black"
+			>头像样本</a>
+			
+	</div>
+	
 	<div class="weui_panel weui_panel_access">
 		<div class="weui_panel_hd">更多</div>
 		
@@ -202,9 +229,6 @@
 			$.toast("fre is changed=>>>>" + $(this).val());
 		});
 
-		$("#alter-face").click(function() {
-			$(".upload_face").trigger('click');
-		});
 
 		$("#switch").click(function() {
 			$.confirm("确定要注销当前帐号吗？", "注销确认", function(text) {
