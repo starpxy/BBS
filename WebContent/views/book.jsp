@@ -384,7 +384,7 @@
 				}
 
 
-				   $.confirm("你确认预定该书在时间 "+formatDateTime(s1), "确认退出", function (text) {
+				   $.confirm("你确认预定该书在时间 "+formatDateTime(s1), "确认预约", function (text) {
 
 					   layer.msg('预订中，请稍候...', {
 							icon : 16,
