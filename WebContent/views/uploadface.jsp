@@ -39,7 +39,7 @@
 <body ontouchstart style="background-color: #f8f8f8;">
 
 <div class="weui-header bg-green">
-    <div class="weui-header-left"><a class="icon icon-109 f-white" id="get-back">返回</a></div>
+    <div class="weui-header-left"><a href="userinfo.jsp" class="icon icon-109 f-white">返回</a></div>
     <h1 class="weui-header-title">更改头像</h1>
     <div class="weui-header-right"><a href="user-login" class="icon icon-27 f-white"></a></div>
 </div>
@@ -50,19 +50,19 @@
 
         <div class="weui_uploader">
 
-            <div class="weui_uploader_hd weui_cell tcenter">
+            <a class="weui_uploader_hd weui_cell tcenter" href="javascript:;">
                 <!--<div class="weui_cell_bd weui_cell_primary">选择头像</div>-->
-            </div>
+            </a>
 
             <div class="weui_uploader_bd">
 
-                <div class="weui_uploader_input_wrp">
+                <a class="weui_uploader_input_wrp" href="javascript:;">
 
 
                     <input class="weui_uploader_input" type="file" accept="image/*" id="file0">
 
 
-                </div>
+                </a>
 
             </div>
 
@@ -123,7 +123,7 @@
         var bs;
 
 
-        var center = parseInt($(window).width()) / 2 - parseInt($('.weui_uploader_input_wrp').css("width")) / 2;
+        var center = (parseInt($(window).width())/2) - parseInt($('.weui_uploader_input_wrp').css("width")) / 2;
         $('.weui_uploader_input_wrp').css("margin-left", center + "px");
 
         $(window).resize(function () {
@@ -176,13 +176,8 @@
 
         });
 
-
-        $("#get-back").click(function () {
-            history.back();
-        });
-
-
         $("#file0").change(function () {
+            alert('in');
             // getObjectURL是自定义的函数，见下面
             // this.files[0]代表的是选择的文件资源的第一个，因为上面写了 multiple="multiple" 就表示上传文件可能不止一个
             // ，但是这里只读取第一个
