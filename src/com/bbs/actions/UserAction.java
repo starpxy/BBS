@@ -18,6 +18,7 @@ import com.bbs.encrypt.SHC32;
 import com.bbs.entities.AccessLog;
 import com.bbs.entities.BorrowedRecord;
 import com.bbs.entities.User;
+import com.bbs.io.ImageUploader;
 import com.bbs.logs.IPUtil;
 import com.bbs.logs.LogUtil;
 import com.bbs.services.UserService;
@@ -471,9 +472,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		User user = (User) session.get("user");
 		status = new HashMap<>();
 		String bookId = httpServletRequest.getParameter("bookId");
-		System.out.println("ininini");
 		if (user != null && bookId != null) {
-			System.out.println("iiiii");
 			status.put("state", userService.addToFavorite(user, bookId));
 		} else {
 			status.put("state", -1);
@@ -529,6 +528,22 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		user.setRecommendFre(1);
 		userService.register(user);
 		return "register";
+	}
+	
+	public String uploadAvatar(){
+		User user = (User) session.get("user");
+		status = new HashMap<>();
+		if (user != null) {
+			System.out.println("in");
+			status.put("state", ImageUploader.upload(httpServletRequest, user.getUserId()+"",userService));
+			session.remove("user");
+			user = userService.getUserInfo(user);
+			session.put("user", user);
+		}
+		else{
+			status.put("state", 2);
+		}
+		return "adminUsersAjax";
 	}
 
 	public String setRecomFreq() {

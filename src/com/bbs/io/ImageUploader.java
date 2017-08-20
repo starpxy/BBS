@@ -13,11 +13,22 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import com.bbs.properties.PathProperty;
+import com.bbs.services.UserService;
 
 public class ImageUploader {
 
-	public static int upload(HttpServletRequest request, String savePath) {
+	public static int upload(HttpServletRequest request, String savePath,UserService userService) {
 		String tempPath = PathProperty.tempPath;
+		String x = request.getParameter("x");
+		String y = request.getParameter("y");
+		String w = request.getParameter("w");
+		String h = request.getParameter("h");
+		String tw = request.getParameter("tw");
+		String th = request.getParameter("th");
+		if (x==null||y==null||w==null||h==null||tw==null||th==null) {
+			return 5;
+		}
+		System.out.println(x+" "+y+" "+w+" "+h+" "+tw+" "+th);
 		// 上传时生成的临时文件保存目录
 		File tmpFile = new File(tempPath);
 		if (!tmpFile.exists()) {

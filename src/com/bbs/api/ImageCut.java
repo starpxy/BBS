@@ -14,25 +14,26 @@ import javax.imageio.ImageIO;
 
 public class ImageCut {
 	/**
-	 * ½ØÈ¡Í¼Æ¬
+	 * æˆªå–å›¾ç‰‡
 	 *
 	 * @param srcImageFile
-	 *            Ô­Í¼Æ¬µØÖ·
+	 *            åŸå›¾ç‰‡åœ°å€
 	 * @param x
-	 *            ½ØÈ¡Ê±µÄx×ø±ê
+	 *            æˆªå–æ—¶çš„xåæ ‡
 	 * @param y
-	 *            ½ØÈ¡Ê±µÄy×ø±ê
+	 *            æˆªå–æ—¶çš„yåæ ‡
 	 * @param desWidth
-	 *            ½ØÈ¡µÄ¿í¶È
+	 *            æˆªå–çš„å®½åº¦
 	 * @param desHeight
-	 *            ½ØÈ¡µÄ¸ß¶È
+	 *            æˆªå–çš„é«˜åº¦
 	 * @param srcWidth
-	 *            Ò³ÃæÍ¼Æ¬µÄ¿í¶È
+	 *            é¡µé¢å›¾ç‰‡çš„å®½åº¦
 	 * @param srcHeight
-	 *            Ò³ÃæÍ¼Æ¬µÄ¸ß¶È
+	 *            é¡µé¢å›¾ç‰‡çš„é«˜åº¦
 	 *
 	 */
-	public static byte[] imgCut(InputStream input, int x, int y, int desWidth, int desHeight, int srcWidth, int srcHeight) {
+	public static byte[] imgCut(InputStream input, int x, int y, int desWidth, int desHeight, int srcWidth,
+			int srcHeight) {
 		try {
 			Image img;
 			ImageFilter cropFilter;
@@ -45,9 +46,9 @@ public class ImageCut {
 				Graphics g = tag.getGraphics();
 				g.drawImage(img, 0, 0, null);
 				g.dispose();
-				// Êä³öÎÄ¼ş
+				// è¾“å‡ºæ–‡ä»¶
 				ByteArrayOutputStream out = new ByteArrayOutputStream();
-				ImageIO.write(tag, "JPEG", out);
+				ImageIO.write(tag, "jpg", out);
 				return out.toByteArray();
 			}
 		} catch (Exception e) {
