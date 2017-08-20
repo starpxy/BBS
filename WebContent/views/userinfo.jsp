@@ -39,11 +39,10 @@
 
 		<div class="tcenter">
 		    <form action="#" method="post" id="myupload">
-			<a id="upload_face"><img id="face_img" style="border-radius: 100%; width: 20%; height: 20%;"
+			<a id="upload_face"><img id="face_img" style="border-radius: 100%; width: 100px; height: 100px;"
 				src="asserts/images/faces/wechat.gif"></a>
 			 <input type="file" name="face" formenctype="multipart/form-data" accept="image/*" hidden>
 			</form>
-				 <br>
           <br>
 
            <a href="memberLevel.jsp" style="width:100%;"> 
