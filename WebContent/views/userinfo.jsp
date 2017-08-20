@@ -36,28 +36,26 @@
 
 	<div class="page-hd">
 
+
 		<div class="tcenter">
-			<a href="uploadface.jsp" id="alter-face"><img style="border-radius: 100%; width: 20%; height: 20%;"
+		    <form action="#" method="post" id="myupload">
+			<a id="upload_face"><img id="face_img" style="border-radius: 100%; width: 20%; height: 20%;"
 				src="asserts/images/faces/wechat.gif"></a>
-				
-				
+			 <input type="file" name="face" formenctype="multipart/form-data" accept="image/*" hidden>
+			</form>
 				 <br>
           <br>
-        <div class="weui_progress">
-            <div class="weui_progress_bar">
-                <div class="weui_progress_inner_bar js_progress" style="width: 60%;"></div>
-            </div>
-            
-            <a href="memberLevel.jsp" class="weui_progress_opr">
-                 <img src="id.png" width="20px" height="20px">
-            </a>
-            &nbsp; 
-            <b class="level" style="color:#47B33A;">V3</b>
-        </div>
-        
+
+           <a href="memberLevel.jsp" style="width:100%;"> 
 			<p style="font-size: 15px">
-				<b>${session.user.name} </b>
+				<b>${session.user.name} </b>            
+                 <img src="id.png" width="20px" height="20px">
+            <b class="level" style="color:#47B33A;">V3</b>
 			</p>
+			<p style="color: #47B33A;font-size:10px">点击进入会员中心</p>
+			</a>
+			
+			
 		</div>
 	</div>
 	 <input style="display: none" class="upload_face" type="image">
@@ -228,7 +226,53 @@
 			//TODO
 			$.toast("fre is changed=>>>>" + $(this).val());
 		});
+		
+	      $("#upload_face").click(function () {
+              $("input[name='face']").trigger('click');
+          });
+          function getObjectURL(file) {
+              var url = null;
+              // 下面函数执行的效果是一样的，只是需要针对不同的浏览器执行不同的 js 函数而已
+              if (window.createObjectURL != undefined) { // basic
+                  url = window.createObjectURL(file);
+              } else if (window.URL != undefined) { // mozilla(firefox)
+                  url = window.URL.createObjectURL(file);
+              } else if (window.webkitURL != undefined) { // webkit or chrome
+                  url = window.webkitURL.createObjectURL(file);
+              }
+              return url;
+          }
 
+          $("input[name='face']").change(function () {
+              var firstfile = this.files[0];
+
+              if (!firstfile.name.match(/.jpg|.gif|.png|.jpeg|.bmp/i)) {
+                  return layer.msg("您上传的图片格式不正确，请重新选择！",{icon:2,anim:6,time:1000});
+
+              }
+              var size = 3 * 1024 * 1024;
+
+              if (firstfile.size > size) {
+                  layer.msg("上传失败，请上传3MB以内的图片。",{icon:2,anim:6,time:1000});
+                  return;
+              }
+
+              var faceUrl = getObjectURL(firstfile);
+
+              var ori = $("#face_img").attr("src");
+
+              $("#face_img").attr("src", faceUrl);
+
+              $.confirm("你确认上传改头像?", "确认上传", function (text) {
+
+                  $("#myupload").submit();
+
+
+              }, function () {
+                  $("#face_img").attr("src", ori);
+
+              });
+          });
 
 		$("#switch").click(function() {
 			$.confirm("确定要注销当前帐号吗？", "注销确认", function(text) {

@@ -103,6 +103,10 @@
 
                 <input type="file" name="face" id="real-img" hidden>
 
+
+
+
+
                 <p class="weui_media_desc"><a href="javascript:;" class="weui_btn bg-green" id="upload">上传 <i
                         class="icon icon-20 f-white"></i></a></p>
             </div>
@@ -216,7 +220,6 @@
             // this.files[0]代表的是选择的文件资源的第一个，因为上面写了 multiple="multiple" 就表示上传文件可能不止一个
             // ，但是这里只读取第一个
             var firstfile = this.files[0];
-
             if (!firstfile.name.match(/.jpg|.gif|.png|.jpeg|.bmp/i)) {
                 return alert("您上传的图片格式不正确，请重新选择！");
             }
