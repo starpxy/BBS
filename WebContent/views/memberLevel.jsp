@@ -7,9 +7,70 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <title>会员中心</title>
 
+
     <link rel="stylesheet" href="asserts/weui/css/weui.css"/>
     <link rel="stylesheet" href="asserts/weui/css/weui2.css"/>
     <link rel="stylesheet" href="asserts/weui/css/weui3.css"/>
+    <style type="text/css">
+        #title {
+            height: 100px;
+            width: 100%;
+            background-image: url("title.jpg");
+            background-size: 100% 100%;
+
+        }
+
+        .div_box {
+            margin-bottom: 10px;
+            border-top: 2px #eee solid;
+            border-bottom: 2px #eee solid;
+            padding: 5px;
+            background: #fff;
+            /*background-image: url("radar_bg.jpg");*/
+            /*background-size: 100% 100%;*/
+            width: 100%;
+        }
+
+        .title {
+            font-size: 12px;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .radar_img {
+            /*-ms-transform:rotate(7deg); !* IE 9 *!*/
+            /*-moz-transform:rotate(7deg); !* Firefox *!*/
+            /*-webkit-transform:rotate(7deg); !* Safari and Chrome *!*/
+            /*-o-transform:rotate(7deg); !* Opera *!*/
+            /*transform:rotate(17deg);*/
+        }
+
+
+
+        .credit_record {
+            padding: 10px;
+            margin: 10px;
+            border: 2px #eee solid;
+            color: #0bb20c;
+            font-size: 10px;
+        }
+
+        .count {
+            float: right;
+        }
+
+        .credit_record_ {
+            padding: 10px;
+            margin: 10px;
+            border: 2px #eee solid;
+            color: #b2202a;
+            font-size: 10px;
+        }
+
+
+    </style>
+
+
 </head>
 
 
@@ -22,6 +83,175 @@
 </div>
 
 
+<div class="page-hd tcenter" id="title">
+
+
+</div>
+
+
+<div class="page-hd div_box" id="radar_box">
+
+    <div style="padding: 10px">
+        <p class="title">我的信用分析 <span style="color: #0bb20c;float: right"> 50/100</span></p>
+    </div>
+
+    <div class="weui_progress">
+        <div class="weui_progress_bar">
+            <div class="weui_progress_inner_bar js_progress" style="width: 50%;"></div>
+        </div>
+        <!--<a href="javascript:;" class="weui_progress_opr">-->
+        <!--<i class="weui_icon_cancel"></i>-->
+        <!--</a>-->
+    </div>
+
+
+    <br>
+
+    <div class="tcenter radar_img">
+        <canvas id="myChart"></canvas>
+    </div>
+
+</div>
+
+
+<div class="page-hd div_box" id="record_box">
+
+    <p class="title">&nbsp;&nbsp;&nbsp;我的信用记录</p>
+
+    <div class="credit_record">
+        <p><i class="icon icon-36"></i> 还书</p>
+
+
+        <span>2012-1-23 12:00:00</span>
+
+        <span class="count">+5</span>
+    </div>
+
+    <div class="credit_record_">
+
+        <p><i class="icon icon-122"></i> 规定时间未还书</p>
+
+        <span>2012-1-23 12:00:00</span>
+
+        <span class="count">-15</span>
+    </div>
+
+    <div class="credit_record">
+        <p><i class="icon icon-36"></i> 还书</p>
+
+
+        <span>2012-1-23 12:00:00</span>
+
+        <span class="count">+5</span>
+    </div>
+
+    <div class="credit_record_">
+
+        <p><i class="icon icon-122"></i> 规定时间未还书</p>
+
+        <span>2012-1-23 12:00:00</span>
+
+        <span class="count">-15</span>
+    </div>
+
+    <div class="credit_record">
+        <p><i class="icon icon-36"></i> 还书</p>
+
+
+        <span>2012-1-23 12:00:00</span>
+
+        <span class="count">+5</span>
+    </div>
+
+    <div class="credit_record_">
+
+        <p><i class="icon icon-122"></i> 规定时间未还书</p>
+
+        <span>2012-1-23 12:00:00</span>
+
+        <span class="count">-15</span>
+    </div>
+
+    <div class="credit_record_">
+
+        <p><i class="icon icon-122"></i> 规定时间未还书</p>
+
+        <span>2012-1-23 12:00:00</span>
+
+        <span class="count">-15</span>
+    </div>
+
+
+    <div class="credit_record_">
+
+        <p><i class="icon icon-122"></i> 规定时间未还书</p>
+
+        <span>2012-1-23 12:00:00</span>
+
+        <span class="count">-15</span>
+    </div>
+
+
+    <div class="credit_record_">
+
+        <p><i class="icon icon-122"></i> 规定时间未还书</p>
+
+        <span>2012-1-23 12:00:00</span>
+
+        <span class="count">-15</span>
+    </div>
+
+
+    <div class="credit_record_">
+
+        <p><i class="icon icon-122"></i> 规定时间未还书</p>
+
+        <span>2012-1-23 12:00:00</span>
+
+        <span class="count">-15</span>
+    </div>
+
+
+    <div class="credit_record_">
+
+        <p><i class="icon icon-122"></i> 规定时间未还书</p>
+
+        <span>2012-1-23 12:00:00</span>
+
+        <span class="count">-15</span>
+    </div>
+
+
+    <div class="credit_record_">
+
+        <p><i class="icon icon-122"></i> 规定时间未还书</p>
+
+        <span>2012-1-23 12:00:00</span>
+
+        <span class="count">-15</span>
+    </div>
+    <div class="credit_record_">
+
+        <p><i class="icon icon-122"></i> 规定时间未还书</p>
+
+        <span>2012-1-23 12:00:00</span>
+
+        <span class="count">-15</span>
+    </div>
+    <div class="credit_record_">
+
+        <p><i class="icon icon-122"></i> 规定时间未还书</p>
+
+        <span>2012-1-23 12:00:00</span>
+
+        <span class="count">-15</span>
+    </div>
+
+
+
+</div>
+
+
 <div class="page-bd">
     <div class="weui-flex">
         <div class="weui-flex-item">
@@ -31,15 +261,80 @@
     </div>
 </div>
 
+
 <script src="asserts/weui/js/zepto.min.js"></script>
+<!--<script src="asserts/jquery.min.js"></script>-->
 <script src="asserts/layui/layui.js"></script>
+<script src="asserts/Chart.min.js"></script>
+
 <script>
+    var radarChartData = {
+        labels: ["预约取书", "按时还书", "每日签到", "押金缴纳", "分享频率"],
+        datasets: [
+            {
+                label: "111",
+                fillColor: "rgba(0,0,0,0)",
+                strokeColor: "rgba(0,0,0,0)",
+                pointColor: "rgba(0,0,0,0)",
+                pointStrokeColor: "rgba(0,0,0,0)",
+                pointHighlightFill: "rgba(0,0,0,0)",
+                pointHighlightStroke: "rgba(0,0,0,0)",
+                data: [20, 20, 20, 20, 20]
+            },
+            {
+                label: "22222",
+                fillColor: "rgba(17,160,4,0.4)",
+                strokeColor: "rgba(17,186,1,1)",
+                pointColor: "rgba(17,186,1,1)",
+                pointStrokeColor: "#11BA00",
+                pointHighlightFill: "#11BA00",
+                pointHighlightStroke: "rgba(17,160,4,0.8)",
+                data: [10, 5, 15, 10, 10]
+            }
+        ]
+    };
+
+
+    window.onload = function () {
+        window.myRadar = new Chart(document.getElementById("myChart").getContext("2d")).Radar(radarChartData, {
+            responsive: true
+        });
+    };
+
+
+
+
+
     $(function () {
+
+
         layui.use('layer', function () {
             layer = layui.layer;
+
             $("#get-back").click(function () {
                 history.back();
             });
+
+            $(window).scroll(function () {
+
+                if ($(window).scrollTop()>500){
+
+                    $("#radar_box").css({
+                        "position":"fixed",
+                        "top":0,
+                        "box-shadow":"0 6px 10px #eeeeee"
+                    });
+
+                }else if($(window).scrollTop()<10){
+                    $("#radar_box").css({
+                        "position":"static",
+                        "top":0
+                    });
+                }
+
+
+            });
+
 
         });
     });
@@ -47,4 +342,5 @@
 
 </body>
 </html>
+
 
