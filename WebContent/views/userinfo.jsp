@@ -1,3 +1,5 @@
+<%@page import="com.sun.org.apache.xml.internal.serialize.Printer"%>
+<%@page import="com.bbs.entities.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
@@ -38,16 +40,25 @@
 
 
 		<div class="tcenter">
-		    <form action="#" method="post" id="myupload">
-			<a id="upload_face"><img id="face_img" style="border-radius: 100%; width: 100px; height: 100px;"
-				src="asserts/images/faces/wechat.gif"></a>
-			 <input type="file" name="face" formenctype="multipart/form-data" accept="image/*" hidden>
+		    <form action="user-uploadAvatar" method="post" id="myupload" enctype="multipart/form-data" >
+			<a id="upload_face"><%
+			User user = (User)request.getSession().getAttribute("user");
+			if(user.getAvatar()==null||user.getAvatar().equals("")){
+				%>
+				<img id="face_img" style="border-radius: 100%; width: 100px; height: 100px;"
+				src="asserts/images/faces/wechat.gif">
+				<% }else{%>
+				<img id="face_img" style="border-radius: 100%; width: 100px; height: 100px;"
+				src="/src/${session.user.avatar}">
+			<%}
+			%>
+			</a>
+			 <input type="file" name="face" accept="image/*" hidden>
 			</form>
           <br>
-
            <a href="memberLevel.jsp" style="width:100%;"> 
 			<p style="font-size: 15px">
-				<b>${session.user.name} </b>            
+				<b>${session.user.name}</b>            
                  <img src="id.png" width="20px" height="20px">
             <b class="level" style="color:#47B33A;">V3</b>
 			</p>
@@ -102,7 +113,7 @@
 		<div class="weui_panel_hd">人脸识别</div>
 		
 		<a href="faceSample.jsp" class="weui_panel_ft f-black"
-			>头像样本</a>
+			>人脸样本</a>
 			
 	</div>
 	
@@ -210,7 +221,6 @@
 					
 						layer.close(index);
 
-
 							
 					}
 				});
@@ -264,8 +274,7 @@
 
               $.confirm("你确认上传改头像?", "确认上传", function (text) {
 
-                  $("#myupload").submit();
-
+                   $("#myupload").submit();
 
               }, function () {
                   $("#face_img").attr("src", ori);

@@ -89,7 +89,7 @@ public class FaceApiManager {
 	}
 
 	private static String parsePath(String path) {
-		String resultPath = PathProperty.facePath;
+		String resultPath = PathProperty.BASEPATH + PathProperty.facePath;
 		resultPath += path;
 		return resultPath;
 	}

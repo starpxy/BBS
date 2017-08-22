@@ -126,6 +126,10 @@ public class UserService {
 		return userDao.addToFavorite(user, bookId);
 	}
 
+	public int addToSelected(String commentId) {
+		return userDao.addToSelected(commentId);
+	}
+
 	public List<Favorite> myFavorites(User user) {
 		return userDao.myFavorites(user);
 	}

@@ -13,6 +13,7 @@ import com.bbs.api.JSAPIInitial;
 import com.bbs.api.TemplateMessagePushing;
 import com.bbs.api.TopScanManager;
 import com.bbs.api.UnifiedOrder;
+import com.bbs.api.entities.UploadResult;
 import com.bbs.encrypt.IncorrectCipherTextLengthException;
 import com.bbs.encrypt.SHC32;
 import com.bbs.entities.AccessLog;
@@ -21,6 +22,7 @@ import com.bbs.entities.User;
 import com.bbs.io.ImageUploader;
 import com.bbs.logs.IPUtil;
 import com.bbs.logs.LogUtil;
+import com.bbs.properties.PathProperty;
 import com.bbs.services.UserService;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -201,7 +203,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		status = new HashMap<>();
 		if (user != null && user.getRole().equals("admin")) {
 			String reservationId = httpServletRequest.getParameter("reservationId");
-			if (reservationId==null) {
+			if (reservationId == null) {
 				status.put("state", 3);
 				return "adminUsersAjax";
 			}
@@ -237,7 +239,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 				page = Integer.valueOf(p);
 			}
 			request.put("books", userService.adminInitial(page));
-			request.put("pages", userService.getPages()+1);
+			request.put("pages", userService.getPages() + 1);
 			request.put("page", page);
 			return "adminBooks";
 		} else {
@@ -292,6 +294,17 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		} else {
 			return "adminLoginFail";
 		}
+	}
+
+	public String addToSelected() {
+		User user = (User) session.get("admin");
+		status = new HashMap<>();
+		if (user != null && user.getRole().equals("admin")) {
+			status.put("state", userService.addToSelected(httpServletRequest.getParameter("commentId")));
+		} else {
+			status.put("state", 2);
+		}
+		return "adminUsersAjaxArea";
 	}
 
 	public String adminListComments() {
@@ -529,21 +542,26 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		userService.register(user);
 		return "register";
 	}
-	
-	public String uploadAvatar(){
+
+	public String uploadAvatar() {
 		User user = (User) session.get("user");
-		status = new HashMap<>();
 		if (user != null) {
-			System.out.println("in");
-			status.put("state", ImageUploader.upload(httpServletRequest, user.getUserId()+"",userService));
+			UploadResult uploadResult = ImageUploader.upload(httpServletRequest,
+					PathProperty.avatarPath + user.getUserId() + "", "face");
+			String filename = uploadResult.getFileName();
+			int state = uploadResult.getState();
+			if (state == 1) {
+				user.setAvatar(filename);
+				userService.changeSomething(user);
+			}
+			request.put("state", state);
 			session.remove("user");
 			user = userService.getUserInfo(user);
 			session.put("user", user);
+		} else {
+			request.put("state", 2);
 		}
-		else{
-			status.put("state", 2);
-		}
-		return "adminUsersAjax";
+		return "avatarChanged";
 	}
 
 	public String setRecomFreq() {

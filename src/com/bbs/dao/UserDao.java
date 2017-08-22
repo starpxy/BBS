@@ -13,6 +13,7 @@ import com.bbs.entities.Book;
 import com.bbs.entities.BookItem;
 import com.bbs.entities.BorrowedRecord;
 import com.bbs.entities.Comment;
+import com.bbs.entities.CreditHistory;
 import com.bbs.entities.Favorite;
 import com.bbs.entities.Reservation;
 import com.bbs.entities.User;
@@ -109,7 +110,8 @@ public class UserDao extends BaseDao {
 	}
 
 	public int deleteReservation(String reservationId) {
-		String hql = "FROM Reservation b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.bookItem c LEFT OUTER JOIN FETCH c.book WHERE b.reservationId="+reservationId;
+		String hql = "FROM Reservation b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.bookItem c LEFT OUTER JOIN FETCH c.book WHERE b.reservationId="
+				+ reservationId;
 		List<Reservation> reservations = getSession().createQuery(hql).list();
 		if (reservations.isEmpty()) {
 			return 3;
@@ -339,6 +341,25 @@ public class UserDao extends BaseDao {
 		query.setMaxResults(15);
 		List<AccessLog> accessLogs = query.list();
 		return accessLogs;
+	}
+
+	public int addToSelected(String commentId) {
+		String hql = "FROM Comment b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.book WHERE b.commentId="
+				+ commentId;
+		List<Comment> comments = getSession().createQuery(hql).list();
+		if (comments.isEmpty()) {
+			return 3;
+		} else {
+			Comment comment = comments.get(0);
+			comment.setStatus(1);
+			getSession().update(comment);
+			CreditHistory creditHistory = new CreditHistory();
+			creditHistory.setCreateAt(new Date());
+			creditHistory.setUser(comment.getUser());
+			creditHistory.setOperation(1);
+			getSession().save(creditHistory);
+			return 1;
+		}
 	}
 
 }

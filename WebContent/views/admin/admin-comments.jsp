@@ -461,11 +461,25 @@
         });
 
         $(".pass-comment").click(function () {
-
-            $(this).addClass("disabled");
-            $(this).html('<i class="fa fa-check"></i>已加入精选');
-            //TODO
-            layer.msg("添加成功", {anim: 1, icon: 1, time: 1000});
+        	$.ajax({
+                type: 'POST',
+                url: 'user-addToSelected',
+                data:{},
+                dataType: 'json',
+                success: function (data) {
+					if (data.state==1){
+						$(this).addClass("disabled");
+			            $(this).html('<i class="fa fa-check"></i>已加入精选');
+			            //TODO
+			            layer.msg("添加成功", {anim: 1, icon: 1, time: 1000});
+					}
+					else{
+						layer.msg("添加失败", {anim: 2, icon: 6, time: 1000});
+					}
+                },
+                error: function (xhr, type) {
+                }
+            });
 
         });
         $("#sign-out").click(function () {
