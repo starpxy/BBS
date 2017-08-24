@@ -94,6 +94,7 @@
 			id="check-login-history">我的登录历史</a>
 					<a href="user-myFavorites" class="weui_panel_ft f-black"
 			id="check-favorite">我的收藏</a> 
+			  <a href="moreUserInfo.jsp" class="weui_panel_ft f-black">更多个人资料</a>
 			
 			
 	</div>
