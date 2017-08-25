@@ -88,7 +88,7 @@ button {
 			<form action="searchHistory-searchBooks" method="get"
 				onsubmit="return check()">
 				<input id="keyword" type="text" name="keyword"
-					placeholder="搜索书名／作者／ISBN...">
+					placeholder="搜索书名／作者／ISBN..." x-webkit-speech />
 				<button type="submit"></button>
 			</form>
 		</div>

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,6 +17,7 @@ public class FaceApiManager {
 	private static final String APP_ID = "10011807";
 	private static final String API_KEY = "u904anZ3SHxG3TxC3IuvYCyQ";
 	private static final String SECRET_KEY = "BuL3W5SMGK9tQFDDGqI6TE0hpXBNj0jO";
+	
 	private static AipFace client;
 
 	private static AipFace getInstance() {
@@ -104,10 +105,48 @@ public class FaceApiManager {
 		}
 	}
 
+	public static List<String> listGroups() {
+		HashMap<String, Object> options = new HashMap<>();
+		JSONObject res = getInstance().getGroupList(options);
+		if (res.getInt("result_num") <= 0) {
+			return new LinkedList<>();
+		}
+		JSONArray result = res.getJSONArray("result");
+		List<Object> groups = result.toList();
+		List<String> toReturn = new LinkedList<>();
+		for (Object group : groups) {
+			toReturn.add((String) group);
+		}
+		return toReturn;
+	}
+
+	public static List<String> listUsers(String group) {
+		HashMap<String, Object> options = new HashMap<>();
+		JSONObject res = getInstance().getGroupUsers(group, options);
+		if (res.getInt("result_num") <= 0) {
+			return new LinkedList<>();
+		}
+		JSONArray result = res.getJSONArray("result");
+		Iterator<Object> iterator = result.iterator();
+		int index = 0;
+		List<String> toReturn = new LinkedList<>();
+		while(iterator.hasNext()){
+			JSONObject temp = result.getJSONObject(index);
+			toReturn.add(temp.getString("uid"));
+			iterator.next();
+			index++;
+		}
+		return toReturn;
+	}
+
 	public static void main(String[] args) {
 		// ArrayList<String> arrayList = new ArrayList<>();
 		// arrayList.add("avatar.jpg");
 		// arrayList.add("huawei.jpg");
-		System.out.println(recognizeUserInGroup("huawei.jpg", "test_group"));
+		// System.out.println(recognizeUserInGroup("huawei.jpg", "test_group"));
+		List<String> list = listUsers("test_group");
+		for (String string : list) {
+			System.out.println(string);
+		}
 	}
 }

@@ -43,6 +43,7 @@
             /*-webkit-transform:rotate(7deg); !* Safari and Chrome *!*/
             /*-o-transform:rotate(7deg); !* Opera *!*/
             /*transform:rotate(17deg);*/
+            height:80%
         }
 
 

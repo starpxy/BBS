@@ -32,6 +32,9 @@
         <property name="recommendFre" type="java.lang.Integer">
             <column name="RECOMMEND_FRE" />
         </property>
+        <property name="level" type="java.lang.Integer">
+            <column name="LEVEL" default="1"/>
+        </property>
         <property name="avatar" type="java.lang.String">
             <column name="AVATAR"/>
         </property>

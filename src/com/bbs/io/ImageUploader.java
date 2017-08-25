@@ -41,7 +41,7 @@ public class ImageUploader {
 				}
 				FileOutputStream out = new FileOutputStream(
 						PathProperty.BASEPATH + savePath + PathProperty.SIGNAL + filenames[count]);
-				byte[] buffer = new byte[1024];
+				byte[] buffer = new byte[5 * 1024];
 				int len = 0;
 				while ((len = fileInputStream.read(buffer)) > 0) {
 					out.write(buffer, 0, len);

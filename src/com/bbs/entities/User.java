@@ -12,9 +12,18 @@ public class User {
 	private String gender;
 	private String role;
 	private Integer recommendFre;
+	private Integer level;
 	private String avatar;
 	private Date updateAt;
 	private Date lastRecommend;
+
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+
+	public Integer getLevel() {
+		return level;
+	}
 
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;

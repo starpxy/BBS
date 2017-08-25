@@ -407,8 +407,9 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		String ip = IPUtil.getIp(httpServletRequest);
 		if (payState != null && !payState.isEmpty()) {
 			UnifiedOrder unifiedOrder = new UnifiedOrder();
+			float parm = (10 - user.getLevel()) * 0.1f;
 			JSONObject jsonObject = JSONObject
-					.fromObject(unifiedOrder.createOrder(user.getWeChat(), ip, 1 * payState.size()));
+					.fromObject(unifiedOrder.createOrder(user.getWeChat(), ip, (int) (parm * 10 * payState.size())));
 			status.put("params", jsonObject.toString());
 			status.put("pay", 1);
 			status.put("ip", ip);
@@ -554,12 +555,11 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 				user.setAvatar(filename);
 				userService.changeSomething(user);
 			}
-			request.put("state", state);
 			session.remove("user");
 			user = userService.getUserInfo(user);
 			session.put("user", user);
 		} else {
-			request.put("state", 2);
+			return "refused";
 		}
 		return "avatarChanged";
 	}
