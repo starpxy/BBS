@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//WebContent/views/TestSearch.jsp=UTF-8
 encoding//WebContent/views/borrowhistory.jsp=UTF-8
 encoding//src/com/bbs/api=UTF-8
 encoding//src/com/bbs/api/AccessTokenManager.java=UTF-8

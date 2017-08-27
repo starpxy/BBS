@@ -3,8 +3,10 @@ package com.bbs.dao;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 
@@ -17,6 +19,7 @@ import com.bbs.entities.CreditHistory;
 import com.bbs.entities.Favorite;
 import com.bbs.entities.Reservation;
 import com.bbs.entities.User;
+import com.bbs.entities.UserCredit;
 
 public class UserDao extends BaseDao {
 	public boolean login(User user) {
@@ -301,6 +304,19 @@ public class UserDao extends BaseDao {
 		}
 	}
 
+	public Map<String, Object> creditInfo(User user) {
+		Map<String, Object> result = new HashMap<>();
+		String hql = "FROM CreditHistory WHERE userId=" + user.getUserId();
+		List<CreditHistory> creditHistories = (List<CreditHistory>) getSession().createQuery(hql);
+		hql = "FROM UserCredit WHERE userId=" + user.getUserId();
+		List<UserCredit> userCredits = (List<UserCredit>) getSession().createQuery(hql);
+		if (!userCredits.isEmpty()) {
+			result.put("credit", userCredits.get(0));
+		}
+		result.put("history", creditHistories);
+		return result;
+	}
+
 	public List<Favorite> myFavorites(User user) {
 		String hql = "FROM Favorite f LEFT OUTER JOIN FETCH f.user LEFT OUTER JOIN FETCH f.book WHERE f.user.userId="
 				+ user.getUserId();
@@ -355,7 +371,7 @@ public class UserDao extends BaseDao {
 			getSession().update(comment);
 			CreditHistory creditHistory = new CreditHistory();
 			creditHistory.setCreateAt(new Date());
-			creditHistory.setUser(comment.getUser());
+			creditHistory.setUserId(comment.getUser().getUserId());
 			creditHistory.setOperation(1);
 			getSession().save(creditHistory);
 			return 1;

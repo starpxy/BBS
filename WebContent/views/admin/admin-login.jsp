@@ -223,7 +223,7 @@ color:#000;
 			                    
 			                    <div style="text-align: center;width:100%;margin:5px;padding:5px;border-top:2px solid #aaa">
 			                    <p style="font-size: 12px;color:#666">通过其他方式登录</p>
-			                    <a href="loginViaWeChat.jsp"  id="loginviawechat"><i  class="fa fa-wechat" ></i></a>
+			                    <a href="user-adminWeChatLogin"  id="loginviawechat"><i  class="fa fa-wechat" ></i></a>
 			                    </div>
 			                                
 			                    

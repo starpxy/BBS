@@ -79,7 +79,7 @@
 
         
         
-        <div><img class="qrcode" src="scan.jpg"></div>
+        <div><img class="qrcode" src="http://qr.topscan.com/api.php?text=https%3A%2F%2Fopen.weixin.qq.com%2Fconnect%2Foauth2%2Fauthorize%3Fappid%3Dwx95311e6c3749af30%26redirect_uri%3Dhttp%253A%252F%252Fpxyzmy.com.cn%252FBBS%252Fviews%252Fau-adminWeChatLogin%253Fparam%253D${request.param }%26response_type%3Dcode%26scope%3Dsnsapi_base"></div>
 
         <div class="info">
 
@@ -88,16 +88,20 @@
                 <p>“图书系统管理员端web”</p>
             </div>
 
+			<div class="status status_succ normal" style="display:none" id="wx_scan_success">
+                    <p>扫描成功</p>
+                    <p>请在手机端确认</p>
+            </div>
 
             <div class="status status_succ normal" style="display:none" id="wx_after_scan">
-                    <p>扫描成功</p>
-                    <p>请在微信中点击确认即可登录</p>
+                    <p>登陆成功</p>
+                    <p>正在跳转页面</p>
             </div>
 
 
             <div class="status status_fail normal" style="display:none" id="wx_after_cancel">
-                    <p>您已取消此次登录</p>
-                    <p>您可再次扫描登录，或关闭窗口</p>
+                    <p>验证失败</p>
+                    <p>验证超时或身份不符,请刷新页面，重新登录</p>
             </div>
 
         </div>
@@ -112,26 +116,6 @@
         
         
         //初始化qrcode img在这里
-        //需要分返回后台二维码图片的src
-        $.ajax({
-            type: 'POST',
-            url: 'xxx',
-            data: {
-                'xxx': xxx
-            },
-            dataType: 'json',
-            success: function (data) {
-                if (data.state==1){
-                    //如果成功
-                    $("#qrcode").attr("src",data.src);
-                }
-                
-            },
-            error: function (xhr, type) {
-                //
-            }
-        });
-
 
         
         //通过定时任务不断发送ajax请求到后台,判读是否有管理员用微信扫码成功
@@ -144,32 +128,17 @@
 
         }, 1000);
 
+        setInterval(function () {
+        	window.location.href="user-adminWeChatLogin";
+        }, 59000);
 
         function sendAjax() {
 
-//            var state=1;
-//
-//            if (state==0){
-//                $(".status_browser").show();
-//                $(".status_succ").hide();
-//                $(".status_fail").hide();
-//
-//            } else if (state==1){
-//                $(".status_browser").hide();
-//                $(".status_succ").show();
-//                $(".status_fail").hide();
-//
-//            }else if (state==2){
-//                $(".status_browser").hide();
-//                $(".status_succ").hide();
-//                $(".status_fail").show();
-//            }
-
             $.ajax({
                 type: 'POST',
-                url: 'xxx',
+                url: 'user-adminState',
                 data: {
-                    'xxx': xxx
+                    'param': '${request.param}'
                 },
                 dataType: 'json',
                 success: function (data) {
@@ -182,24 +151,30 @@
                         $(".status_browser").show();
                         $(".status_succ").hide();
                         $(".status_fail").hide();
+                        $("#wx_scan_success").hide();
 
                     } else if (data.state==1){
                         $(".status_browser").hide();
                         $(".status_succ").show();
                         $(".status_fail").hide();
-
+                        $("#wx_scan_success").hide();
                         setTimeout(function () {
                             //扫码认证成功后
                             //可以延时500ms 跳转到管理员主页面
-                            window.location.href="mxxxx.jsp";
+                            window.location.href="user-adminLogin";
                         },500);
-                    }else if (data.state==2){
+                    }else if(data.state==4){
+                        $(".status_browser").hide();
+                        $(".status_succ").hide();
+                        $(".status_fail").hide();
+                        $("#wx_scan_success").show();
+	                }
+                    else{
                         $(".status_browser").hide();
                         $(".status_succ").hide();
                         $(".status_fail").show();
-                    }
-
-
+                        $("#wx_scan_success").hide();
+	                }
                 },
                 error: function (xhr, type) {
                     //

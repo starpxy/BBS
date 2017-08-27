@@ -8,6 +8,15 @@ public class UserCredit {
 	private int commentQulity;
 	private int identity;
 	private int behavior;
+	private int overAll;
+
+	public void setOverAll(int overAll) {
+		this.overAll = overAll;
+	}
+
+	public int getOverAll() {
+		return overAll;
+	}
 
 	public int getId() {
 		return id;

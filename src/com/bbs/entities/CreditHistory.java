@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class CreditHistory {
 	private int id;
-	private User user;
+	private int userId;
 	private int operation;
 	private Date createAt;
 
@@ -16,12 +16,12 @@ public class CreditHistory {
 		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public int getUserId() {
+		return userId;
 	}
 
 	public int getOperation() {

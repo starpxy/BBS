@@ -23,6 +23,7 @@ import com.bbs.io.ImageUploader;
 import com.bbs.logs.IPUtil;
 import com.bbs.logs.LogUtil;
 import com.bbs.properties.PathProperty;
+import com.bbs.redis.RedisManager;
 import com.bbs.services.UserService;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -572,7 +573,57 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		}
 		return "setRecomFreq";
 	}
-
+	
+	public String creditHistory(){
+		User user = (User) session.get("user");
+		if (user != null) {
+		} else {
+			return "refused";
+		}
+		return "creditHistory";
+	}
+	
+	public String adminWeChatLogin(){
+		Date date = new Date();
+		RedisManager.setKvPair(""+date.getTime(), 60, -1+"");
+		request.put("param", ""+date.getTime());
+		return "adminWeChatLogin";
+	}
+	
+	public String adminState(){
+		status = new HashMap<>();
+		String param = httpServletRequest.getParameter("param");
+		try{
+			String userId = RedisManager.getStringByKey(param);
+			if (userId == null) {
+				status.put("state", 2);
+			}
+			else if(Integer.valueOf(userId)==-2){
+				status.put("state", 4);
+			}
+			else if(Integer.valueOf(userId)!=-2&&Integer.valueOf(userId)!=-1){
+				User user = new User();
+				user.setUserId(Integer.valueOf(userId));
+				user = userService.getUserInfo(user);
+				if (user.getRole().equals("admin")) {
+					session.put("admin", user);
+					status.put("state", 1);
+				}
+				else{
+					status.put("state", 2);
+				}
+			}
+			else{
+				status.put("state", 0);
+			}
+		}
+		catch (Exception e) {
+			status.put("state", 3);
+			return "adminUsersAjax";
+		}
+		return "adminUsersAjax";
+	}
+	
 	public String logout() {
 		if (session.containsKey("user")) {
 			session.remove("user");

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-8-25 16:13:18 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.bbs.entities.UserCredit" table="USERCREDIT">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="userId" type="int">
+            <column name="USER_ID" />
+        </property>
+        <property name="credit" type="int">
+            <column name="CREDIT" />
+        </property>
+        <property name="activeDegree" type="int">
+            <column name="ACTIVE_DEGREE" />
+        </property>
+        <property name="commentQulity" type="int">
+            <column name="COMMENT_QULITY" />
+        </property>
+        <property name="identity" type="int">
+            <column name="IDENTITY" />
+        </property>
+        <property name="behavior" type="int">
+            <column name="BEHAVIOR" />
+        </property>
+        <property name="overAll" type="int">
+            <column name="OVER_ALL" />
+        </property>
+    </class>
+</hibernate-mapping>

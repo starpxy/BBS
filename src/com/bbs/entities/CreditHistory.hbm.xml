@@ -8,9 +8,9 @@
             <column name="ID" />
             <generator class="native" />
         </id>
-        <many-to-one name="user" class="com.bbs.entities.User">
-            <column name="USER" />
-        </many-to-one>
+       <property name="userId" type="int">
+            <column name="USER_ID" />
+        </property>
         <property name="operation" type="int">
             <column name="OPERATION" />
         </property>

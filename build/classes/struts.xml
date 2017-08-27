@@ -30,6 +30,7 @@
 			class="userAction"
 			method="{1}">
 			<result name="granted">main.jsp</result>
+			<result name="creditHistory">memberLevel.jsp</result>
 			<result name="avatarChanged">userinfo.jsp</result>
 			<result name="refused">login.jsp?state=1</result>
 			<result name="register">login.jsp</result>
@@ -41,6 +42,7 @@
 				<param name="root">status</param>
 			</result>
 			<result name="adminLoginSuccess">admin.jsp</result>
+			<result name="adminWeChatLogin">loginViaWeChat.jsp</result>
 			<result name="adminBooks">admin-book.jsp</result>
 			<result name="userChart">user-chart.jsp</result>
 			<result name="bookChart">book-chart.jsp</result>
@@ -140,6 +142,14 @@
 			name="au-*"
 			class="authorizationAction"
 			method="{1}">
+			<result
+				name="adminLogin"
+				type="json">
+				authoMap
+			</result>
+			<result name="adminLoginSucceed">login-confirm.jsp</result>
+			<result name="notRegistered">login-notRegistered.jsp</result>
+			<result name="notAdmin">login-notAdmin.jsp</result>
 			<result name="newMember">register.jsp</result>
 			<result name="success">temp.jsp</result>
 			<result name="exist">temp.jsp</result>
