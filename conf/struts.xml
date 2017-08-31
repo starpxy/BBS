@@ -31,6 +31,7 @@
 			method="{1}">
 			<result name="granted">main.jsp</result>
 			<result name="creditHistory">memberLevel.jsp</result>
+			<result name="extraInfo">userinfo.jsp</result>
 			<result name="avatarChanged">userinfo.jsp</result>
 			<result name="refused">login.jsp?state=1</result>
 			<result name="register">login.jsp</result>

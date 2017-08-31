@@ -7,9 +7,12 @@ import com.bbs.entities.AccessLog;
 import com.bbs.entities.BookItem;
 import com.bbs.entities.BorrowedRecord;
 import com.bbs.entities.Comment;
+import com.bbs.entities.CreditHistory;
+import com.bbs.entities.ExtraInfo;
 import com.bbs.entities.Favorite;
 import com.bbs.entities.Reservation;
 import com.bbs.entities.User;
+import com.bbs.entities.UserCredit;
 
 public class UserService {
 	private UserDao userDao;
@@ -62,6 +65,22 @@ public class UserService {
 		userDao.setRecomFreq(user);
 	}
 
+	public List<CreditHistory> creditHistory(User user) {
+		return userDao.creditHistory(user);
+	}
+
+	public UserCredit userCredit(User user) {
+		return userDao.userCredit(user);
+	}
+
+	public ExtraInfo showExtraInfo(User user) {
+		return userDao.showExtraInfo(user);
+	}
+	
+	public void saveExtraInfo(ExtraInfo extraInfo){
+		userDao.saveExtraInfo(extraInfo);
+	}
+	
 	public List<BookItem> adminInitial(int page) {
 		return userDao.adminInitial(page);
 	}

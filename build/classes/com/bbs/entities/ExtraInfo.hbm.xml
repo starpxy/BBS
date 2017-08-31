@@ -1,24 +1,24 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-8-20 13:11:51 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-8-30 14:39:00 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bbs.entities.CreditHistory" table="CREDIT_HISTORY">
+    <class name="com.bbs.entities.ExtraInfo" table="EXTRA_INFO">
         <id name="id" type="int">
             <column name="ID" />
             <generator class="native" />
         </id>
-       <property name="userId" type="int">
+        <property name="userId" type="int">
             <column name="USER_ID" />
         </property>
-        <property name="operation" type="int">
-            <column name="OPERATION" />
+        <property name="companyEmail" type="java.lang.String">
+            <column name="COMPANYEMAIL" />
         </property>
-        <property name="score" type="int">
-            <column name="SCORE" />
+        <property name="type" type="int">
+            <column name="TYPE" />
         </property>
-        <property name="createAt" type="java.util.Date">
-            <column name="CREATE_AT" />
+        <property name="school" type="java.lang.String">
+            <column name="SCHOOL" />
         </property>
     </class>
 </hibernate-mapping>

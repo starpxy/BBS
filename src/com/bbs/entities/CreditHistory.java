@@ -6,7 +6,16 @@ public class CreditHistory {
 	private int id;
 	private int userId;
 	private int operation;
+	private int score;
 	private Date createAt;
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	public int getScore() {
+		return score;
+	}
 
 	public int getId() {
 		return id;

@@ -270,7 +270,7 @@
 
 <script>
     var radarChartData = {
-        labels: ["预约取书", "按时还书", "每日签到", "押金缴纳", "分享频率"],
+        labels: ["活跃程度", "信用历史", "身份特质", "评论质量", "行为偏好"],
         datasets: [
             {
                 label: "111",
@@ -280,7 +280,7 @@
                 pointStrokeColor: "rgba(0,0,0,0)",
                 pointHighlightFill: "rgba(0,0,0,0)",
                 pointHighlightStroke: "rgba(0,0,0,0)",
-                data: [20, 20, 20, 20, 20]
+                data: [100, 100, 100, 100, 100]
             },
             {
                 label: "22222",
@@ -290,7 +290,7 @@
                 pointStrokeColor: "#11BA00",
                 pointHighlightFill: "#11BA00",
                 pointHighlightStroke: "rgba(17,160,4,0.8)",
-                data: [10, 5, 15, 10, 10]
+                data: ['${request.userCredit.activeDegree}', '${request.userCredit.credit}', '${request.userCredit.identity}', '${request.userCredit.commentQulity}', '${request.userCredit.behavior}']
             }
         ]
     };

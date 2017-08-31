@@ -18,6 +18,7 @@ import com.bbs.encrypt.IncorrectCipherTextLengthException;
 import com.bbs.encrypt.SHC32;
 import com.bbs.entities.AccessLog;
 import com.bbs.entities.BorrowedRecord;
+import com.bbs.entities.ExtraInfo;
 import com.bbs.entities.User;
 import com.bbs.io.ImageUploader;
 import com.bbs.logs.IPUtil;
@@ -577,10 +578,12 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 	public String creditHistory(){
 		User user = (User) session.get("user");
 		if (user != null) {
+			request.put("creditHistory", userService.creditHistory(user));
+			request.put("userCredit", userService.userCredit(user));
+			return "creditHistory";
 		} else {
 			return "refused";
 		}
-		return "creditHistory";
 	}
 	
 	public String adminWeChatLogin(){
@@ -588,6 +591,33 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		RedisManager.setKvPair(""+date.getTime(), 60, -1+"");
 		request.put("param", ""+date.getTime());
 		return "adminWeChatLogin";
+	}
+	
+	public String extraInfo(){
+		User user = (User) session.get("user");
+		if (user==null) {
+			return "refused";
+		}
+		String type = httpServletRequest.getParameter("type");
+		String school = httpServletRequest.getParameter("school");
+		String companyEmail = httpServletRequest.getParameter("companyEmail");
+		if (type==null) {
+		}
+		else{
+			int type_int = Integer.valueOf(type);
+			ExtraInfo extraInfo = userService.showExtraInfo(user);
+			if (extraInfo == null) {
+				extraInfo = new ExtraInfo();
+			}
+			extraInfo.setType(type_int);
+			if (type_int == 1) {
+				extraInfo.setSchool(school);
+			}
+			extraInfo.setUserId(user.getUserId());
+			extraInfo.setCompanyEmail(companyEmail);
+			userService.saveExtraInfo(extraInfo);
+		}
+		return "extraInfo";
 	}
 	
 	public String adminState(){

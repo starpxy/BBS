@@ -20,7 +20,7 @@
     <h1 class="weui-header-title">补充资料</h1>
     <div class="weui-header-right"><a href="user-login" class="icon icon-27 f-white"></a></div>
 </div>
-
+<form method="post" action="user-extraInfo" id="form" onsubmit="return check()">
 <div class="weui_panel weui_panel_access">
     <div class="weui_panel_hd">学历信息</div>
     <div class="weui_panel_bd">
@@ -34,15 +34,11 @@
                 </div>
 
                 <div class="weui_cell_bd weui_cell_primary">
-                    <select class="weui_select select2 f13" name="edu_bg">
-                        <option value="本科以上">本科以上</option>
-                        <option value="本科以上">本科以下</option>
+                    <select class="weui_select select2 f13" name="type">
+                        <option value="1">本科以上</option>
+                        <option value="0">本科以下</option>
                     </select>
 
-                </div>
-
-                <div class="weui_cell_ft" id="low_edu_box" style="display: none">
-                    <a id="low_edu_btn" class="weui-vcode-btn f14">确认修改</a>
                 </div>
 
 
@@ -53,11 +49,7 @@
                 <div class="weui_cell_hd"><label for="" class="weui_label f14">选择学校:</label></div>
 
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" type="text" value="北京 清华大学" id='school'/>
-                </div>
-
-                <div class="weui_cell_ft" id="high_edu_box">
-                    <a id="high_edu_btn" class="weui-vcode-btn f14">确认修改</a>
+                    <input class="weui_input" type="text" value="北京 清华大学" name="school" id='school'/>
                 </div>
 
 
@@ -78,11 +70,7 @@
         <div class="weui_cell f14">
             <div class="weui_cell_hd"><label class="weui_label">邮箱</label></div>
             <div class="weui_cell_bd weui_cell_primary">
-                <input class="weui_input" name="company_email" placeholder="请输入邮件">
-            </div>
-
-            <div class="weui_cell_ft">
-                <a id="company_email_btn" class="weui-vcode-btn f14">确认修改</a>
+                <input class="weui_input" name="companyEmail" placeholder="请输入邮件">
             </div>
 
         </div>
@@ -91,9 +79,14 @@
 
     </div>
 
-
 </div>
-
+	<div class="weui_media_box weui_media_text">
+					<!--<h4 class="weui_media_title">标题一</h4>-->
+					<p class="weui_media_desc">
+						<input id="submit" value="保存" class="weui_btn bg-green" type="submit">
+					</p>
+	</div>
+</form>
 
 <!--<div style="margin-top: 2px">&nbsp;</div>-->
 
@@ -106,6 +99,16 @@
 <script src="asserts/picker-city.js"></script>
 
 <script>
+   function check(){
+	   var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+       if (reg.test($("input[name='companyEmail']").val())){
+    	   layer.msg("修改成功",{icon:1,time:1000,anim:1});
+           return true;
+       }else{
+           layer.msg("请输入正确的邮箱格式",{icon:2,time:1000,anim:6});
+	       return false;
+       }
+    }
     $(function () {
         layui.use('layer', function () {
             layer = layui.layer;
@@ -119,14 +122,11 @@
                 title: "请选择您的学校",
                 showDistrict: false
             });
-//            $("#school").trigger('click');
 
-
-            $("select[name='edu_bg']").change(function () {
+            $("select[name='type']").change(function () {
 
                 $("#low_edu_box").toggle();
 
-//                alert();
                 if ($("#low_edu_box").css('display')=="none"){
                     $("#school").trigger('click');
                 }
@@ -134,41 +134,6 @@
                 $("#school_box").toggle();
 
             });
-
-            $("#low_edu_btn").click(function () {
-
-                layer.msg($("select[name='edu_bg']").val(),{icon:1,time:1000,anim:1});
-
-            });
-
-
-            $("#high_edu_btn").click(function () {
-
-                if ($("#school").val().trim()==""){
-                    layer.msg("请选择学校",{icon:2,time:1000,anim:6});
-                } else {
-                    layer.msg("school:"+$("#school").val()+"edu_bg:"+$("select[name='edu_bg']").val(),{icon:1,time:1000,anim:1});
-                }
-
-
-            });
-
-
-            $("#company_email_btn").click(function () {
-
-                var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
-                 if (reg.test($("input[name='company_email']").val())){
-                     layer.msg("正确"+$("input[name='company_email']").val(),{icon:1,time:1000,anim:1});
-                 }else{
-                     layer.msg("请输入正确的邮箱格式",{icon:2,time:1000,anim:6});
-                 }
-
-
-
-            });
-
-
-
         });
 
     });

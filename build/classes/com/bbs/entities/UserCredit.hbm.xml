@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2017-8-25 16:13:18 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bbs.entities.UserCredit" table="USERCREDIT">
+    <class name="com.bbs.entities.UserCredit" table="USER_CREDIT">
         <id name="id" type="int">
             <column name="ID" />
             <generator class="native" />

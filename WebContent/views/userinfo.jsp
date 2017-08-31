@@ -56,7 +56,7 @@
  %>
 				</a> <input type="file" name="face" accept="image/*" hidden>
 			</form>
-			<br> <a href="memberLevel.jsp" style="width: 100%;">
+			<br> <a href="user-creditHistory" style="width: 100%;">
 				<p style="font-size: 15px">
 					<b>${session.user.name} </b> <img src="id.png" width="20px"
 						height="20px"> <b class="level" style="color: #47B33A;">V${session.user.level}</b>

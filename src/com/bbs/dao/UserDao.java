@@ -16,6 +16,7 @@ import com.bbs.entities.BookItem;
 import com.bbs.entities.BorrowedRecord;
 import com.bbs.entities.Comment;
 import com.bbs.entities.CreditHistory;
+import com.bbs.entities.ExtraInfo;
 import com.bbs.entities.Favorite;
 import com.bbs.entities.Reservation;
 import com.bbs.entities.User;
@@ -90,7 +91,65 @@ public class UserDao extends BaseDao {
 		user2.setRecommendFre(frq);
 		getSession().update(user2);
 	}
-
+	
+	public List<CreditHistory> creditHistory(User user){
+		String hql = "FROM CreditHistory WHERE userId="+user.getUserId();
+		return getSession().createQuery(hql).list();
+	}
+	
+	public UserCredit userCredit(User user){
+		String hql = "FROM UserCredit WHERE userId="+user.getUserId();
+		List<UserCredit> userCredits = (List<UserCredit>) getSession().createQuery(hql).list();
+		if (userCredits.isEmpty()) {
+			UserCredit userCredit = new UserCredit();
+			userCredit.setUserId(user.getUserId());
+			userCredit.setActiveDegree(50);
+			userCredit.setBehavior(50);
+			userCredit.setCommentQulity(50);
+			userCredit.setCredit(50);
+			userCredit.setIdentity(50);
+			getSession().save(userCredit);
+			return userCredit;
+		}
+		return userCredits.get(0);
+	}
+	
+	public ExtraInfo showExtraInfo(User user){
+		String hql = "FROM ExtraInfo WHERE userId="+user.getUserId();
+		List<ExtraInfo> extraInfos = getSession().createQuery(hql).list();
+		if (extraInfos.isEmpty()) {
+			return null;
+		}
+		return extraInfos.get(0);
+	}
+	
+	public void saveExtraInfo(ExtraInfo extraInfo){
+		String hql = "FROM ExtraInfo WHERE userId="+extraInfo.getUserId();
+		List<ExtraInfo> extraInfos = getSession().createQuery(hql).list();
+		if (extraInfos.isEmpty()) {
+			increaseIdentity(extraInfo);
+			getSession().save(extraInfo);
+		}
+		else{
+			ExtraInfo temp = extraInfos.get(0);
+			temp.setCompanyEmail(extraInfo.getCompanyEmail());
+			temp.setSchool(extraInfo.getSchool());
+			temp.setType(extraInfo.getType());
+			increaseIdentity(extraInfo);
+			getSession().update(temp);
+		}
+	}
+	
+	private void increaseIdentity(ExtraInfo extraInfo){
+		String hql = "FROM UserCredit WHERE userId="+extraInfo.getUserId();
+		List<UserCredit> userCredits = (List<UserCredit>) getSession().createQuery(hql).list();
+		if (!userCredits.isEmpty()) {
+			UserCredit userCredit = userCredits.get(0);
+			userCredit.setIdentity(80);
+			getSession().save(userCredit);
+		}
+	}
+	
 	public List<BorrowedRecord> payState(User user) {
 		String hql = "FROM BorrowedRecord b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.bookItem c LEFT OUTER JOIN FETCH c.book WHERE b.user.userId="
 				+ user.getUserId() + " AND b.status=1";
