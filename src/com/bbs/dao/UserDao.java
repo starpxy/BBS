@@ -91,14 +91,14 @@ public class UserDao extends BaseDao {
 		user2.setRecommendFre(frq);
 		getSession().update(user2);
 	}
-	
-	public List<CreditHistory> creditHistory(User user){
-		String hql = "FROM CreditHistory WHERE userId="+user.getUserId();
+
+	public List<CreditHistory> creditHistory(User user) {
+		String hql = "FROM CreditHistory WHERE userId=" + user.getUserId();
 		return getSession().createQuery(hql).list();
 	}
-	
-	public UserCredit userCredit(User user){
-		String hql = "FROM UserCredit WHERE userId="+user.getUserId();
+
+	public UserCredit userCredit(User user) {
+		String hql = "FROM UserCredit WHERE userId=" + user.getUserId();
 		List<UserCredit> userCredits = (List<UserCredit>) getSession().createQuery(hql).list();
 		if (userCredits.isEmpty()) {
 			UserCredit userCredit = new UserCredit();
@@ -108,29 +108,29 @@ public class UserDao extends BaseDao {
 			userCredit.setCommentQulity(50);
 			userCredit.setCredit(50);
 			userCredit.setIdentity(50);
+			userCredit.setOverAll(250);
 			getSession().save(userCredit);
 			return userCredit;
 		}
 		return userCredits.get(0);
 	}
-	
-	public ExtraInfo showExtraInfo(User user){
-		String hql = "FROM ExtraInfo WHERE userId="+user.getUserId();
+
+	public ExtraInfo showExtraInfo(User user) {
+		String hql = "FROM ExtraInfo WHERE userId=" + user.getUserId();
 		List<ExtraInfo> extraInfos = getSession().createQuery(hql).list();
 		if (extraInfos.isEmpty()) {
 			return null;
 		}
 		return extraInfos.get(0);
 	}
-	
-	public void saveExtraInfo(ExtraInfo extraInfo){
-		String hql = "FROM ExtraInfo WHERE userId="+extraInfo.getUserId();
+
+	public void saveExtraInfo(ExtraInfo extraInfo) {
+		String hql = "FROM ExtraInfo WHERE userId=" + extraInfo.getUserId();
 		List<ExtraInfo> extraInfos = getSession().createQuery(hql).list();
 		if (extraInfos.isEmpty()) {
 			increaseIdentity(extraInfo);
 			getSession().save(extraInfo);
-		}
-		else{
+		} else {
 			ExtraInfo temp = extraInfos.get(0);
 			temp.setCompanyEmail(extraInfo.getCompanyEmail());
 			temp.setSchool(extraInfo.getSchool());
@@ -139,17 +139,30 @@ public class UserDao extends BaseDao {
 			getSession().update(temp);
 		}
 	}
-	
-	private void increaseIdentity(ExtraInfo extraInfo){
-		String hql = "FROM UserCredit WHERE userId="+extraInfo.getUserId();
+
+	private void increaseIdentity(ExtraInfo extraInfo) {
+		String hql = "FROM UserCredit WHERE userId=" + extraInfo.getUserId();
 		List<UserCredit> userCredits = (List<UserCredit>) getSession().createQuery(hql).list();
-		if (!userCredits.isEmpty()) {
+		hql = "FROM User WHERE userId=" + extraInfo.getUserId();
+		List<User> users = getSession().createQuery(hql).list();
+		User user = null;
+		if (!users.isEmpty()) {
+			user = users.get(0);
+		}
+		if (!userCredits.isEmpty() && user != null) {
 			UserCredit userCredit = userCredits.get(0);
-			userCredit.setIdentity(80);
-			getSession().save(userCredit);
+			if (extraInfo.getType() == 1) {
+				userCredit.setIdentity(80);
+			} else {
+				userCredit.setIdentity(70);
+			}
+			userCredit.setOverAll(userCredit.getActiveDegree() + userCredit.getBehavior()
+					+ userCredit.getCommentQulity() + userCredit.getCredit() + userCredit.getIdentity());
+			getSession().update(userCredit);
+			calcuLevel(user, userCredit.getOverAll());
 		}
 	}
-	
+
 	public List<BorrowedRecord> payState(User user) {
 		String hql = "FROM BorrowedRecord b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.bookItem c LEFT OUTER JOIN FETCH c.book WHERE b.user.userId="
 				+ user.getUserId() + " AND b.status=1";
@@ -264,6 +277,31 @@ public class UserDao extends BaseDao {
 				borrowedRecord.setStatus(2);
 				borrowedRecord.setOutTradeNo(outTradeNumber);
 				borrowedRecord.setUpdateAt(new Date());
+				hql = "FROM UserCredit WHERE userId=" + borrowedRecord.getUser().getUserId();
+				List<UserCredit> userCredits = getSession().createQuery(hql).list();
+				UserCredit userCredit = null;
+				if (userCredits.isEmpty()) {
+					userCredit = new UserCredit();
+					userCredit.setActiveDegree(50);
+					userCredit.setCommentQulity(50);
+					userCredit.setCredit(50);
+					userCredit.setIdentity(50);
+					userCredit.setUserId(borrowedRecord.getUser().getUserId());
+					userCredit.setBehavior(52);
+					userCredit.setOverAll(userCredit.getActiveDegree() + userCredit.getBehavior()
+							+ userCredit.getCommentQulity() + userCredit.getCredit() + userCredit.getIdentity());
+					getSession().save(userCredit);
+				} else {
+					userCredit = userCredits.get(0);
+					if (userCredit.getBehavior() + 2 >= 100) {
+						userCredit.setBehavior(100);
+					} else {
+						userCredit.setBehavior(userCredit.getBehavior() + 2);
+					}
+					userCredit.setOverAll(userCredit.getActiveDegree() + userCredit.getBehavior()
+							+ userCredit.getCommentQulity() + userCredit.getCredit() + userCredit.getIdentity());
+					getSession().update(userCredit);
+				}
 				getSession().update(borrowedRecord);
 			}
 		}
@@ -327,6 +365,38 @@ public class UserDao extends BaseDao {
 				BorrowedRecord borrowedRecord = borrowedRecords.get(0);
 				borrowedRecord.setStatus(3);
 				borrowedRecord.setUpdateAt(new Date());
+				CreditHistory creditHistory = new CreditHistory();
+				creditHistory.setCreateAt(new Date());
+				creditHistory.setUserId(borrowedRecord.getUser().getUserId());
+				creditHistory.setScore(2);
+				creditHistory.setOperation(2);
+				getSession().save(creditHistory);
+				hql = "FROM UserCredit WHERE userId=" + borrowedRecord.getUser().getUserId();
+				List<UserCredit> userCredits = getSession().createQuery(hql).list();
+				UserCredit userCredit = null;
+				if (userCredits.isEmpty()) {
+					userCredit = new UserCredit();
+					userCredit.setActiveDegree(50);
+					userCredit.setCommentQulity(50);
+					userCredit.setCredit(50);
+					userCredit.setIdentity(50);
+					userCredit.setUserId(borrowedRecord.getUser().getUserId());
+					userCredit.setBehavior(52);
+					userCredit.setOverAll(userCredit.getActiveDegree() + userCredit.getBehavior()
+							+ userCredit.getCommentQulity() + userCredit.getCredit() + userCredit.getIdentity());
+					getSession().save(userCredit);
+				} else {
+					userCredit = userCredits.get(0);
+					if (userCredit.getBehavior() + 2 >= 100) {
+						userCredit.setBehavior(100);
+					} else {
+						userCredit.setBehavior(userCredit.getBehavior() + 2);
+					}
+					userCredit.setOverAll(userCredit.getActiveDegree() + userCredit.getBehavior()
+							+ userCredit.getCommentQulity() + userCredit.getCredit() + userCredit.getIdentity());
+					getSession().update(userCredit);
+				}
+				calcuLevel(borrowedRecord.getUser(), userCredit.getOverAll());
 				getSession().update(borrowedRecord);
 			}
 		}
@@ -431,10 +501,63 @@ public class UserDao extends BaseDao {
 			CreditHistory creditHistory = new CreditHistory();
 			creditHistory.setCreateAt(new Date());
 			creditHistory.setUserId(comment.getUser().getUserId());
+			creditHistory.setScore(2);
 			creditHistory.setOperation(1);
 			getSession().save(creditHistory);
+			hql = "FROM UserCredit WHERE userId=" + comment.getUser().getUserId();
+			List<UserCredit> userCredits = getSession().createQuery(hql).list();
+			UserCredit userCredit = null;
+			if (userCredits.isEmpty()) {
+				userCredit = new UserCredit();
+				userCredit.setActiveDegree(52);
+				userCredit.setCommentQulity(50);
+				userCredit.setCredit(50);
+				userCredit.setIdentity(50);
+				userCredit.setUserId(comment.getUser().getUserId());
+				userCredit.setBehavior(50);
+				userCredit.setOverAll(userCredit.getActiveDegree() + userCredit.getBehavior()
+						+ userCredit.getCommentQulity() + userCredit.getCredit() + userCredit.getIdentity());
+				int overall = userCredit.getOverAll();
+				calcuLevel(comment.getUser(), overall);
+				getSession().save(userCredit);
+			} else {
+				userCredit = userCredits.get(0);
+				if (userCredit.getCommentQulity() + 2 >= 100) {
+					userCredit.setCommentQulity(100);
+				} else {
+					userCredit.setCommentQulity(userCredit.getCommentQulity() + 2);
+				}
+				userCredit.setOverAll(userCredit.getActiveDegree() + userCredit.getBehavior()
+						+ userCredit.getCommentQulity() + userCredit.getCredit() + userCredit.getIdentity());
+				getSession().update(userCredit);
+				calcuLevel(comment.getUser(), userCredit.getOverAll());
+			}
 			return 1;
 		}
 	}
 
+	private void calcuLevel(User user, int overall) {
+		if (overall >= 475) {
+			user.setLevel(10);
+		} else if (overall >= 450) {
+			user.setLevel(9);
+		} else if (overall >= 425) {
+			user.setLevel(8);
+		} else if (overall >= 400) {
+			user.setLevel(7);
+		} else if (overall >= 375) {
+			user.setLevel(6);
+		} else if (overall >= 350) {
+			user.setLevel(5);
+		} else if (overall >= 325) {
+			user.setLevel(4);
+		} else if (overall >= 300) {
+			user.setLevel(3);
+		} else if (overall >= 275) {
+			user.setLevel(2);
+		} else if (overall >= 250) {
+			user.setLevel(1);
+		}
+		getSession().update(user);
+	}
 }

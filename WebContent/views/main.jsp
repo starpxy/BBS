@@ -82,7 +82,7 @@ button {
         }
    #record_audio{
             position: absolute;
-            top: 13px;
+            top: 3px;
             right: 33px;
             color: #6da26b;
             cursor: pointer;

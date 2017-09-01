@@ -268,9 +268,14 @@
 
 
                                 <div class="timeline-footer">
-                                		<input type="hidden" value="${commentId }"/>
                                         <a class="btn btn-danger btn-xs delete-comment">删除</a>
-                                        <a id="selectToGood" class="btn btn-success btn-xs pass-comment"><i class="fa fa-reply"></i>加入精选</a>
+                                        <s:if test="status==0">
+	                                        <a id="selectToGood" class="btn btn-success btn-xs pass-comment"><i class="fa fa-reply"></i>加入精选</a>
+	                                        <input type="hidden" value="${commentId }"/>
+                                        </s:if>
+                                        <s:else>
+                                        	<a id="selectToGood" class="disabled btn btn-success btn-xs pass-comment"><i class="fa fa-check"></i>已加入精选</a>
+                                        </s:else>
 
                              </div>
 
@@ -461,15 +466,16 @@
         });
 
         $(".pass-comment").click(function () {
+            var thele = $(this);
         	$.ajax({
                 type: 'POST',
                 url: 'user-addToSelected',
-                data:{},
+                data:{'commentId':thele.next().val()},
                 dataType: 'json',
                 success: function (data) {
 					if (data.state==1){
-						$(this).addClass("disabled");
-			            $(this).html('<i class="fa fa-check"></i>已加入精选');
+						thele.addClass("disabled");
+			            thele.html('<i class="fa fa-check"></i>已加入精选');
 			            //TODO
 			            layer.msg("添加成功", {anim: 1, icon: 1, time: 1000});
 					}

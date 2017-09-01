@@ -1,3 +1,7 @@
+<%@page import="com.bbs.entities.rules.CreditHistoryRule"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="com.bbs.entities.CreditHistory"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -91,12 +95,12 @@
 <div class="page-hd div_box" id="radar_box">
 
     <div style="padding: 10px">
-        <p class="title">我的信用分析 <span style="color: #0bb20c;float: right"> 250/500</span></p>
+        <p class="title">我的信用分析 <span style="color: #0bb20c;float: right"> ${request.userCredit.overAll }/500</span></p>
     </div>
 
     <div class="weui_progress">
         <div class="weui_progress_bar">
-            <div class="weui_progress_inner_bar js_progress" style="width: 50%;"></div>
+            <div class="weui_progress_inner_bar js_progress" style="width: ${request.userCredit.overAll/5 }%;"></div>
         </div>
         <!--<a href="javascript:;" class="weui_progress_opr">-->
         <!--<i class="weui_icon_cancel"></i>-->
@@ -116,137 +120,29 @@
 <div class="page-hd div_box" id="record_box">
 
     <p class="title">&nbsp;&nbsp;&nbsp;我的信用记录</p>
-
-    <div class="credit_record">
-        <p><i class="icon icon-36"></i> 还书</p>
-
-
-        <span>2012-1-23 12:00:00</span>
-
-        <span class="count">+5</span>
-    </div>
-
-    <div class="credit_record_">
-
-        <p><i class="icon icon-122"></i> 规定时间未还书</p>
-
-        <span>2012-1-23 12:00:00</span>
-
-        <span class="count">-15</span>
-    </div>
-
-    <div class="credit_record">
-        <p><i class="icon icon-36"></i> 还书</p>
-
-
-        <span>2012-1-23 12:00:00</span>
-
-        <span class="count">+5</span>
-    </div>
-
-    <div class="credit_record_">
-
-        <p><i class="icon icon-122"></i> 规定时间未还书</p>
-
-        <span>2012-1-23 12:00:00</span>
-
-        <span class="count">-15</span>
-    </div>
-
-    <div class="credit_record">
-        <p><i class="icon icon-36"></i> 还书</p>
-
-
-        <span>2012-1-23 12:00:00</span>
-
-        <span class="count">+5</span>
-    </div>
-
-    <div class="credit_record_">
-
-        <p><i class="icon icon-122"></i> 规定时间未还书</p>
-
-        <span>2012-1-23 12:00:00</span>
-
-        <span class="count">-15</span>
-    </div>
-
-    <div class="credit_record_">
-
-        <p><i class="icon icon-122"></i> 规定时间未还书</p>
-
-        <span>2012-1-23 12:00:00</span>
-
-        <span class="count">-15</span>
-    </div>
-
-
-    <div class="credit_record_">
-
-        <p><i class="icon icon-122"></i> 规定时间未还书</p>
-
-        <span>2012-1-23 12:00:00</span>
-
-        <span class="count">-15</span>
-    </div>
-
-
-    <div class="credit_record_">
-
-        <p><i class="icon icon-122"></i> 规定时间未还书</p>
-
-        <span>2012-1-23 12:00:00</span>
-
-        <span class="count">-15</span>
-    </div>
-
-
-    <div class="credit_record_">
-
-        <p><i class="icon icon-122"></i> 规定时间未还书</p>
-
-        <span>2012-1-23 12:00:00</span>
-
-        <span class="count">-15</span>
-    </div>
-
-
-    <div class="credit_record_">
-
-        <p><i class="icon icon-122"></i> 规定时间未还书</p>
-
-        <span>2012-1-23 12:00:00</span>
-
-        <span class="count">-15</span>
-    </div>
-
-
-    <div class="credit_record_">
-
-        <p><i class="icon icon-122"></i> 规定时间未还书</p>
-
-        <span>2012-1-23 12:00:00</span>
-
-        <span class="count">-15</span>
-    </div>
-    <div class="credit_record_">
-
-        <p><i class="icon icon-122"></i> 规定时间未还书</p>
-
-        <span>2012-1-23 12:00:00</span>
-
-        <span class="count">-15</span>
-    </div>
-    <div class="credit_record_">
-
-        <p><i class="icon icon-122"></i> 规定时间未还书</p>
-
-        <span>2012-1-23 12:00:00</span>
-
-        <span class="count">-15</span>
-    </div>
-
-
+    <%
+    List<CreditHistory> creditHistories = (List<CreditHistory>)request.getAttribute("creditHistory");
+    if(creditHistories!=null&&!creditHistories.isEmpty()){
+    	Iterator<CreditHistory> iterator = creditHistories.iterator();
+    	while(iterator.hasNext()){
+    		CreditHistory temp = iterator.next();
+    		if(temp.getOperation()>2){
+    			out.println("<div class='credit_record_'>");
+    			out.println("<p><i class='icon icon-122'></i>"+CreditHistoryRule.getStatus(temp.getOperation())+"</p>");
+    			out.println("<span>"+temp.getCreateAt()+"</span>");
+    			out.println("<span class='count'>"+temp.getScore()+"</span>");
+    			out.println("</div>");
+    		}
+    		else{
+    			out.println("<div class='credit_record'>");
+    			out.println("<p><i class='icon icon-36'></i>"+CreditHistoryRule.getStatus(temp.getOperation())+"</p>");
+    			out.println("<span>"+temp.getCreateAt()+"</span>");
+    			out.println("<span class='count'>+"+temp.getScore()+"</span>");
+    			out.println("</div>");
+    		}
+    	}
+    }
+    %>
 
 </div>
 

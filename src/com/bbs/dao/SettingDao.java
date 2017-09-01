@@ -1,6 +1,7 @@
 package com.bbs.dao;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -11,10 +12,12 @@ import org.apache.lucene.queryparser.classic.ParseException;
 import com.bbs.entities.Book;
 import com.bbs.entities.BookItem;
 import com.bbs.entities.BorrowedRecord;
+import com.bbs.entities.CreditHistory;
 import com.bbs.entities.Reservation;
 import com.bbs.entities.SearchHistory;
 import com.bbs.entities.Settings;
 import com.bbs.entities.User;
+import com.bbs.entities.UserCredit;
 import com.bbs.entities.WaitList;
 import com.bbs.search.Search;
 
@@ -112,6 +115,38 @@ public class SettingDao extends BaseDao {
 	public void changeRecordStatus(BorrowedRecord borrowedRecord) {
 		if (borrowedRecord != null) {
 			getSession().update(borrowedRecord);
+			CreditHistory creditHistory = new CreditHistory();
+			creditHistory.setCreateAt(new Date());
+			creditHistory.setUserId(borrowedRecord.getUser().getUserId());
+			creditHistory.setScore(-2);
+			creditHistory.setOperation(4);
+			getSession().save(creditHistory);
+			String hql = "FROM UserCredit WHERE userId=" + borrowedRecord.getUser().getUserId();
+			List<UserCredit> userCredits = getSession().createQuery(hql).list();
+			UserCredit userCredit = null;
+			if (userCredits.isEmpty()) {
+				userCredit = new UserCredit();
+				userCredit.setActiveDegree(50);
+				userCredit.setCommentQulity(50);
+				userCredit.setCredit(50);
+				userCredit.setIdentity(50);
+				userCredit.setUserId(borrowedRecord.getUser().getUserId());
+				userCredit.setBehavior(48);
+				userCredit.setOverAll(userCredit.getActiveDegree() + userCredit.getBehavior()
+						+ userCredit.getCommentQulity() + userCredit.getCredit() + userCredit.getIdentity());
+				getSession().save(userCredit);
+			} else {
+				userCredit = userCredits.get(0);
+				if (userCredit.getBehavior() - 2 <= 0) {
+					userCredit.setBehavior(0);
+				} else {
+					userCredit.setBehavior(userCredit.getBehavior() - 2);
+				}
+				userCredit.setOverAll(userCredit.getActiveDegree() + userCredit.getBehavior()
+						+ userCredit.getCommentQulity() + userCredit.getCredit() + userCredit.getIdentity());
+				getSession().update(userCredit);
+			}
+			calcuLevel(borrowedRecord.getUser(), userCredit.getOverAll());
 		}
 	}
 
@@ -119,6 +154,38 @@ public class SettingDao extends BaseDao {
 		if (reservation != null) {
 			getSession().update(reservation);
 			BookItem bookItem = reservation.getBookItem();
+			CreditHistory creditHistory = new CreditHistory();
+			creditHistory.setCreateAt(new Date());
+			creditHistory.setUserId(reservation.getUser().getUserId());
+			creditHistory.setScore(-2);
+			creditHistory.setOperation(3);
+			getSession().save(creditHistory);
+			String hql = "FROM UserCredit WHERE userId=" + reservation.getUser().getUserId();
+			List<UserCredit> userCredits = getSession().createQuery(hql).list();
+			UserCredit userCredit = null;
+			if (userCredits.isEmpty()) {
+				userCredit = new UserCredit();
+				userCredit.setActiveDegree(50);
+				userCredit.setCommentQulity(50);
+				userCredit.setCredit(50);
+				userCredit.setIdentity(50);
+				userCredit.setUserId(reservation.getUser().getUserId());
+				userCredit.setBehavior(48);
+				userCredit.setOverAll(userCredit.getActiveDegree() + userCredit.getBehavior()
+						+ userCredit.getCommentQulity() + userCredit.getCredit() + userCredit.getIdentity());
+				getSession().save(userCredit);
+			} else {
+				userCredit = userCredits.get(0);
+				if (userCredit.getBehavior() - 2 <= 0) {
+					userCredit.setBehavior(0);
+				} else {
+					userCredit.setBehavior(userCredit.getBehavior() - 2);
+				}
+				userCredit.setOverAll(userCredit.getActiveDegree() + userCredit.getBehavior()
+						+ userCredit.getCommentQulity() + userCredit.getCredit() + userCredit.getIdentity());
+				getSession().update(userCredit);
+			}
+			calcuLevel(reservation.getUser(), userCredit.getOverAll());
 			bookItem.setStatus(0);
 			getSession().update(bookItem);
 		}
@@ -132,6 +199,31 @@ public class SettingDao extends BaseDao {
 	public List<BorrowedRecord> showRecordsToReturn() {
 		String hql = "FROM BorrowedRecord b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.bookItem c LEFT OUTER JOIN FETCH c.book WHERE b.status=3";
 		return getSession().createQuery(hql).list();
+	}
+
+	private void calcuLevel(User user, int overall) {
+		if (overall >= 475) {
+			user.setLevel(10);
+		} else if (overall >= 450) {
+			user.setLevel(9);
+		} else if (overall >= 425) {
+			user.setLevel(8);
+		} else if (overall >= 400) {
+			user.setLevel(7);
+		} else if (overall >= 375) {
+			user.setLevel(6);
+		} else if (overall >= 350) {
+			user.setLevel(5);
+		} else if (overall >= 325) {
+			user.setLevel(4);
+		} else if (overall >= 300) {
+			user.setLevel(3);
+		} else if (overall >= 275) {
+			user.setLevel(2);
+		} else if (overall >= 250) {
+			user.setLevel(1);
+		}
+		getSession().update(user);
 	}
 
 }

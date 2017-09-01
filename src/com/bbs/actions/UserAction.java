@@ -460,7 +460,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 			return "favorite";
 		}
 	}
-
+	
 	public String deleteFavorite() {
 		User user = (User) session.get("user");
 		status = new HashMap<>();
