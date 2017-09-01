@@ -82,7 +82,7 @@ button {
         }
    #record_audio{
             position: absolute;
-            top: 3px;
+            top: 8px;
             right: 33px;
             color: #6da26b;
             cursor: pointer;
@@ -98,7 +98,7 @@ button {
             height: 100px;
             position: fixed;
             z-index: 1000;
-            left: 50%;
+            left: 40%;
             top:50%;
             text-align: center;
             border-radius: 10px;
@@ -116,6 +116,17 @@ button {
             margin-top: 20px;
         }
         
+             #finish_audio{
+            font-size: 12px;
+            background-color: #0bb20c;
+            border-radius: 10px;
+            padding: 0 10px;
+            cursor: pointer;
+        }
+
+        #finish_audio:hover {
+            background-color: #077508;
+        }
         
         
 </style>
@@ -130,12 +141,12 @@ button {
 				onsubmit="return check()">
 				<input id="keyword" type="text" name="keyword"
 					placeholder="搜索书名／作者／ISBN..." x-webkit-speech />
-					    <a id="audio_link"><i class="icon icon-45 f23" id="record_audio"></i></a>
+					    <a id="audio_link"><i class="icon icon-45 f20" id="record_audio"></i></a>
 				<button type="submit"></button>
 			</form>
 		</div>
 		
-    <div class="audio_prompt hide"><div><i class="icon icon-44 f32"></i><p>录音中....</p></div></div>
+    <div class="audio_prompt hide"><div><i class="icon icon-44 f28"></i><p>录音中....</p><a class="f-white" id="finish_audio">完成录音</a></div></div>
 
 
 		<span class="search-span">
@@ -440,23 +451,22 @@ button {
 			});
 
 
-
-	        $("#audio_link").mousedown(function() {
+		     // 3 智能接口
+		        var voice = {
+		          localId: '',
+		          serverId: ''
+		        };
+		        
+	        $("#audio_link").click(function () {
 	            $(".audio_prompt").show();
 	            wx.startRecord({
 	                cancel: function () {
 	                  alert('用户拒绝授权录音');
 	                }
 	              });
-
 	        });
 
-	     // 3 智能接口
-	        var voice = {
-	          localId: '',
-	          serverId: ''
-	        };
-	        $("#audio_link").mouseup(function() {
+	        $("#finish_audio").click(function () {
 	            wx.stopRecord({
 	                success: function (res) {
 	                  voice.localId = res.localId;
@@ -484,9 +494,7 @@ button {
 	              });
 	        });
 
-	        $("#audio_link").mouseout(function() {
-	            console.log("mouse out..");
-	        });
+
 
 			document.querySelector('#scan').onclick = function() {
 				wx
