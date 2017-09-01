@@ -6,18 +6,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <title>会员中心</title>
-
-
     <link rel="stylesheet" href="asserts/weui/css/weui.css"/>
     <link rel="stylesheet" href="asserts/weui/css/weui2.css"/>
     <link rel="stylesheet" href="asserts/weui/css/weui3.css"/>
     <style type="text/css">
         #title {
             height: 100px;
-            width: 100%;
+            width: 90%;
+            margin:0 auto;
             background-image: url("title.jpg");
             background-size: 100% 100%;
-
         }
 
         .div_box {
@@ -93,7 +91,7 @@
 <div class="page-hd div_box" id="radar_box">
 
     <div style="padding: 10px">
-        <p class="title">我的信用分析 <span style="color: #0bb20c;float: right"> 50/100</span></p>
+        <p class="title">我的信用分析 <span style="color: #0bb20c;float: right"> 250/500</span></p>
     </div>
 
     <div class="weui_progress">
@@ -315,7 +313,7 @@
             $("#get-back").click(function () {
                 history.back();
             });
-
+/* 
             $(window).scroll(function () {
 
                 if ($(window).scrollTop()>500){
@@ -334,7 +332,7 @@
                 }
 
 
-            });
+            }); */
 
 
         });

@@ -20,8 +20,8 @@
 <div class="page-hd">
 
     <div class="weui_msg" id="msg1">
-        <div class="weui_icon_area"><i class="weui_icon_msg weui_icon_info"></i></div>
-        <div class="weui_text_area">
+        <div class="weui_icon_area"><i class="weui_icon_msg weui_icon_info" id="icon_label"></i></div>
+        <div class="weui_text_area" id="text_area">
             <h2 class="weui_msg_title">确认登陆</h2>
             <p class="weui_msg_desc">您确认登陆Ebook图书管理员系统吗？</p>
         </div>
@@ -43,6 +43,8 @@
 
 <script>
     $(function () {
+
+
         $("#con").click(function () {
         	$.ajax({
                 type:'POST',
@@ -69,7 +71,14 @@
 	                	 });
 					}
 					else {
-						$.confirm("二维码失效！", "确定", function () {
+						$.confirm("登陆成功！", "确定", function () {
+
+							$(".weui_opr_area").hide();
+							$("#msg1").children("#text_area").children(".weui_msg_title").text("登录成功！");
+							$("#msg1").children("#text_area").children(".weui_msg_desc").html("您已成功通过微信扫码登录");
+							$("#icon_label").removeClass("weui_icon_warn").addClass("weui_icon_success");
+
+							
 						 }, function () {
 	                     	    
 	                	 });

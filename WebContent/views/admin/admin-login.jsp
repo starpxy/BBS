@@ -221,7 +221,7 @@ color:#000;
 			                        <button type="submit"  id="submit1" class="btn btn-success">登录</button>
 			                    </form>
 			                    
-			                    <div style="text-align: center;width:100%;margin:5px;padding:5px;border-top:2px solid #aaa">
+			                    <div style="text-align: center;width:100%;margin:5px;padding:5px;">
 			                    <p style="font-size: 12px;color:#666">通过其他方式登录</p>
 			                    <a href="user-adminWeChatLogin"  id="loginviawechat"><i  class="fa fa-wechat" ></i></a>
 			                    </div>

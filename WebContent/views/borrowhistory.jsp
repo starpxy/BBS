@@ -37,7 +37,9 @@ pageEncoding="UTF-8"%>
         <div class="weui_cell_bd weui_cell_primary">
 
             <select class="weui_select select2" name="select2">
-                <option value="1">全部</option>
+                 <option value="5">全部</option>
+            <option value="0">待确认</option>
+                <option value="1">待支付</option>
                 <option value="2">已借出</option>
                 <option value="3">已还书</option>
                 <option value="4">还书过期</option>
@@ -108,24 +110,34 @@ pageEncoding="UTF-8"%>
 
 //            alert($(this).val());
             var borrowstatus=$(this).val();
-
             var allstatus=$('.borrow-status');
 
-            if (borrowstatus==1){
+            if (borrowstatus==5){
                 allstatus.each(function () {
                     $(this).parent().parent().parent().show();
                 });
-            }else if(borrowstatus==2){
+            }else if(borrowstatus==0){
 
                 allstatus.each(function () {
-                    if ($(this).text()==="已还书"){
+                    if ($(this).text()==="待确认"){
                         $(this).parent().parent().parent().show();
                     }else{
                         $(this).parent().parent().parent().hide();
                     }
                 });
 
-            }else if(borrowstatus==3){
+            }else if(borrowstatus==1){
+
+                allstatus.each(function () {
+                    if ($(this).text()==="待支付"){
+                        $(this).parent().parent().parent().show();
+                    }else{
+                        $(this).parent().parent().parent().hide();
+                    }
+                });
+
+            }
+            else if(borrowstatus==2){
 
                 allstatus.each(function () {
                     if ($(this).text()==="已借出"){
@@ -134,10 +146,16 @@ pageEncoding="UTF-8"%>
                         $(this).parent().parent().parent().hide();
                     }
                 });
+            }        else if(borrowstatus==3){
 
-            }
-            else if(borrowstatus==4){
-
+                allstatus.each(function () {
+                    if ($(this).text()==="已还书"){
+                        $(this).parent().parent().parent().show();
+                    }else{
+                        $(this).parent().parent().parent().hide();
+                    }
+                });
+            }   else if(borrowstatus==4){
                 allstatus.each(function () {
                     if ($(this).text()==="还书过期"){
                         $(this).parent().parent().parent().show();
@@ -145,15 +163,8 @@ pageEncoding="UTF-8"%>
                         $(this).parent().parent().parent().hide();
                     }
                 });
-
             }
-
-
-
         });
-
-
-
     });
 
 </script>
