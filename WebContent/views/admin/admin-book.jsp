@@ -427,7 +427,7 @@
           			<%	bookItem = bookItems.get(i); %>
                                         </span></a></td>
                                         <td class="book-borrowed"><span class="label label-success"><%=count %></span></td>
-                                        <td class="book-price">0.01元/月</td>
+                                        <td class="book-price">0.1元/月</td>
                                         <td class="book-type"><%=bookItem.getBook().getType() %></td>
                                         <td class="options">
                                             <a data-toggle="tooltip" data-placement="left"
@@ -618,7 +618,7 @@
         $(".view-book").click(function () {
             var bookid=$(this).parent().siblings('.book-id').html();
             var explorer = navigator.userAgent;
-            var size=['400px','400px'];
+            var size=['350px','350px'];
             if (explorer.indexOf("Mobile") >= 0) {
                 size=['300px','400px'];
             }else{
@@ -630,7 +630,7 @@
                 btn: ['取消'],
                 resize: true,
                 anim: 2,
-                closeBtn: 2,
+                closeBtn: 1,
                 shadeClose:true,
                 area: size,
                 yes: function (index) {

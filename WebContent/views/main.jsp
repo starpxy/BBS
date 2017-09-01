@@ -473,31 +473,33 @@ button {
 	        });
 
 	        $("#finish_audio").click(function () {
+
 	            wx.stopRecord({
 	                success: function (res) {
 	                  voice.localId = res.localId;
+
+	  	            if (voice.localId == '') {
+	  	                alert('请先使用 startRecord 接口录制一段声音');
+	  	                return;
+	  	              }
+	  	              wx.translateVoice({
+	  	                localId: voice.localId,
+	  	                complete: function (res) {
+	  	                  if (res.hasOwnProperty('translateResult')) {
+	  	    	            $(".audio_prompt").hide(); 
+	  	    	            $("input[name='keyword']").val(res.translateResult);
+	  	    	            $("button[type='submit']").trigger("click");
+	  	                  } else {
+	  	                    alert('无法识别');
+	  	                  }
+	  	                }
+	  	              });
 	                },
 	                fail: function (res) {
 	                  alert(JSON.stringify(res));
 	                }
 	              });
 
-	            if (voice.localId == '') {
-	                alert('请先使用 startRecord 接口录制一段声音');
-	                return;
-	              }
-	              wx.translateVoice({
-	                localId: voice.localId,
-	                complete: function (res) {
-	                  if (res.hasOwnProperty('translateResult')) {
-	    	            $(".audio_prompt").hide(); 
-	    	            $("input[name='keyword']").val(res.translateResult);
-	    	            $("button[type='submit']").trigger("click");
-	                  } else {
-	                    alert('无法识别');
-	                  }
-	                }
-	              });
 	        });
 
 
