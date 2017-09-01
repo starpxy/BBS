@@ -77,6 +77,47 @@ button {
 	font-size: 16px;
 	color: #F9F0DA;
 }
+  input[name='keyword']{
+            position: relative;
+        }
+   #record_audio{
+            position: absolute;
+            top: 13px;
+            right: 33px;
+            color: #6da26b;
+            cursor: pointer;
+        }
+
+        #audio_link:hover  #record_audio{
+            color: #4e744c;
+        }
+        
+         .audio_prompt{
+
+            width: 100px;
+            height: 100px;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            top:50%;
+            text-align: center;
+            border-radius: 10px;
+            -moz-box-shadow: 3px 3px 4px #666;
+            -webkit-box-shadow: 3px 3px 4px #666;
+            box-shadow: 3px 3px 4px #666;
+            background: #fff;
+            color: #0bb20c;
+            filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135,
+            Color='#666');
+
+        }
+
+        .audio_prompt div{
+            margin-top: 20px;
+        }
+        
+        
+        
 </style>
 
 
@@ -89,9 +130,13 @@ button {
 				onsubmit="return check()">
 				<input id="keyword" type="text" name="keyword"
 					placeholder="搜索书名／作者／ISBN..." x-webkit-speech />
+					    <a id="audio_link"><i class="icon icon-45 f23" id="record_audio"></i></a>
 				<button type="submit"></button>
 			</form>
 		</div>
+		
+    <div class="audio_prompt hide"><div><i class="icon icon-44 f32"></i><p>录音中....</p></div></div>
+
 
 		<span class="search-span">
 			<div class="weui_panel weui_panel_access search-div">
@@ -393,6 +438,55 @@ button {
 					});
 				}
 			});
+
+
+
+	        $("#audio_link").mousedown(function() {
+	            $(".audio_prompt").show();
+	            wx.startRecord({
+	                cancel: function () {
+	                  alert('用户拒绝授权录音');
+	                }
+	              });
+
+	        });
+
+	     // 3 智能接口
+	        var voice = {
+	          localId: '',
+	          serverId: ''
+	        };
+	        $("#audio_link").mouseup(function() {
+	            wx.stopRecord({
+	                success: function (res) {
+	                  voice.localId = res.localId;
+	                },
+	                fail: function (res) {
+	                  alert(JSON.stringify(res));
+	                }
+	              });
+
+	            if (voice.localId == '') {
+	                alert('请先使用 startRecord 接口录制一段声音');
+	                return;
+	              }
+	              wx.translateVoice({
+	                localId: voice.localId,
+	                complete: function (res) {
+	                  if (res.hasOwnProperty('translateResult')) {
+	    	            $(".audio_prompt").hide(); 
+	    	            $("input[name='keyword']").val(res.translateResult);
+	    	            $("button[type='submit']").trigger("click");
+	                  } else {
+	                    alert('无法识别');
+	                  }
+	                }
+	              });
+	        });
+
+	        $("#audio_link").mouseout(function() {
+	            console.log("mouse out..");
+	        });
 
 			document.querySelector('#scan').onclick = function() {
 				wx
