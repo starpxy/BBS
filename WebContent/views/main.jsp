@@ -99,7 +99,7 @@ button {
             position: fixed;
             z-index: 1000;
             left: 40%;
-            top:50%;
+            top:40%;
             text-align: center;
             border-radius: 10px;
             -moz-box-shadow: 3px 3px 4px #666;
@@ -439,9 +439,11 @@ button {
 
 					wx.error(function(res) {
 						alert(res.errMsg);
+						haserror=true;
 					});
 				},
 				error : function() {
+					haserror=true;
 					layer.msg('服务器错误', {
 						icon : 2,
 						anim : 2,
@@ -449,7 +451,7 @@ button {
 					});
 				}
 			});
-
+	        var haserror=false;
 
 		     // 3 智能接口
 		        var voice = {
@@ -458,6 +460,10 @@ button {
 		        };
 		        
 	        $("#audio_link").click(function () {
+	            if(haserror){
+	            	  alert('签名错误或者服务器错误');
+		            return;
+		         }
 	            $(".audio_prompt").show();
 	            wx.startRecord({
 	                cancel: function () {
