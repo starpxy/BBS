@@ -80,10 +80,10 @@
                     return layer.msg("您选择的头像格式不正确，请重新选择！",{icon:2,anim:6,time:1000});
 
                 }
-                var size = 3 * 1024 * 1024;
+                var size = 2 * 1024 * 1024;
 
                 if (firstfile.size > size) {
-                    layer.msg("请使用3MB以内的头像。",{icon:2,anim:6,time:1000});
+                    layer.msg("请使用2MB以内的头像。",{icon:2,anim:6,time:1000});
                     return;
                 }
 

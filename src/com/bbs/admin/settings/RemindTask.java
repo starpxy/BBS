@@ -64,24 +64,28 @@ public class RemindTask extends TimerTask {
 
 	@Override
 	public void run() {
-		List<BorrowedRecord> borrowedRecords = settingService.showRecordsToReturn();
-		Iterator<BorrowedRecord> iterator = borrowedRecords.iterator();
-		while (iterator.hasNext()) {
-			BorrowedRecord borrowedRecord = iterator.next();
-			Long now = new Date().getTime();
-			if ((borrowedRecord.getBorrowedAt().getTime() + interval * 1000) < now) {
-				Book book = borrowedRecord.getBookItem().getBook();
-				User user = borrowedRecord.getUser();
-				TemplateMessagePushing templateMessagePushing = new TemplateMessagePushing();
-				templateMessagePushing.pushRecordOverdue(user, book);
-				borrowedRecord.setStatus(4);
-				settingService.changeRecordStatus(borrowedRecord);
+		try {
+			List<BorrowedRecord> borrowedRecords = settingService.showRecordsToReturn();
+			Iterator<BorrowedRecord> iterator = borrowedRecords.iterator();
+			while (iterator.hasNext()) {
+				BorrowedRecord borrowedRecord = iterator.next();
+				Long now = new Date().getTime();
+				if ((borrowedRecord.getBorrowedAt().getTime() + interval * 1000) < now) {
+					Book book = borrowedRecord.getBookItem().getBook();
+					User user = borrowedRecord.getUser();
+					TemplateMessagePushing templateMessagePushing = new TemplateMessagePushing();
+					templateMessagePushing.pushRecordOverdue(user, book);
+					borrowedRecord.setStatus(4);
+					settingService.changeRecordStatus(borrowedRecord);
+				} else if ((now - borrowedRecord.getBorrowedAt().getTime()) > (interval * 2300 / 30)) {
+					TemplateMessagePushing templateMessagePushing = new TemplateMessagePushing();
+					int days = (int) (30 - (now - borrowedRecord.getBorrowedAt().getTime()) / (interval * 1000 / 30));
+					templateMessagePushing.pushReturningBooks(borrowedRecord.getUser().getWeChat(),
+							borrowedRecord.getBookItem().getBook().getBookTitle(), days);
+				}
 			}
-			else if((now-borrowedRecord.getBorrowedAt().getTime())>(interval*2300/30)){
-				TemplateMessagePushing templateMessagePushing = new TemplateMessagePushing();
-				int days = (int) (30-(now-borrowedRecord.getBorrowedAt().getTime())/(interval*1000/30));
-				templateMessagePushing.pushReturningBooks(borrowedRecord.getUser().getWeChat(), borrowedRecord.getBookItem().getBook().getBookTitle(), days);
-			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 	}
 }

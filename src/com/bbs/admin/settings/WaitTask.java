@@ -61,18 +61,22 @@ public class WaitTask extends TimerTask {
 
 	@Override
 	public void run() {
-		List<WaitList> waitLists = settingService.showWaitLists();
-		Iterator<WaitList> iterator = waitLists.iterator();
-		while (iterator.hasNext()) {
-			WaitList waitList = iterator.next();
-			User user = waitList.getUser();
-			Book book = waitList.getBook();
-			if (settingService.isBookAva(book) && waitList.getStatus() == 0) {
-				TemplateMessagePushing templateMessagePushing = new TemplateMessagePushing();
-				templateMessagePushing.pushWishingBook(user, book);
-				waitList.setStatus(1);
-				settingService.changeWaitStatus(waitList);
+		try {
+			List<WaitList> waitLists = settingService.showWaitLists();
+			Iterator<WaitList> iterator = waitLists.iterator();
+			while (iterator.hasNext()) {
+				WaitList waitList = iterator.next();
+				User user = waitList.getUser();
+				Book book = waitList.getBook();
+				if (settingService.isBookAva(book) && waitList.getStatus() == 0) {
+					TemplateMessagePushing templateMessagePushing = new TemplateMessagePushing();
+					templateMessagePushing.pushWishingBook(user, book);
+					waitList.setStatus(1);
+					settingService.changeWaitStatus(waitList);
+				}
 			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 	}
 }

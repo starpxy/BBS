@@ -25,14 +25,14 @@
 
 <div class="weui-header bg-green">
     <div class="weui-header-left"><a class="icon icon-109 f-white" id="get-back">返回</a></div>
-    <h1 class="weui-header-title">头像样本</h1>
+    <h1 class="weui-header-title">人脸样本</h1>
     <div class="weui-header-right"><a href="user-login" class="icon icon-27 f-white"></a></div>
 </div>
 
-
+<form  action="user-uploadFace" method="post" id="myupload" enctype="multipart/form-data">
 <div class="weui_panel weui_panel_access">
 
-    <div class="weui_panel_hd">头像样本上传 <span id="count-span">0</span>/2</div>
+    <div class="weui_panel_hd">人脸样本上传 </div>
 
     <div class="weui_panel_bd">
 
@@ -40,7 +40,7 @@
 
 
             <div class="weui_media_hd">
-                <img class="weui_media_appmsg_thumb" alt="样本一" >
+                <img class="weui_media_appmsg_thumb" alt="样本" >
             </div>
 
 
@@ -54,40 +54,15 @@
 
                 <div class="weui_media_bd">
                     <div class="weui_uploader_input_wrp" style="float: right;margin-top: 10px">
-                        <input class="weui_uploader_input" type="file" accept="image/*"/>
+                        <input class="weui_uploader_input" type="file" accept="image/*" name="face"/>
                     </div>
                 </div>
 
             </div>
         </a>
-
-
-        <a class="weui_media_box weui_media_appmsg">
-
-
-            <div class="weui_media_hd">
-                <img class="weui_media_appmsg_thumb" alt="样本二">
-            </div>
-
-
-            <div class="weui_media_bd">
-                <div class="weui_media_bd">
-                    <div style="float: right;">
-                        <img src="minus.png" class="delete-face">
-                    </div>
-                </div>
-
-                <div class="weui_media_bd">
-                    <div class="weui_uploader_input_wrp" style="float: right;margin-top: 10px">
-                        <input class="weui_uploader_input" type="file" accept="image/*"/>
-                    </div>
-                </div>
-
-            </div>
-        </a>
-    </div>
-
+      </div>
 </div>
+</form>
 
 
 <div style="margin-top: 50px">&nbsp;</div>
@@ -205,10 +180,10 @@
                     return layer.msg('您上传的图片格式不正确，请重新选择！',{icon:2,anim:6,time:1000});
                 }
 
-                var size = 3 * 1024 * 1024;
+                var size = 2 * 1024 * 1024;
 
                 if (firstfile.size > size) {
-                    return layer.msg('上传失败，请上传3MB以内的图片。',{icon:2,anim:6,time:1000});
+                    return layer.msg('上传失败，请上传2MB以内的图片。',{icon:2,anim:6,time:1000});
                 }
 
                 var objUrl = getObjectURL(firstfile);
@@ -241,50 +216,11 @@
 
 
                 if ($("#count-span").text()=="0"){
-                    return layer.msg('请至少上传一张头像样本',{icon:2,anim:6,time:1000});
+                    return layer.msg('请上传人脸样本',{icon:2,anim:6,time:1000});
                 }
 
                 $.confirm("你确认上传这张图片?", "确认上传", function (text) {
-
-                    var index=layer.load(2);
-
-                    var faces=new Array();
-
-//                    setTimeout(function () {
-//                        layer.close(index);
-//                    },2000);
-
-
-                    $("input[type='file']").each(function () {
-                        if ($(this).val()!=""){
-                            faces.push(this.files[0]);
-                        }
-                    });
-
-//                    var formData = new FormData();
-//                    var name = $("input").val();
-//                    formData.append("file",$("#upload")[0].files[0]);
-//                    formData.append("name",name);
-                    console.log(faces);
-
-
-                    $.ajax({
-                        type: 'POST',
-                        url: 'xxx',
-                        data: {
-                            'faces': faces
-                        },
-                        dataType: 'json',
-                        success: function (data) {
-                            //TODO 2
-                            layer.close(index);
-                            layer.msg("上传成功!",{icon:1,anim:2,time:1000});
-                        },
-                        error: function (xhr, type) {
-                            //
-                        }
-                    });
-
+                	$("#myupload").submit();
 
                 }, function () {
 

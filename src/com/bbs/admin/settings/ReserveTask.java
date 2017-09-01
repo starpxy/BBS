@@ -63,19 +63,23 @@ public class ReserveTask extends TimerTask {
 
 	@Override
 	public void run() {
-		List<Reservation> reservations = settingService.showReservations();
-		Iterator<Reservation> iterator = reservations.iterator();
-		while (iterator.hasNext()) {
-			Reservation reservation = iterator.next();
-			Long time = new Date().getTime();
-			if (time > reservation.getFetchDate().getTime()) {
-				User user = reservation.getUser();
-				Book book = reservation.getBookItem().getBook();
-				TemplateMessagePushing templateMessagePushing = new TemplateMessagePushing();
-				templateMessagePushing.pushReserveOverdue(user, book);
-				reservation.setStatus(1);
-				settingService.changeReservationStatus(reservation);
+		try {
+			List<Reservation> reservations = settingService.showReservations();
+			Iterator<Reservation> iterator = reservations.iterator();
+			while (iterator.hasNext()) {
+				Reservation reservation = iterator.next();
+				Long time = new Date().getTime();
+				if (time > reservation.getFetchDate().getTime()) {
+					User user = reservation.getUser();
+					Book book = reservation.getBookItem().getBook();
+					TemplateMessagePushing templateMessagePushing = new TemplateMessagePushing();
+					templateMessagePushing.pushReserveOverdue(user, book);
+					reservation.setStatus(1);
+					settingService.changeReservationStatus(reservation);
+				}
 			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 	}
 }

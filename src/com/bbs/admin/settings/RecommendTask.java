@@ -62,25 +62,29 @@ public class RecommendTask extends TimerTask {
 
 	@Override
 	public void run() {
-		List<User> users = settingService.selectUsers();
-		Iterator<User> iterator = users.iterator();
-		while (iterator.hasNext()) {
-			User user = iterator.next();
-			List<Book> books = settingService.recommendBook(user);
-			ObjectFileManager.writeRecommendToFile(user, books);
-			Book book = null;
-			if (books != null && !books.isEmpty()) {
-				book = books.get(0);
+		try {
+			List<User> users = settingService.selectUsers();
+			Iterator<User> iterator = users.iterator();
+			while (iterator.hasNext()) {
+				User user = iterator.next();
+				List<Book> books = settingService.recommendBook(user);
+				ObjectFileManager.writeRecommendToFile(user, books);
+				Book book = null;
+				if (books != null && !books.isEmpty()) {
+					book = books.get(0);
+				}
+				Date now = new Date();
+				Long time = interval * 1000 * user.getRecommendFre();
+				if (book != null && (user.getLastRecommend() == null
+						|| (now.getTime() - user.getLastRecommend().getTime()) > time)) {
+					TemplateMessagePushing templateMessagePushing = new TemplateMessagePushing();
+					templateMessagePushing.pushRecommendBook(user, book);
+					user.setLastRecommend(now);
+					settingService.saveUser(user);
+				}
 			}
-			Date now = new Date();
-			Long time = interval * 1000 * user.getRecommendFre();
-			if (book != null && (user.getLastRecommend() == null
-					|| (now.getTime() - user.getLastRecommend().getTime()) > time)) {
-				TemplateMessagePushing templateMessagePushing = new TemplateMessagePushing();
-				templateMessagePushing.pushRecommendBook(user, book);
-				user.setLastRecommend(now);
-				settingService.saveUser(user);
-			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 	}
 

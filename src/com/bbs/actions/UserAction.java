@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
 
+import com.bbs.api.FaceApiManager;
 import com.bbs.api.JSAPIInitial;
 import com.bbs.api.TemplateMessagePushing;
 import com.bbs.api.TopScanManager;
@@ -460,7 +461,7 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 			return "favorite";
 		}
 	}
-	
+
 	public String deleteFavorite() {
 		User user = (User) session.get("user");
 		status = new HashMap<>();
@@ -566,6 +567,22 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		return "avatarChanged";
 	}
 
+	public String uploadFace() {
+		User user = (User) session.get("user");
+		if (user != null) {
+			UploadResult uploadResult = ImageUploader.upload(httpServletRequest,
+					PathProperty.facePath.substring(0, PathProperty.facePath.length()-1), "face");
+			String filename = uploadResult.getFileName();
+			int state = uploadResult.getState();
+			if (state == 1) {
+				FaceApiManager.registerNewUsers(filename.split("/")[1], user.getUserId() + "", "", "users");
+			}
+		} else {
+			return "refused";
+		}
+		return "avatarChanged";
+	}
+
 	public String setRecomFreq() {
 		User user = (User) session.get("user");
 		if (user != null) {
@@ -574,8 +591,8 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		}
 		return "setRecomFreq";
 	}
-	
-	public String creditHistory(){
+
+	public String creditHistory() {
 		User user = (User) session.get("user");
 		if (user != null) {
 			request.put("creditHistory", userService.creditHistory(user));
@@ -585,25 +602,24 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 			return "refused";
 		}
 	}
-	
-	public String adminWeChatLogin(){
+
+	public String adminWeChatLogin() {
 		Date date = new Date();
-		RedisManager.setKvPair(""+date.getTime(), 60, -1+"");
-		request.put("param", ""+date.getTime());
+		RedisManager.setKvPair("" + date.getTime(), 60, -1 + "");
+		request.put("param", "" + date.getTime());
 		return "adminWeChatLogin";
 	}
-	
-	public String extraInfo(){
+
+	public String extraInfo() {
 		User user = (User) session.get("user");
-		if (user==null) {
+		if (user == null) {
 			return "refused";
 		}
 		String type = httpServletRequest.getParameter("type");
 		String school = httpServletRequest.getParameter("school");
 		String companyEmail = httpServletRequest.getParameter("companyEmail");
-		if (type==null) {
-		}
-		else{
+		if (type == null) {
+		} else {
 			int type_int = Integer.valueOf(type);
 			ExtraInfo extraInfo = userService.showExtraInfo(user);
 			if (extraInfo == null) {
@@ -619,41 +635,36 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		}
 		return "extraInfo";
 	}
-	
-	public String adminState(){
+
+	public String adminState() {
 		status = new HashMap<>();
 		String param = httpServletRequest.getParameter("param");
-		try{
+		try {
 			String userId = RedisManager.getStringByKey(param);
 			if (userId == null) {
 				status.put("state", 2);
-			}
-			else if(Integer.valueOf(userId)==-2){
+			} else if (Integer.valueOf(userId) == -2) {
 				status.put("state", 4);
-			}
-			else if(Integer.valueOf(userId)!=-2&&Integer.valueOf(userId)!=-1){
+			} else if (Integer.valueOf(userId) != -2 && Integer.valueOf(userId) != -1) {
 				User user = new User();
 				user.setUserId(Integer.valueOf(userId));
 				user = userService.getUserInfo(user);
 				if (user.getRole().equals("admin")) {
 					session.put("admin", user);
 					status.put("state", 1);
-				}
-				else{
+				} else {
 					status.put("state", 2);
 				}
-			}
-			else{
+			} else {
 				status.put("state", 0);
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			status.put("state", 3);
 			return "adminUsersAjax";
 		}
 		return "adminUsersAjax";
 	}
-	
+
 	public String logout() {
 		if (session.containsKey("user")) {
 			session.remove("user");
