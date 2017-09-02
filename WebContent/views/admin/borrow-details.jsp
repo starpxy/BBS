@@ -271,7 +271,7 @@
 
                                 <div class="timeline-footer">
                                 	<input type="hidden" value="<%=borrowedRecord.getUser().getUserId()%>"/>
-                                    <a class="btn btn-success btn-xs delete-item">提醒还书</a>
+   <!--                                  <a class="btn btn-success btn-xs delete-item">提醒还书</a> -->
                                     <input type="hidden" value="<%=borrowedRecord.getBorrowedId()%>"/>
                                 </div>
 

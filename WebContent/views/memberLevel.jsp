@@ -178,9 +178,9 @@
             },
             {
                 label: "22222",
-                fillColor: "rgba(17,160,4,0.4)",
-                strokeColor: "rgba(17,186,1,1)",
-                pointColor: "rgba(17,186,1,1)",
+                fillColor: "rgba(60,179,113,0.4)",
+                strokeColor: "rgba(60,179,113,1)",
+                pointColor: "rgba(60,179,113,1)",
                 pointStrokeColor: "#11BA00",
                 pointHighlightFill: "#11BA00",
                 pointHighlightStroke: "rgba(17,160,4,0.8)",

@@ -249,17 +249,19 @@ input[type="range"]::-webkit-slider-thumb:active {
 			</div>
 		</div>
 		<!-- search form -->
-		<form action="#" method="get" class="sidebar-form">
-			<div class="input-group">
-				<input name="q" class="form-control" placeholder="Search..."
-					type="text"> <span class="input-group-btn">
-					<button type="submit" name="search" id="search-btn"
-						class="btn btn-flat">
-						<i class="fa fa-search"></i>
-					</button>
+	     <div class="sidebar-form">
+                <div class="input-group">
+                    <input name="q" class="form-control" placeholder="Search..."
+                           type="text"> <span class="input-group-btn">
+					<!--<button name="search" id="search-btn"-->
+                            <!--class="btn btn-flat">-->
+						<i class="fa fa-search btn btn-flat" id="search-btn"></i>
+					<!--</button>-->
+
 				</span>
-			</div>
-		</form>
+                </div>
+
+            </div>
 
 		<!-- sidebar menu: : style can be found in sidebar.less -->
 		<ul class="sidebar-menu">
@@ -689,12 +691,113 @@ input[type="range"]::-webkit-slider-thumb:active {
 				.use(
 						'layer',
 						function() {
+							$("input[name='q']").keydown(function (e) {
+
+
+							    if(e.keyCode==13){
+
+							        var keyword=$(this).val().trim();
+							        var keywordlen=keyword.length;
+
+							        if(keyword !=""){
+
+							            var options=$(".option-item");
+							            var inners=$(".inner");
+
+							            options.each(function () {
+
+							                var queryelems=$(this).children("div").children(".info-box" ).children(".info-box-content");
+							                var textele=queryelems.children(".info-box-text");
+							                var numele=queryelems.children(".info-box-number");
+
+							                if(queryelems.html().indexOf(keyword)>-1){
+
+							                    if (textele.html().indexOf(keyword)>-1){
+							                        var pretext=textele.html().substring(0,textele.html().indexOf(keyword));
+							                        var middle="<mark>"+keyword+"</mark>";
+							                        var nexttext=textele.html().substring(textele.html().indexOf(keyword)+keywordlen,textele.html().length);
+							                        textele.html(pretext+middle+nexttext);
+							                    }
+
+							                    if (numele.html().indexOf(keyword)>-1){
+							                        var pretext=numele.html().substring(0,numele.html().indexOf(keyword));
+							                        var middle="<mark>"+keyword+"</mark>";
+							                        var nexttext=numele.html().substring(numele.html().indexOf(keyword)+keywordlen,numele.html().length);
+							                        numele.html(pretext+middle+nexttext);
+							                    }
+
+							                    $(this).show();
+
+							                }else{
+							                    $(this).hide();
+							                }
+
+
+
+							                inners.each(function () {
+
+							                    var queryelems=$(this);
+							                    var textele=queryelems.children("h3");
+							                    var numele=queryelems.children("p");
+
+							                    if(queryelems.html().indexOf(keyword)>-1){
+
+							                        if (textele.html().indexOf(keyword)>-1){
+							                            var pretext=textele.html().substring(0,textele.html().indexOf(keyword));
+							                            var middle="<mark>"+keyword+"</mark>";
+							                            var nexttext=textele.html().substring(textele.html().indexOf(keyword)+keywordlen,textele.html().length);
+							                            textele.html(pretext+middle+nexttext);
+							                        }
+
+							                        if (numele.html().indexOf(keyword)>-1){
+							                            var pretext=numele.html().substring(0,numele.html().indexOf(keyword));
+							                            var middle="<mark>"+keyword+"</mark>";
+							                            var nexttext=numele.html().substring(numele.html().indexOf(keyword)+keywordlen,numele.html().length);
+							                            numele.html(pretext+middle+nexttext);
+							                        }
+
+							                        $(this).show();
+
+							                    }else{
+							                        $(this).parent().parent().hide();
+							                    }
+
+//							                console.log(queryelems.html());
+
+							                });
+
+//							                console.log(queryelems.html());
+
+							            });
+
+
+							        }else{
+
+							            var options=$(".option-item");
+							            var operations=$(".inner").parent().parent();
+
+							            options.each(function () {
+							                $(this).show();
+
+							            });
+
+							            operations.each(function () {
+							                $(this).show();
+
+							            });
+							        }
+
+							    }
+
+							});
+							
 
 							 $("input[type='range']").on('input propertychange',function(){
 								 var value=$(this).val()*3;
 									var style='@keyframes style1 {from, 20%, 53%, 80%, to {animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);transform: translate3d(0,0.5,0.1); }40%, 43% {animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060); transform: translate3d(0px, -'+value+'px, 0);}}';
 									$('style').html($('style').html()+style);
 					            });
+					            
 
 					
 							$

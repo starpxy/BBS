@@ -277,7 +277,7 @@
 						</s:if>
 						<s:else>
 	                        <br>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;暂无图书预定!
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;暂无图书预定!
 						</s:else>
 
                     </ul>
