@@ -22,7 +22,7 @@
 
     <div class="weui_text_area">
         <h2 class="weui_msg_title">验证成功</h2>
-        <p class="weui_msg_desc">您已通过人脸识别验证,可以顺利入馆啦!</p>
+        <p class="weui_msg_desc">欢迎您，${request.user.name }</p>
     </div>
 
     <div class="weui_opr_area">

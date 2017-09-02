@@ -17,7 +17,7 @@ public class FaceApiManager {
 	private static final String APP_ID = "10011807";
 	private static final String API_KEY = "u904anZ3SHxG3TxC3IuvYCyQ";
 	private static final String SECRET_KEY = "BuL3W5SMGK9tQFDDGqI6TE0hpXBNj0jO";
-	
+
 	private static AipFace client;
 
 	private static AipFace getInstance() {
@@ -89,6 +89,24 @@ public class FaceApiManager {
 		return null;
 	}
 
+	public static String recognizeUserInGroup(byte[] bytes, String groupName) {
+		HashMap<String, Object> options = new HashMap<>();
+		options.put("user_top_num", 1);
+		JSONObject res = getInstance().identifyUser(Arrays.asList(groupName), bytes, options);
+		String errorMsg = res.optString("error_msg");
+		if (errorMsg == null || errorMsg.equals("")) {
+			JSONArray result = res.getJSONArray("result");
+			JSONObject info = result.getJSONObject(0);
+			String uid = info.getString("uid");
+			JSONArray scores = info.getJSONArray("scores");
+			int score = scores.getInt(0);
+			if (score >= 80) {
+				return uid;
+			}
+		}
+		return null;
+	}
+
 	private static String parsePath(String path) {
 		String resultPath = PathProperty.BASEPATH + PathProperty.facePath;
 		resultPath += path;
@@ -130,7 +148,7 @@ public class FaceApiManager {
 		Iterator<Object> iterator = result.iterator();
 		int index = 0;
 		List<String> toReturn = new LinkedList<>();
-		while(iterator.hasNext()){
+		while (iterator.hasNext()) {
 			JSONObject temp = result.getJSONObject(index);
 			toReturn.add(temp.getString("uid"));
 			iterator.next();

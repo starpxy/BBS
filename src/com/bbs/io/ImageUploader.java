@@ -15,6 +15,28 @@ import com.bbs.properties.PathProperty;
 
 public class ImageUploader {
 
+	public static byte[] getImageBytes(HttpServletRequest request, String filefield) {
+		MultiPartRequestWrapper req = (MultiPartRequestWrapper) request;
+		File[] files = req.getFiles(filefield);
+		for (File file : files) {
+			try {
+				FileInputStream fileInputStream = new FileInputStream(file);
+				byte[] bytes = new byte[1024 * 1024 * 2];
+				fileInputStream.read(bytes);
+				fileInputStream.close();
+				return bytes;
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		return null;
+	}
+
 	public static UploadResult upload(HttpServletRequest request, String savePath, String filefield) {
 		UploadResult uploadResult = new UploadResult();
 		MultiPartRequestWrapper req = (MultiPartRequestWrapper) request;

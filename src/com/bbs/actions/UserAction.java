@@ -582,6 +582,17 @@ public class UserAction extends BaseAction implements ModelDriven<User>, Servlet
 		}
 		return "avatarChanged";
 	}
+	
+	public String faceReco(){
+		String userId = FaceApiManager.recognizeUserInGroup(ImageUploader.getImageBytes(httpServletRequest, "face"), "users");
+		if (userId == null) {
+			return "faceRecoError";
+		}
+		User user = new User();
+		user.setUserId(Integer.valueOf(userId));
+		request.put("user", userService.getUserInfo(user));
+		return "faceRecoSucc";
+	}
 
 	public String setRecomFreq() {
 		User user = (User) session.get("user");

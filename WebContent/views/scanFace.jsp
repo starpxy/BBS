@@ -19,13 +19,13 @@
 <body ontouchstart style="background-color: #f8f8f8;">
 
 
-<input type="file" hidden name="face">
 
 
 
 <div class="msg_container">
 
-    <form action="verifySuccess.jsp" method="post" enctype="multipart/form-data" id="upload_form">
+    <form action="user-faceReco" method="post" enctype="multipart/form-data" id="upload_form">
+		<input type="file" accept="image/*" hidden name="face">
 
     <img style="width: 100%;height:100%;"
          src="" id="face_img" hidden>

@@ -30,6 +30,8 @@
 			class="userAction"
 			method="{1}">
 			<result name="granted">main.jsp</result>
+			<result name="faceRecoSucc">verifySuccess.jsp</result>
+			<result name="faceRecoError">verifyError.jsp</result>
 			<result name="creditHistory">memberLevel.jsp</result>
 			<result name="extraInfo">userinfo.jsp</result>
 			<result name="avatarChanged">userinfo.jsp</result>
