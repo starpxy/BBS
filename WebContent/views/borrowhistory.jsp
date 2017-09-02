@@ -56,7 +56,7 @@ pageEncoding="UTF-8"%>
 	Iterator<BorrowedRecord> iterator = borrowedRecords.iterator();
 	while(iterator.hasNext()){
 		BorrowedRecord borrowedRecord = iterator.next();
-		float m = 100f;
+		float m = 10f;
 %>
 <div class="weui-form-preview">
     <div>
@@ -66,7 +66,7 @@ pageEncoding="UTF-8"%>
         </div>
         <div class="weui-form-preview-bd">
             <p>
-                <a href="book.html" style="color:orange">
+                <a href="book-bookDetails?bookId=<%=borrowedRecord.getBookItem().getBook().getBookId() %>" style="color:orange">
                     <label class="weui-form-preview-label">书名</label>
                     <span class="weui-form-preview-value"><%=borrowedRecord.getBookItem().getBook().getBookTitle() %></span>
                 </a>

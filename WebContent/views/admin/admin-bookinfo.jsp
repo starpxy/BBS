@@ -52,7 +52,7 @@
                                 <li><a href="#">出版<span class="pull-right" id="publisher">${request.book.publisher }</span></a></li>
                                 <li><a href="#">版本<span class="pull-right" id="versionNumber">${request.book.versionNumber }</span></a></li>
                                 <li><a href="#">库存<span class="pull-right" id="volume">3</span></a></li>
-                                <li><a href="#">借书价格(元/每月)<span class="pull-right" id="price">${request.book.price }</span></a></li>
+                                <li><a href="#">借书价格(元/每月)<span class="pull-right" id="price">${request.book.price *0.1}</span></a></li>
 
 
                                 <li>
