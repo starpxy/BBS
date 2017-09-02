@@ -158,13 +158,14 @@ public class FaceApiManager {
 	}
 
 	public static void main(String[] args) {
-		// ArrayList<String> arrayList = new ArrayList<>();
-		// arrayList.add("avatar.jpg");
-		// arrayList.add("huawei.jpg");
-		// System.out.println(recognizeUserInGroup("huawei.jpg", "test_group"));
+//		ArrayList<String> arrayList = new ArrayList<>();
+//	 	arrayList.add("avatar.jpg");
+//	 	arrayList.add("huawei.jpg");
+//	 	System.out.println(recognizeUserInGroup("huawei.jpg", "test_group"));
 		List<String> list = listUsers("test_group");
 		for (String string : list) {
 			System.out.println(string);
 		}
+		deleteUser("users", "935");
 	}
 }
