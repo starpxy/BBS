@@ -53,7 +53,7 @@
                                 <li><a href="#">版本<span class="pull-right" id="versionNumber">${request.book.versionNumber }</span></a></li>
                                 <li><a href="#">库存<span class="pull-right" id="volume">3</span></a></li>
                                 <li><a href="#">借书价格(元/每月)<span class="pull-right" id="price">${request.book.price *0.1}</span></a></li>
-
+								 <li><a href="#">书籍信用分<span class="pull-right" id="bookCredit">${request.book.bookCredit}</span></a></li>
 
                                 <li>
 
@@ -140,8 +140,12 @@
                             <label>借书价格(元/每月)</label><a id="8"></a>
                             <input class="form-control" name="price" type="number">
                         </div>
-
-
+						
+						<div class="form-group">
+                            <label>书籍信用分</label><a id="12"></a>
+                            <input class="form-control" name="bookCreidt" type="number">
+                        </div>
+                        
                         <div class="form-group">
                             <label>图书种类</label>
                             <select class="form-control" name="type">
@@ -230,6 +234,7 @@
             $("input[name='author']").val($("#author").html());
             $("input[name='price']").val($("#price").html());
             $("select[name='type']").val($("#type").html());
+            $("input[name='bookCredit']").val($("#bookCredit").html());
             $("textarea[name='preface']").html($("#preface").text());
             $("textarea[name='directory']").html($("#directory").text());
             $("textarea[name='introduction']").html($("#introduction").text());

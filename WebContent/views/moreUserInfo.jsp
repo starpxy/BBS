@@ -123,6 +123,7 @@
                 showDistrict: false
             });
 
+			
             $("select[name='type']").change(function () {
 
                 $("#low_edu_box").toggle();

@@ -19,7 +19,7 @@
     <div class="weui_icon_area"><i class="weui_icon_warn weui_icon_msg"></i></div>
     <div class="weui_text_area">
         <h2 class="weui_msg_title">验证失败</h2>
-        <p class="weui_msg_desc">不好意思,您的验证没有通过,可以尝试到网站个人中心添加头像样本</p>
+        <p class="weui_msg_desc">对不起，您未通过验证，请尝试拍正脸照或在个人中心－我的人脸中添加人脸样本。</p>
     </div>
     <div class="weui_opr_area">
     <p class="weui_btn_area">

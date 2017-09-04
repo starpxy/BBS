@@ -114,7 +114,7 @@
 	<div class="weui_panel weui_panel_access">
 		<div class="weui_panel_hd">人脸识别</div>
 
-		<a href="faceSample.jsp" class="weui_panel_ft f-black">头像样本</a>
+		<a href="faceSample.jsp" class="weui_panel_ft f-black">我的人脸</a>
 
 	</div>
 

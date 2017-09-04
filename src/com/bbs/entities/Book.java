@@ -19,7 +19,16 @@ public class Book {
 	private Integer price = 1;
 	private Integer borrowedNum = 0;
 	private Integer commentNum = 0;
+	private Integer bookCredit;
 	private Date updateAt;
+
+	public void setBookCredit(Integer bookCredit) {
+		this.bookCredit = bookCredit;
+	}
+
+	public Integer getBookCredit() {
+		return bookCredit;
+	}
 
 	public void setCommentNum(Integer commentNum) {
 		this.commentNum = commentNum;
