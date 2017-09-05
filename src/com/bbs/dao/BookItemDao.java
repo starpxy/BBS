@@ -10,7 +10,7 @@ public class BookItemDao extends BaseDao {
 	public int ava(BookItem bookItem,User user){
 		String hql = "FROM BookItem WHERE itemId="+bookItem.getItemId();
 		List<BookItem> bookItems = getSession().createQuery(hql).list();
-		hql = "FROM Reservation WHERE user.userId="+user.getUserId()+" AND bookItem.itemId="+bookItem.getItemId()+" AND status='reserved'";
+		hql = "FROM Reservation b LEFT OUTER JOIN FETCH b.user LEFT OUTER JOIN FETCH b.bookItem c LEFT OUTER JOIN FETCH c.book WHERE b.user.userId="+user.getUserId()+" AND c.itemId="+bookItem.getItemId()+" AND b.status=2";
 		List<Reservation> reservations = getSession().createQuery(hql).list();
 		if (reservations.isEmpty()) {
 			if (bookItems.isEmpty()) {

@@ -332,6 +332,9 @@ public class UserDao extends BaseDao {
 				BorrowedRecord borrowedRecord = borrowedRecords.get(0);
 				borrowedRecord.setStatus(1);
 				borrowedRecord.setUpdateAt(new Date());
+				Book book = borrowedRecord.getBookItem().getBook();
+				book.setBookCredit(book.getBookCredit() + 1);
+				getSession().update(book);
 				getSession().update(borrowedRecord);
 			}
 		}
@@ -381,22 +384,31 @@ public class UserDao extends BaseDao {
 					userCredit.setCredit(50);
 					userCredit.setIdentity(50);
 					userCredit.setUserId(borrowedRecord.getUser().getUserId());
-					userCredit.setBehavior(52);
+					userCredit.setBehavior(50 + borrowedRecord.getBookItem().getBook().getBookCredit());
 					userCredit.setOverAll(userCredit.getActiveDegree() + userCredit.getBehavior()
 							+ userCredit.getCommentQulity() + userCredit.getCredit() + userCredit.getIdentity());
 					getSession().save(userCredit);
 				} else {
 					userCredit = userCredits.get(0);
-					if (userCredit.getBehavior() + 2 >= 100) {
+					if (userCredit.getBehavior() + borrowedRecord.getBookItem().getBook().getBookCredit() >= 100) {
 						userCredit.setBehavior(100);
 					} else {
-						userCredit.setBehavior(userCredit.getBehavior() + 2);
+						userCredit.setBehavior(
+								userCredit.getBehavior() + borrowedRecord.getBookItem().getBook().getBookCredit());
 					}
 					userCredit.setOverAll(userCredit.getActiveDegree() + userCredit.getBehavior()
 							+ userCredit.getCommentQulity() + userCredit.getCredit() + userCredit.getIdentity());
 					getSession().update(userCredit);
 				}
 				calcuLevel(borrowedRecord.getUser(), userCredit.getOverAll());
+				BookItem bookItem = borrowedRecord.getBookItem();
+				bookItem.setStatus(0);
+				Book book = bookItem.getBook();
+				if (book.getBookCredit() > 0) {
+					book.setBookCredit(book.getBookCredit() - 1);
+				}
+				getSession().update(book);
+				getSession().update(bookItem);
 				getSession().update(borrowedRecord);
 			}
 		}

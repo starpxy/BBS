@@ -131,22 +131,28 @@ public class SettingDao extends BaseDao {
 				userCredit.setCredit(50);
 				userCredit.setIdentity(50);
 				userCredit.setUserId(borrowedRecord.getUser().getUserId());
-				userCredit.setBehavior(48);
+				userCredit.setBehavior(50 - borrowedRecord.getBookItem().getBook().getBookCredit());
 				userCredit.setOverAll(userCredit.getActiveDegree() + userCredit.getBehavior()
 						+ userCredit.getCommentQulity() + userCredit.getCredit() + userCredit.getIdentity());
 				getSession().save(userCredit);
 			} else {
 				userCredit = userCredits.get(0);
-				if (userCredit.getBehavior() - 2 <= 0) {
+				if (userCredit.getBehavior() - borrowedRecord.getBookItem().getBook().getBookCredit() <= 0) {
 					userCredit.setBehavior(0);
 				} else {
-					userCredit.setBehavior(userCredit.getBehavior() - 2);
+					userCredit.setBehavior(
+							userCredit.getBehavior() - borrowedRecord.getBookItem().getBook().getBookCredit());
 				}
 				userCredit.setOverAll(userCredit.getActiveDegree() + userCredit.getBehavior()
 						+ userCredit.getCommentQulity() + userCredit.getCredit() + userCredit.getIdentity());
 				getSession().update(userCredit);
 			}
 			calcuLevel(borrowedRecord.getUser(), userCredit.getOverAll());
+			Book book = borrowedRecord.getBookItem().getBook();
+			if (book.getBookCredit() > 0) {
+				book.setBookCredit(book.getBookCredit() - 1);
+			}
+			getSession().update(book);
 		}
 	}
 
@@ -187,6 +193,11 @@ public class SettingDao extends BaseDao {
 			}
 			calcuLevel(reservation.getUser(), userCredit.getOverAll());
 			bookItem.setStatus(0);
+			Book book = bookItem.getBook();
+			if (book.getBookCredit() > 0) {
+				book.setBookCredit(book.getBookCredit() - 1);
+			}
+			getSession().update(book);
 			getSession().update(bookItem);
 		}
 	}

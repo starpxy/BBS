@@ -83,6 +83,14 @@
 			<div class="weui_panel_hd">图书详情</div>
 
 			<div class="weui_panel_bd">
+				
+				<div class="weui_media_box weui_media_text">
+
+					<h4 class="weui_media_desc" style="float: right">${request.book.bookCredit }分</h4>
+
+					<h4 class="weui_media_desc f-black">书籍借阅分</h4>
+
+				</div>
 
 				<div class="weui_media_box weui_media_text">
 
@@ -124,6 +132,9 @@
 				class="weui_panel_ft f-black" id="check-catelog">目录</a> <a
 				href="javascript:void(0);" class="weui_panel_ft f-black"
 				id="check-introduction">介绍</a>
+				<a
+				href="../index.html" class="weui_panel_ft f-black">在线悦读</a>
+				
 
 
 		</div>
