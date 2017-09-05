@@ -1,0 +1,10 @@
+{
+"TOTAL_MEMORY": 268435456,
+"dataUrl": "BBS-Reader.data.unityweb",
+"asmCodeUrl": "BBS-Reader.asm.code.unityweb",
+"asmMemoryUrl": "BBS-Reader.asm.memory.unityweb",
+"asmFrameworkUrl": "BBS-Reader.asm.framework.unityweb",
+"asmLibraryUrl": "BBS-Reader.asm.library.unityweb",
+"splashScreenStyle": "Dark",
+"backgroundColor": "#222C36"
+}
